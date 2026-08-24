@@ -62,7 +62,7 @@ def read_urls(path: Path) -> list[str]:
     return urls
 
 
-def download_video(url: str, dest_dir: Path, ffmpeg_path: str, cookies_file: str | None,
+def download_video(url: str, dest_dir: Path, ffmpeg_path: str | None, cookies_file: str | None,
                     cookies_from_browser: str | None) -> dict:
     """Downloads the reel with yt-dlp and returns its info dict."""
     outtmpl = str(dest_dir / "video.%(ext)s")
@@ -70,12 +70,16 @@ def download_video(url: str, dest_dir: Path, ffmpeg_path: str, cookies_file: str
         "outtmpl": outtmpl,
         "format": "bv*[ext=mp4][height<=1080]+ba[ext=m4a]/best[ext=mp4]/best",
         "merge_output_format": "mp4",
-        "ffmpeg_location": ffmpeg_path,
         "quiet": True,
         "no_warnings": True,
         "noprogress": True,
         "retries": 3,
     }
+    if ffmpeg_path:
+        # yt-dlp treats this as a literal path (file or directory), not a PATH
+        # lookup -- only set it when the caller explicitly overrode the default,
+        # otherwise let yt-dlp find ffmpeg on PATH itself.
+        ydl_opts["ffmpeg_location"] = ffmpeg_path
     if cookies_file:
         ydl_opts["cookiefile"] = cookies_file
     if cookies_from_browser:
@@ -206,7 +210,8 @@ def main():
     parser.add_argument("--device", default="cpu", choices=["cpu", "cuda"], help="Whisper inference device")
     parser.add_argument("--compute-type", default="int8",
                          help="faster-whisper compute type, e.g. int8 (cpu) or float16 (cuda)")
-    parser.add_argument("--ffmpeg-path", default="ffmpeg", help="Path to the ffmpeg binary directory or name")
+    parser.add_argument("--ffmpeg-path", default=None,
+                         help="Path to the ffmpeg binary or its containing directory, if not on PATH")
     parser.add_argument("--cookies-file", default=None, help="Path to a Netscape-format cookies.txt for Instagram")
     parser.add_argument("--cookies-from-browser", default=None,
                          help="Browser to pull Instagram cookies from, e.g. chrome, firefox, safari")
