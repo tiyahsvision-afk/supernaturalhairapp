@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+reels_data/
+*.csv
+failures.json
+.DS_Store
