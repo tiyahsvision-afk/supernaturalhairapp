@@ -26,19 +26,19 @@ export default function OnboardingPage() {
   return (
     <PageShell className="flex justify-center">
       <GlowCard className="w-full max-w-lg">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-fuchsia-300">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-fuchsia-600">
           Welcome to the journey
         </p>
-        <h1 className="mt-2 font-display text-2xl font-bold text-white">
+        <h1 className="mt-2 font-display text-2xl font-bold text-ink-900">
           Let's set up your profile
         </h1>
-        <p className="mt-2 text-sm text-white/60">
+        <p className="mt-2 text-sm text-ink-900/60">
           Takes about a minute. Everything here is editable later from your Profile page.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium text-white/80" htmlFor="name">
+            <label className="mb-1 block text-sm font-medium text-ink-900/80" htmlFor="name">
               Your name
             </label>
             <input
@@ -47,11 +47,11 @@ export default function OnboardingPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Amara Johnson"
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+              className="w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-white/80" htmlFor="email">
+            <label className="mb-1 block text-sm font-medium text-ink-900/80" htmlFor="email">
               Email
             </label>
             <input
@@ -61,11 +61,11 @@ export default function OnboardingPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@email.com"
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+              className="w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-white/80" htmlFor="goal">
+            <label className="mb-1 block text-sm font-medium text-ink-900/80" htmlFor="goal">
               What's your main hair goal right now?
             </label>
             <input
@@ -73,7 +73,7 @@ export default function OnboardingPage() {
               value={hairGoal}
               onChange={(e) => setHairGoal(e.target.value)}
               placeholder="e.g. Grow out my edges"
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+              className="w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
             />
           </div>
 

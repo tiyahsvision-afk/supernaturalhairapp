@@ -25,10 +25,10 @@ export default function ConsultationResults({ result, onRetake }: ConsultationRe
   return (
     <div className="space-y-6">
       <GlowCard>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-600">
           Your plan · {new Date(result.createdAt).toLocaleDateString()}
         </p>
-        <p className="mt-3 text-white/80">{result.summary}</p>
+        <p className="mt-3 text-ink-900/80">{result.summary}</p>
         <div className="mt-5 flex flex-wrap gap-3">
           <button
             onClick={handleAddToScheduler}
@@ -39,14 +39,14 @@ export default function ConsultationResults({ result, onRetake }: ConsultationRe
           {added && (
             <button
               onClick={() => navigate('/scheduler')}
-              className="rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
+              className="rounded-full border border-ink-900/20 px-5 py-2.5 text-sm font-semibold text-ink-900 hover:bg-ink-900/10"
             >
               View scheduler →
             </button>
           )}
           <button
             onClick={onRetake}
-            className="rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white/80 hover:bg-white/10"
+            className="rounded-full border border-ink-900/20 px-5 py-2.5 text-sm font-semibold text-ink-900/80 hover:bg-ink-900/10"
           >
             Update my consultation
           </button>
@@ -66,9 +66,9 @@ export default function ConsultationResults({ result, onRetake }: ConsultationRe
                 loading="lazy"
               />
               <div>
-                <h3 className="font-display text-sm font-bold text-white">{product.title}</h3>
-                <p className="mt-1 text-xs font-semibold text-fuchsia-300">{item.frequency}</p>
-                <p className="mt-1 text-xs leading-relaxed text-white/60">{item.guidance}</p>
+                <h3 className="font-display text-sm font-bold text-ink-900">{product.title}</h3>
+                <p className="mt-1 text-xs font-semibold text-fuchsia-600">{item.frequency}</p>
+                <p className="mt-1 text-xs leading-relaxed text-ink-900/60">{item.guidance}</p>
               </div>
             </GlowCard>
           )

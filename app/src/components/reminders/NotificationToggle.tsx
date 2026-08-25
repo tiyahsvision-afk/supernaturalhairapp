@@ -31,20 +31,20 @@ export default function NotificationToggle() {
       <button
         onClick={handleToggle}
         className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition-colors ${
-          enabled ? 'border-fuchsia-300 bg-fuchsia-400/15' : 'border-white/15 bg-white/5 hover:border-white/30'
+          enabled ? 'border-fuchsia-300 bg-fuchsia-400/15' : 'border-ink-900/15 bg-ink-900/5 hover:border-ink-900/30'
         }`}
       >
         <span>
-          <span className="block text-sm font-semibold text-white">
+          <span className="block text-sm font-semibold text-ink-900">
             {enabled ? '🔔 Reminders are on' : '🔕 Turn on reminders'}
           </span>
-          <span className="mt-0.5 block text-xs text-white/50">
+          <span className="mt-0.5 block text-xs text-ink-900/50">
             "Hey, it's time to use this oil" — right when your schedule says so.
           </span>
         </span>
         <span
           className={`h-6 w-11 shrink-0 rounded-full border transition-colors ${
-            enabled ? 'border-fuchsia-300 bg-fuchsia-400' : 'border-white/20 bg-white/10'
+            enabled ? 'border-fuchsia-300 bg-fuchsia-400' : 'border-ink-900/20 bg-ink-900/10'
           }`}
         >
           <span
@@ -54,7 +54,7 @@ export default function NotificationToggle() {
           />
         </span>
       </button>
-      {error && <p className="mt-2 text-xs text-fuchsia-200">{error}</p>}
+      {error && <p className="mt-2 text-xs text-fuchsia-600">{error}</p>}
     </div>
   )
 }

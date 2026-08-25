@@ -7,7 +7,7 @@ interface GlowCardProps extends HTMLAttributes<HTMLDivElement> {
 export default function GlowCard({ children, className = '', ...rest }: GlowCardProps) {
   return (
     <div
-      className={`glass-panel glow-border rounded-3xl p-6 shadow-[0_0_1px_rgba(255,255,255,0.4)] ${className}`}
+      className={`glass-panel glow-border rounded-3xl p-6 ${className}`}
       {...rest}
     >
       {children}

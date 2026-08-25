@@ -11,7 +11,7 @@ export default function ProgressTimeline() {
   if (photos.length === 0) {
     return (
       <GlowCard>
-        <p className="text-sm text-white/60">
+        <p className="text-sm text-ink-900/60">
           No progress photos yet. Add your first one above to start your timeline.
         </p>
       </GlowCard>
@@ -30,13 +30,13 @@ export default function ProgressTimeline() {
           <PhotoThumb photoId={photo.id} alt={photo.note || `Progress photo ${photo.date}`} />
           <button
             onClick={() => handleDelete(photo.id)}
-            className="absolute right-2 top-2 hidden h-7 w-7 place-items-center rounded-full bg-ink-950/80 text-xs text-white group-hover:grid"
+            className="absolute right-2 top-2 hidden h-7 w-7 place-items-center rounded-full bg-white text-xs text-ink-900 shadow-md group-hover:grid"
             aria-label="Delete photo"
           >
             ✕
           </button>
-          <p className="mt-1.5 text-xs font-medium text-white/70">{formatFriendlyDate(photo.date)}</p>
-          {photo.note && <p className="truncate text-xs text-white/40">{photo.note}</p>}
+          <p className="mt-1.5 text-xs font-medium text-ink-900/70">{formatFriendlyDate(photo.date)}</p>
+          {photo.note && <p className="truncate text-xs text-ink-900/40">{photo.note}</p>}
         </div>
       ))}
     </div>

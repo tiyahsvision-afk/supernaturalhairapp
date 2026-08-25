@@ -21,7 +21,7 @@ export default function PhotoThumb({ photoId, alt }: { photoId: string; alt: str
   }, [photoId])
 
   if (!url) {
-    return <div className="aspect-square w-full animate-pulse rounded-2xl bg-white/5" />
+    return <div className="aspect-square w-full animate-pulse rounded-2xl bg-ink-900/5" />
   }
 
   return <img src={url} alt={alt} className="aspect-square w-full rounded-2xl object-cover" />

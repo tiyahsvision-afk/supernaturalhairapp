@@ -40,14 +40,14 @@ export default function ConsultationPage() {
 
       {consultations.length > 1 && mode === 'results' && (
         <div className="mt-10">
-          <h3 className="mb-3 text-sm font-semibold text-white/70">Consultation history</h3>
+          <h3 className="mb-3 text-sm font-semibold text-ink-900/70">Consultation history</h3>
           <div className="space-y-2">
             {consultations.slice(1).map((c) => (
               <GlowCard key={c.id} className="flex items-center justify-between !p-4">
-                <span className="text-sm text-white/60">
+                <span className="text-sm text-ink-900/60">
                   {new Date(c.createdAt).toLocaleString()}
                 </span>
-                <span className="text-xs text-white/40">{c.answers.mainGoal.replace('-', ' ')}</span>
+                <span className="text-xs text-ink-900/40">{c.answers.mainGoal.replace('-', ' ')}</span>
               </GlowCard>
             ))}
           </div>

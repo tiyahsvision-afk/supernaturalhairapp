@@ -17,7 +17,7 @@ export default function ForumPreview() {
           />
           <Link
             to="/forum"
-            className="shrink-0 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
+            className="shrink-0 rounded-full border border-ink-900/20 px-4 py-2 text-sm font-semibold text-ink-900 hover:bg-ink-900/10"
           >
             Visit the forum →
           </Link>
@@ -26,10 +26,10 @@ export default function ForumPreview() {
           {threads.map((t) => (
             <Link key={t.id} to="/forum">
               <GlowCard className="h-full transition-transform hover:-translate-y-1">
-                <p className="text-xs font-semibold uppercase tracking-wide text-sky-300">{t.category}</p>
-                <h3 className="mt-2 font-display text-base font-bold text-white">{t.title}</h3>
-                <p className="mt-2 line-clamp-3 text-sm text-white/60">{t.body}</p>
-                <div className="mt-4 flex items-center gap-3 text-xs text-white/40">
+                <p className="text-xs font-semibold uppercase tracking-wide text-sky-600">{t.category}</p>
+                <h3 className="mt-2 font-display text-base font-bold text-ink-900">{t.title}</h3>
+                <p className="mt-2 line-clamp-3 text-sm text-ink-900/60">{t.body}</p>
+                <div className="mt-4 flex items-center gap-3 text-xs text-ink-900/40">
                   <span>{t.author}</span>
                   <span>·</span>
                   <span>♡ {t.likes}</span>

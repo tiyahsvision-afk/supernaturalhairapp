@@ -21,14 +21,14 @@ export default function NewThreadForm({ onPosted }: { onPosted?: () => void }) {
 
   return (
     <GlowCard>
-      <h3 className="font-display text-base font-bold text-white">Share with the community</h3>
+      <h3 className="font-display text-base font-bold text-ink-900">Share with the community</h3>
       <div className="mt-3 flex flex-wrap gap-2">
         {CATEGORIES.map((c) => (
           <button
             key={c}
             onClick={() => setCategory(c)}
             className={`rounded-full px-3 py-1 text-xs font-semibold ${
-              category === c ? 'bg-fuchsia-400 text-ink-950' : 'border border-white/15 text-white/60'
+              category === c ? 'bg-fuchsia-400 text-ink-950' : 'border border-ink-900/15 text-ink-900/60'
             }`}
           >
             {c}
@@ -39,14 +39,14 @@ export default function NewThreadForm({ onPosted }: { onPosted?: () => void }) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Give your post a title"
-        className="mt-3 w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+        className="mt-3 w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
       />
       <textarea
         value={body}
         onChange={(e) => setBody(e.target.value)}
         rows={3}
         placeholder="Share your supernatural experience..."
-        className="mt-2 w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+        className="mt-2 w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
       />
       <button
         onClick={handleSubmit}

@@ -33,17 +33,17 @@ export default function PhotoUploadForm() {
 
   return (
     <GlowCard>
-      <h3 className="font-display text-lg font-bold text-white">Add a progress photo</h3>
-      <p className="mt-1 text-sm text-white/60">
+      <h3 className="font-display text-lg font-bold text-ink-900">Add a progress photo</h3>
+      <p className="mt-1 text-sm text-ink-900/60">
         Daily or weekly — whatever works for you. Photos are stored privately in this browser.
       </p>
 
       <div className="mt-5 flex flex-col gap-4 sm:flex-row">
-        <label className="flex aspect-square w-full max-w-[180px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-white/20 bg-white/5 hover:border-fuchsia-300/50">
+        <label className="flex aspect-square w-full max-w-[180px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-ink-900/20 bg-ink-900/5 hover:border-fuchsia-300/50">
           {preview ? (
             <img src={preview} alt="Selected preview" className="h-full w-full object-cover" />
           ) : (
-            <span className="px-2 text-center text-xs text-white/50">📷 Tap to take or choose a photo</span>
+            <span className="px-2 text-center text-xs text-ink-900/50">📷 Tap to take or choose a photo</span>
           )}
           <input
             ref={inputRef}
@@ -57,7 +57,7 @@ export default function PhotoUploadForm() {
 
         <div className="flex-1 space-y-3">
           <div>
-            <label className="mb-1 block text-xs font-medium text-white/60" htmlFor="photo-date">
+            <label className="mb-1 block text-xs font-medium text-ink-900/60" htmlFor="photo-date">
               Date
             </label>
             <input
@@ -65,11 +65,11 @@ export default function PhotoUploadForm() {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-fuchsia-300"
+              className="w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-3 py-2 text-sm text-ink-900 outline-none focus:border-fuchsia-300"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-white/60" htmlFor="photo-note">
+            <label className="mb-1 block text-xs font-medium text-ink-900/60" htmlFor="photo-note">
               Note (optional)
             </label>
             <input
@@ -77,7 +77,7 @@ export default function PhotoUploadForm() {
               value={note}
               onChange={(e) => setNote(e.target.value)}
               placeholder="e.g. Week 6 — length check"
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+              className="w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-3 py-2 text-sm text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
             />
           </div>
           <button

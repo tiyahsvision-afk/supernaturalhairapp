@@ -58,8 +58,8 @@ export default function FeatureGrid() {
           {FEATURES.map((f) => (
             <GlowCard key={f.title} className="transition-transform hover:-translate-y-1">
               <div className="text-2xl">{f.icon}</div>
-              <h3 className="mt-3 font-display text-lg font-bold text-white">{f.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/65">{f.body}</p>
+              <h3 className="mt-3 font-display text-lg font-bold text-ink-900">{f.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-900/65">{f.body}</p>
             </GlowCard>
           ))}
         </div>

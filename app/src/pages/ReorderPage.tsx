@@ -33,9 +33,9 @@ export default function ReorderPage() {
       <GlowCard className="mt-10 flex flex-col items-center gap-6 bg-gradient-to-br from-sky-500/10 via-transparent to-fuchsia-500/10 p-8 text-center sm:flex-row sm:text-left">
         <img src={kit.image} alt={kit.title} className="h-28 w-28 shrink-0 rounded-2xl object-cover" />
         <div className="flex-1">
-          <h3 className="font-display text-xl font-bold text-white">{kit.title}</h3>
-          <p className="mt-1 text-sm text-white/60">{kit.description}</p>
-          <p className="mt-2 text-lg font-semibold text-lavender-200">${kit.price.toFixed(2)}</p>
+          <h3 className="font-display text-xl font-bold text-ink-900">{kit.title}</h3>
+          <p className="mt-1 text-sm text-ink-900/60">{kit.description}</p>
+          <p className="mt-2 text-lg font-semibold text-lavender-600">${kit.price.toFixed(2)}</p>
         </div>
         <a
           href={reorderKitUrl()}
@@ -53,7 +53,7 @@ export default function ReorderPage() {
             href={reorderManyUrl(recommendedIds)}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-lavender-300/40 bg-lavender-400/10 px-4 py-2 text-sm font-semibold text-lavender-200 hover:bg-lavender-400/20"
+            className="inline-flex items-center gap-2 rounded-full border border-lavender-300/40 bg-lavender-400/10 px-4 py-2 text-sm font-semibold text-lavender-600 hover:bg-lavender-400/20"
           >
             ✦ Reorder my consultation-recommended products
           </a>
@@ -61,7 +61,7 @@ export default function ReorderPage() {
       )}
 
       <div className="mt-10 flex items-center justify-between">
-        <h3 className="font-display text-lg font-bold text-white">Or pick individual products</h3>
+        <h3 className="font-display text-lg font-bold text-ink-900">Or pick individual products</h3>
         {selected.size > 0 && (
           <a
             href={reorderManyUrl(Array.from(selected))}

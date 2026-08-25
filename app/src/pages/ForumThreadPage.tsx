@@ -22,32 +22,32 @@ export default function ForumThreadPage() {
 
   return (
     <PageShell className="max-w-3xl">
-      <Link to="/forum" className="text-sm text-white/50 hover:text-white">
+      <Link to="/forum" className="text-sm text-ink-900/50 hover:text-ink-900">
         ← Back to forum
       </Link>
 
       <GlowCard className="mt-4">
-        <p className="text-xs font-semibold uppercase tracking-wide text-sky-300">{thread.category}</p>
-        <h1 className="mt-1.5 font-display text-2xl font-bold text-white">{thread.title}</h1>
-        <p className="mt-3 whitespace-pre-line text-white/75">{thread.body}</p>
-        <div className="mt-4 flex items-center gap-4 text-sm text-white/40">
+        <p className="text-xs font-semibold uppercase tracking-wide text-sky-600">{thread.category}</p>
+        <h1 className="mt-1.5 font-display text-2xl font-bold text-ink-900">{thread.title}</h1>
+        <p className="mt-3 whitespace-pre-line text-ink-900/75">{thread.body}</p>
+        <div className="mt-4 flex items-center gap-4 text-sm text-ink-900/40">
           <span>{thread.author}</span>
           <span>{new Date(thread.createdAt).toLocaleDateString()}</span>
-          <button onClick={() => likeThread(thread.id)} className="flex items-center gap-1 hover:text-fuchsia-300">
+          <button onClick={() => likeThread(thread.id)} className="flex items-center gap-1 hover:text-fuchsia-600">
             ♡ {thread.likes}
           </button>
         </div>
       </GlowCard>
 
       <div className="mt-6 space-y-3">
-        <h3 className="text-sm font-semibold text-white/70">{thread.replies.length} replies</h3>
+        <h3 className="text-sm font-semibold text-ink-900/70">{thread.replies.length} replies</h3>
         {thread.replies.map((r) => (
           <GlowCard key={r.id} className="!p-4">
-            <div className="flex items-center gap-2 text-xs text-white/40">
-              <span className="font-semibold text-white/70">{r.author}</span>
+            <div className="flex items-center gap-2 text-xs text-ink-900/40">
+              <span className="font-semibold text-ink-900/70">{r.author}</span>
               <span>{new Date(r.createdAt).toLocaleDateString()}</span>
             </div>
-            <p className="mt-1.5 text-sm text-white/80">{r.body}</p>
+            <p className="mt-1.5 text-sm text-ink-900/80">{r.body}</p>
           </GlowCard>
         ))}
       </div>
@@ -58,7 +58,7 @@ export default function ForumThreadPage() {
             value={reply}
             onChange={(e) => setReply(e.target.value)}
             placeholder="Add a reply..."
-            className="flex-1 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+            className="flex-1 rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
           />
           <button
             onClick={handleReply}
@@ -68,8 +68,8 @@ export default function ForumThreadPage() {
           </button>
         </div>
       ) : (
-        <p className="mt-6 text-sm text-white/50">
-          <Link to="/onboarding" className="text-fuchsia-300 hover:underline">
+        <p className="mt-6 text-sm text-ink-900/50">
+          <Link to="/onboarding" className="text-fuchsia-600 hover:underline">
             Start your journey
           </Link>{' '}
           to join the conversation.

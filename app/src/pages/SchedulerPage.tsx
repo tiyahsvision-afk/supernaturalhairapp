@@ -30,14 +30,14 @@ export default function SchedulerPage() {
         {latestConsultation ? (
           <button
             onClick={generateFromConsultation}
-            className="shrink-0 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
+            className="shrink-0 rounded-full border border-ink-900/20 px-4 py-2 text-sm font-semibold text-ink-900 hover:bg-ink-900/10"
           >
             ✦ Fill next 7 days from my consultation
           </button>
         ) : (
           <Link
             to="/consultation"
-            className="shrink-0 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
+            className="shrink-0 rounded-full border border-ink-900/20 px-4 py-2 text-sm font-semibold text-ink-900 hover:bg-ink-900/10"
           >
             Take your consultation first →
           </Link>
@@ -53,7 +53,7 @@ export default function SchedulerPage() {
             onPrevMonth={() => setMonthDate((d) => new Date(d.getFullYear(), d.getMonth() - 1, 1))}
             onNextMonth={() => setMonthDate((d) => new Date(d.getFullYear(), d.getMonth() + 1, 1))}
           />
-          <div className="mt-4 flex flex-wrap gap-4 text-xs text-white/50">
+          <div className="mt-4 flex flex-wrap gap-4 text-xs text-ink-900/50">
             <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-fuchsia-400" /> Scheduled</span>
             <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-emerald-400" /> Done</span>
             <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-sky-300" /> Hairstyle logged</span>

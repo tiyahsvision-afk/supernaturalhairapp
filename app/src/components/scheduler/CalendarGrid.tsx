@@ -26,18 +26,18 @@ export default function CalendarGrid({
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="font-display text-lg font-bold text-white">{formatMonthLabel(monthDate)}</h3>
+        <h3 className="font-display text-lg font-bold text-ink-900">{formatMonthLabel(monthDate)}</h3>
         <div className="flex gap-2">
           <button
             onClick={onPrevMonth}
-            className="grid h-8 w-8 place-items-center rounded-full border border-white/15 text-white/70 hover:bg-white/10"
+            className="grid h-8 w-8 place-items-center rounded-full border border-ink-900/15 text-ink-900/70 hover:bg-ink-900/10"
             aria-label="Previous month"
           >
             ←
           </button>
           <button
             onClick={onNextMonth}
-            className="grid h-8 w-8 place-items-center rounded-full border border-white/15 text-white/70 hover:bg-white/10"
+            className="grid h-8 w-8 place-items-center rounded-full border border-ink-900/15 text-ink-900/70 hover:bg-ink-900/10"
             aria-label="Next month"
           >
             →
@@ -45,7 +45,7 @@ export default function CalendarGrid({
         </div>
       </div>
 
-      <div className="grid grid-cols-7 gap-1.5 text-center text-xs font-semibold text-white/40">
+      <div className="grid grid-cols-7 gap-1.5 text-center text-xs font-semibold text-ink-900/40">
         {WEEKDAY_LABELS.map((d) => (
           <div key={d} className="py-1">
             {d}
@@ -71,10 +71,10 @@ export default function CalendarGrid({
                   ? 'border-fuchsia-300 bg-fuchsia-400/15'
                   : isToday
                     ? 'border-sky-300/60 bg-sky-400/10'
-                    : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.07]'
+                    : 'border-ink-900/10 bg-ink-900/[0.03] hover:bg-ink-900/[0.07]'
               } ${inMonth ? '' : 'opacity-30'}`}
             >
-              <span className={`font-semibold ${isToday ? 'text-sky-200' : 'text-white/80'}`}>
+              <span className={`font-semibold ${isToday ? 'text-sky-600' : 'text-ink-900/80'}`}>
                 {day.getDate()}
               </span>
               <div className="mt-1 flex flex-wrap items-center justify-center gap-0.5">

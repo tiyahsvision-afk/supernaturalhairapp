@@ -33,25 +33,25 @@ export default function ReferralBox() {
 
   return (
     <GlowCard>
-      <h3 className="font-display text-lg font-bold text-white">Refer a friend</h3>
-      <p className="mt-1 text-sm text-white/60">
+      <h3 className="font-display text-lg font-bold text-ink-900">Refer a friend</h3>
+      <p className="mt-1 text-sm text-ink-900/60">
         Share your code. When a friend joins with it, you both get rewarded.
       </p>
 
       <div className="mt-4 flex items-center gap-2">
-        <code className="flex-1 truncate rounded-xl border border-white/15 bg-ink-950/60 px-3 py-2.5 text-sm text-lavender-200">
+        <code className="flex-1 truncate rounded-xl border border-lavender-200 bg-lavender-50 px-3 py-2.5 text-sm font-semibold text-lavender-600">
           {referralCode}
         </code>
         <button
           onClick={handleCopy}
-          className="shrink-0 rounded-xl border border-white/20 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
+          className="shrink-0 rounded-xl border border-ink-900/20 px-4 py-2.5 text-sm font-semibold text-ink-900 hover:bg-ink-900/10"
         >
           {copied ? '✓ Copied' : 'Copy'}
         </button>
       </div>
 
-      <div className="mt-5 border-t border-white/10 pt-4">
-        <label className="mb-1 block text-xs font-medium text-white/60" htmlFor="friend-code">
+      <div className="mt-5 border-t border-ink-900/10 pt-4">
+        <label className="mb-1 block text-xs font-medium text-ink-900/60" htmlFor="friend-code">
           Have a friend's referral code?
         </label>
         <div className="flex gap-2">
@@ -60,7 +60,7 @@ export default function ReferralBox() {
             value={friendCode}
             onChange={(e) => setFriendCode(e.target.value)}
             placeholder="e.g. AMARA-3F9K"
-            className="flex-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+            className="flex-1 rounded-xl border border-ink-900/15 bg-ink-900/5 px-3 py-2 text-sm text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
           />
           <button
             onClick={handleRedeemFriendCode}
@@ -69,7 +69,7 @@ export default function ReferralBox() {
             Apply
           </button>
         </div>
-        {message && <p className="mt-2 text-xs text-lavender-200">{message}</p>}
+        {message && <p className="mt-2 text-xs text-lavender-600">{message}</p>}
       </div>
     </GlowCard>
   )

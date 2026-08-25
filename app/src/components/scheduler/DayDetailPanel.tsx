@@ -42,41 +42,41 @@ export default function DayDetailPanel({ dateKey }: { dateKey: string }) {
   return (
     <GlowCard className="space-y-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-600">
           {formatFriendlyDate(dateKey)}
         </p>
-        <h3 className="mt-1 font-display text-lg font-bold text-white">Routine for this day</h3>
+        <h3 className="mt-1 font-display text-lg font-bold text-ink-900">Routine for this day</h3>
       </div>
 
       <div className="space-y-2">
         {scheduleItems.length === 0 && (
-          <p className="text-sm text-white/50">Nothing scheduled yet — add a product below.</p>
+          <p className="text-sm text-ink-900/50">Nothing scheduled yet — add a product below.</p>
         )}
         {scheduleItems.map((item) => {
           const product = getProduct(item.productId)
           return (
             <div
               key={item.id}
-              className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5"
+              className="flex items-center justify-between gap-3 rounded-xl border border-ink-900/10 bg-ink-900/[0.03] px-3 py-2.5"
             >
               <button onClick={() => toggleScheduleItemDone(item.id)} className="flex flex-1 items-center gap-3 text-left">
                 <span
                   className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border text-[10px] ${
-                    item.done ? 'border-emerald-400 bg-emerald-400 text-ink-950' : 'border-white/30 text-transparent'
+                    item.done ? 'border-emerald-400 bg-emerald-400 text-ink-950' : 'border-ink-900/30 text-transparent'
                   }`}
                 >
                   ✓
                 </span>
                 <span>
-                  <span className={`text-sm font-medium ${item.done ? 'text-white/40 line-through' : 'text-white'}`}>
+                  <span className={`text-sm font-medium ${item.done ? 'text-ink-900/40 line-through' : 'text-ink-900'}`}>
                     {product?.title}
                   </span>
-                  <span className="ml-2 text-xs text-white/40">{TIME_LABELS[item.timeOfDay]}</span>
+                  <span className="ml-2 text-xs text-ink-900/40">{TIME_LABELS[item.timeOfDay]}</span>
                 </span>
               </button>
               <button
                 onClick={() => removeScheduleItem(item.id)}
-                className="text-xs text-white/30 hover:text-fuchsia-300"
+                className="text-xs text-ink-900/30 hover:text-fuchsia-600"
                 aria-label="Remove"
               >
                 ✕
@@ -86,11 +86,11 @@ export default function DayDetailPanel({ dateKey }: { dateKey: string }) {
         })}
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 border-t border-white/10 pt-4">
+      <div className="flex flex-wrap items-center gap-2 border-t border-ink-900/10 pt-4">
         <select
           value={productId}
           onChange={(e) => setProductId(e.target.value)}
-          className="rounded-xl border border-white/15 bg-ink-800 px-3 py-2 text-sm text-white outline-none"
+          className="rounded-xl border border-ink-900/15 bg-white px-3 py-2 text-sm text-ink-900 outline-none"
         >
           {PRODUCTS.map((p) => (
             <option key={p.id} value={p.id}>
@@ -101,7 +101,7 @@ export default function DayDetailPanel({ dateKey }: { dateKey: string }) {
         <select
           value={timeOfDay}
           onChange={(e) => setTimeOfDay(e.target.value as ScheduleItem['timeOfDay'])}
-          className="rounded-xl border border-white/15 bg-ink-800 px-3 py-2 text-sm text-white outline-none"
+          className="rounded-xl border border-ink-900/15 bg-white px-3 py-2 text-sm text-ink-900 outline-none"
         >
           <option value="morning">Morning</option>
           <option value="evening">Evening</option>
@@ -115,17 +115,17 @@ export default function DayDetailPanel({ dateKey }: { dateKey: string }) {
         </button>
       </div>
 
-      <div className="border-t border-white/10 pt-4">
-        <p className="mb-2 text-sm font-semibold text-white/70">Hairstyle</p>
+      <div className="border-t border-ink-900/10 pt-4">
+        <p className="mb-2 text-sm font-semibold text-ink-900/70">Hairstyle</p>
         {hairstyle ? (
           <div className="flex items-start justify-between rounded-xl border border-sky-300/20 bg-sky-400/5 px-3 py-2.5">
             <div>
-              <p className="text-sm font-medium text-white">{hairstyle.name}</p>
-              {hairstyle.notes && <p className="mt-0.5 text-xs text-white/50">{hairstyle.notes}</p>}
+              <p className="text-sm font-medium text-ink-900">{hairstyle.name}</p>
+              {hairstyle.notes && <p className="mt-0.5 text-xs text-ink-900/50">{hairstyle.notes}</p>}
             </div>
             <button
               onClick={() => removeHairstyle(hairstyle.id)}
-              className="text-xs text-white/30 hover:text-fuchsia-300"
+              className="text-xs text-ink-900/30 hover:text-fuchsia-600"
             >
               ✕
             </button>
@@ -136,17 +136,17 @@ export default function DayDetailPanel({ dateKey }: { dateKey: string }) {
               value={hairstyleName}
               onChange={(e) => setHairstyleName(e.target.value)}
               placeholder="e.g. Braided pineapple bun"
-              className="min-w-[180px] flex-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+              className="min-w-[180px] flex-1 rounded-xl border border-ink-900/15 bg-ink-900/5 px-3 py-2 text-sm text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
             />
             <input
               value={hairstyleNotes}
               onChange={(e) => setHairstyleNotes(e.target.value)}
               placeholder="Notes (optional)"
-              className="min-w-[140px] flex-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+              className="min-w-[140px] flex-1 rounded-xl border border-ink-900/15 bg-ink-900/5 px-3 py-2 text-sm text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
             />
             <button
               onClick={handleAddHairstyle}
-              className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
+              className="rounded-full border border-ink-900/20 px-4 py-2 text-sm font-semibold text-ink-900 hover:bg-ink-900/10"
             >
               Save
             </button>

@@ -62,16 +62,16 @@ export default function ConsultationWizard({
           <div
             key={i}
             className={`h-1.5 flex-1 rounded-full transition-colors ${
-              i <= step ? 'bg-gradient-to-r from-sky-400 to-fuchsia-400' : 'bg-white/10'
+              i <= step ? 'bg-gradient-to-r from-sky-400 to-fuchsia-400' : 'bg-ink-900/10'
             }`}
           />
         ))}
       </div>
 
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-300">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-600">
         Step {step + 1} of {STEP_TITLES.length}
       </p>
-      <h2 className="mt-1 font-display text-xl font-bold text-white sm:text-2xl">
+      <h2 className="mt-1 font-display text-xl font-bold text-ink-900 sm:text-2xl">
         {STEP_TITLES[step]}
       </h2>
 
@@ -98,14 +98,14 @@ export default function ConsultationWizard({
               onClick={() => patch('usesHeatOrProtectiveStyles', !answers.usesHeatOrProtectiveStyles)}
               className={`w-full rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition-colors ${
                 answers.usesHeatOrProtectiveStyles
-                  ? 'border-fuchsia-300 bg-fuchsia-400/15 text-white'
-                  : 'border-white/15 bg-white/5 text-white/70'
+                  ? 'border-fuchsia-300 bg-fuchsia-400/15 text-ink-900'
+                  : 'border-ink-900/15 bg-ink-900/5 text-ink-900/70'
               }`}
             >
               {answers.usesHeatOrProtectiveStyles ? '✓ ' : ''}I regularly use heat styling or protective styles
             </button>
             <div>
-              <label htmlFor="notes" className="mb-1 block text-sm font-medium text-white/80">
+              <label htmlFor="notes" className="mb-1 block text-sm font-medium text-ink-900/80">
                 Anything else we should know? (optional)
               </label>
               <textarea
@@ -114,7 +114,7 @@ export default function ConsultationWizard({
                 onChange={(e) => patch('notes', e.target.value)}
                 rows={3}
                 placeholder="e.g. sensitive scalp, postpartum shedding, trying to transition..."
-                className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 outline-none focus:border-fuchsia-300"
+                className="w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-ink-900 placeholder:text-ink-900/30 outline-none focus:border-fuchsia-300"
               />
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function ConsultationWizard({
         <button
           type="button"
           onClick={back}
-          className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white/70 hover:text-white"
+          className="rounded-full border border-ink-900/15 px-5 py-2.5 text-sm font-medium text-ink-900/70 hover:text-ink-900"
         >
           {step === 0 ? 'Cancel' : 'Back'}
         </button>

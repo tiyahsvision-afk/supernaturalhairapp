@@ -11,9 +11,9 @@ export default function TodayChecklist() {
 
   if (items.length === 0) {
     return (
-      <div className="text-sm text-white/60">
+      <div className="text-sm text-ink-900/60">
         Nothing scheduled for today.{' '}
-        <Link to="/scheduler" className="text-fuchsia-300 hover:underline">
+        <Link to="/scheduler" className="text-fuchsia-600 hover:underline">
           Plan your routine →
         </Link>
       </div>
@@ -24,7 +24,7 @@ export default function TodayChecklist() {
 
   return (
     <div>
-      <div className="mb-3 flex items-center justify-between text-xs text-white/50">
+      <div className="mb-3 flex items-center justify-between text-xs text-ink-900/50">
         <span>Today's routine</span>
         <span>
           {doneCount}/{items.length} done
@@ -37,16 +37,16 @@ export default function TodayChecklist() {
             <button
               key={item.id}
               onClick={() => toggleScheduleItemDone(item.id)}
-              className="flex w-full items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 text-left hover:bg-white/[0.06]"
+              className="flex w-full items-center gap-3 rounded-xl border border-ink-900/10 bg-ink-900/[0.03] px-3 py-2.5 text-left hover:bg-ink-900/[0.06]"
             >
               <span
                 className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border text-[10px] ${
-                  item.done ? 'border-emerald-400 bg-emerald-400 text-ink-950' : 'border-white/30 text-transparent'
+                  item.done ? 'border-emerald-400 bg-emerald-400 text-ink-950' : 'border-ink-900/30 text-transparent'
                 }`}
               >
                 ✓
               </span>
-              <span className={`text-sm ${item.done ? 'text-white/40 line-through' : 'text-white'}`}>
+              <span className={`text-sm ${item.done ? 'text-ink-900/40 line-through' : 'text-ink-900'}`}>
                 {product?.title}
               </span>
             </button>

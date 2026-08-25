@@ -31,12 +31,12 @@ export default function TestimonialStrip() {
                   {initials(t.name)}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="text-xs text-white/50">{t.handle}</p>
+                  <p className="text-sm font-semibold text-ink-900">{t.name}</p>
+                  <p className="text-xs text-ink-900/50">{t.handle}</p>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-white/75">“{t.quote}”</p>
-              <p className="mt-4 inline-block rounded-full bg-fuchsia-400/10 px-3 py-1 text-xs font-semibold text-fuchsia-200">
+              <p className="mt-4 text-sm leading-relaxed text-ink-900/75">“{t.quote}”</p>
+              <p className="mt-4 inline-block rounded-full bg-fuchsia-400/10 px-3 py-1 text-xs font-semibold text-fuchsia-600">
                 {t.highlight}
               </p>
             </GlowCard>

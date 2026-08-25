@@ -52,7 +52,7 @@ export default function ForumPage() {
             key={c}
             onClick={() => setFilter(c)}
             className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
-              filter === c ? 'bg-white/10 text-white border border-white/20' : 'text-white/50 hover:text-white'
+              filter === c ? 'bg-ink-900/10 text-ink-900 border border-ink-900/20' : 'text-ink-900/50 hover:text-ink-900'
             }`}
           >
             {c}

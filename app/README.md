@@ -51,4 +51,4 @@ This app intentionally ships as a self-contained MVP. To take it further:
 
 ## Design system
 
-Palette (see `@theme` in `src/index.css`): `sky-*` (light blue), `fuchsia-*` / light fuchsia, `lavender-*`, white, on an `ink-*` deep-space background — glass-panel cards (`glass-panel`, `glow-border` utility classes), gradient text/buttons, and soft animated glow blobs for the "futuristic, high-tech" feel requested. A light/"daylight" theme toggle is a natural next iteration; the current build ships one considered dark theme with light-toned accents throughout.
+Palette (see `@theme` in `src/index.css`): `sky-*` (light blue), `fuchsia-*` / light fuchsia, `lavender-*`, and white on a white background, with `ink-*` (a deep space navy/violet) reserved for text and subtle dark-tinted borders/fills. Cards use the `glass-panel`/`glow-border` utility classes (soft elevation shadow + a pastel gradient border), gradient headings/buttons, and softly animated pastel glow blobs behind the hero for the "futuristic, high-tech" feel requested. A dark theme toggle is a natural next iteration; the current build ships one considered light theme.

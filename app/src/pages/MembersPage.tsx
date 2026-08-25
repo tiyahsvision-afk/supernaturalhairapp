@@ -39,12 +39,12 @@ export default function MembersPage() {
           className="h-28 w-28 shrink-0 rounded-2xl object-cover"
         />
         <div className="flex-1">
-          <h3 className="font-display text-xl font-bold text-white">Supernatural Members Club</h3>
-          <p className="mt-1 text-sm text-white/60">Limited spots — journey coaching, meetups, Bible study & creator spotlights.</p>
-          <p className="mt-2 text-lg font-semibold text-lavender-200">${MEMBERS_ONLY_PRODUCT.price.toFixed(0)}</p>
+          <h3 className="font-display text-xl font-bold text-ink-900">Supernatural Members Club</h3>
+          <p className="mt-1 text-sm text-ink-900/60">Limited spots — journey coaching, meetups, Bible study & creator spotlights.</p>
+          <p className="mt-2 text-lg font-semibold text-lavender-600">${MEMBERS_ONLY_PRODUCT.price.toFixed(0)}</p>
         </div>
         {isClubMember ? (
-          <span className="shrink-0 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-5 py-3 text-sm font-semibold text-emerald-200">
+          <span className="shrink-0 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-5 py-3 text-sm font-semibold text-emerald-600">
             ✓ You're a member
           </span>
         ) : onboarded ? (
@@ -59,7 +59,7 @@ export default function MembersPage() {
               href={productPageUrl(MEMBERS_ONLY_PRODUCT.handle)}
               target="_blank"
               rel="noreferrer"
-              className="text-xs text-white/40 hover:text-white/70"
+              className="text-xs text-ink-900/40 hover:text-ink-900/70"
             >
               Complete purchase on shcbeauty.com →
             </a>
@@ -78,20 +78,20 @@ export default function MembersPage() {
         {PERKS.map((p) => (
           <GlowCard key={p.title}>
             <div className="text-2xl">{p.icon}</div>
-            <h3 className="mt-3 font-display text-base font-bold text-white">{p.title}</h3>
-            <p className="mt-2 text-sm text-white/60">{p.body}</p>
+            <h3 className="mt-3 font-display text-base font-bold text-ink-900">{p.title}</h3>
+            <p className="mt-2 text-sm text-ink-900/60">{p.body}</p>
           </GlowCard>
         ))}
       </div>
 
       {isClubMember && (
         <div className="mt-12">
-          <h3 className="mb-4 font-display text-lg font-bold text-white">Upcoming sessions</h3>
+          <h3 className="mb-4 font-display text-lg font-bold text-ink-900">Upcoming sessions</h3>
           <div className="space-y-2.5">
             {COACHING_SESSIONS.map((s) => (
               <GlowCard key={s.title} className="flex items-center justify-between !p-4">
-                <span className="text-sm text-white">{s.title}</span>
-                <span className="text-xs text-white/50">{s.cadence}</span>
+                <span className="text-sm text-ink-900">{s.title}</span>
+                <span className="text-xs text-ink-900/50">{s.cadence}</span>
               </GlowCard>
             ))}
           </div>
@@ -99,14 +99,14 @@ export default function MembersPage() {
       )}
 
       <div className="mt-12">
-        <h3 className="mb-4 font-display text-lg font-bold text-white">Creator spotlights & the Journey Magazine</h3>
+        <h3 className="mb-4 font-display text-lg font-bold text-ink-900">Creator spotlights & the Journey Magazine</h3>
         <div className="grid gap-5 sm:grid-cols-3">
           {MAGAZINE_ISSUES.map((issue) => (
             <a key={issue.handle} href={productPageUrl(issue.handle)} target="_blank" rel="noreferrer">
               <GlowCard className="h-full transition-transform hover:-translate-y-1">
                 <img src={issue.image} alt={issue.title} className="h-32 w-full rounded-xl object-cover" loading="lazy" />
-                <h4 className="mt-3 text-sm font-bold text-white">{issue.title}</h4>
-                <p className="mt-1 text-xs text-white/55">{issue.blurb}</p>
+                <h4 className="mt-3 text-sm font-bold text-ink-900">{issue.title}</h4>
+                <p className="mt-1 text-xs text-ink-900/55">{issue.blurb}</p>
               </GlowCard>
             </a>
           ))}

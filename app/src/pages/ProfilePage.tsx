@@ -42,7 +42,7 @@ export default function ProfilePage() {
         ].map((stat) => (
           <GlowCard key={stat.label} className="text-center !p-4">
             <p className="font-display text-2xl font-bold text-gradient">{stat.value}</p>
-            <p className="text-xs text-white/50">{stat.label}</p>
+            <p className="text-xs text-ink-900/50">{stat.label}</p>
           </GlowCard>
         ))}
       </div>
@@ -50,18 +50,18 @@ export default function ProfilePage() {
       <GlowCard className="mt-6">
         <div className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium text-white/80" htmlFor="p-name">
+            <label className="mb-1 block text-sm font-medium text-ink-900/80" htmlFor="p-name">
               Name
             </label>
             <input
               id="p-name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-white outline-none focus:border-fuchsia-300"
+              className="w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-ink-900 outline-none focus:border-fuchsia-300"
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-white/80" htmlFor="p-email">
+            <label className="mb-1 block text-sm font-medium text-ink-900/80" htmlFor="p-email">
               Email
             </label>
             <input
@@ -69,18 +69,18 @@ export default function ProfilePage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-white outline-none focus:border-fuchsia-300"
+              className="w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-ink-900 outline-none focus:border-fuchsia-300"
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-white/80" htmlFor="p-goal">
+            <label className="mb-1 block text-sm font-medium text-ink-900/80" htmlFor="p-goal">
               Hair goal
             </label>
             <input
               id="p-goal"
               value={hairGoal}
               onChange={(e) => setHairGoal(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-white outline-none focus:border-fuchsia-300"
+              className="w-full rounded-xl border border-ink-900/15 bg-ink-900/5 px-4 py-2.5 text-ink-900 outline-none focus:border-fuchsia-300"
             />
           </div>
           <button
@@ -98,15 +98,15 @@ export default function ProfilePage() {
 
       <GlowCard className="mt-6 flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-white">Membership</p>
-          <p className="text-xs text-white/50">
+          <p className="text-sm font-semibold text-ink-900">Membership</p>
+          <p className="text-xs text-ink-900/50">
             {profile.isClubMember ? 'You are a Supernatural Members Club member ✓' : 'Not a member yet'}
           </p>
         </div>
-        <span className="text-xs text-white/40">Member since {new Date(profile.memberSince).toLocaleDateString()}</span>
+        <span className="text-xs text-ink-900/40">Member since {new Date(profile.memberSince).toLocaleDateString()}</span>
       </GlowCard>
 
-      <button onClick={handleReset} className="mt-10 text-xs text-white/30 hover:text-fuchsia-300">
+      <button onClick={handleReset} className="mt-10 text-xs text-ink-900/30 hover:text-fuchsia-600">
         Clear local demo data
       </button>
     </PageShell>
