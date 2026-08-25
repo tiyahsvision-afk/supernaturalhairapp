@@ -12,6 +12,14 @@ A companion web app for customers who've bought the **Supernatural Hair Care Jou
 
 No backend exists yet — this is a fully working front-end MVP. Every feature is real and interactive; data lives in the browser (localStorage + IndexedDB). See **Going to production** below for what a real backend adds.
 
+## Live site
+
+Every push to `claude/supernatural-journey-app-wxdict` that touches `app/` automatically publishes to:
+
+**https://tiyahsvision-afk.github.io/Tia/**
+
+via `.github/workflows/deploy-pages.yml` (build with Vite, deploy with GitHub Pages). No manual steps needed after the first-ever deploy, which may need "Settings → Pages → Source: GitHub Actions" turned on once for this repository if it isn't already.
+
 ## Getting started
 
 ```bash
