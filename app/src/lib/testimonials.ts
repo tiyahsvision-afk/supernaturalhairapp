@@ -3,6 +3,8 @@ export interface Testimonial {
   handle: string
   quote: string
   highlight: string
+  /** Real customer photo URL. Leave unset to show the initials avatar. */
+  photoUrl?: string
 }
 
 // Placeholder UGC copy in the brand's voice — swap in real customer photos

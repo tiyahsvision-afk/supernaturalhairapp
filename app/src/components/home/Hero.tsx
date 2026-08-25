@@ -9,17 +9,17 @@ export default function Hero() {
       <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
         <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-ink-900/15 bg-ink-900/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-lavender-600">
           <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-fuchsia-400" />
-          For every Supernatural Journey Kit owner
+          A home for your hair journey and your identity journey
         </div>
         <h1 className="font-display text-4xl font-extrabold leading-[1.1] text-ink-900 sm:text-6xl">
-          Your kit, guided.
+          You're not just growing hair.
           <br />
-          <span className="text-gradient">A journey, personalized.</span>
+          <span className="text-gradient">You're growing into you.</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-base text-ink-900/70 sm:text-lg">
-          Digital consultations, a routine scheduler built around your hairstyles, gentle
-          reminders, progress photos, rewards, and a community walking the same identity
-          journey — all built around your Supernatural Hair Care Journey Kit.
+          Your Supernatural Journey Kit comes with a place to belong — a personal plan for
+          your hair, a community that gets it, and a little faith and sisterhood built
+          right in. This is where the rest of your journey happens.
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link

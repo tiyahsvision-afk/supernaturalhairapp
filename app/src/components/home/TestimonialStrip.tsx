@@ -18,6 +18,7 @@ export default function TestimonialStrip() {
         <SectionHeading
           eyebrow="Real journeys"
           title="Told by the community, not by us"
+          description="Every quote here comes from a woman on the same journey you're on."
           align="center"
         />
         <div className="mt-10 flex snap-x gap-5 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -27,9 +28,17 @@ export default function TestimonialStrip() {
               className="w-[280px] shrink-0 snap-start sm:w-[320px]"
             >
               <div className="flex items-center gap-3">
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-br from-sky-400 via-fuchsia-400 to-lavender-400 text-sm font-bold text-ink-950">
-                  {initials(t.name)}
-                </div>
+                {t.photoUrl ? (
+                  <img
+                    src={t.photoUrl}
+                    alt={t.name}
+                    className="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-white"
+                  />
+                ) : (
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-sky-400 via-fuchsia-400 to-lavender-400 text-sm font-bold text-ink-950 ring-2 ring-white">
+                    {initials(t.name)}
+                  </div>
+                )}
                 <div>
                   <p className="text-sm font-semibold text-ink-900">{t.name}</p>
                   <p className="text-xs text-ink-900/50">{t.handle}</p>
