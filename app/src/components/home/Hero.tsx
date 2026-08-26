@@ -21,21 +21,21 @@ export default function Hero() {
           your hair, a community that gets it, and a little faith and sisterhood built
           right in. This is where the rest of your journey happens.
         </p>
-        <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-9 flex flex-col items-center justify-center">
           <Link
             to={onboarded ? '/consultation' : '/onboarding'}
-            className="w-full rounded-full bg-gradient-to-r from-sky-400 via-fuchsia-400 to-lavender-400 px-7 py-3 text-sm font-semibold text-ink-950 shadow-[0_0_35px_rgba(232,121,249,0.5)] transition-transform hover:scale-105 sm:w-auto"
+            className="w-full max-w-xs rounded-full bg-gradient-to-r from-sky-400 via-fuchsia-400 to-lavender-400 px-8 py-4 text-base font-semibold text-ink-950 shadow-[0_0_35px_rgba(232,121,249,0.5)] transition-transform hover:scale-105 sm:w-auto"
           >
-            Start Your Digital Consultation
+            Start Your Digital Consultation — Free
           </Link>
+          <p className="mt-3 text-xs text-ink-900/45">Takes about 2 minutes · no download · nothing to buy</p>
           <Link
             to={onboarded ? '/scheduler' : '/onboarding'}
-            className="w-full rounded-full border border-ink-900/20 bg-ink-900/5 px-7 py-3 text-sm font-semibold text-ink-900 backdrop-blur-md transition-colors hover:bg-ink-900/10 sm:w-auto"
+            className="mt-4 text-sm font-medium text-ink-900/50 underline decoration-ink-900/20 underline-offset-4 hover:text-ink-900"
           >
-            Build My Scheduler
+            or jump straight to building my scheduler →
           </Link>
         </div>
-        <p className="mt-4 text-xs text-ink-900/40">No app store download needed — everything lives right here.</p>
       </div>
     </section>
   )

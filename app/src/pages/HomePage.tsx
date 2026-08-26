@@ -5,10 +5,11 @@ import FeatureGrid from '@/components/home/FeatureGrid'
 import TestimonialStrip from '@/components/home/TestimonialStrip'
 import ForumPreview from '@/components/home/ForumPreview'
 import MembersTeaser from '@/components/home/MembersTeaser'
+import StickyMobileCta from '@/components/home/StickyMobileCta'
 
 export default function HomePage() {
   return (
-    <>
+    <div className="pb-20 sm:pb-0">
       <Hero />
       <WhyDifferent />
       <FounderStory />
@@ -16,6 +17,7 @@ export default function HomePage() {
       <TestimonialStrip />
       <ForumPreview />
       <MembersTeaser />
-    </>
+      <StickyMobileCta />
+    </div>
   )
 }
