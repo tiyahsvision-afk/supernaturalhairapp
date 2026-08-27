@@ -13,6 +13,7 @@ const COLLECTIONS = [
   "orders",
   "custodyEvents",
   "messages",
+  "pushSubscriptions",
 ];
 
 function seed() {

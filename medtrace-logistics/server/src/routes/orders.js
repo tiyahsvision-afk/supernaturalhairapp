@@ -3,6 +3,8 @@ import { randomUUID } from "crypto";
 import { db } from "../db.js";
 import { requireAuth } from "../auth.js";
 import { requireCompanyMember, requireCompanyAdmin, scopedToCompany } from "../scope.js";
+import { broadcast } from "../live.js";
+import { pushToDriver, pushToCompanyAdmins } from "../push.js";
 
 export const ordersRouter = Router();
 
@@ -70,6 +72,7 @@ ordersRouter.post("/", requireCompanyAdmin, (req, res) => {
   };
   data.orders.push(order);
   db.write(data);
+  broadcast("orders");
   res.status(201).json({ order });
 });
 
@@ -115,6 +118,13 @@ ordersRouter.post("/:id/assign", requireCompanyAdmin, (req, res) => {
   });
 
   db.write(data);
+  broadcast("orders");
+  broadcast("drivers");
+  pushToDriver(data, driver, {
+    title: "New delivery assigned",
+    body: `${order.patient_name} — ${order.delivery_address}`,
+    url: "/my-orders",
+  });
   res.json({ order });
 });
 
@@ -130,7 +140,7 @@ const VALID_TRANSITIONS = [
 // Advance an order's status and append a chain-of-custody event, matching the
 // ChainOfCustodyEvent entity (which shares its event_type enum with this list plus temp_reading).
 ordersRouter.post("/:id/events", (req, res) => {
-  const { event_type, notes, gps_lat, gps_lng, barcode_scan, signature_url, temperature_reading } =
+  const { event_type, notes, gps_lat, gps_lng, barcode_scan, signature_url, photo_proof_url, temperature_reading } =
     req.body || {};
   if (!VALID_TRANSITIONS.includes(event_type) && event_type !== "temp_reading") {
     return res.status(400).json({ error: `event_type must be one of ${VALID_TRANSITIONS.join(", ")}, temp_reading` });
@@ -174,6 +184,7 @@ ordersRouter.post("/:id/events", (req, res) => {
     if (event_type === "delivered") {
       order.delivered_at = new Date().toISOString();
       order.recipient_signature_url = signature_url || order.recipient_signature_url;
+      order.photo_proof_url = photo_proof_url || order.photo_proof_url;
       driver.status = "available";
     }
     if (event_type === "attempted") {
@@ -188,6 +199,15 @@ ordersRouter.post("/:id/events", (req, res) => {
   }
 
   db.write(data);
+  broadcast("orders");
+  broadcast("drivers");
+  if (event_type === "exception" || event_type === "attempted") {
+    pushToCompanyAdmins(data, order.company_id, {
+      title: "A delivery needs attention",
+      body: `${order.order_number} — ${driver.name} ${event_type === "exception" ? "reported a problem" : "couldn't complete the delivery"}`,
+      url: "/dashboard",
+    });
+  }
   res.json({ order, driver });
 });
 

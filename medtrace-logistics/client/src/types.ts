@@ -70,6 +70,8 @@ export interface Order {
   driver_id: string | null;
   route_sequence: number | null;
   barcode: string;
+  delivery_lat: number | null;
+  delivery_lng: number | null;
   company_id: string;
   signature_url: string | null;
   recipient_signature_url: string | null;

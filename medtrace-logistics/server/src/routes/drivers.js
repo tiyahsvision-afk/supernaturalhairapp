@@ -3,6 +3,7 @@ import { randomUUID } from "crypto";
 import { db } from "../db.js";
 import { requireAuth } from "../auth.js";
 import { requireCompanyMember, requireCompanyAdmin, scopedToCompany } from "../scope.js";
+import { broadcast } from "../live.js";
 
 export const driversRouter = Router();
 
@@ -35,6 +36,7 @@ driversRouter.post("/", requireCompanyAdmin, (req, res) => {
   };
   data.drivers.push(driver);
   db.write(data);
+  broadcast("drivers");
   res.status(201).json({ driver });
 });
 
@@ -53,5 +55,6 @@ driversRouter.patch("/:id", (req, res) => {
     if (key in req.body) driver[key] = req.body[key];
   }
   db.write(data);
+  broadcast("drivers");
   res.json({ driver });
 });

@@ -1,10 +1,77 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
 import { useApi } from "../hooks/useApi";
+import { useLive } from "../context/LiveContext";
+import { useAuth } from "../context/AuthContext";
 import { PackageBadge, PriorityBadge, StatusBadge } from "../components/Badges";
 import { api, ApiError } from "../lib/api";
 import { AlertIcon, ClipboardIcon } from "../components/Icons";
-import type { Order } from "../types";
+import { SignaturePad } from "../components/SignaturePad";
+import { PhotoCapture } from "../components/PhotoCapture";
+import type { Driver, Order } from "../types";
+
+function ShareLocation() {
+  const { user } = useAuth();
+  const { data } = useApi<{ drivers: Driver[] }>("/drivers");
+  const myDriver = data?.drivers.find((d) => d.user_email === user?.email);
+  const [sharing, setSharing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const watchIdRef = useRef<number | null>(null);
+  const lastSentRef = useRef(0);
+
+  useEffect(() => {
+    return () => {
+      if (watchIdRef.current != null) navigator.geolocation.clearWatch(watchIdRef.current);
+    };
+  }, []);
+
+  function start() {
+    if (!myDriver) return;
+    if (!("geolocation" in navigator)) {
+      setError("This browser doesn't support location sharing.");
+      return;
+    }
+    setError(null);
+    const id = navigator.geolocation.watchPosition(
+      (pos) => {
+        const now = Date.now();
+        if (now - lastSentRef.current < 8000) return;
+        lastSentRef.current = now;
+        api(`/drivers/${myDriver.id}`, {
+          method: "PATCH",
+          body: { current_lat: pos.coords.latitude, current_lng: pos.coords.longitude },
+        }).catch(() => {});
+      },
+      () => setError("Location permission denied."),
+      { enableHighAccuracy: true, maximumAge: 5000 }
+    );
+    watchIdRef.current = id;
+    setSharing(true);
+  }
+
+  function stop() {
+    if (watchIdRef.current != null) navigator.geolocation.clearWatch(watchIdRef.current);
+    watchIdRef.current = null;
+    setSharing(false);
+  }
+
+  if (!myDriver) return null;
+
+  return (
+    <div className="flex items-center gap-2">
+      <button
+        onClick={sharing ? stop : start}
+        className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold ${
+          sharing ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+        }`}
+      >
+        <span className={`h-1.5 w-1.5 rounded-full ${sharing ? "animate-pulse bg-emerald-500" : "bg-slate-400"}`} />
+        {sharing ? "Sharing location" : "Share my location"}
+      </button>
+      {error && <span className="text-xs text-red-500">{error}</span>}
+    </div>
+  );
+}
 
 const FLOW: Record<string, { next: string; label: string } | null> = {
   pending: null,
@@ -22,7 +89,8 @@ function OrderCard({ order, onChanged }: { order: Order; onChanged: () => void }
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [temp, setTemp] = useState("");
-  const [signature, setSignature] = useState("");
+  const [signature, setSignature] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<string | null>(null);
 
   async function logEvent(event_type: string, extra: Record<string, unknown> = {}) {
     setBusy(true);
@@ -81,20 +149,27 @@ function OrderCard({ order, onChanged }: { order: Order; onChanged: () => void }
       )}
 
       {step && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
           {step.next === "delivered" && order.requires_dual_signature && (
-            <input
-              placeholder="Type the recipient's full name to sign"
-              value={signature}
-              onChange={(e) => setSignature(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs"
-            />
+            <div>
+              <p className="mb-1 text-xs font-semibold text-slate-600">Recipient signature (required)</p>
+              <SignaturePad onChange={setSignature} />
+            </div>
+          )}
+          {step.next === "delivered" && (
+            <div>
+              <p className="mb-1 text-xs font-semibold text-slate-600">Proof of delivery photo (optional)</p>
+              <PhotoCapture onChange={setPhoto} />
+            </div>
           )}
           <div className="flex gap-2">
             <button
               disabled={busy || (step.next === "delivered" && order.requires_dual_signature && !signature)}
               onClick={() =>
-                logEvent(step.next, step.next === "delivered" && signature ? { signature_url: `signed:${signature}` } : {})
+                logEvent(step.next, {
+                  ...(signature ? { signature_url: signature } : {}),
+                  ...(photo ? { photo_proof_url: photo } : {}),
+                })
               }
               className="flex-1 rounded-full bg-teal-600 py-2.5 text-xs font-bold text-white hover:bg-teal-700 disabled:opacity-50"
             >
@@ -118,21 +193,25 @@ function OrderCard({ order, onChanged }: { order: Order; onChanged: () => void }
 }
 
 export function DriverPortal() {
-  const { data, refetch } = useApi<{ orders: Order[] }>("/orders");
+  const live = useLive();
+  const { data, refetch } = useApi<{ orders: Order[] }>("/orders", [live.versions.orders]);
   const orders = data?.orders || [];
   const active = orders.filter((o) => !["delivered", "attempted", "cancelled", "exception"].includes(o.status));
   const done = orders.filter((o) => ["delivered", "attempted", "cancelled", "exception"].includes(o.status));
 
   return (
     <Layout>
-      <div className="mb-6">
-        <h1 className="flex items-center gap-2.5 text-2xl font-bold text-slate-900">
-          <ClipboardIcon size={22} className="text-teal-600" />
-          My deliveries
-        </h1>
-        <p className="mt-1 text-sm text-slate-500">
-          {active.length} active {active.length === 1 ? "delivery" : "deliveries"} — tap the button to move one forward.
-        </p>
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="flex items-center gap-2.5 text-2xl font-bold text-slate-900">
+            <ClipboardIcon size={22} className="text-teal-600" />
+            My deliveries
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">
+            {active.length} active {active.length === 1 ? "delivery" : "deliveries"} — tap the button to move one forward.
+          </p>
+        </div>
+        <ShareLocation />
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {active.map((o) => (

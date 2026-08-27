@@ -3,6 +3,7 @@ import { useAuth } from "./context/AuthContext";
 import { Login } from "./pages/Login";
 import { Onboarding } from "./pages/Onboarding";
 import { DispatcherDashboard } from "./pages/DispatcherDashboard";
+import { MapPage } from "./pages/MapPage";
 import { DriversPage } from "./pages/DriversPage";
 import { CompanyPage } from "./pages/CompanyPage";
 import { DriverPortal } from "./pages/DriverPortal";
@@ -41,6 +42,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<DispatcherDashboard />} />
+      <Route path="/map" element={<MapPage />} />
       <Route path="/drivers" element={<DriversPage />} />
       <Route path="/company" element={<CompanyPage />} />
       <Route path="/my-orders" element={<DriverPortal />} />

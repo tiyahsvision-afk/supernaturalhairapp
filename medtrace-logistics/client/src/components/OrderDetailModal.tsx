@@ -5,6 +5,7 @@ import { DRIVER_STATUS_LABEL, PackageBadge, PriorityBadge, STATUS_LABEL, StatusB
 import { AlertIcon, SnowIcon, TruckIcon } from "./Icons";
 import type { ChainOfCustodyEvent, Driver, Order } from "../types";
 import { useApi } from "../hooks/useApi";
+import { useLive } from "../context/LiveContext";
 
 const NEXT_STATUS: Record<string, string | null> = {
   pending: null,
@@ -29,7 +30,10 @@ export function OrderDetailModal({
   onClose: () => void;
   onChanged: () => void;
 }) {
-  const { data, refetch } = useApi<{ events: ChainOfCustodyEvent[] }>(`/orders/${order.id}/events`);
+  const live = useLive();
+  const { data, refetch } = useApi<{ events: ChainOfCustodyEvent[] }>(`/orders/${order.id}/events`, [
+    live.versions.orders,
+  ]);
   const [driverId, setDriverId] = useState(order.driver_id || "");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -108,6 +112,26 @@ export function OrderDetailModal({
         <div className="mt-4 flex items-start gap-2 rounded-xl bg-amber-50 p-3 text-sm text-amber-800">
           <AlertIcon size={16} className="mt-0.5 shrink-0 text-amber-500" />
           <span>{order.notes}</span>
+        </div>
+      )}
+
+      {(order.recipient_signature_url || order.photo_proof_url) && (
+        <div className="mt-5 border-t border-slate-200 pt-4">
+          <p className="mb-2 text-sm font-bold text-slate-900">Proof of delivery</p>
+          <div className="flex flex-wrap gap-4">
+            {order.recipient_signature_url && (
+              <div>
+                <p className="mb-1 text-xs text-slate-400">Recipient signature</p>
+                <img src={order.recipient_signature_url} alt="Recipient signature" className="h-20 rounded-lg border border-slate-200 bg-white" />
+              </div>
+            )}
+            {order.photo_proof_url && (
+              <div>
+                <p className="mb-1 text-xs text-slate-400">Delivery photo</p>
+                <img src={order.photo_proof_url} alt="Delivery proof" className="h-20 w-20 rounded-lg border border-slate-200 object-cover" />
+              </div>
+            )}
+          </div>
         </div>
       )}
 

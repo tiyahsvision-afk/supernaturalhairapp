@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useLive } from "../context/LiveContext";
+import { NotificationsToggle } from "./NotificationsToggle";
 import { BuildingIcon, ChatIcon, ClipboardIcon, TruckIcon, UsersIcon } from "./Icons";
 
 function NavItem({ to, label, icon }: { to: string; label: string; icon: ReactNode }) {
@@ -21,6 +23,7 @@ function NavItem({ to, label, icon }: { to: string; label: string; icon: ReactNo
 
 export function Layout({ children }: { children: ReactNode }) {
   const { user, logout } = useAuth();
+  const live = useLive();
   const isDispatcher = user?.role === "admin" || user?.company_role === "admin";
 
   return (
@@ -41,6 +44,7 @@ export function Layout({ children }: { children: ReactNode }) {
               {isDispatcher ? (
                 <>
                   <NavItem to="/dashboard" label="Deliveries" icon={<TruckIcon size={16} />} />
+                  <NavItem to="/map" label="Map" icon={<span className="text-sm leading-none">🗺️</span>} />
                   <NavItem to="/drivers" label="Drivers" icon={<UsersIcon size={16} />} />
                   <NavItem to="/company" label="Company" icon={<BuildingIcon size={16} />} />
                 </>
@@ -53,6 +57,16 @@ export function Layout({ children }: { children: ReactNode }) {
             </nav>
           </div>
           <div className="flex items-center gap-3">
+            <NotificationsToggle />
+            <span
+              className={`hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold sm:flex ${
+                live.connected ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-400"
+              }`}
+              title={live.connected ? "Live updates connected" : "Reconnecting…"}
+            >
+              <span className={`h-1.5 w-1.5 rounded-full ${live.connected ? "bg-emerald-500" : "bg-slate-300"}`} />
+              {live.connected ? "Live" : "Offline"}
+            </span>
             <div className="text-right">
               <div className="text-sm font-semibold text-slate-900">{user?.name}</div>
               <div className="text-[11px] text-slate-400">{isDispatcher ? "Dispatcher" : "Driver"}</div>

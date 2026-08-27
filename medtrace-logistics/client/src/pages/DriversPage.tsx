@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Layout } from "../components/Layout";
 import { useApi } from "../hooks/useApi";
+import { useLive } from "../context/LiveContext";
 import { DriverStatusBadge } from "../components/Badges";
 import { Modal } from "../components/Modal";
 import { MessageThread } from "../components/MessageThread";
@@ -9,7 +10,8 @@ import { ChatIcon, PlusIcon, UsersIcon } from "../components/Icons";
 import type { Company, Driver } from "../types";
 
 export function DriversPage() {
-  const { data, refetch } = useApi<{ drivers: Driver[] }>("/drivers");
+  const live = useLive();
+  const { data, refetch } = useApi<{ drivers: Driver[] }>("/drivers", [live.versions.drivers]);
   const { data: companyData } = useApi<{ company: Company }>("/companies/mine");
   const drivers = data?.drivers || [];
   const [showAdd, setShowAdd] = useState(false);

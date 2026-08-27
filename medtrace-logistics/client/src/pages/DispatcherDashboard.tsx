@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Layout } from "../components/Layout";
 import { useApi } from "../hooks/useApi";
+import { useLive } from "../context/LiveContext";
 import { PackageBadge, PriorityBadge, StatusBadge } from "../components/Badges";
 import { CreateOrderModal } from "../components/CreateOrderModal";
 import { OrderDetailModal } from "../components/OrderDetailModal";
@@ -39,8 +40,9 @@ const FILTERS: { key: string; label: string; test?: (o: Order) => boolean }[] = 
 ];
 
 export function DispatcherDashboard() {
-  const { data: ordersData, refetch } = useApi<{ orders: Order[] }>("/orders");
-  const { data: driversData, refetch: refetchDrivers } = useApi<{ drivers: Driver[] }>("/drivers");
+  const live = useLive();
+  const { data: ordersData, refetch } = useApi<{ orders: Order[] }>("/orders", [live.versions.orders]);
+  const { data: driversData, refetch: refetchDrivers } = useApi<{ drivers: Driver[] }>("/drivers", [live.versions.drivers]);
   const [showCreate, setShowCreate] = useState(false);
   const [selected, setSelected] = useState<Order | null>(null);
   const [filter, setFilter] = useState("all");

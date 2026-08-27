@@ -2,11 +2,16 @@ import { useState } from "react";
 import { api } from "../lib/api";
 import { useApi } from "../hooks/useApi";
 import { useAuth } from "../context/AuthContext";
+import { useLive } from "../context/LiveContext";
 import type { DriverMessage } from "../types";
 
 export function MessageThread({ driverId, driverName }: { driverId: string; driverName: string }) {
   const { user } = useAuth();
-  const { data, refetch } = useApi<{ messages: DriverMessage[] }>(`/messages?driver_id=${driverId}`, [driverId]);
+  const live = useLive();
+  const { data, refetch } = useApi<{ messages: DriverMessage[] }>(`/messages?driver_id=${driverId}`, [
+    driverId,
+    live.versions.messages,
+  ]);
   const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
 

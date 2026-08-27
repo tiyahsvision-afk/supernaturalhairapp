@@ -3,6 +3,8 @@ import { randomUUID } from "crypto";
 import { db } from "../db.js";
 import { requireAuth } from "../auth.js";
 import { requireCompanyMember, scopedToCompany } from "../scope.js";
+import { broadcast } from "../live.js";
+import { pushToDriver, pushToCompanyAdmins } from "../push.js";
 
 export const messagesRouter = Router();
 
@@ -42,6 +44,23 @@ messagesRouter.post("/", (req, res) => {
   };
   data.messages.push(entry);
   db.write(data);
+  broadcast("messages");
+
+  const senderIsDriver = driver.user_email === req.user.email;
+  if (senderIsDriver) {
+    pushToCompanyAdmins(data, driver.company_id, {
+      title: `Message from ${driver.name}`,
+      body: message,
+      url: "/drivers",
+    });
+  } else {
+    pushToDriver(data, driver, {
+      title: `Message from ${req.user.name}`,
+      body: message,
+      url: "/messages",
+    });
+  }
+
   res.status(201).json({ message: entry });
 });
 
@@ -51,5 +70,6 @@ messagesRouter.patch("/:id/read", (req, res) => {
   if (!message || !scopedToCompany(req, message)) return res.status(404).json({ error: "Not found" });
   message.read = true;
   db.write(data);
+  broadcast("messages");
   res.json({ message });
 });
