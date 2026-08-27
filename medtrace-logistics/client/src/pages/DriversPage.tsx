@@ -5,10 +5,12 @@ import { DriverStatusBadge } from "../components/Badges";
 import { Modal } from "../components/Modal";
 import { MessageThread } from "../components/MessageThread";
 import { api, ApiError } from "../lib/api";
-import type { Driver } from "../types";
+import { ChatIcon, PlusIcon, UsersIcon } from "../components/Icons";
+import type { Company, Driver } from "../types";
 
 export function DriversPage() {
   const { data, refetch } = useApi<{ drivers: Driver[] }>("/drivers");
+  const { data: companyData } = useApi<{ company: Company }>("/companies/mine");
   const drivers = data?.drivers || [];
   const [showAdd, setShowAdd] = useState(false);
   const [messaging, setMessaging] = useState<Driver | null>(null);
@@ -32,40 +34,55 @@ export function DriversPage() {
     }
   }
 
-  const input = "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none";
+  const input = "w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-teal-500 focus:outline-none";
 
   return (
     <Layout>
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-slate-900">Drivers</h1>
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="flex items-center gap-2.5 text-2xl font-bold text-slate-900">
+            <UsersIcon size={22} className="text-teal-600" />
+            Drivers
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">Your delivery team{companyData ? ` at ${companyData.company.name}` : ""}.</p>
+        </div>
         <button
           onClick={() => setShowAdd(true)}
-          className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700"
+          className="flex items-center gap-2 rounded-full bg-teal-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-teal-700"
         >
-          + Add driver
+          <PlusIcon size={16} />
+          Add a driver
         </button>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {drivers.map((d) => (
           <div key={d.id} className="rounded-2xl border border-slate-200 bg-white p-4">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="font-medium text-slate-900">{d.name}</p>
-                <p className="text-xs text-slate-500">{d.user_email}</p>
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-50 text-sm font-bold text-teal-700">
+                  {d.name.split(" ").map((p) => p[0]).slice(0, 2).join("").toUpperCase()}
+                </div>
+                <div className="min-w-0">
+                  <p className="font-bold text-slate-900">{d.name}</p>
+                  <p className="truncate text-xs text-slate-400">{d.user_email}</p>
+                </div>
               </div>
               <DriverStatusBadge status={d.status} />
             </div>
             <div className="mt-3 space-y-1 text-xs text-slate-500">
-              <p>Vehicle: {d.vehicle || "—"}</p>
-              <p>Phone: {d.phone || "—"}</p>
-              <p>License: {d.license_number || "—"}</p>
-              {d.michigan_board_of_pharmacy_license && <p>MI BOP: {d.michigan_board_of_pharmacy_license}</p>}
+              <p>Vehicle: <span className="font-medium text-slate-700">{d.vehicle || "—"}</span></p>
+              <p>Phone: <span className="font-medium text-slate-700">{d.phone || "—"}</span></p>
+              <p>Driver's license: <span className="font-medium text-slate-700">{d.license_number || "—"}</span></p>
+              {d.michigan_board_of_pharmacy_license && (
+                <p>Pharmacy license #: <span className="font-medium text-slate-700">{d.michigan_board_of_pharmacy_license}</span></p>
+              )}
             </div>
             <button
               onClick={() => setMessaging(d)}
-              className="mt-3 w-full rounded-lg border border-slate-200 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-slate-100 py-2 text-xs font-bold text-slate-600 hover:bg-slate-200"
             >
+              <ChatIcon size={14} />
               Message
             </button>
           </div>
@@ -74,12 +91,12 @@ export function DriversPage() {
       </div>
 
       {showAdd && (
-        <Modal title="Add driver" onClose={() => setShowAdd(false)}>
+        <Modal title="Add a driver" eyebrow="Grow your team" onClose={() => setShowAdd(false)}>
           <form onSubmit={addDriver} className="space-y-3">
             <input required placeholder="Full name" className={input} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
             <input
               type="email"
-              placeholder="Account email (used to link their driver login)"
+              placeholder="Email (so they can sign in)"
               className={input}
               value={form.user_email}
               onChange={(e) => setForm({ ...form, user_email: e.target.value })}
@@ -93,7 +110,7 @@ export function DriversPage() {
               onChange={(e) => setForm({ ...form, license_number: e.target.value })}
             />
             {error && <p className="text-sm text-red-600">{error}</p>}
-            <button type="submit" disabled={busy} className="w-full rounded-lg bg-teal-600 py-2 text-sm font-medium text-white hover:bg-teal-700 disabled:opacity-50">
+            <button type="submit" disabled={busy} className="w-full rounded-full bg-teal-600 py-2.5 text-sm font-bold text-white hover:bg-teal-700 disabled:opacity-50">
               {busy ? "Adding…" : "Add driver"}
             </button>
           </form>
@@ -101,7 +118,7 @@ export function DriversPage() {
       )}
 
       {messaging && (
-        <Modal title="Message driver" onClose={() => setMessaging(null)}>
+        <Modal title={messaging.name} eyebrow="Message driver" onClose={() => setMessaging(null)}>
           <MessageThread driverId={messaging.id} driverName={messaging.name} />
         </Modal>
       )}

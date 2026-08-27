@@ -2,6 +2,7 @@ import { Layout } from "../components/Layout";
 import { useApi } from "../hooks/useApi";
 import { useAuth } from "../context/AuthContext";
 import { MessageThread } from "../components/MessageThread";
+import { ChatIcon } from "../components/Icons";
 import type { Driver } from "../types";
 
 export function MessagesPage() {
@@ -11,7 +12,11 @@ export function MessagesPage() {
 
   return (
     <Layout>
-      <h1 className="mb-6 text-xl font-semibold text-slate-900">Messages</h1>
+      <h1 className="mb-1 flex items-center gap-2.5 text-2xl font-bold text-slate-900">
+        <ChatIcon size={22} className="text-teal-600" />
+        Messages
+      </h1>
+      <p className="mb-6 text-sm text-slate-500">Chat with dispatch about your deliveries.</p>
       <div className="max-w-md rounded-2xl border border-slate-200 bg-white p-4">
         {myDriver ? (
           <MessageThread driverId={myDriver.id} driverName="dispatch" />

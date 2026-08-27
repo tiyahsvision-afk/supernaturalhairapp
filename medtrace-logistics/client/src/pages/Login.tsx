@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { ApiError } from "../lib/api";
+import { TruckIcon } from "../components/Icons";
 
 export function Login() {
   const { login, register } = useAuth();
@@ -35,11 +36,11 @@ export function Login() {
     <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center gap-2">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-600 text-xl font-bold text-white">
-            M
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-600 text-white">
+            <TruckIcon size={22} />
           </div>
-          <h1 className="text-xl font-semibold text-slate-900">MedTrace Logistics</h1>
-          <p className="text-sm text-slate-500">Pharmacy courier &amp; chain-of-custody tracking</p>
+          <h1 className="text-xl font-bold text-slate-900">MedTrace Logistics</h1>
+          <p className="text-sm text-slate-500">Pharmacy delivery tracking</p>
         </div>
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-4 flex rounded-lg bg-slate-100 p-1 text-sm">

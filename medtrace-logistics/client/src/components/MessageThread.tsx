@@ -42,19 +42,19 @@ export function MessageThread({ driverId, driverName }: { driverId: string; driv
             </div>
           );
         })}
-        {!messages.length && <p className="text-center text-sm text-slate-400">No messages yet.</p>}
+        {!messages.length && <p className="text-center text-sm text-slate-400">No messages yet — say hello.</p>}
       </div>
       <form onSubmit={send} className="flex gap-2">
         <input
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Write a message…"
-          className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+          className="flex-1 rounded-full border border-slate-300 px-4 py-2.5 text-sm focus:border-teal-500 focus:outline-none"
         />
         <button
           type="submit"
           disabled={sending}
-          className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700 disabled:opacity-50"
+          className="rounded-full bg-teal-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-teal-700 disabled:opacity-50"
         >
           Send
         </button>

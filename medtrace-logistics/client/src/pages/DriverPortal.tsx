@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Layout } from "../components/Layout";
 import { useApi } from "../hooks/useApi";
-import { StatusBadge, PriorityBadge, PackageBadge } from "../components/Badges";
+import { PackageBadge, PriorityBadge, StatusBadge } from "../components/Badges";
 import { api, ApiError } from "../lib/api";
+import { AlertIcon, ClipboardIcon } from "../components/Icons";
 import type { Order } from "../types";
 
 const FLOW: Record<string, { next: string; label: string } | null> = {
   pending: null,
   assigned: { next: "picked_up", label: "Mark picked up" },
-  picked_up: { next: "in_transit", label: "Start transit" },
+  picked_up: { next: "in_transit", label: "Start driving" },
   in_transit: { next: "arrived", label: "Mark arrived" },
   arrived: { next: "delivered", label: "Complete delivery" },
   delivered: null,
@@ -39,25 +40,32 @@ function OrderCard({ order, onChanged }: { order: Order; onChanged: () => void }
   const step = FLOW[order.status];
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4">
-      <div className="mb-2 flex flex-wrap items-center gap-2">
-        <span className="font-medium text-slate-900">{order.order_number}</span>
+    <div className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-4">
+      <div className="flex flex-wrap items-center gap-1.5">
         <StatusBadge status={order.status} />
         <PriorityBadge priority={order.priority} />
+      </div>
+      <p className="text-base font-bold text-slate-900">{order.patient_name}</p>
+      <p className="text-sm text-slate-500">{order.delivery_address}</p>
+      <div className="flex items-center justify-between border-t border-slate-100 pt-2 text-xs">
+        <span className="font-mono text-slate-400">{order.order_number}</span>
         <PackageBadge type={order.package_type} />
       </div>
-      <p className="text-sm text-slate-700">{order.patient_name}</p>
-      <p className="text-sm text-slate-500">{order.delivery_address}</p>
-      {order.notes && <p className="mt-2 rounded-lg bg-amber-50 p-2 text-xs text-amber-800">{order.notes}</p>}
+      {order.notes && (
+        <div className="flex items-start gap-2 rounded-xl bg-amber-50 p-2.5 text-xs text-amber-800">
+          <AlertIcon size={14} className="mt-0.5 shrink-0 text-amber-500" />
+          <span>{order.notes}</span>
+        </div>
+      )}
 
       {order.temperature_required && order.status !== "delivered" && (
-        <div className="mt-3 flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <input
             type="number"
-            placeholder={`Temp reading (${order.temperature_min}-${order.temperature_max}°C)`}
+            placeholder={`Temp (${order.temperature_min}–${order.temperature_max}°C)`}
             value={temp}
             onChange={(e) => setTemp(e.target.value)}
-            className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-xs"
+            className="flex-1 rounded-xl border border-slate-300 px-3 py-2 text-xs"
           />
           <button
             disabled={!temp || busy}
@@ -65,7 +73,7 @@ function OrderCard({ order, onChanged }: { order: Order; onChanged: () => void }
               logEvent("temp_reading", { temperature_reading: Number(temp) });
               setTemp("");
             }}
-            className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+            className="rounded-full bg-slate-100 px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-200 disabled:opacity-50"
           >
             Log temp
           </button>
@@ -73,13 +81,13 @@ function OrderCard({ order, onChanged }: { order: Order; onChanged: () => void }
       )}
 
       {step && (
-        <div className="mt-3">
+        <div className="flex flex-col gap-2">
           {step.next === "delivered" && order.requires_dual_signature && (
             <input
-              placeholder="Recipient signature (type full name)"
+              placeholder="Type the recipient's full name to sign"
               value={signature}
               onChange={(e) => setSignature(e.target.value)}
-              className="mb-2 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-xs"
+              className="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs"
             />
           )}
           <div className="flex gap-2">
@@ -88,23 +96,23 @@ function OrderCard({ order, onChanged }: { order: Order; onChanged: () => void }
               onClick={() =>
                 logEvent(step.next, step.next === "delivered" && signature ? { signature_url: `signed:${signature}` } : {})
               }
-              className="flex-1 rounded-lg bg-teal-600 py-2 text-xs font-medium text-white hover:bg-teal-700 disabled:opacity-50"
+              className="flex-1 rounded-full bg-teal-600 py-2.5 text-xs font-bold text-white hover:bg-teal-700 disabled:opacity-50"
             >
               {step.label}
             </button>
             {step.next !== "delivered" && (
               <button
                 disabled={busy}
-                onClick={() => logEvent("exception", { notes: "Driver flagged an exception" })}
-                className="rounded-lg border border-red-300 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
+                onClick={() => logEvent("exception", { notes: "Driver reported a problem completing this delivery" })}
+                className="rounded-full border-2 border-red-300 px-3 py-2.5 text-xs font-bold text-red-600 hover:bg-red-50 disabled:opacity-50"
               >
-                Exception
+                Report a problem
               </button>
             )}
           </div>
         </div>
       )}
-      {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-red-600">{error}</p>}
     </div>
   );
 }
@@ -117,16 +125,24 @@ export function DriverPortal() {
 
   return (
     <Layout>
-      <h1 className="mb-6 text-xl font-semibold text-slate-900">My deliveries</h1>
-      <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mb-6">
+        <h1 className="flex items-center gap-2.5 text-2xl font-bold text-slate-900">
+          <ClipboardIcon size={22} className="text-teal-600" />
+          My deliveries
+        </h1>
+        <p className="mt-1 text-sm text-slate-500">
+          {active.length} active {active.length === 1 ? "delivery" : "deliveries"} — tap the button to move one forward.
+        </p>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {active.map((o) => (
           <OrderCard key={o.id} order={o} onChanged={refetch} />
         ))}
-        {!active.length && <p className="text-sm text-slate-400">No active deliveries assigned right now.</p>}
+        {!active.length && <p className="text-sm text-slate-400">You're all caught up — nothing active right now.</p>}
       </div>
       {!!done.length && (
         <>
-          <h2 className="mb-3 text-sm font-medium text-slate-500">Completed</h2>
+          <h2 className="mb-3 mt-8 text-sm font-bold text-slate-500">Completed</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {done.map((o) => (
               <OrderCard key={o.id} order={o} onChanged={refetch} />
