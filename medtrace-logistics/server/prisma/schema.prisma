@@ -1,0 +1,240 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- enums ----------
+
+enum PlatformRole {
+  admin
+  user
+}
+
+enum CompanyRole {
+  admin
+  driver
+}
+
+enum CompanyStatus {
+  active
+  suspended
+}
+
+enum DriverStatus {
+  available
+  on_route
+  offline
+}
+
+enum OrderStatus {
+  pending
+  assigned
+  picked_up
+  in_transit
+  arrived
+  delivered
+  attempted
+  exception
+  cancelled
+}
+
+enum OrderPriority {
+  routine
+  urgent
+  stat
+}
+
+enum PackageType {
+  standard
+  refrigerated
+  controlled_substance
+  dot_specimen
+}
+
+enum CustodyEventType {
+  assigned
+  picked_up
+  in_transit
+  arrived
+  delivered
+  attempted
+  exception
+  temp_reading
+}
+
+// ---------- models ----------
+// Field names are deliberately snake_case, matching the JSON shape the
+// frontend already speaks — this is a storage-layer swap, not an API change,
+// so Prisma results can be returned to clients with no serialization layer.
+
+model Company {
+  id             String        @id @default(cuid())
+  name           String
+  address        String        @default("")
+  city           String        @default("")
+  state          String        @default("")
+  license_number String        @default("")
+  industry       String        @default("")
+  contact_phone  String        @default("")
+  join_code      String        @unique
+  status         CompanyStatus @default(active)
+  created_at     DateTime      @default(now())
+
+  users           User[]
+  drivers         Driver[]
+  orders          Order[]
+  custody_events  ChainOfCustodyEvent[]
+  messages        DriverMessage[]
+
+  @@map("companies")
+}
+
+model User {
+  id            String       @id @default(cuid())
+  email         String       @unique
+  name          String
+  password_hash String
+  role          PlatformRole @default(user)
+  company_id    String?
+  company       Company?     @relation(fields: [company_id], references: [id])
+  company_role  CompanyRole?
+  created_at    DateTime     @default(now())
+
+  push_subscriptions PushSubscription[]
+  sent_messages      DriverMessage[]    @relation("MessageSender")
+
+  @@index([company_id])
+  @@map("users")
+}
+
+model Driver {
+  id                                  String       @id @default(cuid())
+  name                                String
+  user_email                          String       @default("")
+  vehicle                             String       @default("")
+  phone                               String       @default("")
+  license_number                      String       @default("")
+  status                              DriverStatus @default(available)
+  current_lat                         Float?
+  current_lng                         Float?
+  michigan_board_of_pharmacy_license  String       @default("")
+  company_id                          String
+  company                             Company      @relation(fields: [company_id], references: [id], onDelete: Cascade)
+  created_at                          DateTime     @default(now())
+  updated_at                          DateTime     @updatedAt
+
+  orders         Order[]
+  custody_events ChainOfCustodyEvent[]
+  messages       DriverMessage[]
+
+  @@index([company_id])
+  @@index([user_email])
+  @@map("drivers")
+}
+
+model Order {
+  id                                  String        @id @default(cuid())
+  order_number                        String
+  patient_name                        String
+  patient_dob                         String?
+  patient_address                     String        @default("")
+  patient_phone                       String        @default("")
+  pickup_pharmacy                     String        @default("")
+  pickup_address                      String        @default("")
+  delivery_address                    String
+  status                              OrderStatus   @default(pending)
+  priority                            OrderPriority @default(routine)
+  package_type                        PackageType   @default(standard)
+  temperature_required                Boolean       @default(false)
+  temperature_min                     Float?
+  temperature_max                     Float?
+  requires_dual_signature             Boolean       @default(false)
+  michigan_board_of_pharmacy_license  String        @default("")
+  pharmacist_in_charge                String        @default("")
+  dot_specimen_classification         String?
+  driver_id                           String?
+  driver                              Driver?       @relation(fields: [driver_id], references: [id])
+  route_sequence                      Int?
+  barcode                             String
+  delivery_lat                        Float?
+  delivery_lng                        Float?
+  company_id                          String
+  company                             Company       @relation(fields: [company_id], references: [id], onDelete: Cascade)
+  signature_url                       String?       @db.Text
+  recipient_signature_url             String?       @db.Text
+  photo_proof_url                     String?       @db.Text
+  delivered_at                        DateTime?
+  attempted_at                        DateTime?
+  deadline                            DateTime?
+  notes                               String        @default("")
+  created_at                          DateTime      @default(now())
+  updated_at                          DateTime      @updatedAt
+
+  custody_events ChainOfCustodyEvent[]
+
+  @@unique([company_id, order_number])
+  @@index([company_id])
+  @@index([driver_id])
+  @@map("orders")
+}
+
+model ChainOfCustodyEvent {
+  id                    String           @id @default(cuid())
+  order_id              String
+  order                 Order            @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  order_number          String
+  driver_id             String
+  driver                Driver           @relation(fields: [driver_id], references: [id])
+  driver_name           String
+  event_type            CustodyEventType
+  timestamp             DateTime         @default(now())
+  gps_lat               Float?
+  gps_lng               Float?
+  barcode_scan          String?
+  signature_url         String?          @db.Text
+  temperature_reading   Float?
+  temperature_excursion Boolean          @default(false)
+  company_id            String
+  company                Company         @relation(fields: [company_id], references: [id], onDelete: Cascade)
+  notes                 String           @default("")
+
+  @@index([order_id])
+  @@index([company_id])
+  @@map("custody_events")
+}
+
+model DriverMessage {
+  id          String   @id @default(cuid())
+  driver_id   String
+  driver      Driver   @relation(fields: [driver_id], references: [id], onDelete: Cascade)
+  driver_name String
+  sender_name String
+  sender_id   String
+  sender      User     @relation("MessageSender", fields: [sender_id], references: [id])
+  message     String   @db.Text
+  read        Boolean  @default(false)
+  company_id  String
+  company     Company  @relation(fields: [company_id], references: [id], onDelete: Cascade)
+  created_at  DateTime @default(now())
+
+  @@index([driver_id])
+  @@index([company_id])
+  @@map("driver_messages")
+}
+
+model PushSubscription {
+  id         String   @id @default(cuid())
+  user_id    String
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  endpoint   String   @unique
+  p256dh     String
+  auth       String
+  created_at DateTime @default(now())
+
+  @@index([user_id])
+  @@map("push_subscriptions")
+}
