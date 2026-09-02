@@ -4,8 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 
 export default defineConfig({
-  // When built for GitHub Pages the site lives at /Tia/, not the domain root.
-  base: process.env.GH_PAGES ? '/Tia/' : '/',
+  // When built for GitHub Pages the site lives at /supernaturalhairapp/, not the domain root.
+  base: process.env.GH_PAGES ? '/supernaturalhairapp/' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

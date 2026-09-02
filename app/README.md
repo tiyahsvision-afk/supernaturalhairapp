@@ -16,7 +16,7 @@ No backend exists yet — this is a fully working front-end MVP. Every feature i
 
 Every push to `claude/supernatural-journey-app-wxdict` that touches `app/` automatically publishes to:
 
-**https://tiyahsvision-afk.github.io/Tia/**
+**https://tiyahsvision-afk.github.io/supernaturalhairapp/**
 
 via `.github/workflows/deploy-pages.yml` (build with Vite, deploy with GitHub Pages). No manual steps needed after the first-ever deploy, which may need "Settings → Pages → Source: GitHub Actions" turned on once for this repository if it isn't already.
 
