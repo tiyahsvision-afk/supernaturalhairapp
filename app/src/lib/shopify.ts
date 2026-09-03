@@ -46,6 +46,19 @@ export const PRODUCTS: ShcProduct[] = [
     isCoreStep: true,
   },
   {
+    id: 'nourish-moisturizer',
+    handle: 'nourish-nourishing-moisturizer',
+    title: 'NOURISH Nourishing Moisturizer',
+    shortName: 'Nourish Moisturizer',
+    price: 16,
+    variantId: '47454196629813',
+    image:
+      'https://cdn.shopify.com/s/files/1/0848/1407/0069/files/nourish_moisturizer.jpg?v=1779812756',
+    description:
+      'Flax seed, aloe vera, oatstraw and kelp extract for an abundance of leave-in moisture.',
+    isCoreStep: true,
+  },
+  {
     id: 'hair-growth-oil',
     handle: 'hair-growth-oil',
     title: 'GROW Hair Growth Oil',
@@ -69,19 +82,6 @@ export const PRODUCTS: ShcProduct[] = [
       'https://cdn.shopify.com/s/files/1/0848/1407/0069/files/Scalp_massage_oil.jpg?v=1779810991',
     description:
       'Almond, jojoba and chamomile alleviate tenderness and relax an itchy, tense scalp.',
-    isCoreStep: true,
-  },
-  {
-    id: 'nourish-moisturizer',
-    handle: 'nourish-nourishing-moisturizer',
-    title: 'NOURISH Nourishing Moisturizer',
-    shortName: 'Nourish Moisturizer',
-    price: 16,
-    variantId: '47454196629813',
-    image:
-      'https://cdn.shopify.com/s/files/1/0848/1407/0069/files/nourish_moisturizer.jpg?v=1779812756',
-    description:
-      'Flax seed, aloe vera, oatstraw and kelp extract for an abundance of leave-in moisture.',
     isCoreStep: true,
   },
   {
