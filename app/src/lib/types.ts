@@ -104,3 +104,12 @@ export interface ForumThread {
   likes: number
   replies: ForumReply[]
 }
+
+export interface ChatMessage {
+  id: string
+  name: string
+  email: string
+  body: string
+  createdAt: string
+  deliveryMethod: 'email' | 'mail-app'
+}

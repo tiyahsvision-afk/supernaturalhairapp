@@ -4,6 +4,7 @@ import BackgroundGlow from '@/components/layout/BackgroundGlow'
 import NavBar from '@/components/layout/NavBar'
 import Footer from '@/components/layout/Footer'
 import RequireOnboarding from '@/components/layout/RequireOnboarding'
+import ChatBubble from '@/components/chat/ChatBubble'
 
 import HomePage from '@/pages/HomePage'
 import OnboardingPage from '@/pages/OnboardingPage'
@@ -89,6 +90,7 @@ export default function App() {
         </Routes>
       </div>
       <Footer />
+      <ChatBubble />
     </div>
   )
 }

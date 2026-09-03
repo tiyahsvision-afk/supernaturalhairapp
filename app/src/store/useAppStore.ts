@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type {
+  ChatMessage,
   ConsultationAnswers,
   ConsultationResult,
   ForumReply,
@@ -25,6 +26,7 @@ interface AppState {
   photos: ProgressPhoto[]
   rewardEvents: RewardEvent[]
   forumThreads: ForumThread[]
+  chatMessages: ChatMessage[]
 
   completeOnboarding: (input: { name: string; email: string; hairGoal: string }) => void
   updateProfile: (patch: Partial<Profile>) => void
@@ -49,6 +51,8 @@ interface AppState {
   addForumThread: (input: { category: ForumThread['category']; title: string; body: string }) => void
   addForumReply: (threadId: string, body: string) => void
   likeThread: (threadId: string) => void
+
+  addChatMessage: (msg: Omit<ChatMessage, 'id' | 'createdAt'>) => void
 }
 
 const defaultProfile: Profile = {
@@ -71,6 +75,7 @@ export const useAppStore = create<AppState>()(
       photos: [],
       rewardEvents: [],
       forumThreads: SEED_FORUM_THREADS,
+      chatMessages: [],
 
       completeOnboarding: ({ name, email, hairGoal }) => {
         set({
@@ -189,6 +194,11 @@ export const useAppStore = create<AppState>()(
           forumThreads: s.forumThreads.map((t) =>
             t.id === threadId ? { ...t, likes: t.likes + 1 } : t,
           ),
+        })),
+
+      addChatMessage: (msg) =>
+        set((s) => ({
+          chatMessages: [...s.chatMessages, { ...msg, id: newId(), createdAt: new Date().toISOString() }],
         })),
     }),
     {
