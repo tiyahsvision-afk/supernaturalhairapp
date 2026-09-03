@@ -23,6 +23,10 @@ import type { ConversationSummary, LiveChatMessage } from './types'
 export async function ensureCustomerAuth(): Promise<string | null> {
   try {
     const auth = getAuthInstance()
+    // Wait for Firebase to finish restoring the saved session from this
+    // browser's storage before deciding there isn't one — otherwise every
+    // page load looks "new" and starts a fresh, empty conversation.
+    await auth.authStateReady()
     if (auth.currentUser) return auth.currentUser.uid
     const cred = await signInAnonymously(auth)
     return cred.user.uid
