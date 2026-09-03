@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PageShell from '@/components/layout/PageShell'
 import SectionHeading from '@/components/layout/SectionHeading'
 import GlowCard from '@/components/layout/GlowCard'
@@ -8,9 +9,11 @@ import { useAppStore } from '@/store/useAppStore'
 export default function ProfilePage() {
   const profile = useAppStore((s) => s.profile)
   const updateProfile = useAppStore((s) => s.updateProfile)
+  const logOut = useAppStore((s) => s.logOut)
   const points = useAppStore((s) => s.pointsBalance())
   const consultationCount = useAppStore((s) => s.consultations.length)
   const photoCount = useAppStore((s) => s.photos.length)
+  const navigate = useNavigate()
 
   const [name, setName] = useState(profile.name)
   const [email, setEmail] = useState(profile.email)
@@ -21,6 +24,11 @@ export default function ProfilePage() {
     updateProfile({ name: name.trim(), email: email.trim(), hairGoal: hairGoal.trim() })
     setSavedFlash(true)
     setTimeout(() => setSavedFlash(false), 2000)
+  }
+
+  function handleLogOut() {
+    logOut()
+    navigate('/')
   }
 
   function handleReset() {
@@ -104,7 +112,14 @@ export default function ProfilePage() {
         <span className="text-xs text-ink-900/40">Member since {new Date(profile.memberSince).toLocaleDateString()}</span>
       </GlowCard>
 
-      <button onClick={handleReset} className="mt-10 text-xs text-ink-900/30 hover:text-fuchsia-600">
+      <button
+        onClick={handleLogOut}
+        className="mt-10 w-full rounded-full border border-ink-900/15 py-2.5 text-sm font-semibold text-ink-900/80 hover:bg-ink-900/5"
+      >
+        Log out
+      </button>
+
+      <button onClick={handleReset} className="mt-4 text-xs text-ink-900/30 hover:text-fuchsia-600">
         Clear local demo data
       </button>
     </PageShell>

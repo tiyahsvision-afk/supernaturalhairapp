@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAppStore } from '@/store/useAppStore'
 import logo from '@/assets/logo.jpg'
 
@@ -18,6 +18,14 @@ export default function NavBar() {
   const onboarded = useAppStore((s) => s.onboarded)
   const points = useAppStore((s) => s.pointsBalance())
   const name = useAppStore((s) => s.profile.name)
+  const logOut = useAppStore((s) => s.logOut)
+  const navigate = useNavigate()
+
+  function handleLogOut() {
+    logOut()
+    setOpen(false)
+    navigate('/')
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink-900/10 bg-white/70 backdrop-blur-xl">
@@ -61,6 +69,12 @@ export default function NavBar() {
               >
                 {name ? name.split(' ')[0] : 'Profile'}
               </Link>
+              <button
+                onClick={handleLogOut}
+                className="rounded-full px-3 py-1.5 text-sm font-medium text-ink-900/50 hover:text-ink-900"
+              >
+                Log out
+              </button>
             </>
           ) : (
             <Link
@@ -107,6 +121,14 @@ export default function NavBar() {
               >
                 Profile · ✦ {points} pts
               </NavLink>
+            )}
+            {onboarded && (
+              <button
+                onClick={handleLogOut}
+                className="rounded-lg px-3 py-2 text-left text-sm font-medium text-ink-900/50"
+              >
+                Log out
+              </button>
             )}
             {!onboarded && (
               <Link

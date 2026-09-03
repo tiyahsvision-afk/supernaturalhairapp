@@ -31,6 +31,7 @@ interface AppState {
   completeOnboarding: (input: { name: string; email: string; hairGoal: string }) => void
   updateProfile: (patch: Partial<Profile>) => void
   setNotificationsEnabled: (enabled: boolean) => void
+  logOut: () => void
 
   submitConsultation: (answers: ConsultationAnswers) => ConsultationResult
   latestConsultation: () => ConsultationResult | undefined
@@ -96,6 +97,11 @@ export const useAppStore = create<AppState>()(
 
       setNotificationsEnabled: (enabled) =>
         set((s) => ({ profile: { ...s.profile, notificationsEnabled: enabled } })),
+
+      // Leaves your data in place on this device — it's all still here next
+      // time you start your journey again, it just takes you back to the
+      // landing page until then.
+      logOut: () => set({ onboarded: false }),
 
       submitConsultation: (answers) => {
         const { plan, summary } = buildConsultationPlan(answers)
