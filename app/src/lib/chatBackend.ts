@@ -1,7 +1,9 @@
 import {
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInAnonymously,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   type User,
 } from 'firebase/auth'
@@ -30,6 +32,16 @@ export async function ensureCustomerAuth(): Promise<string | null> {
     if (auth.currentUser) return auth.currentUser.uid
     const cred = await signInAnonymously(auth)
     return cred.user.uid
+  } catch {
+    return null
+  }
+}
+
+/** Signs the visitor in with their Google account so they never have to type name/email. */
+export async function signInWithGoogle(): Promise<{ name: string; email: string } | null> {
+  try {
+    const cred = await signInWithPopup(getAuthInstance(), new GoogleAuthProvider())
+    return { name: cred.user.displayName ?? '', email: cred.user.email ?? '' }
   } catch {
     return null
   }
