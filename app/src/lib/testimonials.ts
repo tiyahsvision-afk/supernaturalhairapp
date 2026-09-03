@@ -7,42 +7,35 @@ export interface Testimonial {
   photoUrl?: string
 }
 
-// Placeholder UGC copy in the brand's voice — swap in real customer photos
-// and quotes (e.g. pulled from Shopify product reviews or Instagram UGC)
-// before shipping.
+// Real customer reviews from the Supernatural Hair Care LLC Google Business
+// listing.
 export const TESTIMONIALS: Testimonial[] = [
   {
-    name: 'Amara J.',
-    handle: '@amara.grows',
+    name: 'Ashley N.',
+    handle: 'Google review',
     quote:
-      'The scheduler keeps my whole routine straight — GROW oil on Mon/Wed/Fri, REST on rest days. My edges have never been fuller.',
-    highlight: '+2in retained length',
+      "Supernatural Hair Care is truly amazing! I started my natural hair journey two years ago and it has been a struggle finding good natural hair products. I wish I found this company sooner because my hair is loving it. The shampoo lathers so well and smells so good, and the hydrating conditioner really leaves my hair in its best condition. I highly recommend this brand if you're looking for healthy hair that looks and feels good.",
+    highlight: '★★★★★ 5-star review',
   },
   {
-    name: 'Deja W.',
-    handle: '@dejawrites',
+    name: 'Shauna J.',
+    handle: 'Google review',
     quote:
-      'I finally understand WHEN to use what. The digital consultation felt like a real appointment, not a quiz.',
-    highlight: 'Consultation-guided routine',
+      "Supernatural Hair Care is exactly that! Supernatural. Since using the hair care line I've noticed an increase in my volume, shine, and moisture. I also use the hair oil on my son's hair and he hasn't experienced any of the normal breakage seen in most infants. If you're looking for a healthy way to restore your crown, this line is for you.",
+    highlight: '★★★★★ 5-star review',
   },
   {
-    name: 'Zavia M.',
-    handle: '@zaviamonet',
+    name: 'Alyssa P.',
+    handle: 'Google review',
     quote:
-      "The reminders are the only reason I stopped forgetting REMEDY conditioner on wash day. Check it off and keep it moving.",
-    highlight: '12-week streak',
+      'Supernatural has some of the best haircare products on the market. Between it being very natural and all handmade, it is amazing. Their shampoo is exceptional — it leaves my hair super clean and also very hydrated.',
+    highlight: '★★★★★ 5-star review',
   },
   {
-    name: 'Christine S.',
-    handle: '@christineshines',
+    name: 'Ali E.',
+    handle: 'Google review',
     quote:
-      'The forum is where I show up on the hard days. It changed how I see this whole journey, not just my hair.',
-    highlight: 'Community forum',
-  },
-  {
-    name: 'Sarai B.',
-    handle: '@saraiblissett',
-    quote: 'Uploading my weekly progress photo takes ten seconds and I actually have a timeline now.',
-    highlight: 'Weekly photo streak',
+      'Love this product because it helped with my dry scalp. I tried a lot of things but this worked the best. I wash and condition together once a week, but use the conditioner every 3 days.',
+    highlight: '★★★★★ 5-star review',
   },
 ]
