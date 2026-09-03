@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAppStore } from '@/store/useAppStore'
-import logo from '@/assets/logo.jpg'
+import logo from '@/assets/logo.png'
 
 const APP_LINKS = [
   { to: '/app', label: 'Dashboard' },
@@ -31,7 +31,7 @@ export default function NavBar() {
     <header className="sticky top-0 z-40 border-b border-ink-900/10 bg-white/70 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-center gap-2 font-display text-lg font-extrabold tracking-tight">
-          <img src={logo} alt="Supernatural Hair Care" className="h-9 w-8 rounded-xl object-cover" />
+          <img src={logo} alt="Supernatural Hair Care" className="h-9 w-8 object-contain" />
           <span className="text-gradient">Supernatural Journey</span>
         </Link>
 
