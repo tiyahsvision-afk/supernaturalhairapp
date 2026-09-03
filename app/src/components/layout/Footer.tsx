@@ -40,8 +40,10 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <p className="mt-10 text-xs text-ink-900/40">
-          © {new Date().getFullYear()} Supernatural Hair Care. Made for the Journey Kit community.
+        <p className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-900/40">
+          <span>© {new Date().getFullYear()} Supernatural Hair Care. Made for the Journey Kit community.</span>
+          <Link to="/privacy" className="hover:text-ink-900">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-ink-900">Terms of Service</Link>
         </p>
       </div>
     </footer>

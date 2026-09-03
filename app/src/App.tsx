@@ -18,6 +18,8 @@ import RewardsPage from '@/pages/RewardsPage'
 import ForumPage from '@/pages/ForumPage'
 import ForumThreadPage from '@/pages/ForumThreadPage'
 import ProfilePage from '@/pages/ProfilePage'
+import PrivacyPage from '@/pages/PrivacyPage'
+import TermsPage from '@/pages/TermsPage'
 
 // Owner-only page — lazy-loaded so its Firebase dependency never ships to regular visitors.
 const InboxPage = lazy(() => import('@/pages/InboxPage'))
@@ -83,6 +85,8 @@ export default function App() {
           />
           <Route path="/forum" element={<ForumPage />} />
           <Route path="/forum/:threadId" element={<ForumThreadPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route
             path="/inbox"
             element={
