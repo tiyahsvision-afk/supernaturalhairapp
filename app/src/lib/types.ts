@@ -15,7 +15,6 @@ export interface Profile {
   hairGoal: string
   memberSince: string
   notificationsEnabled: boolean
-  isClubMember: boolean
   referralCode: string
 }
 
@@ -71,7 +70,6 @@ export type RewardEventType =
   | 'referral'
   | 'consultation'
   | 'streak'
-  | 'join-club'
   | 'redeem'
   | 'welcome'
 

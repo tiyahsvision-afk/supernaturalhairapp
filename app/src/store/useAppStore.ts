@@ -29,7 +29,6 @@ interface AppState {
   completeOnboarding: (input: { name: string; email: string; hairGoal: string }) => void
   updateProfile: (patch: Partial<Profile>) => void
   setNotificationsEnabled: (enabled: boolean) => void
-  joinClub: () => void
 
   submitConsultation: (answers: ConsultationAnswers) => ConsultationResult
   latestConsultation: () => ConsultationResult | undefined
@@ -58,7 +57,6 @@ const defaultProfile: Profile = {
   hairGoal: '',
   memberSince: new Date().toISOString(),
   notificationsEnabled: false,
-  isClubMember: false,
   referralCode: '',
 }
 
@@ -93,12 +91,6 @@ export const useAppStore = create<AppState>()(
 
       setNotificationsEnabled: (enabled) =>
         set((s) => ({ profile: { ...s.profile, notificationsEnabled: enabled } })),
-
-      joinClub: () => {
-        if (get().profile.isClubMember) return
-        set((s) => ({ profile: { ...s.profile, isClubMember: true } }))
-        get().addRewardEvent('join-club', 100, 'Joined the Supernatural Members Club')
-      },
 
       submitConsultation: (answers) => {
         const { plan, summary } = buildConsultationPlan(answers)

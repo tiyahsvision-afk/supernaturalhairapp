@@ -12,7 +12,6 @@ const QUICK_LINKS = [
   { to: '/progress', icon: '📸', label: 'Progress' },
   { to: '/reorder', icon: '🛍️', label: 'Reorder' },
   { to: '/rewards', icon: '✦', label: 'Rewards' },
-  { to: '/members', icon: '👑', label: 'Members' },
   { to: '/forum', icon: '💬', label: 'Forum' },
 ]
 

@@ -5,7 +5,6 @@ const EARN_ACTIONS = [
   { icon: '📸', label: 'Share a progress photo', points: 50 },
   { icon: '🔮', label: 'Complete or update your consultation', points: 25 },
   { icon: '🤝', label: 'Refer a friend who joins', points: 150 },
-  { icon: '👑', label: 'Join the Members Club', points: 100 },
 ]
 
 export default function PointsHero() {

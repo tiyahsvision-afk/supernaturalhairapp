@@ -36,8 +36,8 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Christine S.',
     handle: '@christineshines',
     quote:
-      'Joining the Members Club for the Bible study + coaching calls changed how I see this whole journey, not just my hair.',
-    highlight: 'Members Club',
+      'The forum is where I show up on the hard days. It changed how I see this whole journey, not just my hair.',
+    highlight: 'Community forum',
   },
   {
     name: 'Sarai B.',

@@ -13,7 +13,6 @@ import SchedulerPage from '@/pages/SchedulerPage'
 import ProgressPage from '@/pages/ProgressPage'
 import ReorderPage from '@/pages/ReorderPage'
 import RewardsPage from '@/pages/RewardsPage'
-import MembersPage from '@/pages/MembersPage'
 import ForumPage from '@/pages/ForumPage'
 import ForumThreadPage from '@/pages/ForumThreadPage'
 import ProfilePage from '@/pages/ProfilePage'
@@ -77,7 +76,6 @@ export default function App() {
               </RequireOnboarding>
             }
           />
-          <Route path="/members" element={<MembersPage />} />
           <Route path="/forum" element={<ForumPage />} />
           <Route path="/forum/:threadId" element={<ForumThreadPage />} />
           <Route

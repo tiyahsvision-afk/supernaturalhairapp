@@ -26,7 +26,6 @@ export default function Footer() {
             <p className="mb-3 text-sm font-semibold text-ink-900/80">Community</p>
             <ul className="space-y-2 text-sm text-ink-900/60">
               <li><Link to="/forum" className="hover:text-ink-900">Forum</Link></li>
-              <li><Link to="/members" className="hover:text-ink-900">Members Club</Link></li>
               <li><Link to="/rewards" className="hover:text-ink-900">Rewards</Link></li>
             </ul>
           </div>

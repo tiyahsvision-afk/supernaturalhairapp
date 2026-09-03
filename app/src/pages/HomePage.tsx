@@ -5,7 +5,6 @@ import FounderStory from '@/components/home/FounderStory'
 import FeatureGrid from '@/components/home/FeatureGrid'
 import TestimonialStrip from '@/components/home/TestimonialStrip'
 import ForumPreview from '@/components/home/ForumPreview'
-import MembersTeaser from '@/components/home/MembersTeaser'
 import StickyMobileCta from '@/components/home/StickyMobileCta'
 
 export default function HomePage() {
@@ -18,7 +17,6 @@ export default function HomePage() {
       <FeatureGrid />
       <TestimonialStrip />
       <ForumPreview />
-      <MembersTeaser />
       <StickyMobileCta />
     </div>
   )

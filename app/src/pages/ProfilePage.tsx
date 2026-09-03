@@ -98,10 +98,8 @@ export default function ProfilePage() {
 
       <GlowCard className="mt-6 flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-ink-900">Membership</p>
-          <p className="text-xs text-ink-900/50">
-            {profile.isClubMember ? 'You are a Supernatural Members Club member ✓' : 'Not a member yet'}
-          </p>
+          <p className="text-sm font-semibold text-ink-900">Your journey</p>
+          <p className="text-xs text-ink-900/50">Thanks for being here.</p>
         </div>
         <span className="text-xs text-ink-900/40">Member since {new Date(profile.memberSince).toLocaleDateString()}</span>
       </GlowCard>

@@ -9,7 +9,6 @@ const APP_LINKS = [
   { to: '/progress', label: 'Progress' },
   { to: '/reorder', label: 'Reorder' },
   { to: '/rewards', label: 'Rewards' },
-  { to: '/members', label: 'Members' },
   { to: '/forum', label: 'Forum' },
 ]
 

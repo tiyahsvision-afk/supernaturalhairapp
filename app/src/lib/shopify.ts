@@ -124,14 +124,6 @@ export const PRODUCTS: ShcProduct[] = [
   },
 ]
 
-export const MEMBERS_ONLY_PRODUCT = {
-  handle: 'members-only',
-  title: 'MEMBERS ONLY',
-  price: 200,
-  image:
-    'https://cdn.shopify.com/s/files/1/0848/1407/0069/files/TealandWhiteGradientYogaMembershipFacebookPost_YourStory_2.png?v=1713143003',
-}
-
 export const MAIL_CLUB_PRODUCT = {
   handle: 'supernatural-mail-club',
   title: 'Supernatural Mail Club',
@@ -140,37 +132,6 @@ export const MAIL_CLUB_PRODUCT = {
   image:
     'https://cdn.shopify.com/s/files/1/0848/1407/0069/files/4fd304f9-5ff2-4025-93f9-a694734ce016.jpg?v=1786639781',
 }
-
-export interface MagazineIssue {
-  handle: string
-  title: string
-  blurb: string
-  image: string
-}
-
-export const MAGAZINE_ISSUES: MagazineIssue[] = [
-  {
-    handle: 'october-supernatural-journey-magazine',
-    title: 'October — Supernatural Journey Magazine',
-    blurb: 'Hairstylist & content creator Sarai Blissett joins the spotlight.',
-    image:
-      'https://cdn.shopify.com/s/files/1/0848/1407/0069/files/Concept_1.jpg?v=1759871098',
-  },
-  {
-    handle: 'march-2025-supernatural-journey-magazine',
-    title: 'March 2025 — 7th Anniversary Issue',
-    blurb: "The Beauty In Identity Workbook, plus an interview with Ngozichukwu Ayodele.",
-    image:
-      'https://cdn.shopify.com/s/files/1/0848/1407/0069/files/MagazineMarch25.png?v=1742049459',
-  },
-  {
-    handle: 'february-2025-supernatural-journey-magazine',
-    title: 'February 2025 — Creators to Watch',
-    blurb: 'Stories of hair culture, holistic healing, and creatives to know.',
-    image:
-      'https://cdn.shopify.com/s/files/1/0848/1407/0069/files/35CF7B15-72F5-4FBB-B4C6-A00A4CA4344E.png?v=1738760094',
-  },
-]
 
 export const CORE_STEP_PRODUCTS = PRODUCTS.filter((p) => p.isCoreStep)
 

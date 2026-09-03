@@ -7,7 +7,7 @@ const PILLARS = [
   {
     icon: '🙏🏽',
     title: 'Faith and sisterhood, built in',
-    body: 'Bible study, coaching calls with our founder, and real conversation — this app holds space for that, not just your routine.',
+    body: 'Identity & faith reflections, real conversation, and a community that gets it — this app holds space for that, not just your routine.',
   },
   {
     icon: '💛',
