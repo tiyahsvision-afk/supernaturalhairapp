@@ -113,3 +113,20 @@ export interface ChatMessage {
   createdAt: string
   deliveryMethod: 'email' | 'mail-app'
 }
+
+// Live, two-way chat (backed by Firestore when configured).
+export interface LiveChatMessage {
+  id: string
+  from: 'customer' | 'owner'
+  body: string
+  createdAt: number
+}
+
+export interface ConversationSummary {
+  conversationId: string
+  name: string
+  email: string
+  lastMessage: string
+  updatedAt: number
+  unreadForOwner: boolean
+}

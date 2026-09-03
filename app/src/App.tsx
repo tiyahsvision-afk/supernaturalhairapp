@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useReminderEngine } from '@/hooks/useReminderEngine'
 import BackgroundGlow from '@/components/layout/BackgroundGlow'
@@ -17,6 +18,9 @@ import RewardsPage from '@/pages/RewardsPage'
 import ForumPage from '@/pages/ForumPage'
 import ForumThreadPage from '@/pages/ForumThreadPage'
 import ProfilePage from '@/pages/ProfilePage'
+
+// Owner-only page — lazy-loaded so its Firebase dependency never ships to regular visitors.
+const InboxPage = lazy(() => import('@/pages/InboxPage'))
 
 export default function App() {
   useReminderEngine()
@@ -79,6 +83,14 @@ export default function App() {
           />
           <Route path="/forum" element={<ForumPage />} />
           <Route path="/forum/:threadId" element={<ForumThreadPage />} />
+          <Route
+            path="/inbox"
+            element={
+              <Suspense fallback={<div className="p-10 text-center text-ink-900/50">Loading…</div>}>
+                <InboxPage />
+              </Suspense>
+            }
+          />
           <Route
             path="/profile"
             element={
