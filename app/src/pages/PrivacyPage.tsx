@@ -22,20 +22,21 @@ export default function PrivacyPage() {
         <div>
           <h2 className="font-display text-base font-bold text-ink-900">Where it's stored</h2>
           <p className="mt-1">
-            Your profile, schedule, consultation answers, and progress photos are stored
-            locally in your own browser — they aren't uploaded to a server. If you message
-            us through the chat bubble, that conversation (and the name/email you give it)
-            is stored securely with Firebase (a Google service) so we can see and reply to
-            it. Only you and Tia can read your conversation.
+            Your day-to-day schedule and progress photos stay stored locally in your own
+            browser — they aren't uploaded anywhere. Your name, email, hair goal, and a
+            summary of your consultation are synced securely to Firebase (a Google service)
+            once you start your journey, so Tia can see how the app is being used. If you
+            message us through the chat bubble, that conversation is stored the same way.
+            Only you and Tia can read your own data — no other customer can see it.
           </p>
         </div>
 
         <div>
           <h2 className="font-display text-base font-bold text-ink-900">How it's used</h2>
           <p className="mt-1">
-            We use this information to run your personalized routine inside the app and to
-            reply to messages you send us. We don't sell your information, and we don't
-            share it with advertisers.
+            We use this information to run your personalized routine inside the app, to
+            understand how customers are using it, and to reply to messages you send us. We
+            don't sell your information, and we don't share it with advertisers.
           </p>
         </div>
 

@@ -19,7 +19,7 @@ import {
   type Unsubscribe,
 } from 'firebase/firestore'
 import { getAuthInstance, getDb } from './firebase'
-import type { ConversationSummary, LiveChatMessage } from './types'
+import type { AdminUserRecord, ConversationSummary, LiveChatMessage } from './types'
 
 /** Signs the visitor in anonymously (once) so they have a stable conversation ID. */
 export async function ensureCustomerAuth(): Promise<string | null> {
@@ -123,6 +123,38 @@ export function subscribeToMessages(
           body: data.body,
           createdAt: data.createdAt?.toMillis?.() ?? Date.now(),
         } satisfies LiveChatMessage
+      }),
+    )
+  })
+}
+
+/** Upserts a customer's profile snapshot for the owner's admin dashboard. */
+export async function syncUserProfile(
+  uid: string,
+  data: Omit<AdminUserRecord, 'uid' | 'updatedAt'>,
+): Promise<void> {
+  await setDoc(doc(getDb(), 'users', uid), { ...data, updatedAt: serverTimestamp() }, { merge: true })
+}
+
+export function subscribeToUsers(cb: (users: AdminUserRecord[]) => void): Unsubscribe {
+  const q = query(collection(getDb(), 'users'), orderBy('updatedAt', 'desc'))
+  return onSnapshot(q, (snap) => {
+    cb(
+      snap.docs.map((d) => {
+        const data = d.data()
+        return {
+          uid: d.id,
+          name: data.name ?? '',
+          email: data.email ?? '',
+          hairGoal: data.hairGoal ?? '',
+          memberSince: data.memberSince ?? '',
+          pointsBalance: data.pointsBalance ?? 0,
+          consultationCount: data.consultationCount ?? 0,
+          scheduleItemCount: data.scheduleItemCount ?? 0,
+          photoCount: data.photoCount ?? 0,
+          latestConsultationSummary: data.latestConsultationSummary ?? '',
+          updatedAt: data.updatedAt?.toMillis?.() ?? Date.now(),
+        } satisfies AdminUserRecord
       }),
     )
   })

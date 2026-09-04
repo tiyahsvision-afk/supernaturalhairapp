@@ -130,3 +130,20 @@ export interface ConversationSummary {
   updatedAt: number
   unreadForOwner: boolean
 }
+
+// A synced snapshot of one customer's profile + activity, for the owner's
+// admin dashboard. Kept intentionally lean: counts and a summary, not every
+// raw local record (schedule items, photo files stay on the customer's device).
+export interface AdminUserRecord {
+  uid: string
+  name: string
+  email: string
+  hairGoal: string
+  memberSince: string
+  pointsBalance: number
+  consultationCount: number
+  scheduleItemCount: number
+  photoCount: number
+  latestConsultationSummary: string
+  updatedAt: number
+}

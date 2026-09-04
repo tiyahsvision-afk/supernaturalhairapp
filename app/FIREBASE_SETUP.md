@@ -41,6 +41,9 @@ one time.
            allow create: if request.auth != null && (request.auth.uid == convId || isOwner());
          }
        }
+       match /users/{uid} {
+         allow read, write: if isOwner() || (request.auth != null && request.auth.uid == uid);
+       }
      }
    }
    ```

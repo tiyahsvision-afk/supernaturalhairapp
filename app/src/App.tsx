@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useReminderEngine } from '@/hooks/useReminderEngine'
+import { useUserSync } from '@/hooks/useUserSync'
 import BackgroundGlow from '@/components/layout/BackgroundGlow'
 import NavBar from '@/components/layout/NavBar'
 import Footer from '@/components/layout/Footer'
@@ -21,11 +22,13 @@ import ProfilePage from '@/pages/ProfilePage'
 import PrivacyPage from '@/pages/PrivacyPage'
 import TermsPage from '@/pages/TermsPage'
 
-// Owner-only page — lazy-loaded so its Firebase dependency never ships to regular visitors.
+// Owner-only pages — lazy-loaded so their Firebase dependency never ships to regular visitors.
 const InboxPage = lazy(() => import('@/pages/InboxPage'))
+const AdminPage = lazy(() => import('@/pages/AdminPage'))
 
 export default function App() {
   useReminderEngine()
+  useUserSync()
 
   return (
     <div className="relative flex min-h-screen flex-col">
@@ -92,6 +95,14 @@ export default function App() {
             element={
               <Suspense fallback={<div className="p-10 text-center text-ink-900/50">Loading…</div>}>
                 <InboxPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <Suspense fallback={<div className="p-10 text-center text-ink-900/50">Loading…</div>}>
+                <AdminPage />
               </Suspense>
             }
           />
