@@ -9,7 +9,7 @@ initializeApp()
 const db = getFirestore()
 
 const ANTHROPIC_API_KEY = defineSecret('ANTHROPIC_API_KEY')
-const MODEL = 'claude-haiku-4-5-20251001'
+const MODEL = 'claude-haiku-4-5'
 const MAX_HISTORY_MESSAGES = 20
 const FALLBACK_REPLY =
   "Sorry, I'm having trouble responding right now — Tia will follow up with you personally soon."
@@ -53,7 +53,10 @@ export const replyToCustomerMessage = onDocumentCreated(
       const response = await anthropic.messages.create({
         model: MODEL,
         max_tokens: 500,
-        system: SYSTEM_PROMPT,
+        // The knowledge base is identical on every request across every
+        // customer — caching it cuts ~90% off that portion of the cost
+        // after the first call.
+        system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
         messages: turns,
       })
       replyText = response.content
