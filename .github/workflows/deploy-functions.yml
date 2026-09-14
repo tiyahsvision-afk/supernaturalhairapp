@@ -1,0 +1,41 @@
+name: Deploy AI chat assistant (Firebase Functions)
+
+on:
+  push:
+    branches:
+      - claude/supernatural-journey-app-wxdict
+    paths:
+      - 'app/functions/**'
+      - 'app/firebase.json'
+      - 'app/firestore.rules'
+      - '.github/workflows/deploy-functions.yml'
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/functions/package-lock.json
+      - name: Install function dependencies
+        working-directory: app/functions
+        run: npm ci
+      - name: Write Firebase service account key
+        run: echo "$FIREBASE_SERVICE_ACCOUNT" > /tmp/service-account.json
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      - name: Set Anthropic API key secret
+        working-directory: app
+        run: printf '%s' "$ANTHROPIC_API_KEY" | npx firebase-tools functions:secrets:set ANTHROPIC_API_KEY --data-file - --force
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/service-account.json
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - name: Deploy Firestore rules + Functions
+        working-directory: app
+        run: npx firebase-tools deploy --only firestore:rules,functions --non-interactive
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/service-account.json

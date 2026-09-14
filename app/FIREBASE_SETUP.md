@@ -67,3 +67,64 @@ Once steps 1–4 are done, send Claude the `firebaseConfig` object from step 2
 (or paste it into `app/src/lib/chatConfig.ts` yourself, replacing the empty
 strings). After that's pushed, the chat bubble goes live for real, and you
 can sign in at `/inbox` with the email and password from step 4.
+
+# Turning on the AI Journey Assistant
+
+The chat now has a real AI ("Journey Assistant") that answers customer
+questions using Tia's book and the product catalog (see
+`app/functions/knowledge.js`). It runs as a Firebase Cloud Function, which
+needs a couple of things enabled — all doable in the browser, no terminal
+required. GitHub Actions deploys the function automatically once these are
+set.
+
+## 1. Upgrade Firebase to the "Blaze" plan
+
+Cloud Functions require this. It's still pay-as-you-go with a large free
+tier — for a small chat volume this should cost close to nothing, but it
+needs a card on file.
+
+1. In the Firebase console, click **Upgrade** (bottom-left, next to the
+   "Spark" plan name) or go to Project Settings → Usage and billing.
+2. Choose **Blaze**, attach a billing account (or create one), and confirm.
+
+## 2. Get an Anthropic API key
+
+This is what actually powers the AI's answers — a separate account from
+regular Claude.ai.
+
+1. Go to https://console.anthropic.com and sign in or create an account.
+2. Go to **API Keys** → **Create Key**. Copy the key (starts with `sk-ant-`).
+3. Add billing there too (Settings → Billing) — usage-based, small per-message cost.
+
+## 3. Generate a Firebase service account key
+
+This lets GitHub deploy the function on your behalf, without you ever
+touching a terminal.
+
+1. In the Firebase console: **Project Settings** (gear icon) → **Service
+   accounts** tab.
+2. Click **Generate new private key** → **Generate key**. A `.json` file
+   downloads.
+3. Open that file in a text editor and copy its *entire* contents.
+
+## 4. Add both as GitHub secrets
+
+1. Go to the repo on GitHub → **Settings** → **Secrets and variables** →
+   **Actions**.
+2. Click **New repository secret**, name it `ANTHROPIC_API_KEY`, paste the
+   key from step 2, save.
+3. Click **New repository secret** again, name it `FIREBASE_SERVICE_ACCOUNT`,
+   paste the *entire JSON file contents* from step 3, save.
+
+## 5. Done — it deploys itself
+
+Once both secrets are saved, go to the repo's **Actions** tab, find
+"Deploy AI chat assistant (Firebase Functions)," and click **Run workflow**
+(or just push any change to `app/functions/**` — it deploys automatically
+from then on). After it finishes, every new customer message gets a real
+AI-generated reply, and you'll see it labeled "AI" in your Inbox so you
+can tell it apart from your own replies.
+
+To change what the assistant knows (add products, correct something,
+adjust its tone), edit `app/functions/knowledge.js` and push — no other
+setup needed after that, it redeploys on its own.

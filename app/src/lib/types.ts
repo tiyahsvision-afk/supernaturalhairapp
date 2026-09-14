@@ -117,7 +117,7 @@ export interface ChatMessage {
 // Live, two-way chat (backed by Firestore when configured).
 export interface LiveChatMessage {
   id: string
-  from: 'customer' | 'owner'
+  from: 'customer' | 'owner' | 'ai'
   body: string
   createdAt: number
 }

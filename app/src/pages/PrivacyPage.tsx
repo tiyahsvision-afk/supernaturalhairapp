@@ -41,6 +41,18 @@ export default function PrivacyPage() {
         </div>
 
         <div>
+          <h2 className="font-display text-base font-bold text-ink-900">The chat is AI-assisted</h2>
+          <p className="mt-1">
+            Messages you send through the chat bubble are answered by our "Journey
+            Assistant," an AI trained on our founder's hair-care knowledge and product
+            catalog — not a live person. Tia can see every conversation and jump in
+            personally any time. Your messages are sent to Anthropic (the company behind
+            Claude, the AI model we use) solely to generate that reply, and aren't used to
+            train their models on our customers' behalf.
+          </p>
+        </div>
+
+        <div>
           <h2 className="font-display text-base font-bold text-ink-900">Your control</h2>
           <p className="mt-1">
             You can edit your profile any time from the Profile page, log out to stop your

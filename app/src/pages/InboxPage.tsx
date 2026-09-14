@@ -90,9 +90,12 @@ function Inbox() {
                     className={`max-w-[75%] rounded-2xl px-3 py-2 text-sm ${
                       m.from === 'owner'
                         ? 'ml-auto rounded-tr-sm bg-lavender-50 text-right text-ink-900/80'
-                        : 'mr-auto rounded-tl-sm bg-fuchsia-50 text-ink-900/80'
+                        : m.from === 'ai'
+                          ? 'mr-auto rounded-tl-sm bg-sky-50 text-ink-900/80'
+                          : 'mr-auto rounded-tl-sm bg-fuchsia-50 text-ink-900/80'
                     }`}
                   >
+                    {m.from === 'ai' && <p className="text-[10px] font-semibold text-sky-600">AI</p>}
                     {m.body}
                   </div>
                 ))}

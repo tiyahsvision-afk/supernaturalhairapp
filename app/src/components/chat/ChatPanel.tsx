@@ -81,9 +81,9 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-x-4 bottom-40 z-50 mx-auto flex max-h-[65vh] w-auto max-w-sm flex-col overflow-hidden rounded-3xl border border-ink-900/10 bg-white shadow-2xl sm:inset-x-auto sm:right-6 sm:bottom-24 sm:w-96">
       <div className="flex items-center justify-between border-b border-ink-900/10 bg-gradient-to-r from-sky-50 via-fuchsia-50 to-lavender-50 px-5 py-4">
         <div>
-          <p className="font-display text-sm font-bold text-ink-900">Message Tia</p>
+          <p className="font-display text-sm font-bold text-ink-900">Journey Assistant</p>
           <p className="text-xs text-ink-900/50">
-            {live ? "You'll see her reply right here" : 'Usually replies within a day'}
+            {live ? 'Our AI hair guide — Tia can jump in any time' : 'Usually replies within a day'}
           </p>
         </div>
         <button
@@ -99,18 +99,21 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
         <div className="max-h-64 min-h-[3rem] overflow-y-auto px-5 py-3">
           {connecting && <p className="text-center text-xs text-ink-900/40">Connecting…</p>}
           {!connecting && liveMessages.length === 0 && (
-            <p className="text-center text-xs text-ink-900/40">Say hello — Tia will see it here.</p>
+            <p className="text-center text-xs text-ink-900/40">
+              Ask about your hair or scalp — our AI Journey Assistant will help, and Tia sees every conversation.
+            </p>
           )}
           {liveMessages.map((m) => (
             <div
               key={m.id}
               className={`mb-2 max-w-[85%] rounded-2xl px-3 py-2 ${
-                m.from === 'owner'
-                  ? 'mr-auto rounded-tl-sm bg-lavender-50 text-left'
-                  : 'ml-auto rounded-tr-sm bg-fuchsia-50 text-right'
+                m.from === 'customer'
+                  ? 'ml-auto rounded-tr-sm bg-fuchsia-50 text-right'
+                  : 'mr-auto rounded-tl-sm bg-lavender-50 text-left'
               }`}
             >
               {m.from === 'owner' && <p className="text-[10px] font-semibold text-lavender-600">Tia</p>}
+              {m.from === 'ai' && <p className="text-[10px] font-semibold text-sky-600">Journey Assistant · AI</p>}
               <p className="text-xs text-ink-900/80">{m.body}</p>
               <p className="mt-0.5 text-[10px] text-ink-900/40">
                 {new Date(m.createdAt).toLocaleString()}
