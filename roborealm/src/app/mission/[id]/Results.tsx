@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/nav";
 import { Modal, PassMark } from "@/components/ui";
 import { ACHIEVEMENTS, type Awards } from "@/progress/logic";
 import type { MissionReport } from "@/missions/evaluate";

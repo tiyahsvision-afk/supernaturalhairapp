@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/components/nav";
 import { useState } from "react";
 import { Avatar, AVATAR_ACCESSORIES, defaultAvatar, HAIR_COLORS, HAIRS, OUTFITS, SKINS } from "@/components/Avatar";
 import { RobotPortrait } from "@/components/RobotArt";

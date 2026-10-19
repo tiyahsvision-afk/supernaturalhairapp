@@ -3,6 +3,7 @@
 import { RobotPortrait } from "@/components/RobotArt";
 import { Avatar } from "@/components/Avatar";
 import { download, PageTitle } from "@/components/ui";
+import { STATIC } from "@/components/nav";
 import { COMPETENCIES } from "@/content/competencies";
 import { MISSIONS } from "@/missions/missions";
 import { DOC_FIELDS, MASTERY_LABEL, MASTERY_ORDER, masteryMap } from "@/progress/logic";
@@ -26,9 +27,11 @@ export default function Portfolio() {
     <div className="mx-auto max-w-[1100px] px-4 py-6 print-text">
       <PageTitle title="Engineering Portfolio" sub="Evidence of what you have demonstrated. Stored only in this browser — nothing is published.">
         <div className="no-print flex flex-wrap gap-2">
-          <button className="btn btn-primary" onClick={() => window.print()} title="Use your browser's 'Save as PDF' destination">
-            🖨️ Print / Save as PDF
-          </button>
+          {!STATIC && (
+            <button className="btn btn-primary" onClick={() => window.print()} title="Use your browser's 'Save as PDF' destination">
+              🖨️ Print / Save as PDF
+            </button>
+          )}
           <button
             className="btn btn-ghost"
             onClick={() =>

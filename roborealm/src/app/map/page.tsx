@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/nav";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { CAREER_LINKS } from "@/content/nova";

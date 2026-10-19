@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { Link, usePathname, useRouter } from "@/components/nav";
 import { MotionConfig } from "motion/react";
 import { useEffect } from "react";
 import { levelInfo, titleForLevel } from "@/progress/logic";

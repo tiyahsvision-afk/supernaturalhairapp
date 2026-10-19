@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/nav";
 
 const FEATURES = [
   ["Cohorts", "Create classes and groups; students join with a class code — no student email required."],

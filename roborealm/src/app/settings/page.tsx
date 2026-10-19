@@ -1,8 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/components/nav";
 import { useState } from "react";
-import { download, PageTitle } from "@/components/ui";
+import { ConfirmButton, download, PageTitle } from "@/components/ui";
 import { SAVE_KEY, useGame } from "@/progress/store";
 
 export default function SettingsPage() {
@@ -58,7 +58,7 @@ export default function SettingsPage() {
         <div className="flex flex-wrap gap-2">
           <button
             className="btn btn-ghost"
-            onClick={() => download("roborealm-save.json", localStorage.getItem(SAVE_KEY) ?? "{}", "application/json")}
+            onClick={() => download("roborealm-save.json", JSON.stringify({ state: useGame.getState(), version: 1 }), "application/json")}
           >
             ⬇ Export my save
           </button>
@@ -83,18 +83,20 @@ export default function SettingsPage() {
               }}
             />
           </label>
-          <button
+          <ConfirmButton
             className="btn btn-danger"
-            onClick={() => {
-              if (window.confirm("Delete ALL ROBOREALM data from this browser? This cannot be undone.")) {
-                s.resetAll();
+            label="Delete all my data"
+            confirmLabel="Click again to delete everything (cannot be undone)"
+            onConfirm={() => {
+              s.resetAll();
+              try {
                 localStorage.removeItem(SAVE_KEY);
-                router.replace("/");
+              } catch {
+                /* storage unavailable */
               }
+              router.replace("/");
             }}
-          >
-            Delete all my data
-          </button>
+          />
         </div>
         {msg && <p role="status" className="text-sm">{msg}</p>}
       </section>

@@ -2,9 +2,10 @@
 
 import Editor, { loader, type OnMount } from "@monaco-editor/react";
 import { useEffect, useRef } from "react";
+import { assetBase } from "./nav";
 
 // Self-hosted Monaco (copied to /public/monaco by scripts/copy-pyodide.mjs).
-loader.config({ paths: { vs: "/monaco/vs" } });
+loader.config({ paths: { vs: typeof document === "undefined" ? "/monaco/vs" : `${assetBase()}monaco/vs` } });
 
 type Monaco = Parameters<OnMount>[1];
 type IEditor = Parameters<OnMount>[0];

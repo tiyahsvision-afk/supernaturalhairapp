@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { RobotPortrait, RobotTopDown } from "@/components/RobotArt";
 import { playSound } from "@/components/sound";
-import { PageTitle } from "@/components/ui";
+import { ConfirmButton, PageTitle } from "@/components/ui";
 import {
   ACCESSORIES,
   BATTERIES,
@@ -122,17 +122,15 @@ export default function Workshop() {
             ))}
           </ul>
           {s.garage.length > 1 && (
-            <button
+            <ConfirmButton
               className="btn btn-ghost mt-3 w-full !py-1 text-sm"
-              onClick={() => {
-                if (window.confirm(`Delete ${editing.name}?`)) {
-                  s.deleteDesign(editing.id);
-                  setEditing(s.garage.find((g) => g.id !== editing.id)!);
-                }
+              label="Delete selected"
+              confirmLabel={`Click again to delete ${editing.name}`}
+              onConfirm={() => {
+                s.deleteDesign(editing.id);
+                setEditing(s.garage.find((g) => g.id !== editing.id)!);
               }}
-            >
-              Delete selected
-            </button>
+            />
           )}
         </aside>
 

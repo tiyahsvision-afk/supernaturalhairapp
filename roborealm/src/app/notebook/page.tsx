@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/nav";
 import { useState } from "react";
 import { MISSIONS } from "@/missions/missions";
 import { PageTitle } from "@/components/ui";

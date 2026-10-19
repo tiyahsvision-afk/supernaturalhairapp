@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/nav";
 import { motion } from "motion/react";
 import { Avatar } from "@/components/Avatar";
 import { RobotPortrait } from "@/components/RobotArt";

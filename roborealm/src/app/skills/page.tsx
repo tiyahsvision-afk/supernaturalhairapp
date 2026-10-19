@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/nav";
 import { COMPETENCIES, type SkillCategory } from "@/content/competencies";
 import { MISSIONS } from "@/missions/missions";
 import { PageTitle } from "@/components/ui";

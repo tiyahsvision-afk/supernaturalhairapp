@@ -7,7 +7,7 @@ const fredoka = Fredoka({ subsets: ["latin"], variable: "--font-fredoka", weight
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "ROBOREALM — Robotics & AI Adventure",
+  title: "ROBOREALM",
   description: "Build, program, test and debug simulated robots. A robotics career-training simulator disguised as an adventure game.",
 };
 

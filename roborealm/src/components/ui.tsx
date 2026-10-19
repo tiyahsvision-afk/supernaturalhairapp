@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { MissionKind } from "@/missions/types";
 
 export function PageTitle({ title, sub, children }: { title: string; sub?: string; children?: React.ReactNode }) {
@@ -98,4 +98,37 @@ export function download(filename: string, content: string, type = "text/plain")
   a.download = filename;
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/** Two-step confirmation inside the page (browser confirm() dialogs are not available everywhere). */
+export function ConfirmButton({
+  className,
+  label,
+  confirmLabel,
+  onConfirm,
+}: {
+  className: string;
+  label: React.ReactNode;
+  confirmLabel: string;
+  onConfirm: () => void;
+}) {
+  const [armed, setArmed] = useState(false);
+  useEffect(() => {
+    if (!armed) return;
+    const t = setTimeout(() => setArmed(false), 4000);
+    return () => clearTimeout(t);
+  }, [armed]);
+  return (
+    <button
+      className={className}
+      onClick={() => {
+        if (armed) {
+          setArmed(false);
+          onConfirm();
+        } else setArmed(true);
+      }}
+    >
+      {armed ? confirmLabel : label}
+    </button>
+  );
 }

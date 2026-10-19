@@ -1,5 +1,6 @@
 "use client";
 
+import { assetBase } from "@/components/nav";
 import type { MissionReport } from "@/missions/evaluate";
 import type { RobotDesign } from "@/robots/design";
 import type { ScenarioRun } from "./missionRunner";
@@ -73,7 +74,7 @@ class PythonClient {
         );
       }, timeoutMs);
       this.pending.set(id, { resolve: resolve as (v: unknown) => void, reject, timer });
-      w.postMessage({ id, ...msg });
+      w.postMessage({ id, base: assetBase(), ...msg });
     });
   }
 
