@@ -1,3 +1,5 @@
+> **Also in this repo:** [`roborealm/`](roborealm/README.md) — ROBOREALM, a robotics & AI learning game (Next.js). The Instagram tools below are unchanged.
+
 # Instagram Reels Content-Framework Analyzer
 
 Two scripts:

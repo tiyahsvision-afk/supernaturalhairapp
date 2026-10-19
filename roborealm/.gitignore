@@ -5,3 +5,4 @@ public/pyodide/
 next-env.d.ts
 *.tsbuildinfo
 test-results/
+public/monaco/

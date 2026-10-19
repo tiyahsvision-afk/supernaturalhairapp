@@ -15,3 +15,10 @@ for (const f of ["pyodide.mjs", "pyodide.asm.js", "pyodide.asm.wasm", "python_st
   cpSync(join(src, f), join(dest, f));
 }
 console.log("[copy-pyodide] copied runtime to public/pyodide");
+
+// Self-host the Monaco editor too (no third-party CDN at runtime).
+const monacoSrc = join(root, "node_modules", "monaco-editor", "min", "vs");
+if (existsSync(monacoSrc)) {
+  cpSync(monacoSrc, join(root, "public", "monaco", "vs"), { recursive: true });
+  console.log("[copy-pyodide] copied monaco to public/monaco");
+}

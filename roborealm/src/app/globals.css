@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lavender: #a78bfa;
+  --color-sky: #7dd3fc;
+  --color-mint: #6ee7b7;
+  --color-peach: #fdba9a;
+  --color-sun: #fde68a;
+  --color-navy: #172554;
+  --color-ink: #0b1437;
+  --color-offwhite: #f8fafc;
+  --color-danger: #fb7185;
+  --font-display: var(--font-fredoka), ui-rounded, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: #0b1437;
+  color: var(--color-offwhite);
+}
+
+body {
+  min-height: 100dvh;
+  background-image:
+    radial-gradient(1200px 600px at 10% -10%, rgba(167, 139, 250, 0.25), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(125, 211, 252, 0.18), transparent 60%),
+    radial-gradient(800px 600px at 50% 120%, rgba(110, 231, 183, 0.12), transparent 60%),
+    linear-gradient(180deg, #0b1437 0%, #172554 100%);
+  background-attachment: fixed;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.panel-strong {
+  background: #111a47;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.55rem 1.1rem;
+  font-weight: 600;
+  transition: transform 0.12s ease, background 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+}
+.btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #a78bfa, #7dd3fc);
+  color: #0b1437;
+  box-shadow: 0 6px 20px -6px rgba(167, 139, 250, 0.7);
+}
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 8px 28px -6px rgba(125, 211, 252, 0.8);
+}
+.btn-go {
+  background: linear-gradient(135deg, #6ee7b7, #7dd3fc);
+  color: #0b1437;
+}
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-offwhite);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14);
+}
+.btn-danger {
+  background: #fb7185;
+  color: #0b1437;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 9999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+:focus-visible {
+  outline: 3px solid #fde68a;
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+.field {
+  width: 100%;
+  border-radius: 0.9rem;
+  background: rgba(11, 20, 55, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.6rem 0.8rem;
+  color: var(--color-offwhite);
+}
+.field:focus {
+  border-color: #a78bfa;
+  outline: none;
+}
+
+.prose-rr p + p {
+  margin-top: 0.6rem;
+}
+
+.float {
+  animation: float 5s ease-in-out infinite;
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.hc .panel,
+.hc .panel-strong {
+  border-color: rgba(255, 255, 255, 0.55);
+  background: #0b1437;
+}
+.hc body,
+.hc .text-white\/60,
+.hc .text-white\/70 {
+  color: #fff;
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:not(.full-motion) *,
+  html:not(.full-motion) *::before,
+  html:not(.full-motion) *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Blockly dark integration */
+.blocklyMainBackground {
+  fill: #101a45 !important;
+  stroke: none !important;
+}
+.blocklyToolboxDiv,
+.blocklyFlyoutBackground {
+  background-color: #0f1840 !important;
+  fill: #0f1840 !important;
+}
+.blocklyTreeLabel,
+.blocklyToolboxCategoryLabel {
+  color: #f8fafc !important;
+  font-family: var(--font-sans);
+}
+
+@media print {
+  header,
+  .no-print {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #0b1437 !important;
+  }
+  .panel,
+  .panel-strong {
+    background: #fff !important;
+    border-color: #cbd5e1 !important;
+    backdrop-filter: none !important;
+    break-inside: avoid;
+  }
+  .print-text * {
+    color: #0b1437 !important;
+  }
+  pre {
+    white-space: pre-wrap;
+    background: #f1f5f9 !important;
+    color: #0b1437 !important;
+  }
+}
