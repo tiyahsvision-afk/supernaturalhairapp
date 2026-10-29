@@ -1,0 +1,12 @@
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+.env
+.env.local
+.env.*.local
+storage/
+private-data/
+coverage/
+storage-test/
+test-results/

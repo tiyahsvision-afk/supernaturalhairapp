@@ -1,0 +1,573 @@
+{
+ "_meta": {
+  "MOCK": true,
+  "note": "Mock batch for contract hp-ii/0.1.0-draft. Exercises: accepted records, taxonomy mapping, unmapped term quarantine, AI estimate without model version, health-data consent gating, missing research consent, direct-identifier rejection."
+ },
+ "contractVersion": "hp-ii/0.1.0-draft",
+ "isMock": true,
+ "taxonomyMappings": [
+  {
+   "externalTaxonomy": "hp-assessment",
+   "externalVersion": "0.1",
+   "externalCode": "hairType",
+   "term": "curl-geometry"
+  },
+  {
+   "externalTaxonomy": "hp-assessment",
+   "externalVersion": "0.1",
+   "externalCode": "porosity",
+   "term": "apparent-porosity"
+  },
+  {
+   "externalTaxonomy": "hp-assessment",
+   "externalVersion": "0.1",
+   "externalCode": "scalpCondition",
+   "term": "scalp"
+  }
+ ],
+ "records": [
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "PARTICIPANT",
+   "externalRecordId": "mock-p1",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SYSTEM_DERIVED",
+   "observedAt": "2026-09-01",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-enrolment"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "ageBand": "25-34",
+    "regionCoarse": "US"
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "PHENOTYPE_OBSERVATION",
+   "externalRecordId": "mock-ph-1",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-09-01",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-assessment-q-hairType",
+    "version": "0.1"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "hairType",
+    "termSystem": "hp-assessment",
+    "termSystemVersion": "0.1",
+    "value": "coily"
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "PHENOTYPE_OBSERVATION",
+   "externalRecordId": "mock-ph-2",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-09-01",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-assessment-q-porosity",
+    "version": "0.1"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "porosity",
+    "termSystem": "hp-assessment",
+    "termSystemVersion": "0.1",
+    "value": "not sure"
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "EXPOSURE_EVENT",
+   "externalRecordId": "mock-ex-1",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-09-01",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-routine-log",
+    "version": "0.1"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "productRef": {
+     "system": "gtin",
+     "code": "860000079464"
+    },
+    "exposureConfidence": "USER_REPORTED_PRODUCT",
+    "startDate": "2026-09-01",
+    "frequency": {
+     "count": 3,
+     "per": "week"
+    },
+    "rinseOffOrLeaveOn": "LEAVE_ON",
+    "applicationSites": [
+     "scalp"
+    ],
+    "coverage": "full_head"
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "OUTCOME_OBSERVATION",
+   "externalRecordId": "mock-out-1",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-10-15",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-checkin-q-breakage",
+    "version": "0.1"
+   },
+   "confidence": null,
+   "qualityFlags": [
+    "RECALL_PERIOD_LONG"
+   ],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "breakage",
+    "termSystem": "ii-hair-scalp",
+    "termSystemVersion": "0.1.0-draft",
+    "value": "a little",
+    "followUpDays": 44,
+    "exposureEventRefs": [
+     "mock-ex-1"
+    ],
+    "context": {
+     "protectiveStyle": "twists",
+     "heatUse": "none"
+    }
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "OUTCOME_OBSERVATION",
+   "externalRecordId": "mock-out-2",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "IMAGE_DERIVED",
+   "observedAt": "2026-10-15",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-photo-protocol",
+    "version": "0.1"
+   },
+   "confidence": 0.42,
+   "qualityFlags": [
+    "IMAGE_LIGHTING"
+   ],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "apparent-density-change",
+    "termSystem": "ii-hair-scalp",
+    "termSystemVersion": "0.1.0-draft",
+    "value": {
+     "score": 0.03,
+     "scale": "relative-change"
+    },
+    "followUpDays": 44
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "OUTCOME_OBSERVATION",
+   "externalRecordId": "mock-out-3",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "AI_ESTIMATE",
+   "observedAt": "2026-10-15",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hairfm-density-estimator"
+   },
+   "confidence": 0.3,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "apparent-density-change",
+    "termSystem": "ii-hair-scalp",
+    "termSystemVersion": "0.1.0-draft",
+    "value": 0.05
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "OUTCOME_OBSERVATION",
+   "externalRecordId": "mock-out-4",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "AI_ESTIMATE",
+   "observedAt": "2026-10-15",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hairfm-density-estimator",
+    "version": "hairfm-0.0.1-mock"
+   },
+   "confidence": 0.3,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "apparent-density-change",
+    "termSystem": "ii-hair-scalp",
+    "termSystemVersion": "0.1.0-draft",
+    "value": 0.05
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "SENSITIVITY_FACTOR",
+   "externalRecordId": "mock-sf-1",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-09-01",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-sensitivity-q"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "category": "FRAGRANCE_SENSITIVITY",
+    "present": true
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "PARTICIPANT",
+   "externalRecordId": "mock-p2",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0002-2b8e41",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": false,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SYSTEM_DERIVED",
+   "observedAt": "2026-09-02",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-enrolment"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "ageBand": "35-44",
+    "regionCoarse": "US"
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "SENSITIVITY_FACTOR",
+   "externalRecordId": "mock-sf-2",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0002-2b8e41",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": false,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-09-02",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-sensitivity-q"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "category": "CONTACT_ALLERGY_REPORTED",
+    "present": true
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "OUTCOME_OBSERVATION",
+   "externalRecordId": "mock-out-5",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0002-2b8e41",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": false,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-10-02",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-checkin-q-flaking",
+    "version": "0.1"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "visible-flaking",
+    "termSystem": "ii-hair-scalp",
+    "termSystemVersion": "0.1.0-draft",
+    "value": "moderate",
+    "context": {
+     "season": "autumn",
+     "medicationChange": "yes"
+    }
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "PHENOTYPE_OBSERVATION",
+   "externalRecordId": "mock-ph-3",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0002-2b8e41",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": false,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-09-02",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-assessment-q-unknown",
+    "version": "0.1"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "scalpVibe",
+    "termSystem": "hp-assessment",
+    "termSystemVersion": "0.1",
+    "value": "itchy"
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "PHENOTYPE_OBSERVATION",
+   "externalRecordId": "mock-ph-4",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0003-91d0aa",
+   "consent": {
+    "researchUse": false,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-09-03",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "hp-assessment-q-hairType",
+    "version": "0.1"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "hairType",
+    "termSystem": "hp-assessment",
+    "termSystemVersion": "0.1",
+    "value": "curly"
+   }
+  },
+  {
+   "contractVersion": "hp-ii/0.1.0-draft",
+   "recordType": "PHENOTYPE_OBSERVATION",
+   "externalRecordId": "mock-ph-5",
+   "revision": 1,
+   "participantRef": "hp-mock-participant-0001-7f3a9c",
+   "consent": {
+    "researchUse": true,
+    "healthDataUse": true,
+    "imageDerivedUse": true,
+    "modelTrainingUse": false,
+    "asOf": "2026-09-01",
+    "protocolVersion": "hp-consent-0.1-mock"
+   },
+   "sourceType": "SELF_REPORTED",
+   "observedAt": "2026-09-01",
+   "datePrecision": "DAY",
+   "method": {
+    "code": "x"
+   },
+   "confidence": null,
+   "qualityFlags": [],
+   "deidentification": {
+    "protocolVersion": "hp-deid-0.1-mock",
+    "dateShifted": false,
+    "geoPrecision": "country"
+   },
+   "payload": {
+    "termCode": "hairType",
+    "termSystem": "hp-assessment",
+    "termSystemVersion": "0.1",
+    "value": "coily"
+   },
+   "email": "someone@example.com"
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* Supernatural Ingredient Intelligence — editorial research UI.
+   Brand primary #9bc9ff is a surface/accent color; text uses ink tokens (brand blue fails text contrast on white). */
+@theme {
+  --color-brand: #9bc9ff;
+  --color-brand-50: #f2f8ff;
+  --color-brand-100: #e3f0ff;
+  --color-brand-200: #c7e1ff;
+  --color-brand-300: #9bc9ff;
+  --color-brand-600: #2f6fb5;
+  --color-brand-700: #1f5592;
+  --color-paper: #fbfaf7;
+  --color-paper-2: #f4f1ea;
+  --color-line: #e5e0d6;
+  --color-ink: #1d2433;
+  --color-ink-2: #4a5263;
+  --color-ink-3: #6b7280;
+  --color-good: #1f7a4d;
+  --color-warn: #8a5a00;
+  --color-bad: #a3302a;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+:root { color-scheme: light; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-paper: #12151c;
+    --color-paper-2: #1a1f29;
+    --color-line: #2c3340;
+    --color-ink: #eef1f6;
+    --color-ink-2: #c3cad6;
+    --color-ink-3: #9aa3b2;
+    --color-brand-50: #16202f;
+    --color-brand-100: #1b2a3e;
+    --color-brand-200: #24405f;
+    --color-brand-600: #9bc9ff;
+    --color-brand-700: #c7e1ff;
+    --color-good: #5fd39a;
+    --color-warn: #f0b84a;
+    --color-bad: #ff8a80;
+  }
+}
+
+body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); }
+a { color: var(--color-brand-700); }
+a:hover { text-decoration: underline; }
+h1, h2, h3 { font-family: var(--font-serif); letter-spacing: -0.01em; }
+table { border-collapse: collapse; width: 100%; }
+th { text-align: left; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-ink-3); }
+th, td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--color-line); vertical-align: top; }
+input, select, textarea { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 0.5rem; padding: 0.45rem 0.65rem; color: var(--color-ink); width: 100%; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--color-brand); outline-offset: 1px; }
+input[type="checkbox"], input[type="radio"] { width: auto; }
+code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; }

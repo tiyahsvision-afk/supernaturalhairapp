@@ -1,0 +1,1955 @@
+// Supernatural Ingredient Intelligence — Phase 1 schema.
+//
+// Design rules enforced here and in src/lib:
+//  * Facts are never overwritten: a correction creates a new row and sets supersededAt/supersededById on the old one.
+//  * Every fact-like row carries sourceId + entryMode + reviewStatus (provenance).
+//  * Supplier recommendations, literature-tested levels, regulatory maxima, internal ranges and observed commercial use
+//    are separate ConcentrationRecord types and are never merged.
+//  * Private records (formulas, raw-material documents, research candidates) carry ownerOrgId + visibility.
+//  * The knowledge graph is stored as typed, provenance-bearing edges (GraphEdge); see src/lib/graph.ts for the
+//    abstraction layer that would let a graph database be added later.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ───────────────────────────── Enums ─────────────────────────────
+
+enum Role {
+  SUPER_ADMIN
+  DATA_ADMIN
+  COSMETIC_CHEMIST
+  RESEARCH_SCIENTIST
+  DERMATOLOGIST_REVIEWER
+  TRICHOLOGIST_REVIEWER
+  REGULATORY_REVIEWER
+  PATENT_REVIEWER
+  DATA_ANNOTATOR
+  SUPPLIER_PARTNER
+  BRAND_PARTNER
+  READ_ONLY_RESEARCHER
+}
+
+enum OrgType {
+  INTERNAL
+  BRAND
+  SUPPLIER
+  RESEARCH
+  INTEGRATION
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+  LOCKED
+}
+
+enum Visibility {
+  SHARED // visible to every authenticated user (reference data)
+  ORGANIZATION // owner organization only
+  RESTRICTED // owner organization + explicit permission (private formulas, supplier documents)
+  CONFIDENTIAL_IP // owner organization + ip:read permission (potential IP)
+}
+
+enum ReviewStatus {
+  DRAFT
+  SUBMITTED
+  ASSIGNED
+  UNDER_REVIEW
+  CHANGES_REQUESTED
+  SECOND_REVIEW_REQUIRED
+  APPROVED
+  REJECTED
+  SUPERSEDED
+  EXPIRED
+  RE_REVIEW_REQUIRED
+}
+
+enum EntryMode {
+  IMPORTED
+  AI_EXTRACTED
+  MANUAL
+}
+
+enum SourceType {
+  CHEMICAL_DATABASE
+  COSMETIC_INVENTORY
+  REGULATORY
+  SAFETY_REVIEW
+  LITERATURE
+  PATENT
+  SUPPLIER
+  MANUFACTURER_LABEL
+  INTERNAL
+  CURATOR
+  AI_EXTRACTION
+  HAIR_PASSPORT
+  OTHER
+}
+
+enum RightsStatus {
+  APPROVED_INTERNAL
+  APPROVED_COMMERCIAL
+  APPROVED_WITH_ATTRIBUTION
+  METADATA_ONLY
+  LINK_ONLY
+  MANUAL_REVIEW_REQUIRED
+  LICENSE_REQUIRED
+  RESTRICTED
+  PROHIBITED
+  UNKNOWN
+}
+
+enum IdentityType {
+  DEFINED_SUBSTANCE
+  SALT
+  ESTER
+  DERIVATIVE
+  ISOMER
+  POLYMER
+  COPOLYMER
+  PEPTIDE
+  PROTEIN
+  HYDROLYSATE
+  BOTANICAL_EXTRACT
+  BOTANICAL_FRACTION
+  ESSENTIAL_OIL
+  FIXED_OIL
+  WAX
+  FERMENT
+  LYSATE
+  FILTRATE
+  MINERAL
+  PROPRIETARY_BLEND
+  FRAGRANCE_MIXTURE
+  DELIVERY_SYSTEM
+  RAW_MATERIAL_BLEND
+  UVCB
+  UNKNOWN_COMPOSITION
+  OTHER_COMPLEX
+}
+
+enum MaterialType {
+  SMALL_MOLECULE
+  BOTANICAL_EXTRACT
+  BOTANICAL_FRACTION
+  PEPTIDE
+  PROTEIN
+  AMINO_ACID
+  LIPID
+  OIL
+  WAX
+  SURFACTANT
+  POLYMER
+  SILICONE
+  MINERAL
+  FERMENTATION_DERIVED
+  MICROBIOME_RELATED
+  PRESERVATIVE
+  FRAGRANCE_MATERIAL
+  COLORANT
+  UV_FILTER
+  DELIVERY_TECHNOLOGY
+  COMPLEX_MIXTURE
+  OTHER
+}
+
+enum OriginType {
+  NATURAL
+  NATURALLY_DERIVED
+  SYNTHETIC
+  BIOTECH
+  UNKNOWN
+}
+
+enum IngredientStatus {
+  ACTIVE
+  INACTIVE
+  MERGED
+}
+
+enum NameType {
+  INCI
+  CHEMICAL
+  IUPAC
+  COMMON
+  TRADE
+  BOTANICAL
+  DISPLAY
+}
+
+enum AliasType {
+  SYNONYM
+  ABBREVIATION
+  MISSPELLING
+  LEGACY_NAME
+  LABEL_DISPLAY_NAME
+  TRADE_NAME
+}
+
+enum IdentifierType {
+  CAS
+  EC
+  PUBCHEM_CID
+  DTXSID
+  INCHI
+  INCHIKEY
+  SMILES
+  MOLECULAR_FORMULA
+  COSING_REF
+  UNII
+}
+
+enum VerificationStatus {
+  UNVERIFIED
+  VERIFIED
+  NEEDS_REVIEW
+  CONFLICT
+  REJECTED
+}
+
+enum IngredientRelationType {
+  PARENT_OF
+  DERIVATIVE_OF
+  SALT_OF
+  ESTER_OF
+  ISOMER_OF
+  GRADE_OF
+  BLEND_COMPONENT_OF
+  CARRIER_OF
+  PRESERVATIVE_OF
+  BOTANICAL_SOURCE_OF
+  PROCESSING_VARIANT_OF
+  SUPPLIER_VERSION_OF
+  RELATED_TO
+  POSSIBLY_SAME_AS
+}
+
+enum IdentityDecision {
+  SAME_INGREDIENT
+  RELATED_INGREDIENT
+  SALT_OR_DERIVATIVE
+  MIXTURE_CONTAINING
+  DIFFERENT_INGREDIENT
+  UNRESOLVED
+}
+
+enum IdentityEventType {
+  MERGE
+  UNMERGE
+  RELATE
+  DECIDE_DIFFERENT
+  ALIAS_ADDED
+  IDENTIFIER_CORRECTED
+  IDENTIFIER_REJECTED
+}
+
+enum PropertyType {
+  MOLECULAR_WEIGHT
+  MOLECULAR_FORMULA
+  EXACT_MASS
+  SOLUBILITY
+  DISPERSIBILITY
+  PARTITION_COEFFICIENT
+  MELTING_POINT
+  BOILING_POINT
+  DENSITY
+  VISCOSITY
+  CHARGE
+  PKA
+  REFRACTIVE_INDEX
+  HLB
+  SURFACE_ACTIVITY
+  CRITICAL_MICELLE_CONCENTRATION
+  TOPOLOGICAL_POLAR_SURFACE_AREA
+  H_BOND_DONOR_COUNT
+  H_BOND_ACCEPTOR_COUNT
+  PH_RANGE
+  PROCESSING_TEMPERATURE
+  STABILITY_RANGE
+  LIGHT_SENSITIVITY
+  OXIDATION_SENSITIVITY
+  HYDROLYSIS_SENSITIVITY
+  STORAGE_REQUIREMENTS
+  INCOMPATIBILITIES
+  DEGRADATION_PATHWAYS
+  HUMECTANT_BEHAVIOR
+  OCCLUSIVE_BEHAVIOR
+  EMOLLIENT_BEHAVIOR
+  SURFACTANT_BEHAVIOR
+  CONDITIONING_BEHAVIOR
+  FILM_FORMING_BEHAVIOR
+  CHELATING_BEHAVIOR
+  PRESERVATION_FUNCTION
+  PROTEIN_INTERACTION
+  KERATIN_INTERACTION
+  SCALP_INTERACTION
+  ALLERGEN_INFORMATION
+  SENSITIZATION_INFORMATION
+  IRRITATION_INFORMATION
+  CONCENTRATION_RANGE
+  RINSE_OFF_USE
+  LEAVE_ON_USE
+  SUPPLIER_RECOMMENDATION
+  REGULATORY_RESTRICTION
+  OTHER
+}
+
+enum ConcentrationType {
+  SUPPLIER_RECOMMENDATION
+  LITERATURE_TESTED
+  REGULATORY_MAXIMUM
+  INTERNAL_RANGE
+  OBSERVED_COMMERCIAL_USE
+}
+
+enum ApplicationType {
+  RINSE_OFF
+  LEAVE_ON
+  BOTH
+  UNKNOWN
+}
+
+enum ApplicationSite {
+  SCALP
+  HAIR_SHAFT
+  GENERAL
+  UNKNOWN
+}
+
+enum RegulatoryStatus {
+  ALLOWED
+  RESTRICTED
+  PROHIBITED
+  CONDITIONALLY_PERMITTED
+  NOT_LISTED
+  NOT_A_COSMETIC_INGREDIENT
+  UNKNOWN
+}
+
+enum SafetyEndpoint {
+  OVERALL_CONCLUSION
+  SENSITIZATION
+  IRRITATION
+  PHOTOALLERGY
+  REPRODUCTIVE_TOXICITY
+  GENOTOXICITY
+  CARCINOGENICITY
+  INHALATION
+  OCULAR
+  SCALP_DERMAL
+  VULNERABLE_POPULATIONS
+  OTHER
+}
+
+enum FormulaStatus {
+  CONCEPT
+  RESEARCH_CANDIDATE
+  CHEMIST_REVIEW
+  PROTOTYPE
+  STABILITY_TESTING
+  COMPATIBILITY_TESTING
+  SAFETY_ASSESSMENT
+  APPROVED_FOR_CONTROLLED_STUDY
+  APPROVED_FOR_MANUFACTURING
+  RETIRED
+}
+
+enum StudyType {
+  PEER_REVIEWED_STUDY
+  REVIEW
+  SYSTEMATIC_REVIEW
+  META_ANALYSIS
+  IN_VITRO
+  EX_VIVO
+  ANIMAL
+  HUMAN_OBSERVATIONAL
+  CONTROLLED_HUMAN
+  PROFESSIONAL_CONSENSUS
+  REGULATORY_ASSESSMENT
+  SUPPLIER_STUDY
+  INTERNAL_STUDY
+  CASE_REPORT
+  PATENT_EXAMPLE
+  OTHER
+}
+
+enum EvidenceDirection {
+  SUPPORTS
+  CONTRADICTS
+  NEUTRAL
+  MIXED
+  UNCLEAR
+}
+
+enum QualityCategory {
+  VERY_LOW
+  LOW
+  MODERATE
+  HIGH
+  NOT_YET_ASSESSED
+}
+
+enum NodeType {
+  Ingredient
+  IngredientFamily
+  RawMaterial
+  Supplier
+  Formula
+  Product
+  Patent
+  Study
+  EvidenceClaim
+  HairPhenotype
+  ScalpPhenotype
+  Function
+  Mechanism
+  Intervention
+  Outcome
+  UserCohort
+  Regulation
+  ResearchCandidate
+}
+
+enum EdgeType {
+  ALIAS_OF
+  DERIVED_FROM
+  MEMBER_OF
+  CONTAINS
+  SUPPLIED_BY
+  USED_IN
+  HAS_FUNCTION
+  HAS_PROPERTY
+  COMPATIBLE_WITH
+  INCOMPATIBLE_WITH
+  STUDIED_IN
+  ASSOCIATED_WITH
+  TESTED_AT
+  PRODUCED_OUTCOME
+  TARGETS_PHENOTYPE
+  RESTRICTED_BY
+  PROHIBITED_BY
+  REVIEWED_BY
+  CLAIMED_IN_PATENT
+  CITED_BY
+  SUPPORTS
+  CONTRADICTS
+  REQUIRES_REVIEW
+  GENERATED_HYPOTHESIS
+}
+
+enum EdgeStatus {
+  PROPOSED
+  ACTIVE
+  DEPRECATED
+}
+
+enum ReviewType {
+  IDENTITY
+  CHEMICAL_PROPERTY
+  COSMETIC_FUNCTION
+  EVIDENCE
+  SAFETY
+  REGULATORY
+  PATENT
+  FORMULA
+  STATISTICAL
+  AI_ANSWER
+  RESEARCH_SIGNAL
+  IP
+  SOURCE_RIGHTS
+  PRODUCT_INGREDIENTS
+  GRAPH_RELATIONSHIP
+}
+
+enum Priority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum QuarantineQueue {
+  UNRESOLVED_IDENTITY
+  IDENTIFIER_MISMATCH
+  CONFLICTING_CAS
+  MISSING_UNIT
+  IMPOSSIBLE_VALUE
+  MALFORMED_FORMULA
+  REGULATORY_CONFLICT
+  LOW_CONFIDENCE_AI
+  DUPLICATE_PATENT
+  DUPLICATE_PUBLICATION
+  UNMAPPED_TERM
+  CONSENT_VIOLATION
+}
+
+enum QueueItemStatus {
+  OPEN
+  RESOLVED
+  DISMISSED
+}
+
+enum ImportKind {
+  CSV
+  JSON
+  CONNECTOR
+  SEED
+}
+
+enum ImportStatus {
+  QUEUED
+  RUNNING
+  COMPLETED
+  PARTIAL
+  FAILED
+}
+
+enum ImportOutcome {
+  CREATED
+  UPDATED
+  UNCHANGED
+  DUPLICATE
+  REJECTED
+  QUARANTINED
+  WARNING
+}
+
+enum DocumentType {
+  SDS
+  TDS
+  COA
+  SPECIFICATION
+  FORMULATION_GUIDE
+  REGULATORY
+  LABEL_IMAGE
+  OTHER
+}
+
+enum ScanStatus {
+  PENDING
+  CLEAN
+  INFECTED
+  NOT_SCANNED
+}
+
+enum ObservationSource {
+  SELF_REPORTED
+  CLINICIAN_OBSERVED
+  PROFESSIONAL_OBSERVED
+  INSTRUMENT_MEASURED
+  IMAGE_DERIVED
+  AI_ESTIMATE
+  SYSTEM_DERIVED
+}
+
+enum ExposureConfidence {
+  EXACT_INTERNAL_FORMULA
+  MANUFACTURER_CONFIRMED_FORMULA
+  SUPPLIER_CONFIRMED_ACTIVE
+  STUDY_CONFIRMED_CONCENTRATION
+  ESTIMATED_RANGE
+  LABEL_CONFIRMED_PRESENCE
+  USER_REPORTED_PRODUCT
+  INFERRED
+  UNKNOWN
+}
+
+enum IntegrationRecordStatus {
+  ACCEPTED
+  QUARANTINED
+  REJECTED
+  DUPLICATE
+}
+
+// ─────────────────────── Organizations, users, auth ───────────────────────
+
+model Organization {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String
+  slug         String   @unique
+  type         OrgType
+  entitlements Json     @default("{}") // future subscription / data-entitlement flags (no billing in Phase 1)
+  createdAt    DateTime @default(now())
+
+  users      User[]
+  apiKeys    ApiKey[]
+  formulas   Formula[]
+  rawMats    RawMaterial[]
+  documents  Document[]
+  candidates ResearchCandidate[]
+  products   Product[]
+  batches    IntegrationBatch[]
+}
+
+model User {
+  id               String       @id @default(uuid()) @db.Uuid
+  email            String       @unique
+  name             String
+  passwordHash     String
+  status           UserStatus   @default(ACTIVE)
+  mfaSecret        String? // base32 TOTP secret (encrypt at rest in production; see docs/security.md)
+  mfaEnabled       Boolean      @default(false)
+  failedLoginCount Int          @default(0)
+  lockedUntil      DateTime?
+  lastLoginAt      DateTime?
+  organizationId   String       @db.Uuid
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  roles           UserRole[]
+  sessions        Session[]
+  reviewerProfile ReviewerProfile?
+  savedSearches   SavedSearch[]
+  assignedReviews ReviewTask[]     @relation("ReviewAssignee")
+}
+
+model UserRole {
+  userId String @db.Uuid
+  role   Role
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, role])
+}
+
+model Session {
+  id          String    @id // sha256 of the opaque cookie token; the raw token is never stored
+  userId      String    @db.Uuid
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  expiresAt   DateTime
+  lastSeenAt  DateTime  @default(now())
+  mfaVerified Boolean   @default(false)
+  ip          String?
+  userAgent   String?
+  revokedAt   DateTime?
+
+  @@index([userId])
+}
+
+model ApiKey {
+  id             String       @id @default(uuid()) @db.Uuid
+  name           String
+  prefix         String       @unique // first 12 chars shown to humans, e.g. "sii_live_ab12"
+  keyHash        String // sha256 of the full key
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  createdById    String?      @db.Uuid
+  scopes         String[]
+  createdAt      DateTime     @default(now())
+  lastUsedAt     DateTime?
+  expiresAt      DateTime?
+  revokedAt      DateTime?
+}
+
+model ReviewerProfile {
+  userId             String             @id @db.Uuid
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profession         String?
+  qualifications     String?
+  credential         String?
+  expertise          String[]
+  verificationStatus VerificationStatus @default(UNVERIFIED)
+  coiDeclaration     String?
+  coiDeclaredAt      DateTime?
+  trainingCompleted  String[]
+  protocolVersions   String[]
+  updatedAt          DateTime           @updatedAt
+}
+
+/// Append-only. An INSERT-only trigger (see migration) rejects UPDATE and DELETE.
+model AuditLog {
+  id         BigInt   @id @default(autoincrement())
+  at         DateTime @default(now())
+  actorId    String?  @db.Uuid
+  actorType  String // USER | API_KEY | SYSTEM
+  actorLabel String?
+  action     String // e.g. ingredient.create, fact.supersede, identity.merge
+  entityType String
+  entityId   String
+  before     Json?
+  after      Json?
+  reason     String?
+  sourceId   String?  @db.Uuid
+  requestId  String?
+  ip         String?
+
+  @@index([entityType, entityId])
+  @@index([actorId])
+  @@index([at])
+}
+
+model SecurityEvent {
+  id      String   @id @default(uuid()) @db.Uuid
+  at      DateTime @default(now())
+  type    String // LOGIN_FAILED, LOGIN_LOCKED, LOGIN_OK, MFA_FAILED, PERMISSION_DENIED, API_KEY_INVALID, RATE_LIMITED
+  userId  String?  @db.Uuid
+  email   String?
+  ip      String?
+  details Json     @default("{}")
+
+  @@index([type, at])
+}
+
+// ─────────────────────── Source registry & data rights ───────────────────────
+
+model Source {
+  id                        String       @id @default(uuid()) @db.Uuid
+  key                       String       @unique
+  name                      String
+  owner                     String?
+  type                      SourceType
+  authority                 String?
+  url                       String?
+  accessMethod              String? // API | BULK_DOWNLOAD | MANUAL | UPLOAD | WEB_FETCH | INTERNAL
+  apiStatus                 String? // AVAILABLE | BLOCKED_IN_ENVIRONMENT | KEY_REQUIRED | NOT_APPLICABLE
+  license                   String?
+  termsUrl                  String?
+  rightsStatus              RightsStatus @default(UNKNOWN)
+  commercialUse             String? // allowed | not-allowed | unknown | requires-license
+  internalUse               String?
+  redistribution            String?
+  derivativeWork            String?
+  attributionRequirements   String?
+  rateLimits                String?
+  storagePermission         Boolean      @default(false)
+  cachingPermission         Boolean      @default(false)
+  fullTextStoragePermission Boolean      @default(false)
+  documentSharingPermission Boolean      @default(false)
+  allowExport               Boolean      @default(false)
+  allowExternalApi          Boolean      @default(false)
+  allowModelTraining        Boolean      @default(false)
+  allowPartnerSharing       Boolean      @default(false)
+  refreshFrequency          String?
+  lastSuccessfulImportAt    DateTime?
+  lastAttemptedImportAt     DateTime?
+  termsReviewStatus         ReviewStatus @default(SUBMITTED)
+  lastTermsReviewAt         DateTime?
+  reviewedById              String?      @db.Uuid
+  reviewNotes               String?
+  approvedUses              String[]
+  prohibitedUses            String[]
+  reReviewDueAt             DateTime?
+  parserVersion             String?
+  recordCount               Int          @default(0)
+  errorCount                Int          @default(0)
+  active                    Boolean      @default(true)
+  createdAt                 DateTime     @default(now())
+  updatedAt                 DateTime     @updatedAt
+}
+
+/// Idempotency map: (source, entity type, external id) → internal entity. Re-imports update or mark unchanged.
+model ExternalRef {
+  id          String   @id @default(uuid()) @db.Uuid
+  sourceId    String   @db.Uuid
+  entityType  String
+  externalId  String
+  entityId    String
+  contentHash String
+  firstSeenAt DateTime @default(now())
+  lastSeenAt  DateTime @default(now())
+
+  @@unique([sourceId, entityType, externalId])
+  @@index([entityType, entityId])
+}
+
+// ─────────────────────── Ingredient identity ───────────────────────
+
+model IngredientFamily {
+  id          String             @id @default(uuid()) @db.Uuid
+  slug        String             @unique
+  name        String
+  description String?
+  parentId    String?            @db.Uuid
+  parent      IngredientFamily?  @relation("FamilyTree", fields: [parentId], references: [id])
+  children    IngredientFamily[] @relation("FamilyTree")
+  ingredients Ingredient[]
+}
+
+model Ingredient {
+  id                String            @id @default(uuid()) @db.Uuid
+  slug              String            @unique
+  canonicalName     String
+  inciName          String?
+  displayName       String
+  chemicalName      String?
+  commonName        String?
+  description       String?
+  identityType      IdentityType
+  materialType      MaterialType
+  originType        OriginType        @default(UNKNOWN)
+  familyId          String?           @db.Uuid
+  family            IngredientFamily? @relation(fields: [familyId], references: [id])
+  status            IngredientStatus  @default(ACTIVE)
+  mergedIntoId      String?           @db.Uuid
+  reviewStatus      ReviewStatus      @default(SUBMITTED)
+  priorityTier      Int?
+  priorityReason    String?
+  identityNote      String?
+  structureImageUrl String?
+  version           Int               @default(1)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  names          IngredientName[]
+  aliases        IngredientAlias[]
+  identifiers    IngredientIdentifier[]
+  complexProfile ComplexMaterialProfile?
+  facts          IngredientFact[]
+  functions      IngredientFunction[]
+  concentrations ConcentrationRecord[]
+  regulatory     RegulatoryRecord[]
+  safetyReviews  SafetyReview[]
+  evidenceLinks  EvidenceLink[]
+  patentLinks    PatentLink[]
+  rawComponents  RawMaterialComponent[]
+  formulaLines   FormulaIngredient[]
+  productLines   ProductIngredient[]
+  relationsFrom  IngredientRelation[]    @relation("RelFrom")
+  relationsTo    IngredientRelation[]    @relation("RelTo")
+
+  @@index([status])
+  @@index([familyId])
+}
+
+model ComplexMaterialProfile {
+  ingredientId           String              @id @db.Uuid
+  ingredient             Ingredient          @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  botanicalSourceId      String?             @db.Uuid
+  botanicalSource        BotanicalSource?    @relation(fields: [botanicalSourceId], references: [id])
+  plantPart              String?
+  geographicOrigin       String?
+  harvestConditions      String?
+  extractionSolvent      String?
+  extractionMethodId     String?             @db.Uuid
+  extractionMethod       ExtractionMethod?   @relation(fields: [extractionMethodId], references: [id])
+  fermentationSourceId   String?             @db.Uuid
+  fermentationSource     FermentationSource? @relation(fields: [fermentationSourceId], references: [id])
+  processingMethod       String?
+  purificationLevel      String?
+  standardizationMarker  String?
+  markerRange            String?
+  carrier                String?
+  preservative           String?
+  waterContent           String?
+  batchVariability       String?
+  supplierGrade          String?
+  mwDistribution         String?
+  degreeOfPolymerization String?
+  degreeOfHydrolysis     String?
+  activeContentRange     String?
+  sourceId               String?             @db.Uuid
+  updatedAt              DateTime            @updatedAt
+}
+
+model BotanicalSource {
+  id          String                   @id @default(uuid()) @db.Uuid
+  genus       String
+  species     String
+  cultivar    String?
+  commonName  String?
+  plantFamily String?
+  profiles    ComplexMaterialProfile[]
+
+  @@unique([genus, species])
+}
+
+model ExtractionMethod {
+  id          String                   @id @default(uuid()) @db.Uuid
+  name        String                   @unique
+  description String?
+  profiles    ComplexMaterialProfile[]
+}
+
+model FermentationSource {
+  id          String                   @id @default(uuid()) @db.Uuid
+  organism    String
+  substrate   String?
+  description String?
+  profiles    ComplexMaterialProfile[]
+
+  @@unique([organism, substrate])
+}
+
+model IngredientName {
+  id           String       @id @default(uuid()) @db.Uuid
+  ingredientId String       @db.Uuid
+  ingredient   Ingredient   @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  name         String
+  normalized   String
+  nameType     NameType
+  isPreferred  Boolean      @default(false)
+  language     String       @default("en")
+  sourceId     String?      @db.Uuid
+  reviewStatus ReviewStatus @default(SUBMITTED)
+  createdAt    DateTime     @default(now())
+
+  @@unique([ingredientId, nameType, normalized])
+  @@index([normalized])
+  @@index([normalized(ops: raw("gin_trgm_ops"))], map: "IngredientName_normalized_trgm", type: Gin)
+}
+
+model IngredientAlias {
+  id           String       @id @default(uuid()) @db.Uuid
+  ingredientId String       @db.Uuid
+  ingredient   Ingredient   @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  alias        String
+  normalized   String
+  aliasType    AliasType    @default(SYNONYM)
+  sourceId     String?      @db.Uuid
+  reviewStatus ReviewStatus @default(SUBMITTED)
+  createdAt    DateTime     @default(now())
+
+  @@unique([ingredientId, normalized])
+  @@index([normalized])
+  @@index([normalized(ops: raw("gin_trgm_ops"))], map: "IngredientAlias_normalized_trgm", type: Gin)
+}
+
+model IngredientIdentifier {
+  id                 String             @id @default(uuid()) @db.Uuid
+  ingredientId       String             @db.Uuid
+  ingredient         Ingredient         @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  type               IdentifierType
+  value              String
+  normalized         String
+  isRepresentative   Boolean            @default(false) // identifier of a representative structure, not the full (mixture) identity
+  sourceId           String?            @db.Uuid
+  sourceLocation     String?
+  verificationStatus VerificationStatus @default(UNVERIFIED)
+  confidence         Float?
+  reviewStatus       ReviewStatus       @default(SUBMITTED)
+  createdAt          DateTime           @default(now())
+  supersededAt       DateTime?
+
+  @@unique([ingredientId, type, normalized])
+  @@index([type, normalized])
+}
+
+model IngredientRelation {
+  id              String                 @id @default(uuid()) @db.Uuid
+  fromId          String                 @db.Uuid
+  from            Ingredient             @relation("RelFrom", fields: [fromId], references: [id], onDelete: Cascade)
+  toId            String                 @db.Uuid
+  to              Ingredient             @relation("RelTo", fields: [toId], references: [id], onDelete: Cascade)
+  relationType    IngredientRelationType
+  interchangeable Boolean                @default(false) // must stay false unless a reviewer approves interchangeability
+  sourceId        String?                @db.Uuid
+  notes           String?
+  reviewStatus    ReviewStatus           @default(SUBMITTED)
+  createdAt       DateTime               @default(now())
+
+  @@unique([fromId, toId, relationType])
+}
+
+model IdentityResolutionCandidate {
+  id            String            @id @default(uuid()) @db.Uuid
+  ingredientAId String            @db.Uuid
+  ingredientBId String            @db.Uuid
+  reason        String
+  score         Float?
+  status        QueueItemStatus   @default(OPEN)
+  decision      IdentityDecision?
+  decidedById   String?           @db.Uuid
+  decidedAt     DateTime?
+  notes         String?
+  createdAt     DateTime          @default(now())
+
+  @@unique([ingredientAId, ingredientBId])
+}
+
+/// Every merge stores a full snapshot of moved child rows so the merge can be reversed.
+model IdentityResolutionEvent {
+  id                    String            @id @default(uuid()) @db.Uuid
+  type                  IdentityEventType
+  primaryIngredientId   String            @db.Uuid
+  secondaryIngredientId String?           @db.Uuid
+  candidateId           String?           @db.Uuid
+  snapshot              Json
+  reason                String
+  actorId               String?           @db.Uuid
+  createdAt             DateTime          @default(now())
+  reversedAt            DateTime?
+  reversedById          String?           @db.Uuid
+}
+
+// ─────────────────────── Facts, functions, ontology ───────────────────────
+
+model IngredientFact {
+  id                 String       @id @default(uuid()) @db.Uuid
+  ingredientId       String       @db.Uuid
+  ingredient         Ingredient   @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  propertyType       PropertyType
+  valueText          String? // textual / qualitative value
+  originalValue      String? // exactly as stated by the source
+  originalUnit       String?
+  valueNumeric       Decimal?     @db.Decimal(20, 8)
+  valueMin           Decimal?     @db.Decimal(20, 8)
+  valueMax           Decimal?     @db.Decimal(20, 8)
+  isRange            Boolean      @default(false)
+  normalizedValue    Decimal?     @db.Decimal(20, 8)
+  normalizedMin      Decimal?     @db.Decimal(20, 8)
+  normalizedMax      Decimal?     @db.Decimal(20, 8)
+  normalizedUnit     String?
+  conversionMethod   String?
+  conversionVersion  String?
+  significantFigures Int?
+  uncertainty        String?
+  detectionLimit     String?
+  qualityFlags       String[]
+  testConditions     String?
+  temperatureC       Decimal?     @db.Decimal(8, 3)
+  phConditions       String?
+  medium             String?
+  formulationContext String?
+  jurisdiction       String?
+  sourceId           String       @db.Uuid
+  sourceLocation     String?
+  quotedText         String? // only when the source's rights allow
+  extractionMethod   String?
+  entryMode          EntryMode
+  confidence         Float?
+  reviewStatus       ReviewStatus @default(SUBMITTED)
+  reviewedById       String?      @db.Uuid
+  reviewedAt         DateTime?
+  effectiveDate      DateTime?
+  supersededAt       DateTime?
+  supersededById     String?      @db.Uuid
+  createdById        String?      @db.Uuid
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  @@index([ingredientId, propertyType])
+}
+
+model FunctionTerm {
+  id          String               @id @default(uuid()) @db.Uuid
+  code        String               @unique
+  label       String
+  description String?
+  parentId    String?              @db.Uuid
+  ingredients IngredientFunction[]
+}
+
+model IngredientFunction {
+  id           String       @id @default(uuid()) @db.Uuid
+  ingredientId String       @db.Uuid
+  ingredient   Ingredient   @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  functionId   String       @db.Uuid
+  function     FunctionTerm @relation(fields: [functionId], references: [id])
+  sourceId     String       @db.Uuid
+  basis        String? // SOURCE_DECLARED | SUPPLIER | LITERATURE | REGULATORY_LISTING | CURATOR_PROPOSED
+  entryMode    EntryMode
+  confidence   Float?
+  reviewStatus ReviewStatus @default(SUBMITTED)
+  createdAt    DateTime     @default(now())
+
+  @@unique([ingredientId, functionId, sourceId])
+}
+
+model OntologyTerm {
+  id                 String         @id @default(uuid()) @db.Uuid
+  code               String         @unique
+  domain             String // HAIR | SCALP | CONTEXT | OUTCOME
+  label              String
+  definition         String
+  consumerDefinition String?
+  researchDefinition String?
+  measurementMethod  String?
+  allowedValues      Json?
+  parentId           String?        @db.Uuid
+  parent             OntologyTerm?  @relation("OntologyTree", fields: [parentId], references: [id])
+  children           OntologyTerm[] @relation("OntologyTree")
+  synonyms           String[]
+  ontologyVersion    String
+  status             String         @default("DRAFT_FOR_REVIEW")
+  createdAt          DateTime       @default(now())
+
+  evidenceLinks EvidenceLink[]
+  mappings      TaxonomyMapping[]
+}
+
+model ConcentrationRecord {
+  id               String            @id @default(uuid()) @db.Uuid
+  ingredientId     String            @db.Uuid
+  ingredient       Ingredient        @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  recordType       ConcentrationType
+  minValue         Decimal?          @db.Decimal(12, 6)
+  maxValue         Decimal?          @db.Decimal(12, 6)
+  typicalValue     Decimal?          @db.Decimal(12, 6)
+  unit             String // e.g. "% w/w"
+  basis            String? // AS_SUPPLIED | ACTIVE | UNKNOWN
+  productCategory  String?
+  applicationType  ApplicationType   @default(UNKNOWN)
+  applicationSite  ApplicationSite   @default(UNKNOWN)
+  intendedFunction String?
+  sourceId         String            @db.Uuid
+  sourceLocation   String?
+  jurisdiction     String?
+  restriction      String?
+  testConditions   String?
+  entryMode        EntryMode
+  reviewStatus     ReviewStatus      @default(SUBMITTED)
+  effectiveDate    DateTime?
+  supersededAt     DateTime?
+  notes            String?
+  createdAt        DateTime          @default(now())
+
+  @@index([ingredientId, recordType])
+}
+
+model RegulatoryRecord {
+  id                   String           @id @default(uuid()) @db.Uuid
+  ingredientId         String           @db.Uuid
+  ingredient           Ingredient       @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  jurisdiction         String // US | EU | UK | CA | ...
+  authority            String
+  regulationRef        String?
+  status               RegulatoryStatus
+  maxConcentration     Decimal?         @db.Decimal(12, 6)
+  maxConcentrationUnit String?
+  productRestrictions  String?
+  warningRequirements  String?
+  labelingRequirements String?
+  colorAdditiveStatus  String?
+  preservativeStatus   String?
+  uvFilterStatus       String?
+  effectiveDate        DateTime?
+  sourceId             String           @db.Uuid
+  sourceUrl            String?
+  lastCheckedAt        DateTime?
+  staleAfterDays       Int              @default(180)
+  entryMode            EntryMode
+  reviewStatus         ReviewStatus     @default(SUBMITTED)
+  reviewedById         String?          @db.Uuid
+  reviewedAt           DateTime?
+  notes                String?
+  supersededAt         DateTime?
+  supersededById       String?          @db.Uuid
+  createdAt            DateTime         @default(now())
+
+  @@index([ingredientId, jurisdiction])
+}
+
+model SafetyReview {
+  id                    String         @id @default(uuid()) @db.Uuid
+  ingredientId          String         @db.Uuid
+  ingredient            Ingredient     @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  reviewBody            String // CIR | SCCS | OTHER
+  endpoint              SafetyEndpoint
+  conclusion            String
+  exposureRoute         String?
+  vulnerablePopulations String?
+  evidenceStrength      String?
+  sourceId              String         @db.Uuid
+  url                   String?
+  publishedAt           DateTime?
+  highRisk              Boolean        @default(false)
+  entryMode             EntryMode
+  reviewStatus          ReviewStatus   @default(SUBMITTED)
+  supersededAt          DateTime?
+  createdAt             DateTime       @default(now())
+}
+
+// ─────────────────────── Suppliers, raw materials, documents ───────────────────────
+
+model Supplier {
+  id        String        @id @default(uuid()) @db.Uuid
+  name      String        @unique
+  website   String?
+  type      String? // MANUFACTURER | DISTRIBUTOR | BOTH
+  country   String?
+  notes     String?
+  createdAt DateTime      @default(now())
+  rawMats   RawMaterial[]
+  documents Document[]
+}
+
+model RawMaterial {
+  id                     String       @id @default(uuid()) @db.Uuid
+  tradeName              String
+  supplierId             String?      @db.Uuid
+  supplier               Supplier?    @relation(fields: [supplierId], references: [id])
+  manufacturer           String?
+  distributor            String?
+  declaredComposition    String?
+  activePercent          Decimal?     @db.Decimal(9, 5)
+  activePercentConfirmed Boolean      @default(false)
+  carrier                String?
+  preservationSystem     String?
+  countryOfOrigin        String?
+  moq                    String?
+  leadTime               String?
+  priceRange             String?
+  sampleAvailable        Boolean?
+  certifications         String[]
+  veganStatus            String?
+  naturalOriginIndex     Decimal?     @db.Decimal(6, 4)
+  allergenStatement      String?
+  internalApprovalStatus ReviewStatus @default(DRAFT)
+  isSample               Boolean      @default(false)
+  ownerOrgId             String       @db.Uuid
+  ownerOrg               Organization @relation(fields: [ownerOrgId], references: [id])
+  visibility             Visibility   @default(ORGANIZATION)
+  createdAt              DateTime     @default(now())
+  updatedAt              DateTime     @updatedAt
+
+  components   RawMaterialComponent[]
+  documents    Document[]
+  formulaLines FormulaIngredient[]
+
+  @@unique([ownerOrgId, tradeName, supplierId])
+}
+
+model RawMaterialComponent {
+  id            String      @id @default(uuid()) @db.Uuid
+  rawMaterialId String      @db.Uuid
+  rawMaterial   RawMaterial @relation(fields: [rawMaterialId], references: [id], onDelete: Cascade)
+  ingredientId  String      @db.Uuid
+  ingredient    Ingredient  @relation(fields: [ingredientId], references: [id])
+  declaredName  String?
+  percentMin    Decimal?    @db.Decimal(9, 5)
+  percentMax    Decimal?    @db.Decimal(9, 5)
+  role          String // ACTIVE | CARRIER | PRESERVATIVE | SOLVENT | OTHER
+  confirmed     Boolean     @default(false)
+
+  @@unique([rawMaterialId, ingredientId])
+}
+
+model Document {
+  id               String       @id @default(uuid()) @db.Uuid
+  ownerOrgId       String       @db.Uuid
+  ownerOrg         Organization @relation(fields: [ownerOrgId], references: [id])
+  visibility       Visibility   @default(RESTRICTED)
+  docType          DocumentType
+  title            String
+  filename         String
+  storageKey       String       @unique
+  mimeType         String
+  sizeBytes        Int
+  sha256           String
+  version          String?
+  documentDate     DateTime?
+  expiresAt        DateTime?
+  reviewDueAt      DateTime?
+  rawMaterialId    String?      @db.Uuid
+  rawMaterial      RawMaterial? @relation(fields: [rawMaterialId], references: [id])
+  supplierId       String?      @db.Uuid
+  supplier         Supplier?    @relation(fields: [supplierId], references: [id])
+  supplierProvided Boolean      @default(true) // displayed as "Supplier-provided information"
+  scanStatus       ScanStatus   @default(PENDING)
+  reviewStatus     ReviewStatus @default(SUBMITTED)
+  uploadedById     String       @db.Uuid
+  createdAt        DateTime     @default(now())
+}
+
+// ─────────────────────── Formulas ───────────────────────
+
+model Formula {
+  id               String           @id @default(uuid()) @db.Uuid
+  code             String
+  name             String
+  ownerOrgId       String           @db.Uuid
+  ownerOrg         Organization     @relation(fields: [ownerOrgId], references: [id])
+  visibility       Visibility       @default(RESTRICTED)
+  isSample         Boolean          @default(false)
+  productCategory  String?
+  createdById      String?          @db.Uuid
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  versions         FormulaVersion[]
+  duplicatedFromId String?          @db.Uuid
+
+  @@unique([ownerOrgId, code])
+}
+
+model FormulaVersion {
+  id                     String              @id @default(uuid()) @db.Uuid
+  formulaId              String              @db.Uuid
+  formula                Formula             @relation(fields: [formulaId], references: [id], onDelete: Cascade)
+  versionNumber          Int
+  status                 FormulaStatus       @default(CONCEPT)
+  intendedPhenotypeCodes String[]
+  intendedGoals          String[]
+  applicationType        ApplicationType     @default(UNKNOWN)
+  targetPh               Decimal?            @db.Decimal(4, 2)
+  measuredPh             Decimal?            @db.Decimal(4, 2)
+  viscosity              String?
+  batchSize              Decimal?            @db.Decimal(12, 4)
+  batchUnit              String?
+  manufacturingProcess   String?
+  processingTemperature  String?
+  phaseStructure         String?
+  preservationSystem     String?
+  packagingCompatibility String?
+  stabilityStatus        String              @default("NOT_TESTED")
+  safetyReviewStatus     ReviewStatus        @default(DRAFT)
+  chemistReviewStatus    ReviewStatus        @default(DRAFT)
+  studyStatus            String              @default("NONE")
+  commercialStatus       String              @default("NOT_COMMERCIAL")
+  qsTolerance            Decimal             @default(0.001) @db.Decimal(6, 4)
+  notes                  String?
+  locked                 Boolean             @default(false) // locked versions are immutable; edits create a new version
+  createdById            String?             @db.Uuid
+  approvedById           String?             @db.Uuid
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+  lines                  FormulaIngredient[]
+  productVersions        ProductVersion[]
+
+  @@unique([formulaId, versionNumber])
+}
+
+model FormulaIngredient {
+  id                  String         @id @default(uuid()) @db.Uuid
+  formulaVersionId    String         @db.Uuid
+  formulaVersion      FormulaVersion @relation(fields: [formulaVersionId], references: [id], onDelete: Cascade)
+  ingredientId        String?        @db.Uuid
+  ingredient          Ingredient?    @relation(fields: [ingredientId], references: [id])
+  rawMaterialId       String?        @db.Uuid
+  rawMaterial         RawMaterial?   @relation(fields: [rawMaterialId], references: [id])
+  displayName         String
+  phase               String?
+  percent             Decimal?       @db.Decimal(9, 5) // raw-material use level (as supplied), % w/w
+  isQs                Boolean        @default(false)
+  functionalRole      String?
+  additionOrder       Int?
+  processingNotes     String?
+  supplierId          String?        @db.Uuid
+  lot                 String?
+  activeConcentration Decimal?       @db.Decimal(9, 5) // only set when the raw material's active % is confirmed
+}
+
+// ─────────────────────── Products ───────────────────────
+
+model Product {
+  id               String           @id @default(uuid()) @db.Uuid
+  slug             String           @unique
+  brand            String
+  name             String
+  category         String?
+  market           String?
+  applicationType  ApplicationType  @default(UNKNOWN)
+  isSupernatural   Boolean          @default(false)
+  barcode          String?
+  purchaseUrl      String?
+  sourceImageUrl   String?
+  discontinued     Boolean          @default(false)
+  ownerOrgId       String?          @db.Uuid
+  ownerOrg         Organization?    @relation(fields: [ownerOrgId], references: [id])
+  verificationDate DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  versions         ProductVersion[]
+
+  @@index([barcode])
+}
+
+/// A product's ingredient list over a validity window. A changed list creates a new version; old versions are kept so
+/// historical exposure is never rewritten.
+model ProductVersion {
+  id                   String              @id @default(uuid()) @db.Uuid
+  productId            String              @db.Uuid
+  product              Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  versionNumber        Int
+  ingredientListRaw    String
+  ingredientListSource String // MANUFACTURER_WEBSITE | LABEL_PHOTO | OCR | RETAILER | USER_SUBMITTED | INTERNAL_FORMULA
+  sourceUrl            String?
+  sourceId             String?             @db.Uuid
+  contentHash          String
+  validFrom            DateTime
+  validTo              DateTime?
+  formulaVersionId     String?             @db.Uuid
+  formulaVersion       FormulaVersion?     @relation(fields: [formulaVersionId], references: [id])
+  marketingExcerpts    String[]
+  claimFlags           Json                @default("[]")
+  dataQualityNotes     String[]
+  reviewStatus         ReviewStatus        @default(SUBMITTED)
+  verifiedAt           DateTime?
+  createdAt            DateTime            @default(now())
+  lines                ProductIngredient[]
+
+  @@unique([productId, versionNumber])
+}
+
+model ProductIngredient {
+  id                 String             @id @default(uuid()) @db.Uuid
+  productVersionId   String             @db.Uuid
+  productVersion     ProductVersion     @relation(fields: [productVersionId], references: [id], onDelete: Cascade)
+  position           Int // 1-based displayed order. Order never implies concentration.
+  displayedName      String
+  normalizedName     String
+  ingredientId       String?            @db.Uuid
+  ingredient         Ingredient?        @relation(fields: [ingredientId], references: [id])
+  identityConfidence Float              @default(0)
+  matchMethod        String? // EXACT_CANONICAL | EXACT_INCI | EXACT_ALIAS | PARENTHETICAL_STRIPPED | FUZZY | MANUAL
+  parsingStatus      String // MATCHED | AMBIGUOUS | UNMATCHED
+  verificationStatus VerificationStatus @default(UNVERIFIED)
+
+  @@unique([productVersionId, position])
+}
+
+// ─────────────────────── Evidence & patents ───────────────────────
+
+model Evidence {
+  id                         String          @id @default(uuid()) @db.Uuid
+  title                      String
+  doi                        String?         @unique
+  pmid                       String?         @unique
+  pmcid                      String?
+  citation                   String?
+  authors                    String?
+  journal                    String?
+  publicationDate            DateTime?
+  studyType                  StudyType
+  evidenceLevel              Int? // 1–7 ladder (organizes research; does not authorize claims)
+  population                 String?
+  phenotypeDescription       String?
+  sampleSize                 Int?
+  comparator                 String?
+  duration                   String?
+  concentrationText          String?
+  outcomesText               String?
+  measurementMethod          String?
+  statisticalResult          String?
+  limitations                String?
+  coiInfo                    String?
+  fundingSource              String?
+  sourceUrl                  String
+  fullTextAvailable          Boolean?
+  extractionStatus           String          @default("METADATA_ONLY") // METADATA_ONLY | ABSTRACT_REVIEWED | FULL_TEXT_EXTRACTED
+  sourceConclusion           String?
+  aiSummary                  String? // always displayed with an "AI draft" label
+  aiSummaryModel             String?
+  reviewedInterpretation     String?
+  internalRelevance          String?
+  qualityPreliminary         Json?
+  qualityPreliminaryCategory QualityCategory @default(NOT_YET_ASSESSED)
+  qualityReviewerCategory    QualityCategory @default(NOT_YET_ASSESSED)
+  qualityAdjustmentReason    String?
+  rubricVersion              String?
+  texturedHairRelevant       Boolean?
+  medicalContext             Boolean         @default(false)
+  safetyRelevant             Boolean         @default(false)
+  sourceId                   String          @db.Uuid
+  entryMode                  EntryMode
+  reviewStatus               ReviewStatus    @default(SUBMITTED)
+  reviewedById               String?         @db.Uuid
+  reviewedAt                 DateTime?
+  createdAt                  DateTime        @default(now())
+  updatedAt                  DateTime        @updatedAt
+  links                      EvidenceLink[]
+}
+
+model EvidenceLink {
+  id                String            @id @default(uuid()) @db.Uuid
+  evidenceId        String            @db.Uuid
+  evidence          Evidence          @relation(fields: [evidenceId], references: [id], onDelete: Cascade)
+  ingredientId      String?           @db.Uuid
+  ingredient        Ingredient?       @relation(fields: [ingredientId], references: [id])
+  formulaId         String?           @db.Uuid
+  ontologyTermId    String?           @db.Uuid
+  ontologyTerm      OntologyTerm?     @relation(fields: [ontologyTermId], references: [id])
+  role              String // EXPOSURE | OUTCOME | COMPARATOR | CONTEXT | SAFETY_SUBJECT
+  direction         EvidenceDirection @default(UNCLEAR)
+  concentrationText String?
+  statement         String?
+  entryMode         EntryMode
+  reviewStatus      ReviewStatus      @default(SUBMITTED)
+  createdAt         DateTime          @default(now())
+
+  @@index([ingredientId])
+  @@index([ontologyTermId])
+}
+
+model Patent {
+  id                 String       @id @default(uuid()) @db.Uuid
+  publicationNumber  String       @unique
+  applicationNumber  String?
+  title              String
+  abstract           String?
+  applicants         String[]
+  assignees          String[]
+  inventors          String[]
+  priorityDate       DateTime?
+  filingDate         DateTime?
+  publicationDate    DateTime?
+  grantDate          DateTime?
+  jurisdiction       String // derived from publication-number prefix
+  jurisdictions      String[]
+  cpcClassifications String[]
+  legalStatus        String? // unknown until retrieved from an official source
+  familyMembers      String[]
+  claimsSummary      String?
+  examples           String?
+  citedPatents       String[]
+  citingPatents      String[]
+  topics             String[]
+  officialUrl        String
+  sourceId           String       @db.Uuid
+  lastCheckedAt      DateTime?
+  entryMode          EntryMode
+  reviewStatus       ReviewStatus @default(SUBMITTED)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  links              PatentLink[]
+}
+
+model PatentLink {
+  id           String       @id @default(uuid()) @db.Uuid
+  patentId     String       @db.Uuid
+  patent       Patent       @relation(fields: [patentId], references: [id], onDelete: Cascade)
+  ingredientId String?      @db.Uuid
+  ingredient   Ingredient?  @relation(fields: [ingredientId], references: [id])
+  formulaId    String?      @db.Uuid
+  relation     String // MENTIONS_IN_SNIPPET | CLAIMED | EXAMPLE | RELATED_MECHANISM
+  mechanism    String?
+  entryMode    EntryMode
+  reviewStatus ReviewStatus @default(SUBMITTED)
+  createdAt    DateTime     @default(now())
+
+  @@unique([patentId, ingredientId, relation])
+}
+
+// ─────────────────────── Knowledge graph ───────────────────────
+
+model GraphEdge {
+  id           String       @id @default(uuid()) @db.Uuid
+  fromType     NodeType
+  fromId       String
+  toType       NodeType
+  toId         String
+  edgeType     EdgeType
+  sourceId     String?      @db.Uuid
+  confidence   Float
+  evidenceType String? // e.g. MANUFACTURER_LABEL, LITERATURE_METADATA, CURATOR_PROPOSED
+  status       EdgeStatus   @default(PROPOSED)
+  reviewStatus ReviewStatus @default(SUBMITTED)
+  validFrom    DateTime     @default(now())
+  supersededAt DateTime?
+  properties   Json         @default("{}")
+  notes        String?
+  createdById  String?      @db.Uuid
+  createdAt    DateTime     @default(now())
+
+  @@unique([fromType, fromId, toType, toId, edgeType])
+  @@index([fromType, fromId])
+  @@index([toType, toId])
+  @@index([edgeType])
+}
+
+// ─────────────────────── Review, quarantine, imports ───────────────────────
+
+model ReviewRequirement {
+  id                String     @id @default(uuid()) @db.Uuid
+  recordType        String     @unique
+  reviewType        ReviewType
+  requiredRoles     Role[]
+  approvalsRequired Int        @default(1)
+  secondReviewer    Boolean    @default(false)
+  blind             Boolean    @default(false)
+  dueInDays         Int        @default(14)
+  notes             String?
+}
+
+model ReviewTask {
+  id                String           @id @default(uuid()) @db.Uuid
+  entityType        String
+  entityId          String
+  reviewType        ReviewType
+  title             String
+  status            ReviewStatus     @default(SUBMITTED)
+  priority          Priority         @default(NORMAL)
+  requiredRoles     Role[]
+  approvalsRequired Int              @default(1)
+  blind             Boolean          @default(false)
+  assignedToId      String?          @db.Uuid
+  assignedTo        User?            @relation("ReviewAssignee", fields: [assignedToId], references: [id])
+  submittedById     String?          @db.Uuid
+  dueAt             DateTime?
+  notes             String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  completedAt       DateTime?
+  decisions         ReviewDecision[]
+
+  @@index([status, reviewType])
+  @@index([entityType, entityId])
+}
+
+model ReviewDecision {
+  id         String       @id @default(uuid()) @db.Uuid
+  taskId     String       @db.Uuid
+  task       ReviewTask   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  reviewerId String       @db.Uuid
+  decision   ReviewStatus // APPROVED | REJECTED | CHANGES_REQUESTED
+  notes      String?
+  createdAt  DateTime     @default(now())
+}
+
+model QuarantineItem {
+  id           String          @id @default(uuid()) @db.Uuid
+  queue        QuarantineQueue
+  importJobId  String?         @db.Uuid
+  entityType   String?
+  entityId     String?
+  dedupeKey    String?         @unique
+  payload      Json
+  reason       String
+  status       QueueItemStatus @default(OPEN)
+  resolvedById String?         @db.Uuid
+  resolvedAt   DateTime?
+  resolution   String?
+  createdAt    DateTime        @default(now())
+
+  @@index([queue, status])
+}
+
+model ImportJob {
+  id              String         @id @default(uuid()) @db.Uuid
+  sourceId        String         @db.Uuid
+  kind            ImportKind
+  entityType      String
+  filename        String?
+  fileSha256      String?
+  sourceVersion   String?
+  parserVersion   String
+  status          ImportStatus   @default(QUEUED)
+  totalCount      Int            @default(0)
+  processedCount  Int            @default(0)
+  createdCount    Int            @default(0)
+  updatedCount    Int            @default(0)
+  unchangedCount  Int            @default(0)
+  rejectedCount   Int            @default(0)
+  duplicateCount  Int            @default(0)
+  unresolvedCount Int            @default(0)
+  warningCount    Int            @default(0)
+  errors          Json           @default("[]")
+  cursor          Int            @default(0) // next row to process; failed jobs resume from here
+  rows            Json? // parsed rows retained so a failed job can resume without re-upload
+  startedAt       DateTime?
+  finishedAt      DateTime?
+  durationMs      Int?
+  createdById     String?        @db.Uuid
+  createdAt       DateTime       @default(now())
+  records         ImportRecord[]
+}
+
+model ImportRecord {
+  id          String        @id @default(uuid()) @db.Uuid
+  jobId       String        @db.Uuid
+  job         ImportJob     @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  rowNumber   Int
+  externalKey String?
+  outcome     ImportOutcome
+  entityType  String?
+  entityId    String?
+  message     String?
+
+  @@index([jobId, outcome])
+}
+
+model IngestionQueueItem {
+  id                         String       @id @default(uuid()) @db.Uuid
+  label                      String
+  ingredientId               String?      @unique @db.Uuid
+  priorityTier               Int
+  reason                     String
+  supernaturalProducts       String[]
+  hairPassportAppearances    Int          @default(0)
+  texturedProductAppearances Int          @default(0)
+  hairGoals                  String[]
+  evidenceAvailability       String // NONE | METADATA | REVIEWED
+  regulatoryReviewPriority   String // LOW | NORMAL | HIGH
+  importStatus               String // IDENTITY_ONLY | IDENTIFIERS_VERIFIED | FACTS_IMPORTED | COMPLETE
+  reviewStatus               ReviewStatus @default(SUBMITTED)
+  updatedAt                  DateTime     @updatedAt
+}
+
+// ─────────────────────── Research candidates (private / potential IP) ───────────────────────
+
+model ResearchCandidate {
+  id                    String       @id @default(uuid()) @db.Uuid
+  code                  String       @unique // SN-001, SN-002, ...
+  title                 String
+  description           String
+  candidateType         String
+  origin                String?
+  discoveryMethod       String?
+  associatedSignal      String?
+  hypothesis            String?
+  literatureNotes       String?
+  priorArtNotes         String?
+  proposedMechanism     String?
+  targetPhenotypeCodes  String[]
+  experiments           String?
+  results               String?
+  collaborators         String[]
+  researchStatus        String       @default("HYPOTHESIS")
+  safetyStatus          String       @default("NOT_ASSESSED")
+  testingStatus         String       @default("NOT_STARTED")
+  ipStatus              String       @default("NOT_REVIEWED")
+  ownershipReviewStatus String       @default("NOT_REVIEWED")
+  visibility            Visibility   @default(CONFIDENTIAL_IP)
+  ownerOrgId            String       @db.Uuid
+  ownerOrg              Organization @relation(fields: [ownerOrgId], references: [id])
+  createdById           String?      @db.Uuid
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
+}
+
+// ─────────────────────── Search ───────────────────────
+
+/// Flattened, ranked search index across entities. Rebuilt per entity on write (src/lib/search-index.ts).
+model SearchEntry {
+  id         String      @id @default(uuid()) @db.Uuid
+  entityType String // ingredient | product | patent | evidence | supplier | formula | raw_material | research_candidate
+  entityId   String
+  term       String
+  normalized String
+  termKind   String // CANONICAL | INCI | IDENTIFIER | ALIAS | NAME | TITLE | BRAND | CODE | FUNCTION | TEXT
+  label      String // what the user sees as the result title
+  detail     String?
+  weight     Int         @default(0)
+  ownerOrgId String?     @db.Uuid // set for private entity types; results are filtered by organization + visibility
+  visibility Visibility?
+
+  @@index([normalized])
+  @@index([normalized(ops: raw("gin_trgm_ops"))], map: "SearchEntry_normalized_trgm", type: Gin)
+  @@index([entityType, entityId])
+}
+
+model SavedSearch {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  query     String
+  filters   Json     @default("{}")
+  createdAt DateTime @default(now())
+}
+
+model SearchLog {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String?  @db.Uuid
+  query       String
+  filters     Json     @default("{}")
+  resultCount Int
+  durationMs  Int
+  zeroResult  Boolean
+  createdAt   DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+// ─────────────────────── Hair Passport integration (contract hp-ii/0.1.0-draft) ───────────────────────
+
+model IntegrationBatch {
+  id               String              @id @default(uuid()) @db.Uuid
+  externalSystem   String // "hair-passport"
+  contractVersion  String
+  organizationId   String              @db.Uuid
+  organization     Organization        @relation(fields: [organizationId], references: [id])
+  apiKeyId         String?             @db.Uuid
+  isMock           Boolean             @default(false)
+  receivedAt       DateTime            @default(now())
+  recordCount      Int                 @default(0)
+  acceptedCount    Int                 @default(0)
+  quarantinedCount Int                 @default(0)
+  rejectedCount    Int                 @default(0)
+  duplicateCount   Int                 @default(0)
+  records          IntegrationRecord[]
+}
+
+model IntegrationRecord {
+  id                   String                  @id @default(uuid()) @db.Uuid
+  batchId              String                  @db.Uuid
+  batch                IntegrationBatch        @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  externalSystem       String
+  recordType           String
+  externalRecordId     String
+  revision             Int                     @default(1)
+  participantRef       String?
+  rawPayload           Json? // null when rejected for consent: nothing beyond the rejection log is retained
+  status               IntegrationRecordStatus
+  messages             String[]
+  normalizedEntityType String?
+  normalizedEntityId   String?
+  mappingVersion       String?
+  isMock               Boolean                 @default(false)
+  createdAt            DateTime                @default(now())
+
+  @@unique([externalSystem, recordType, externalRecordId, revision])
+}
+
+model TaxonomyMapping {
+  id               String       @id @default(uuid()) @db.Uuid
+  externalSystem   String
+  externalTaxonomy String
+  externalVersion  String
+  externalCode     String
+  ontologyTermId   String       @db.Uuid
+  ontologyTerm     OntologyTerm @relation(fields: [ontologyTermId], references: [id])
+  mappingVersion   String
+  status           String       @default("ACTIVE")
+  notes            String?
+  createdAt        DateTime     @default(now())
+
+  @@unique([externalSystem, externalTaxonomy, externalVersion, externalCode])
+}
+
+model FieldMapping {
+  id              String   @id @default(uuid()) @db.Uuid
+  externalSystem  String
+  contractVersion String
+  recordType      String
+  externalPath    String
+  internalField   String
+  transform       String?
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+
+  @@unique([externalSystem, contractVersion, recordType, externalPath])
+}
+
+model ResearchParticipant {
+  id                    String                 @id @default(uuid()) @db.Uuid
+  researchId            String                 @unique // internal pseudonym, never the HP participantRef
+  externalSystem        String
+  participantRef        String
+  ageBand               String?
+  regionCoarse          String?
+  withdrawnAt           DateTime?
+  deletionScheduledAt   DateTime?
+  legalHold             Boolean                @default(false)
+  modelTrainingEligible Boolean                @default(false)
+  isMock                Boolean                @default(false)
+  createdAt             DateTime               @default(now())
+  consents              ConsentSnapshot[]
+  phenotypes            PhenotypeObservation[]
+  exposures             ExposureEvent[]
+  outcomes              OutcomeObservation[]
+  sensitivities         SensitivityFactor[]
+
+  @@unique([externalSystem, participantRef])
+}
+
+model ConsentSnapshot {
+  id               String              @id @default(uuid()) @db.Uuid
+  participantId    String              @db.Uuid
+  participant      ResearchParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  researchUse      Boolean
+  healthDataUse    Boolean
+  imageDerivedUse  Boolean
+  modelTrainingUse Boolean
+  protocolVersion  String
+  asOf             DateTime
+  recordedAt       DateTime            @default(now())
+}
+
+model PhenotypeObservation {
+  id                  String              @id @default(uuid()) @db.Uuid
+  participantId       String              @db.Uuid
+  participant         ResearchParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  integrationRecordId String              @db.Uuid
+  ontologyTermId      String?             @db.Uuid
+  externalTermSystem  String
+  externalTermCode    String
+  value               Json
+  unit                String?
+  sourceType          ObservationSource
+  methodCode          String
+  methodVersion       String?
+  modelVersion        String?
+  confidence          Float?
+  qualityFlags        String[]
+  observedAt          DateTime
+  datePrecision       String
+  isMock              Boolean             @default(false)
+  createdAt           DateTime            @default(now())
+}
+
+model OutcomeObservation {
+  id                  String              @id @default(uuid()) @db.Uuid
+  participantId       String              @db.Uuid
+  participant         ResearchParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  integrationRecordId String              @db.Uuid
+  ontologyTermId      String?             @db.Uuid
+  externalTermSystem  String
+  externalTermCode    String
+  value               Json
+  unit                String?
+  sourceType          ObservationSource
+  methodCode          String
+  methodVersion       String?
+  modelVersion        String?
+  confidence          Float?
+  qualityFlags        String[]
+  observedAt          DateTime
+  datePrecision       String
+  baselineRecordRef   String?
+  followUpDays        Int?
+  exposureEventRefs   String[]
+  concurrentChanges   String[]
+  context             Json?
+  isMock              Boolean             @default(false)
+  createdAt           DateTime            @default(now())
+}
+
+model ExposureEvent {
+  id                  String              @id @default(uuid()) @db.Uuid
+  participantId       String              @db.Uuid
+  participant         ResearchParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  integrationRecordId String              @db.Uuid
+  externalRecordId    String
+  productId           String?             @db.Uuid
+  productVersionId    String?             @db.Uuid // selected by date: the version valid at startDate
+  formulaVersionId    String?             @db.Uuid
+  productRefRaw       String?
+  exposureConfidence  ExposureConfidence
+  startDate           DateTime
+  endDate             DateTime?
+  frequency           Json?
+  applicationQuantity Json?
+  contactDuration     Json?
+  applicationType     ApplicationType     @default(UNKNOWN)
+  applicationSites    String[]
+  coverage            String?
+  adherence           Json?
+  details             Json                @default("{}")
+  sourceType          ObservationSource
+  isMock              Boolean             @default(false)
+  createdAt           DateTime            @default(now())
+}
+
+model SensitivityFactor {
+  id                  String              @id @default(uuid()) @db.Uuid
+  participantId       String              @db.Uuid
+  participant         ResearchParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  integrationRecordId String              @db.Uuid
+  category            String
+  codeSystem          String?
+  code                String?
+  present             String // true | false | unknown
+  isMock              Boolean             @default(false)
+  createdAt           DateTime            @default(now())
+}
+
+model WithdrawalNotice {
+  id               String    @id @default(uuid()) @db.Uuid
+  externalSystem   String
+  participantRef   String
+  participantId    String?   @db.Uuid
+  scope            String // ALL | MODEL_TRAINING | HEALTH_DATA
+  effectiveAt      DateTime
+  receivedAt       DateTime  @default(now())
+  processedAt      DateTime?
+  affectedAnalyses Json      @default("[]")
+  notes            String?
+  isMock           Boolean   @default(false)
+}

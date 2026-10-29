@@ -1,0 +1,1009 @@
+{
+ "_meta": {
+  "label": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review."
+ },
+ "formulas": [
+  {
+   "code": "SAMPLE-SH-01",
+   "name": "Sample sulfate-free clarifying shampoo",
+   "productCategory": "shampoo",
+   "applicationType": "RINSE_OFF",
+   "targetPh": 5.5,
+   "intendedGoals": [
+    "buildup removal",
+    "gentle cleansing"
+   ],
+   "intendedPhenotypeCodes": [
+    "buildup"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "water",
+     "percent": "qs",
+     "phase": "A",
+     "role": "solvent"
+    },
+    {
+     "ref": "sodium-c14-16-olefin-sulfonate",
+     "percent": 12,
+     "phase": "A",
+     "role": "primary surfactant"
+    },
+    {
+     "ref": "cocamidopropyl-hydroxysultaine",
+     "percent": 4,
+     "phase": "A",
+     "role": "co-surfactant"
+    },
+    {
+     "ref": "glycerin",
+     "percent": 1,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "panthenol",
+     "percent": 0.5,
+     "phase": "B",
+     "role": "humectant"
+    },
+    {
+     "ref": "guar-hydroxypropyltrimonium-chloride",
+     "percent": 0.2,
+     "phase": "A",
+     "role": "deposition aid"
+    },
+    {
+     "ref": "disodium-edta",
+     "percent": 0.1,
+     "phase": "A",
+     "role": "chelator"
+    },
+    {
+     "ref": "sodium-chloride",
+     "percent": 1,
+     "phase": "D",
+     "role": "viscosity"
+    },
+    {
+     "ref": "citric-acid",
+     "percent": 0.2,
+     "phase": "D",
+     "role": "pH adjuster"
+    },
+    {
+     "ref": "phenoxyethanol",
+     "percent": 0.8,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "ethylhexylglycerin",
+     "percent": 0.2,
+     "phase": "C",
+     "role": "preservative booster"
+    }
+   ]
+  },
+  {
+   "code": "SAMPLE-CO-01",
+   "name": "Sample rinse-out conditioner",
+   "productCategory": "conditioner",
+   "applicationType": "RINSE_OFF",
+   "targetPh": 4.5,
+   "intendedGoals": [
+    "detangling",
+    "softness"
+   ],
+   "intendedPhenotypeCodes": [
+    "mechanical-damage",
+    "breakage"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "water",
+     "percent": "qs",
+     "phase": "A",
+     "role": "solvent"
+    },
+    {
+     "ref": "cetearyl-alcohol",
+     "percent": 5,
+     "phase": "B",
+     "role": "structurant"
+    },
+    {
+     "ref": "behentrimonium-chloride",
+     "percent": 2,
+     "phase": "B",
+     "role": "cationic conditioner"
+    },
+    {
+     "ref": "glycerin",
+     "percent": 2,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "olive-oil",
+     "percent": 1,
+     "phase": "B",
+     "role": "emollient"
+    },
+    {
+     "ref": "hydrolyzed-rice-protein",
+     "percent": 0.5,
+     "phase": "C",
+     "role": "protein"
+    },
+    {
+     "ref": "panthenol",
+     "percent": 0.5,
+     "phase": "C",
+     "role": "humectant"
+    },
+    {
+     "ref": "citric-acid",
+     "percent": 0.1,
+     "phase": "D",
+     "role": "pH adjuster"
+    },
+    {
+     "ref": "phenoxyethanol",
+     "percent": 0.8,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "ethylhexylglycerin",
+     "percent": 0.2,
+     "phase": "C",
+     "role": "preservative booster"
+    }
+   ]
+  },
+  {
+   "code": "SAMPLE-LI-01",
+   "name": "Sample leave-in moisture cream",
+   "productCategory": "leave-in conditioner",
+   "applicationType": "LEAVE_ON",
+   "targetPh": 5.0,
+   "intendedGoals": [
+    "moisture retention"
+   ],
+   "intendedPhenotypeCodes": [
+    "moisture-retention",
+    "apparent-porosity"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "water",
+     "percent": "qs",
+     "phase": "A",
+     "role": "solvent"
+    },
+    {
+     "ref": "glycerin",
+     "percent": 3,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "cetearyl-olivate",
+     "percent": 2.4,
+     "phase": "B",
+     "role": "emulsifier"
+    },
+    {
+     "ref": "sorbitan-olivate",
+     "percent": 1.6,
+     "phase": "B",
+     "role": "emulsifier"
+    },
+    {
+     "ref": "cetyl-alcohol",
+     "percent": 1.5,
+     "phase": "B",
+     "role": "co-emulsifier"
+    },
+    {
+     "ref": "shea-butter",
+     "percent": 2,
+     "phase": "B",
+     "role": "emollient"
+    },
+    {
+     "ref": "olive-oil",
+     "percent": 2,
+     "phase": "B",
+     "role": "emollient"
+    },
+    {
+     "ref": "aloe-barbadensis-leaf-juice",
+     "percent": 5,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "panthenol",
+     "percent": 0.5,
+     "phase": "C",
+     "role": "humectant"
+    },
+    {
+     "ref": "xanthan-gum",
+     "percent": 0.2,
+     "phase": "A",
+     "role": "thickener"
+    },
+    {
+     "ref": "citric-acid",
+     "percent": 0.05,
+     "phase": "D",
+     "role": "pH adjuster"
+    },
+    {
+     "ref": "phenoxyethanol",
+     "percent": 0.8,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "ethylhexylglycerin",
+     "percent": 0.2,
+     "phase": "C",
+     "role": "preservative booster"
+    }
+   ]
+  },
+  {
+   "code": "SAMPLE-OIL-01",
+   "name": "Sample anhydrous scalp oil",
+   "productCategory": "scalp oil",
+   "applicationType": "LEAVE_ON",
+   "targetPh": null,
+   "intendedGoals": [
+    "scalp comfort"
+   ],
+   "intendedPhenotypeCodes": [
+    "scalp-dryness"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "jojoba-seed-oil",
+     "percent": "qs",
+     "phase": "A",
+     "role": "carrier"
+    },
+    {
+     "ref": "castor-seed-oil",
+     "percent": 20,
+     "phase": "A",
+     "role": "emollient"
+    },
+    {
+     "ref": "sweet-almond-oil",
+     "percent": 20,
+     "phase": "A",
+     "role": "emollient"
+    },
+    {
+     "ref": "argan-kernel-oil",
+     "percent": 10,
+     "phase": "A",
+     "role": "emollient"
+    },
+    {
+     "ref": "tocopherol",
+     "percent": 0.5,
+     "phase": "A",
+     "role": "antioxidant"
+    },
+    {
+     "ref": "peppermint-oil",
+     "percent": 0.5,
+     "phase": "B",
+     "role": "fragrance / sensory"
+    },
+    {
+     "ref": "rosemary-leaf-oil",
+     "percent": 0.5,
+     "phase": "B",
+     "role": "fragrance / botanical"
+    }
+   ]
+  },
+  {
+   "code": "SAMPLE-GEL-01",
+   "name": "Sample flax-style curl gel",
+   "productCategory": "styling gel",
+   "applicationType": "LEAVE_ON",
+   "targetPh": 6.0,
+   "intendedGoals": [
+    "curl definition",
+    "hold"
+   ],
+   "intendedPhenotypeCodes": [
+    "curl-geometry",
+    "frizz-response"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "water",
+     "percent": "qs",
+     "phase": "A",
+     "role": "solvent"
+    },
+    {
+     "ref": "glycerin",
+     "percent": 3,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "flax-extract",
+     "percent": 5,
+     "phase": "A",
+     "role": "film former"
+    },
+    {
+     "ref": "carbomer",
+     "percent": 0.5,
+     "phase": "A",
+     "role": "rheology modifier"
+    },
+    {
+     "ref": "aminomethyl-propanol",
+     "percent": 0.4,
+     "phase": "B",
+     "role": "neutralizer"
+    },
+    {
+     "ref": "pvp",
+     "percent": 2,
+     "phase": "A",
+     "role": "film former"
+    },
+    {
+     "ref": "aloe-barbadensis-leaf-juice",
+     "percent": 2,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "panthenol",
+     "percent": 0.5,
+     "phase": "B",
+     "role": "humectant"
+    },
+    {
+     "ref": "polysorbate-20",
+     "percent": 0.5,
+     "phase": "C",
+     "role": "solubilizer"
+    },
+    {
+     "ref": "phenoxyethanol",
+     "percent": 0.8,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "ethylhexylglycerin",
+     "percent": 0.2,
+     "phase": "C",
+     "role": "preservative booster"
+    }
+   ]
+  },
+  {
+   "code": "SAMPLE-CW-01",
+   "name": "Sample cleansing conditioner (co-wash)",
+   "productCategory": "cleansing conditioner",
+   "applicationType": "RINSE_OFF",
+   "targetPh": 5.0,
+   "intendedGoals": [
+    "gentle cleansing",
+    "detangling"
+   ],
+   "intendedPhenotypeCodes": [
+    "moisture-retention"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "water",
+     "percent": "qs",
+     "phase": "A",
+     "role": "solvent"
+    },
+    {
+     "ref": "cetearyl-alcohol",
+     "percent": 4,
+     "phase": "B",
+     "role": "structurant"
+    },
+    {
+     "ref": "behentrimonium-methosulfate",
+     "percent": 2,
+     "phase": "B",
+     "role": "cationic conditioner"
+    },
+    {
+     "ref": "cocamidopropyl-betaine",
+     "percent": 3,
+     "phase": "A",
+     "role": "mild cleanser"
+    },
+    {
+     "ref": "coconut-oil",
+     "percent": 1,
+     "phase": "B",
+     "role": "emollient"
+    },
+    {
+     "ref": "glycerin",
+     "percent": 2,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "caprylyl-glycol",
+     "percent": 0.5,
+     "phase": "C",
+     "role": "preservative booster"
+    },
+    {
+     "ref": "phenoxyethanol",
+     "percent": 0.8,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "citric-acid",
+     "percent": 0.1,
+     "phase": "D",
+     "role": "pH adjuster"
+    }
+   ]
+  },
+  {
+   "code": "SAMPLE-AD-01",
+   "name": "Sample anti-flaking scalp shampoo (cosmetic research candidate)",
+   "productCategory": "shampoo",
+   "applicationType": "RINSE_OFF",
+   "targetPh": 5.5,
+   "intendedGoals": [
+    "reduce visible flaking"
+   ],
+   "intendedPhenotypeCodes": [
+    "visible-flaking"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "water",
+     "percent": "qs",
+     "phase": "A",
+     "role": "solvent"
+    },
+    {
+     "ref": "sodium-cocoyl-isethionate",
+     "percent": 6,
+     "phase": "A",
+     "role": "primary surfactant"
+    },
+    {
+     "ref": "cocamidopropyl-betaine",
+     "percent": 5,
+     "phase": "A",
+     "role": "co-surfactant"
+    },
+    {
+     "ref": "decyl-glucoside",
+     "percent": 3,
+     "phase": "A",
+     "role": "co-surfactant"
+    },
+    {
+     "ref": "piroctone-olamine",
+     "percent": 0.5,
+     "phase": "B",
+     "role": "anti-flaking active"
+    },
+    {
+     "ref": "salicylic-acid",
+     "percent": 0.5,
+     "phase": "B",
+     "role": "exfoliant"
+    },
+    {
+     "ref": "glycerin",
+     "percent": 2,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "menthol",
+     "percent": 0.1,
+     "phase": "C",
+     "role": "cooling sensory"
+    },
+    {
+     "ref": "sodium-benzoate",
+     "percent": 0.5,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "potassium-sorbate",
+     "percent": 0.2,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "citric-acid",
+     "percent": 0.3,
+     "phase": "D",
+     "role": "pH adjuster"
+    }
+   ]
+  },
+  {
+   "code": "SAMPLE-PR-01",
+   "name": "Sample protein treatment",
+   "productCategory": "treatment",
+   "applicationType": "RINSE_OFF",
+   "targetPh": 4.5,
+   "intendedGoals": [
+    "strength",
+    "repair appearance"
+   ],
+   "intendedPhenotypeCodes": [
+    "chemical-damage",
+    "breakage"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "water",
+     "percent": "qs",
+     "phase": "A",
+     "role": "solvent"
+    },
+    {
+     "ref": "hydrolyzed-keratin",
+     "percent": 1,
+     "phase": "C",
+     "role": "protein"
+    },
+    {
+     "ref": "hydrolyzed-wheat-protein",
+     "percent": 1,
+     "phase": "C",
+     "role": "protein"
+    },
+    {
+     "ref": "cetearyl-alcohol",
+     "percent": 5,
+     "phase": "B",
+     "role": "structurant"
+    },
+    {
+     "ref": "cetrimonium-chloride",
+     "percent": 1.5,
+     "phase": "B",
+     "role": "cationic conditioner"
+    },
+    {
+     "ref": "panthenol",
+     "percent": 1,
+     "phase": "C",
+     "role": "humectant"
+    },
+    {
+     "ref": "glycerin",
+     "percent": 2,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "citric-acid",
+     "percent": 0.1,
+     "phase": "D",
+     "role": "pH adjuster"
+    },
+    {
+     "ref": "phenoxyethanol",
+     "percent": 0.8,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "ethylhexylglycerin",
+     "percent": 0.2,
+     "phase": "C",
+     "role": "preservative booster"
+    }
+   ]
+  },
+  {
+   "code": "SAMPLE-BD-01",
+   "name": "Sample bond-support leave-in spray",
+   "productCategory": "leave-in spray",
+   "applicationType": "LEAVE_ON",
+   "targetPh": 4.0,
+   "intendedGoals": [
+    "chemical-damage support"
+   ],
+   "intendedPhenotypeCodes": [
+    "chemical-damage",
+    "color-treated-hair"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "water",
+     "percent": "qs",
+     "phase": "A",
+     "role": "solvent"
+    },
+    {
+     "ref": "bis-aminopropyl-diglycol-dimaleate",
+     "percent": 1,
+     "phase": "B",
+     "role": "bond-support research ingredient"
+    },
+    {
+     "ref": "arginine",
+     "percent": 0.5,
+     "phase": "B",
+     "role": "amino acid"
+    },
+    {
+     "ref": "glycerin",
+     "percent": 2,
+     "phase": "A",
+     "role": "humectant"
+    },
+    {
+     "ref": "polyquaternium-10",
+     "percent": 0.3,
+     "phase": "A",
+     "role": "conditioning polymer"
+    },
+    {
+     "ref": "panthenol",
+     "percent": 0.5,
+     "phase": "B",
+     "role": "humectant"
+    },
+    {
+     "ref": "citric-acid",
+     "percent": 0.2,
+     "phase": "D",
+     "role": "pH adjuster"
+    },
+    {
+     "ref": "phenoxyethanol",
+     "percent": 0.8,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "ethylhexylglycerin",
+     "percent": 0.2,
+     "phase": "C",
+     "role": "preservative booster"
+    }
+   ]
+  },
+  {
+   "code": "SAMPLE-SC-01",
+   "name": "Sample scalp serum (raw-material math demo)",
+   "productCategory": "scalp serum",
+   "applicationType": "LEAVE_ON",
+   "targetPh": 5.5,
+   "intendedGoals": [
+    "scalp comfort",
+    "appearance of density"
+   ],
+   "intendedPhenotypeCodes": [
+    "scalp-dryness",
+    "apparent-density-change"
+   ],
+   "notes": "SAMPLE — illustrative archetype for testing the platform. Not a Supernatural formula. Not for manufacture. Percentages are ingredient-level illustrative values unless a raw material is referenced. Candidate for cosmetic-chemist review.",
+   "lines": [
+    {
+     "ref": "water",
+     "percent": "qs",
+     "phase": "A",
+     "role": "solvent"
+    },
+    {
+     "ref": "propanediol",
+     "percent": 5,
+     "phase": "A",
+     "role": "humectant / solvent"
+    },
+    {
+     "ref": "niacinamide",
+     "percent": 2,
+     "phase": "A",
+     "role": "scalp-care active"
+    },
+    {
+     "ref": "caffeine",
+     "percent": 0.5,
+     "phase": "A",
+     "role": "scalp-care active"
+    },
+    {
+     "ref": "rm:sample-panthenol-75",
+     "percent": 1.33,
+     "phase": "B",
+     "role": "humectant (raw material, 75% active confirmed in sample spec)"
+    },
+    {
+     "ref": "rm:sample-peptide-complex",
+     "percent": 2,
+     "phase": "B",
+     "role": "peptide raw material (active % unknown)"
+    },
+    {
+     "ref": "hydroxyethylcellulose",
+     "percent": 0.5,
+     "phase": "A",
+     "role": "thickener"
+    },
+    {
+     "ref": "phenoxyethanol",
+     "percent": 0.8,
+     "phase": "C",
+     "role": "preservative"
+    },
+    {
+     "ref": "ethylhexylglycerin",
+     "percent": 0.2,
+     "phase": "C",
+     "role": "preservative booster"
+    }
+   ]
+  }
+ ],
+ "rawMaterials": [
+  {
+   "key": "sample-panthenol-75",
+   "tradeName": "SAMPLE Panthenol 75% aqueous solution (illustrative)",
+   "activePercent": 75,
+   "activePercentConfirmed": true,
+   "declaredComposition": "Panthenol 75%, Water 25% (illustrative sample specification)",
+   "components": [
+    [
+     "panthenol",
+     75,
+     75,
+     "ACTIVE"
+    ],
+    [
+     "water",
+     25,
+     25,
+     "SOLVENT"
+    ]
+   ]
+  },
+  {
+   "key": "sample-peptide-complex",
+   "tradeName": "SAMPLE Peptide complex (illustrative)",
+   "activePercent": null,
+   "activePercentConfirmed": false,
+   "declaredComposition": "Butylene Glycol, Water, Acetyl Tetrapeptide-3 (active % not declared)",
+   "components": [
+    [
+     "butylene-glycol",
+     null,
+     null,
+     "CARRIER"
+    ],
+    [
+     "water",
+     null,
+     null,
+     "SOLVENT"
+    ],
+    [
+     "acetyl-tetrapeptide-3",
+     null,
+     null,
+     "ACTIVE"
+    ]
+   ]
+  },
+  {
+   "key": "sample-olive-emulsifier",
+   "tradeName": "SAMPLE olive-derived emulsifier blend (illustrative)",
+   "activePercent": null,
+   "activePercentConfirmed": false,
+   "declaredComposition": "Cetearyl Olivate, Sorbitan Olivate",
+   "components": [
+    [
+     "cetearyl-olivate",
+     null,
+     null,
+     "ACTIVE"
+    ],
+    [
+     "sorbitan-olivate",
+     null,
+     null,
+     "ACTIVE"
+    ]
+   ]
+  },
+  {
+   "key": "sample-cationic-guar",
+   "tradeName": "SAMPLE cationic guar powder (illustrative)",
+   "activePercent": 100,
+   "activePercentConfirmed": false,
+   "declaredComposition": "Guar Hydroxypropyltrimonium Chloride",
+   "components": [
+    [
+     "guar-hydroxypropyltrimonium-chloride",
+     100,
+     100,
+     "ACTIVE"
+    ]
+   ]
+  },
+  {
+   "key": "sample-pe-ehg",
+   "tradeName": "SAMPLE phenoxyethanol / ethylhexylglycerin blend (illustrative)",
+   "activePercent": null,
+   "activePercentConfirmed": false,
+   "declaredComposition": "Phenoxyethanol ~90%, Ethylhexylglycerin ~10%",
+   "components": [
+    [
+     "phenoxyethanol",
+     85,
+     95,
+     "PRESERVATIVE"
+    ],
+    [
+     "ethylhexylglycerin",
+     5,
+     15,
+     "PRESERVATIVE"
+    ]
+   ]
+  },
+  {
+   "key": "sample-capb-30",
+   "tradeName": "SAMPLE cocamidopropyl betaine ~30% solution (illustrative)",
+   "activePercent": 30,
+   "activePercentConfirmed": false,
+   "declaredComposition": "Water, Cocamidopropyl Betaine (~30%), Sodium Chloride",
+   "components": [
+    [
+     "cocamidopropyl-betaine",
+     28,
+     32,
+     "ACTIVE"
+    ],
+    [
+     "water",
+     null,
+     null,
+     "SOLVENT"
+    ],
+    [
+     "sodium-chloride",
+     null,
+     null,
+     "OTHER"
+    ]
+   ]
+  },
+  {
+   "key": "sample-aos-40",
+   "tradeName": "SAMPLE sodium C14-16 olefin sulfonate ~40% solution (illustrative)",
+   "activePercent": 40,
+   "activePercentConfirmed": false,
+   "declaredComposition": "Water, Sodium C14-16 Olefin Sulfonate (~40%)",
+   "components": [
+    [
+     "sodium-c14-16-olefin-sulfonate",
+     38,
+     42,
+     "ACTIVE"
+    ],
+    [
+     "water",
+     null,
+     null,
+     "SOLVENT"
+    ]
+   ]
+  },
+  {
+   "key": "sample-btac-flakes",
+   "tradeName": "SAMPLE behentrimonium chloride / cetearyl alcohol flakes (illustrative)",
+   "activePercent": null,
+   "activePercentConfirmed": false,
+   "declaredComposition": "Cetearyl Alcohol, Behentrimonium Chloride",
+   "components": [
+    [
+     "cetearyl-alcohol",
+     null,
+     null,
+     "CARRIER"
+    ],
+    [
+     "behentrimonium-chloride",
+     null,
+     null,
+     "ACTIVE"
+    ]
+   ]
+  },
+  {
+   "key": "sample-keratin-20",
+   "tradeName": "SAMPLE hydrolyzed keratin ~20% solution (illustrative)",
+   "activePercent": 20,
+   "activePercentConfirmed": false,
+   "declaredComposition": "Water, Hydrolyzed Keratin (~20%), Phenoxyethanol",
+   "components": [
+    [
+     "hydrolyzed-keratin",
+     18,
+     22,
+     "ACTIVE"
+    ],
+    [
+     "water",
+     null,
+     null,
+     "SOLVENT"
+    ],
+    [
+     "phenoxyethanol",
+     null,
+     null,
+     "PRESERVATIVE"
+    ]
+   ]
+  },
+  {
+   "key": "sample-rosemary-glycerite",
+   "tradeName": "SAMPLE rosemary leaf extract in glycerin (illustrative)",
+   "activePercent": null,
+   "activePercentConfirmed": false,
+   "declaredComposition": "Glycerin, Water, Rosmarinus Officinalis Leaf Extract (ratio not declared)",
+   "components": [
+    [
+     "glycerin",
+     null,
+     null,
+     "CARRIER"
+    ],
+    [
+     "water",
+     null,
+     null,
+     "SOLVENT"
+    ],
+    [
+     "rosemary-leaf-extract",
+     null,
+     null,
+     "ACTIVE"
+    ]
+   ]
+  }
+ ]
+}

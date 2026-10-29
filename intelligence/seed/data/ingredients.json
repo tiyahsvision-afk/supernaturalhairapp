@@ -1,0 +1,4980 @@
+{
+ "_meta": {
+  "description": "Curated canonical-ingredient seed for Supernatural Ingredient Intelligence.",
+  "provenance": "Names, identity type, material type, family and functions are CURATOR-PROPOSED (AI-assisted) and stored with reviewStatus=SUBMITTED. Candidate PubChem CIDs ('cid') are NOT stored as identifiers unless verified against PubChem PUG REST (see pubchem-verification.json). CAS numbers come only from PubChem registry-number cross-references of verified CIDs.",
+  "priorityNote": "Tier 1 (Supernatural products) and tier 3 (textured-hair products) are computed by the seed loader from parsed product ingredient lists; 'p' here is the fallback tier for ingredients not found in any seeded product.",
+  "fields": "k=key n=canonical (INCI where one exists) c=common name t=identityType m=materialType f=family fn=functions p=fallback priority tier r=priority reason o=origin cid=candidate PubChem CID a=aliases/synonyms b=botanical source [genus, species, part]"
+ },
+ "ingredients": [
+  {
+   "k": "water",
+   "n": "Aqua",
+   "c": "Water",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "OTHER",
+   "f": "solvents",
+   "fn": [
+    "other"
+   ],
+   "o": "NATURAL",
+   "cid": 962,
+   "a": [
+    "Water",
+    "Aqua (Water)",
+    "Water (Aqua)",
+    "Aqua/Water/Eau",
+    "Deionized Water",
+    "Eau"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "glycerin",
+   "n": "Glycerin",
+   "c": "Glycerol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "cid": 753,
+   "a": [
+    "Glycerol",
+    "Glycerine",
+    "Glycerin (Vegetable)",
+    "Vegetable Glycerin"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "panthenol",
+   "n": "Panthenol",
+   "c": "Provitamin B5",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant",
+    "conditioner",
+    "antistatic"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 4678,
+   "a": [
+    "Provitamin B5",
+    "DL-Panthenol",
+    "Pro-Vitamin B5"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "dexpanthenol",
+   "n": "Dexpanthenol",
+   "c": "D-Panthenol",
+   "t": "ISOMER",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant",
+    "conditioner"
+   ],
+   "p": 4,
+   "r": "Stereoisomer of panthenol — kept separate; not interchangeable without review.",
+   "o": "SYNTHETIC",
+   "cid": 131204,
+   "a": [
+    "D-Panthenol"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sodium-chloride",
+   "n": "Sodium Chloride",
+   "c": "Salt",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "MINERAL",
+   "f": "salts",
+   "fn": [
+    "thickener"
+   ],
+   "o": "NATURAL",
+   "cid": 5234,
+   "a": [
+    "Salt"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "potassium-chloride",
+   "n": "Potassium Chloride",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "MINERAL",
+   "f": "salts",
+   "fn": [
+    "thickener"
+   ],
+   "o": "NATURAL",
+   "cid": 4873,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "citric-acid",
+   "n": "Citric Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "ph-adjusters",
+   "fn": [
+    "ph-adjuster",
+    "chelator",
+    "buffer"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "cid": 311,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sodium-citrate",
+   "n": "Sodium Citrate",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "ph-adjusters",
+   "fn": [
+    "buffer",
+    "chelator"
+   ],
+   "p": 4,
+   "r": "Common buffer in leave-on and rinse-off hair care.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 6224,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "lactic-acid",
+   "n": "Lactic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "ph-adjusters",
+   "fn": [
+    "ph-adjuster",
+    "humectant",
+    "exfoliant"
+   ],
+   "p": 4,
+   "r": "pH adjuster and humectant; moisture category.",
+   "o": "BIOTECH",
+   "cid": 612,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sodium-lactate",
+   "n": "Sodium Lactate",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant",
+    "buffer"
+   ],
+   "p": 4,
+   "r": "Humectant; moisture category.",
+   "o": "BIOTECH",
+   "cid": 23666456,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sodium-pca",
+   "n": "Sodium PCA",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant"
+   ],
+   "p": 4,
+   "r": "Humectant; moisture category.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 23666346,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "urea",
+   "n": "Urea",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant"
+   ],
+   "p": 4,
+   "r": "Humectant; scalp dryness.",
+   "o": "SYNTHETIC",
+   "cid": 1176,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sorbitol",
+   "n": "Sorbitol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant"
+   ],
+   "p": 4,
+   "r": "Humectant; moisture category.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 5780,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "trehalose",
+   "n": "Trehalose",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant"
+   ],
+   "p": 4,
+   "r": "Humectant; moisture category.",
+   "o": "BIOTECH",
+   "cid": 7427,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "betaine",
+   "n": "Betaine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "cid": 247,
+   "a": [
+    "Trimethylglycine"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "propylene-glycol",
+   "n": "Propylene Glycol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant",
+    "solubilizer"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 1030,
+   "a": [
+    "1,2-Propanediol"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "butylene-glycol",
+   "n": "Butylene Glycol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant",
+    "solubilizer"
+   ],
+   "p": 4,
+   "r": "Humectant/solvent for botanical extracts.",
+   "o": "SYNTHETIC",
+   "cid": 7896,
+   "a": [
+    "1,3-Butanediol"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "propanediol",
+   "n": "Propanediol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "humectants",
+   "fn": [
+    "humectant",
+    "solubilizer"
+   ],
+   "p": 4,
+   "r": "Bio-based humectant/solvent.",
+   "o": "BIOTECH",
+   "cid": 10442,
+   "a": [
+    "1,3-Propanediol"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "caprylyl-glycol",
+   "n": "Caprylyl Glycol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "preservatives",
+   "fn": [
+    "humectant",
+    "preservative-booster"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 14231,
+   "a": [
+    "1,2-Octanediol"
+   ],
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "pentylene-glycol",
+   "n": "Pentylene Glycol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "preservatives",
+   "fn": [
+    "humectant",
+    "preservative-booster"
+   ],
+   "p": 4,
+   "r": "Humectant / preservative booster.",
+   "o": "SYNTHETIC",
+   "cid": 93000,
+   "a": [
+    "1,2-Pentanediol"
+   ],
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "honey",
+   "n": "Honey",
+   "c": "Mel",
+   "t": "UNKNOWN_COMPOSITION",
+   "m": "COMPLEX_MIXTURE",
+   "f": "humectants",
+   "fn": [
+    "humectant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Mel"
+   ]
+  },
+  {
+   "k": "sodium-hyaluronate",
+   "n": "Sodium Hyaluronate",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "humectants",
+   "fn": [
+    "humectant",
+    "film-former"
+   ],
+   "p": 5,
+   "r": "Biotechnology-derived humectant polymer; molecular-weight distribution matters.",
+   "o": "BIOTECH",
+   "a": [
+    "Hyaluronic Acid Sodium Salt"
+   ]
+  },
+  {
+   "k": "hyaluronic-acid",
+   "n": "Hyaluronic Acid",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "humectants",
+   "fn": [
+    "humectant",
+    "film-former"
+   ],
+   "p": 5,
+   "r": "Biotech humectant; distinct from its sodium salt.",
+   "o": "BIOTECH"
+  },
+  {
+   "k": "sodium-c14-16-olefin-sulfonate",
+   "n": "Sodium C14-16 Olefin Sulfonate",
+   "c": "Alpha olefin sulfonate",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "o": "SYNTHETIC",
+   "a": [
+    "AOS",
+    "Alpha Olefin Sulfonate",
+    "Sodium C14-C16 Olefin Sulfonate"
+   ]
+  },
+  {
+   "k": "sodium-lauryl-sulfate",
+   "n": "Sodium Lauryl Sulfate",
+   "c": "SLS",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Reference irritant surfactant; buildup/scalp comfort category.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 3423265,
+   "a": [
+    "SLS",
+    "Sodium Dodecyl Sulfate",
+    "SDS"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sodium-laureth-sulfate",
+   "n": "Sodium Laureth Sulfate",
+   "c": "SLES",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Most common shampoo surfactant.",
+   "o": "SYNTHETIC",
+   "a": [
+    "SLES",
+    "Sodium Lauryl Ether Sulfate"
+   ]
+  },
+  {
+   "k": "ammonium-lauryl-sulfate",
+   "n": "Ammonium Lauryl Sulfate",
+   "t": "SALT",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Common shampoo surfactant.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 16700,
+   "a": [
+    "ALS"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sodium-cocoyl-isethionate",
+   "n": "Sodium Cocoyl Isethionate",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Mild sulfate-free surfactant used in textured-hair cleansers.",
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "SCI"
+   ]
+  },
+  {
+   "k": "sodium-lauroyl-methyl-isethionate",
+   "n": "Sodium Lauroyl Methyl Isethionate",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Mild sulfate-free surfactant.",
+   "o": "SYNTHETIC",
+   "a": [
+    "SLMI"
+   ]
+  },
+  {
+   "k": "sodium-cocoyl-glycinate",
+   "n": "Sodium Cocoyl Glycinate",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Amino-acid surfactant; gentle cleansing.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "sodium-methyl-cocoyl-taurate",
+   "n": "Sodium Methyl Cocoyl Taurate",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Mild sulfate-free surfactant.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "disodium-laureth-sulfosuccinate",
+   "n": "Disodium Laureth Sulfosuccinate",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Mild co-surfactant.",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "cocamidopropyl-hydroxysultaine",
+   "n": "Cocamidopropyl Hydroxysultaine",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "amphoteric-surfactants",
+   "fn": [
+    "co-surfactant",
+    "antistatic",
+    "cleansing-agent"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "CAHS"
+   ]
+  },
+  {
+   "k": "cocamidopropyl-betaine",
+   "n": "Cocamidopropyl Betaine",
+   "c": "CAPB",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "amphoteric-surfactants",
+   "fn": [
+    "co-surfactant",
+    "cleansing-agent",
+    "antistatic"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "CAPB",
+    "Cocoamidopropyl Betaine"
+   ]
+  },
+  {
+   "k": "lauryl-glucoside",
+   "n": "Lauryl Glucoside",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Mild nonionic surfactant.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "decyl-glucoside",
+   "n": "Decyl Glucoside",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Mild nonionic surfactant; known contact allergen.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "coco-glucoside",
+   "n": "Coco-Glucoside",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "surfactant",
+    "cleansing-agent"
+   ],
+   "p": 4,
+   "r": "Mild nonionic surfactant.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "cocamide-mipa",
+   "n": "Cocamide MIPA",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "co-surfactant",
+    "thickener"
+   ],
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "glycereth-2-cocoate",
+   "n": "Glycereth-2 Cocoate",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emollient",
+    "emulsifier"
+   ],
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "polysorbate-20",
+   "n": "Polysorbate 20",
+   "t": "POLYMER",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "solubilizer",
+    "emulsifier"
+   ],
+   "o": "SYNTHETIC",
+   "a": [
+    "Tween 20"
+   ]
+  },
+  {
+   "k": "polysorbate-60",
+   "n": "Polysorbate 60",
+   "t": "POLYMER",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emulsifier"
+   ],
+   "o": "SYNTHETIC",
+   "a": [
+    "Tween 60"
+   ]
+  },
+  {
+   "k": "oleth-10",
+   "n": "Oleth-10",
+   "t": "POLYMER",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emulsifier",
+    "solubilizer"
+   ],
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "steareth-20",
+   "n": "Steareth-20",
+   "t": "POLYMER",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emulsifier"
+   ],
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "peg-150-stearate",
+   "n": "PEG-150 Stearate",
+   "t": "POLYMER",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emulsifier",
+    "thickener"
+   ],
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "peg-40-castor-oil",
+   "n": "PEG-40 Castor Oil",
+   "t": "POLYMER",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "solubilizer",
+    "emulsifier"
+   ],
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "sorbitan-laurate",
+   "n": "Sorbitan Laurate",
+   "t": "ESTER",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emulsifier"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "cid": 11046239,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "sorbitan-olivate",
+   "n": "Sorbitan Olivate",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emulsifier"
+   ],
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "cetearyl-olivate",
+   "n": "Cetearyl Olivate",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emulsifier",
+    "emollient"
+   ],
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "glyceryl-stearate-se",
+   "n": "Glyceryl Stearate SE",
+   "t": "RAW_MATERIAL_BLEND",
+   "m": "SURFACTANT",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emulsifier",
+    "emollient"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "Glyceryl Stearate (self-emulsifying)"
+   ]
+  },
+  {
+   "k": "glyceryl-stearate",
+   "n": "Glyceryl Stearate",
+   "t": "ESTER",
+   "m": "LIPID",
+   "f": "nonionic-surfactants",
+   "fn": [
+    "emulsifier",
+    "emollient"
+   ],
+   "p": 4,
+   "r": "Parent of Glyceryl Stearate SE — related, not interchangeable.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 24699,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "sodium-stearoyl-glutamate",
+   "n": "Sodium Stearoyl Glutamate",
+   "t": "SALT",
+   "m": "SURFACTANT",
+   "f": "anionic-surfactants",
+   "fn": [
+    "emulsifier"
+   ],
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "glycol-distearate",
+   "n": "Glycol Distearate",
+   "t": "ESTER",
+   "m": "LIPID",
+   "f": "opacifiers",
+   "fn": [
+    "thickener",
+    "other"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 61174,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "glycol-stearate",
+   "n": "Glycol Stearate",
+   "t": "ESTER",
+   "m": "LIPID",
+   "f": "opacifiers",
+   "fn": [
+    "thickener",
+    "emollient"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 24762,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "cetyl-alcohol",
+   "n": "Cetyl Alcohol",
+   "c": "Hexadecanol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "LIPID",
+   "f": "fatty-alcohols",
+   "fn": [
+    "emollient",
+    "thickener",
+    "emulsifier"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "cid": 2682,
+   "a": [
+    "1-Hexadecanol",
+    "Hexadecan-1-ol"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "stearyl-alcohol",
+   "n": "Stearyl Alcohol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "LIPID",
+   "f": "fatty-alcohols",
+   "fn": [
+    "emollient",
+    "thickener"
+   ],
+   "p": 4,
+   "r": "Core conditioner structurant.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 8221,
+   "a": [
+    "1-Octadecanol"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "cetearyl-alcohol",
+   "n": "Cetearyl Alcohol",
+   "t": "RAW_MATERIAL_BLEND",
+   "m": "LIPID",
+   "f": "fatty-alcohols",
+   "fn": [
+    "emollient",
+    "thickener",
+    "emulsifier"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "Cetostearyl Alcohol"
+   ]
+  },
+  {
+   "k": "behenyl-alcohol",
+   "n": "Behenyl Alcohol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "LIPID",
+   "f": "fatty-alcohols",
+   "fn": [
+    "emollient",
+    "thickener"
+   ],
+   "p": 4,
+   "r": "Conditioner structurant.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 12620,
+   "a": [
+    "1-Docosanol"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "behentrimonium-chloride",
+   "n": "Behentrimonium Chloride",
+   "t": "SALT",
+   "m": "SURFACTANT",
+   "f": "cationic-surfactants",
+   "fn": [
+    "cationic-conditioner",
+    "conditioner",
+    "detangler",
+    "antistatic"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 3014969,
+   "a": [
+    "BTAC",
+    "Behenyltrimethylammonium Chloride",
+    "Docosyltrimethylammonium Chloride"
+   ],
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "behentrimonium-methosulfate",
+   "n": "Behentrimonium Methosulfate",
+   "t": "SALT",
+   "m": "SURFACTANT",
+   "f": "cationic-surfactants",
+   "fn": [
+    "cationic-conditioner",
+    "detangler",
+    "antistatic"
+   ],
+   "o": "SYNTHETIC",
+   "a": [
+    "BTMS",
+    "Behenyltrimethylammonium Methosulfate"
+   ],
+   "cid": 157846,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "cetrimonium-chloride",
+   "n": "Cetrimonium Chloride",
+   "t": "SALT",
+   "m": "SURFACTANT",
+   "f": "cationic-surfactants",
+   "fn": [
+    "cationic-conditioner",
+    "antistatic",
+    "preservative"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 8154,
+   "a": [
+    "CTAC",
+    "Cetyltrimethylammonium Chloride",
+    "Hexadecyltrimethylammonium Chloride"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "stearalkonium-chloride",
+   "n": "Stearalkonium Chloride",
+   "t": "SALT",
+   "m": "SURFACTANT",
+   "f": "cationic-surfactants",
+   "fn": [
+    "cationic-conditioner",
+    "antistatic"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 31204,
+   "a": [
+    "Benzyldimethylstearylammonium Chloride"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "quaternium-18",
+   "n": "Quaternium-18",
+   "t": "UVCB",
+   "m": "SURFACTANT",
+   "f": "cationic-surfactants",
+   "fn": [
+    "cationic-conditioner",
+    "antistatic"
+   ],
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "stearamidopropyl-dimethylamine",
+   "n": "Stearamidopropyl Dimethylamine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SURFACTANT",
+   "f": "cationic-surfactants",
+   "fn": [
+    "cationic-conditioner",
+    "antistatic",
+    "emulsifier"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 62109,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "guar-hydroxypropyltrimonium-chloride",
+   "n": "Guar Hydroxypropyltrimonium Chloride",
+   "c": "Cationic guar",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "cationic-polymers",
+   "fn": [
+    "conditioner",
+    "deposition-aid",
+    "antistatic",
+    "detangler"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "Guar Hydroxypropyl Trimonium Chloride",
+    "GHPTC",
+    "Cationic Guar"
+   ]
+  },
+  {
+   "k": "polyquaternium-10",
+   "n": "Polyquaternium-10",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "cationic-polymers",
+   "fn": [
+    "conditioner",
+    "deposition-aid",
+    "film-former",
+    "antistatic"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "PQ-10"
+   ]
+  },
+  {
+   "k": "polyquaternium-7",
+   "n": "Polyquaternium-7",
+   "t": "COPOLYMER",
+   "m": "POLYMER",
+   "f": "cationic-polymers",
+   "fn": [
+    "conditioner",
+    "film-former",
+    "antistatic"
+   ],
+   "o": "SYNTHETIC",
+   "a": [
+    "PQ-7"
+   ]
+  },
+  {
+   "k": "polyquaternium-11",
+   "n": "Polyquaternium-11",
+   "t": "COPOLYMER",
+   "m": "POLYMER",
+   "f": "cationic-polymers",
+   "fn": [
+    "film-former",
+    "antistatic"
+   ],
+   "p": 4,
+   "r": "Styling film-former.",
+   "o": "SYNTHETIC",
+   "a": [
+    "PQ-11"
+   ]
+  },
+  {
+   "k": "polyquaternium-37",
+   "n": "Polyquaternium-37",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "cationic-polymers",
+   "fn": [
+    "conditioner",
+    "thickener"
+   ],
+   "p": 4,
+   "r": "Cationic thickener in leave-in conditioners.",
+   "o": "SYNTHETIC",
+   "a": [
+    "PQ-37"
+   ]
+  },
+  {
+   "k": "polyquaternium-6",
+   "n": "Polyquaternium-6",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "cationic-polymers",
+   "fn": [
+    "conditioner",
+    "antistatic"
+   ],
+   "p": 4,
+   "r": "Cationic conditioning polymer.",
+   "o": "SYNTHETIC",
+   "a": [
+    "PQ-6"
+   ]
+  },
+  {
+   "k": "dimethicone",
+   "n": "Dimethicone",
+   "t": "POLYMER",
+   "m": "SILICONE",
+   "f": "silicones",
+   "fn": [
+    "conditioner",
+    "emollient",
+    "film-former",
+    "antistatic"
+   ],
+   "p": 4,
+   "r": "Benchmark conditioning silicone; heat damage / frizz.",
+   "o": "SYNTHETIC",
+   "a": [
+    "Polydimethylsiloxane",
+    "PDMS"
+   ]
+  },
+  {
+   "k": "amodimethicone",
+   "n": "Amodimethicone",
+   "t": "POLYMER",
+   "m": "SILICONE",
+   "f": "silicones",
+   "fn": [
+    "conditioner",
+    "film-former"
+   ],
+   "p": 4,
+   "r": "Amino-functional silicone; damaged-hair targeting.",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "dimethiconol",
+   "n": "Dimethiconol",
+   "t": "POLYMER",
+   "m": "SILICONE",
+   "f": "silicones",
+   "fn": [
+    "conditioner",
+    "emollient"
+   ],
+   "p": 4,
+   "r": "Conditioning silicone.",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "cyclopentasiloxane",
+   "n": "Cyclopentasiloxane",
+   "c": "D5",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SILICONE",
+   "f": "silicones",
+   "fn": [
+    "emollient",
+    "solubilizer"
+   ],
+   "p": 6,
+   "r": "Restricted in EU wash-off products (D4/D5) — regulatory-review priority.",
+   "o": "SYNTHETIC",
+   "cid": 10913,
+   "a": [
+    "D5",
+    "Decamethylcyclopentasiloxane"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "bis-aminopropyl-dimethicone",
+   "n": "Bis-Aminopropyl Dimethicone",
+   "t": "POLYMER",
+   "m": "SILICONE",
+   "f": "silicones",
+   "fn": [
+    "conditioner"
+   ],
+   "p": 4,
+   "r": "Amino silicone conditioning.",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "olive-oil",
+   "n": "Olea Europaea Fruit Oil",
+   "c": "Olive Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Olea Europaea (Olive) Fruit Oil",
+    "Olive Oil",
+    "Extra Virgin Olive Oil"
+   ],
+   "b": [
+    "Olea",
+    "europaea",
+    "fruit"
+   ]
+  },
+  {
+   "k": "grape-seed-oil",
+   "n": "Vitis Vinifera Seed Oil",
+   "c": "Grape Seed Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Vitis Vinifera (Grape) Seed Oil",
+    "Grapeseed Oil"
+   ],
+   "b": [
+    "Vitis",
+    "vinifera",
+    "seed"
+   ]
+  },
+  {
+   "k": "rice-bran-oil",
+   "n": "Oryza Sativa Bran Oil",
+   "c": "Rice Bran Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Oryza Sativa (Rice) Bran Oil",
+    "Rice Bran Oil"
+   ],
+   "b": [
+    "Oryza",
+    "sativa",
+    "bran"
+   ]
+  },
+  {
+   "k": "acai-fruit-oil",
+   "n": "Euterpe Oleracea Fruit Oil",
+   "c": "Acai Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "antioxidant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Euterpe Oleracea (Acai Palm) Fruit Oil",
+    "Acai Fruit Oil",
+    "Acai Oil"
+   ],
+   "b": [
+    "Euterpe",
+    "oleracea",
+    "fruit"
+   ]
+  },
+  {
+   "k": "passion-fruit-seed-oil",
+   "n": "Passiflora Edulis Seed Oil",
+   "c": "Passion Fruit Seed Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Passiflora Edulis Seed (Passion Fruit) Oil",
+    "Passion Fruit Oil",
+    "Maracuja Oil"
+   ],
+   "b": [
+    "Passiflora",
+    "edulis",
+    "seed"
+   ]
+  },
+  {
+   "k": "linseed-seed-oil",
+   "n": "Linum Usitatissimum Seed Oil",
+   "c": "Flaxseed Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Linum Usitatissimum (Flax Seed) Seed Oil",
+    "Linum Usitatissimum (Linseed) Seed Oil",
+    "Flaxseed Oil",
+    "Linseed Oil"
+   ],
+   "b": [
+    "Linum",
+    "usitatissimum",
+    "seed"
+   ]
+  },
+  {
+   "k": "calendula-flower-oil",
+   "n": "Calendula Officinalis Flower Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "scalp-soothing"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Calendula Oil"
+   ],
+   "b": [
+    "Calendula",
+    "officinalis",
+    "flower"
+   ]
+  },
+  {
+   "k": "sweet-almond-oil",
+   "n": "Prunus Amygdalus Dulcis Oil",
+   "c": "Sweet Almond Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Prunus Amygdalus Dulcis (Sweet Almond) Oil",
+    "Sweet Almond Oil"
+   ],
+   "b": [
+    "Prunus",
+    "amygdalus dulcis",
+    "seed"
+   ]
+  },
+  {
+   "k": "castor-seed-oil",
+   "n": "Ricinus Communis Seed Oil",
+   "c": "Castor Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "film-former"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Ricinus Communis (Castor) Seed Oil",
+    "Castor Oil",
+    "Jamaican Black Castor Oil"
+   ],
+   "b": [
+    "Ricinus",
+    "communis",
+    "seed"
+   ]
+  },
+  {
+   "k": "jojoba-seed-oil",
+   "n": "Simmondsia Chinensis Seed Oil",
+   "c": "Jojoba Oil",
+   "t": "WAX",
+   "m": "WAX",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Simmondsia Chinensis (Jojoba) Seed Oil",
+    "Jojoba Oil"
+   ],
+   "b": [
+    "Simmondsia",
+    "chinensis",
+    "seed"
+   ]
+  },
+  {
+   "k": "hydrolyzed-jojoba-esters",
+   "n": "Hydrolyzed Jojoba Esters",
+   "t": "HYDROLYSATE",
+   "m": "LIPID",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "conditioner"
+   ],
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "argan-kernel-oil",
+   "n": "Argania Spinosa Kernel Oil",
+   "c": "Argan Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "antioxidant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Argan Oil",
+    "Argania Spinosa (Argan) Kernel Oil"
+   ],
+   "b": [
+    "Argania",
+    "spinosa",
+    "kernel"
+   ]
+  },
+  {
+   "k": "coconut-oil",
+   "n": "Cocos Nucifera Oil",
+   "c": "Coconut Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Cocos Nucifera (Coconut) Oil",
+    "Coconut Oil"
+   ],
+   "b": [
+    "Cocos",
+    "nucifera",
+    "kernel"
+   ]
+  },
+  {
+   "k": "soybean-oil",
+   "n": "Glycine Soja Oil",
+   "c": "Soybean Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Glycine Soja (Soybean) Oil",
+    "Soybean Oil"
+   ],
+   "b": [
+    "Glycine",
+    "max",
+    "seed"
+   ]
+  },
+  {
+   "k": "wheat-germ-oil",
+   "n": "Triticum Vulgare Germ Oil",
+   "c": "Wheat Germ Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Triticum Vulgare (Wheat) Germ Oil"
+   ],
+   "b": [
+    "Triticum",
+    "vulgare",
+    "germ"
+   ]
+  },
+  {
+   "k": "safflower-seed-oil",
+   "n": "Carthamus Tinctorius Seed Oil",
+   "c": "Safflower Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Carthamus Tinctorius (Safflower) Seed Oil"
+   ],
+   "b": [
+    "Carthamus",
+    "tinctorius",
+    "seed"
+   ]
+  },
+  {
+   "k": "evening-primrose-oil",
+   "n": "Oenothera Biennis Oil",
+   "c": "Evening Primrose Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Oenothera Biennis (Evening Primrose) Oil"
+   ],
+   "b": [
+    "Oenothera",
+    "biennis",
+    "seed"
+   ]
+  },
+  {
+   "k": "babassu-seed-oil",
+   "n": "Orbignya Oleifera Seed Oil",
+   "c": "Babassu Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Orbignya Oleifera (Babassu) Seed Oil"
+   ],
+   "b": [
+    "Orbignya",
+    "oleifera",
+    "seed"
+   ]
+  },
+  {
+   "k": "avocado-oil",
+   "n": "Persea Gratissima Oil",
+   "c": "Avocado Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Persea Gratissima (Avocado) Oil"
+   ],
+   "b": [
+    "Persea",
+    "americana",
+    "fruit"
+   ]
+  },
+  {
+   "k": "macadamia-ternifolia-seed-oil",
+   "n": "Macadamia Ternifolia Seed Oil",
+   "c": "Macadamia Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "b": [
+    "Macadamia",
+    "ternifolia",
+    "seed"
+   ]
+  },
+  {
+   "k": "carrot-seed-oil",
+   "n": "Daucus Carota Sativa Seed Oil",
+   "c": "Carrot Seed Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Daucus Carota Sativa (Carrot) Seed Oil"
+   ],
+   "b": [
+    "Daucus",
+    "carota sativa",
+    "seed"
+   ]
+  },
+  {
+   "k": "neem-seed-oil",
+   "n": "Melia Azadirachta Seed Oil",
+   "c": "Neem Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Neem Oil",
+    "Azadirachta Indica Seed Oil"
+   ],
+   "b": [
+    "Azadirachta",
+    "indica",
+    "seed"
+   ]
+  },
+  {
+   "k": "sunflower-seed-oil",
+   "n": "Helianthus Annuus Seed Oil",
+   "c": "Sunflower Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "p": 4,
+   "r": "Comparator oil in hair-damage literature.",
+   "o": "NATURAL",
+   "a": [
+    "Helianthus Annuus (Sunflower) Seed Oil",
+    "Sunflower Oil"
+   ],
+   "b": [
+    "Helianthus",
+    "annuus",
+    "seed"
+   ]
+  },
+  {
+   "k": "mineral-oil",
+   "n": "Paraffinum Liquidum",
+   "c": "Mineral Oil",
+   "t": "UVCB",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "occlusive"
+   ],
+   "p": 4,
+   "r": "Comparator in hair-oil penetration literature; occlusive.",
+   "o": "SYNTHETIC",
+   "a": [
+    "Mineral Oil",
+    "Liquid Paraffin"
+   ]
+  },
+  {
+   "k": "petrolatum",
+   "n": "Petrolatum",
+   "t": "UVCB",
+   "m": "WAX",
+   "f": "butters-waxes",
+   "fn": [
+    "occlusive",
+    "emollient"
+   ],
+   "p": 4,
+   "r": "Occlusive used in edge/scalp products.",
+   "o": "SYNTHETIC",
+   "a": [
+    "Petroleum Jelly"
+   ]
+  },
+  {
+   "k": "synsepalum-dulcificum-seed-oil",
+   "n": "Synsepalum Dulcificum Seed Oil",
+   "c": "Miracle Fruit Seed Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "p": 4,
+   "r": "Has controlled human breakage evidence (branded MFSO).",
+   "o": "NATURAL",
+   "a": [
+    "MFSO",
+    "Miracle Fruit Seed Oil"
+   ],
+   "b": [
+    "Synsepalum",
+    "dulcificum",
+    "seed"
+   ]
+  },
+  {
+   "k": "black-seed-oil",
+   "n": "Nigella Sativa Seed Oil",
+   "c": "Black Seed Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "botanical-active"
+   ],
+   "p": 3,
+   "r": "Popular in textured-hair scalp oils.",
+   "o": "NATURAL",
+   "b": [
+    "Nigella",
+    "sativa",
+    "seed"
+   ]
+  },
+  {
+   "k": "pumpkin-seed-oil",
+   "n": "Cucurbita Pepo Seed Oil",
+   "c": "Pumpkin Seed Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "botanical-active"
+   ],
+   "p": 4,
+   "r": "Appearance-of-density literature (oral).",
+   "o": "NATURAL",
+   "b": [
+    "Cucurbita",
+    "pepo",
+    "seed"
+   ]
+  },
+  {
+   "k": "baobab-seed-oil",
+   "n": "Adansonia Digitata Seed Oil",
+   "c": "Baobab Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "p": 3,
+   "r": "Common in textured-hair products.",
+   "o": "NATURAL",
+   "b": [
+    "Adansonia",
+    "digitata",
+    "seed"
+   ]
+  },
+  {
+   "k": "marula-seed-oil",
+   "n": "Sclerocarya Birrea Seed Oil",
+   "c": "Marula Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "p": 3,
+   "r": "Common in textured-hair oils.",
+   "o": "NATURAL",
+   "b": [
+    "Sclerocarya",
+    "birrea",
+    "seed"
+   ]
+  },
+  {
+   "k": "moringa-seed-oil",
+   "n": "Moringa Oleifera Seed Oil",
+   "c": "Moringa Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "p": 3,
+   "r": "Common in textured-hair oils.",
+   "o": "NATURAL",
+   "b": [
+    "Moringa",
+    "oleifera",
+    "seed"
+   ]
+  },
+  {
+   "k": "camellia-seed-oil",
+   "n": "Camellia Japonica Seed Oil",
+   "c": "Camellia Oil",
+   "t": "FIXED_OIL",
+   "m": "OIL",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "p": 4,
+   "r": "Hair oil; frizz.",
+   "o": "NATURAL",
+   "b": [
+    "Camellia",
+    "japonica",
+    "seed"
+   ]
+  },
+  {
+   "k": "squalane",
+   "n": "Squalane",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "LIPID",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "p": 5,
+   "r": "Increasingly biotech-derived (sugarcane fermentation) lipid.",
+   "o": "BIOTECH",
+   "cid": 8089,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "isopropyl-myristate",
+   "n": "Isopropyl Myristate",
+   "t": "ESTER",
+   "m": "LIPID",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "penetration-enhancer"
+   ],
+   "p": 4,
+   "r": "Emollient ester.",
+   "o": "SYNTHETIC",
+   "cid": 8042,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "caprylic-capric-triglyceride",
+   "n": "Caprylic/Capric Triglyceride",
+   "t": "UVCB",
+   "m": "LIPID",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "solubilizer"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "MCT Oil"
+   ]
+  },
+  {
+   "k": "c12-15-alkyl-lactate",
+   "n": "C12-15 Alkyl Lactate",
+   "t": "UVCB",
+   "m": "LIPID",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "coco-caprylate",
+   "n": "Coco-Caprylate",
+   "t": "UVCB",
+   "m": "LIPID",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient"
+   ],
+   "p": 4,
+   "r": "Silicone-alternative emollient.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "phytantriol",
+   "n": "Phytantriol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "LIPID",
+   "f": "emollient-oils",
+   "fn": [
+    "humectant",
+    "conditioner"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 3018525,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "phytosterols",
+   "n": "Phytosterols",
+   "t": "UVCB",
+   "m": "LIPID",
+   "f": "emollient-oils",
+   "fn": [
+    "emollient",
+    "conditioner"
+   ],
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "cholesterol",
+   "n": "Cholesterol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "LIPID",
+   "f": "lipids",
+   "fn": [
+    "emollient",
+    "conditioner"
+   ],
+   "p": 5,
+   "r": "Biomimetic lipid; cuticle lipid research.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 5997,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "ceramide-np",
+   "n": "Ceramide NP",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "LIPID",
+   "f": "lipids",
+   "fn": [
+    "conditioner",
+    "emollient"
+   ],
+   "p": 5,
+   "r": "Biomimetic lipid.",
+   "o": "BIOTECH",
+   "a": [
+    "Ceramide 3"
+   ]
+  },
+  {
+   "k": "methyl-eicosanoic-acid-18",
+   "n": "18-Methyl Eicosanoic Acid",
+   "c": "18-MEA",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "LIPID",
+   "f": "lipids",
+   "fn": [
+    "conditioner"
+   ],
+   "p": 5,
+   "r": "Native cuticle lipid; biomimetic research target.",
+   "o": "SYNTHETIC",
+   "a": [
+    "18-MEA",
+    "18-Methyleicosanoic Acid"
+   ],
+   "cid": 5282602,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "shea-butter",
+   "n": "Butyrospermum Parkii Butter",
+   "c": "Shea Butter",
+   "t": "FIXED_OIL",
+   "m": "LIPID",
+   "f": "butters-waxes",
+   "fn": [
+    "emollient",
+    "occlusive"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Butyrospermum Parkii (Shea) Butter",
+    "Shea Butter",
+    "Vitellaria Paradoxa Butter"
+   ],
+   "b": [
+    "Vitellaria",
+    "paradoxa",
+    "seed"
+   ]
+  },
+  {
+   "k": "mango-seed-butter",
+   "n": "Mangifera Indica Seed Butter",
+   "c": "Mango Butter",
+   "t": "FIXED_OIL",
+   "m": "LIPID",
+   "f": "butters-waxes",
+   "fn": [
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Mangifera Indica (Mango) Seed Butter"
+   ],
+   "b": [
+    "Mangifera",
+    "indica",
+    "seed"
+   ]
+  },
+  {
+   "k": "cocoa-seed-butter",
+   "n": "Theobroma Cacao Seed Butter",
+   "c": "Cocoa Butter",
+   "t": "FIXED_OIL",
+   "m": "LIPID",
+   "f": "butters-waxes",
+   "fn": [
+    "emollient",
+    "occlusive"
+   ],
+   "p": 3,
+   "r": "Common in textured-hair butters.",
+   "o": "NATURAL",
+   "b": [
+    "Theobroma",
+    "cacao",
+    "seed"
+   ]
+  },
+  {
+   "k": "murumuru-seed-butter",
+   "n": "Astrocaryum Murumuru Seed Butter",
+   "c": "Murumuru Butter",
+   "t": "FIXED_OIL",
+   "m": "LIPID",
+   "f": "butters-waxes",
+   "fn": [
+    "emollient"
+   ],
+   "p": 3,
+   "r": "Common in textured-hair products.",
+   "o": "NATURAL",
+   "b": [
+    "Astrocaryum",
+    "murumuru",
+    "seed"
+   ]
+  },
+  {
+   "k": "beeswax",
+   "n": "Cera Alba",
+   "c": "Beeswax",
+   "t": "WAX",
+   "m": "WAX",
+   "f": "butters-waxes",
+   "fn": [
+    "occlusive",
+    "thickener"
+   ],
+   "p": 3,
+   "r": "Used in edge/hold products; allergy relevance.",
+   "o": "NATURAL",
+   "a": [
+    "Beeswax"
+   ]
+  },
+  {
+   "k": "candelilla-wax",
+   "n": "Euphorbia Cerifera Wax",
+   "c": "Candelilla Wax",
+   "t": "WAX",
+   "m": "WAX",
+   "f": "butters-waxes",
+   "fn": [
+    "occlusive",
+    "thickener"
+   ],
+   "p": 4,
+   "r": "Vegan wax alternative.",
+   "o": "NATURAL",
+   "b": [
+    "Euphorbia",
+    "cerifera",
+    "stem"
+   ]
+  },
+  {
+   "k": "lanolin",
+   "n": "Lanolin",
+   "t": "UNKNOWN_COMPOSITION",
+   "m": "WAX",
+   "f": "butters-waxes",
+   "fn": [
+    "emollient",
+    "occlusive"
+   ],
+   "p": 6,
+   "r": "Known contact allergen.",
+   "o": "NATURAL"
+  },
+  {
+   "k": "balsam-canada-resin",
+   "n": "Abies Balsamea Resin",
+   "c": "Canada Balsam",
+   "t": "UNKNOWN_COMPOSITION",
+   "m": "COMPLEX_MIXTURE",
+   "f": "botanical-extracts",
+   "fn": [
+    "film-former",
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Abies Balsamea (Balsam Canada) Resin"
+   ],
+   "b": [
+    "Abies",
+    "balsamea",
+    "resin"
+   ]
+  },
+  {
+   "k": "hydrolyzed-rice-protein",
+   "n": "Hydrolyzed Rice Protein",
+   "t": "HYDROLYSATE",
+   "m": "PROTEIN",
+   "f": "proteins-hydrolysates",
+   "fn": [
+    "protein",
+    "film-former",
+    "conditioner"
+   ],
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "hydrolyzed-wheat-protein",
+   "n": "Hydrolyzed Wheat Protein",
+   "t": "HYDROLYSATE",
+   "m": "PROTEIN",
+   "f": "proteins-hydrolysates",
+   "fn": [
+    "protein",
+    "film-former",
+    "conditioner"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "Hydrolysed Wheat Protein"
+   ]
+  },
+  {
+   "k": "hydrolyzed-silk",
+   "n": "Hydrolyzed Silk",
+   "t": "HYDROLYSATE",
+   "m": "PROTEIN",
+   "f": "proteins-hydrolysates",
+   "fn": [
+    "protein",
+    "film-former"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "Silk Amino Acids (related)"
+   ]
+  },
+  {
+   "k": "hydrolyzed-keratin",
+   "n": "Hydrolyzed Keratin",
+   "t": "HYDROLYSATE",
+   "m": "PROTEIN",
+   "f": "proteins-hydrolysates",
+   "fn": [
+    "protein",
+    "strengthening-agent",
+    "film-former"
+   ],
+   "p": 4,
+   "r": "Repair / chemical damage; molecular-weight dependent penetration.",
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "Hydrolysed Keratin",
+    "Keratin Peptides"
+   ]
+  },
+  {
+   "k": "hydrolyzed-collagen",
+   "n": "Hydrolyzed Collagen",
+   "t": "HYDROLYSATE",
+   "m": "PROTEIN",
+   "f": "proteins-hydrolysates",
+   "fn": [
+    "protein",
+    "film-former"
+   ],
+   "p": 4,
+   "r": "Protein treatment category.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "hydrolyzed-quinoa",
+   "n": "Hydrolyzed Quinoa",
+   "t": "HYDROLYSATE",
+   "m": "PROTEIN",
+   "f": "proteins-hydrolysates",
+   "fn": [
+    "protein",
+    "film-former"
+   ],
+   "p": 4,
+   "r": "Vegan protein for color-treated hair.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "hydrolyzed-oat-protein",
+   "n": "Hydrolyzed Oat Protein",
+   "t": "HYDROLYSATE",
+   "m": "PROTEIN",
+   "f": "proteins-hydrolysates",
+   "fn": [
+    "protein",
+    "film-former"
+   ],
+   "p": 4,
+   "r": "Protein; gluten-adjacent allergen considerations.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "hydrolyzed-corn-starch",
+   "n": "Hydrolyzed Corn Starch",
+   "t": "HYDROLYSATE",
+   "m": "POLYMER",
+   "f": "polymers-thickeners",
+   "fn": [
+    "film-former",
+    "humectant"
+   ],
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "arginine",
+   "n": "Arginine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "AMINO_ACID",
+   "f": "amino-acids",
+   "fn": [
+    "conditioner",
+    "ph-adjuster"
+   ],
+   "p": 4,
+   "r": "Amino acid in bond-repair and conditioning literature.",
+   "o": "BIOTECH",
+   "cid": 6322,
+   "a": [
+    "L-Arginine"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "glycine",
+   "n": "Glycine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "AMINO_ACID",
+   "f": "amino-acids",
+   "fn": [
+    "conditioner",
+    "buffer"
+   ],
+   "p": 4,
+   "r": "Amino acid; bond-repair patents.",
+   "o": "BIOTECH",
+   "cid": 750,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "serine",
+   "n": "Serine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "AMINO_ACID",
+   "f": "amino-acids",
+   "fn": [
+    "humectant",
+    "conditioner"
+   ],
+   "p": 4,
+   "r": "Hair amino acid; moisture.",
+   "o": "BIOTECH",
+   "cid": 5951,
+   "a": [
+    "L-Serine"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "cysteine",
+   "n": "Cysteine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "AMINO_ACID",
+   "f": "amino-acids",
+   "fn": [
+    "conditioner",
+    "antioxidant"
+   ],
+   "p": 4,
+   "r": "Disulfide chemistry of keratin.",
+   "o": "BIOTECH",
+   "cid": 5862,
+   "a": [
+    "L-Cysteine"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "lysine",
+   "n": "Lysine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "AMINO_ACID",
+   "f": "amino-acids",
+   "fn": [
+    "conditioner"
+   ],
+   "p": 4,
+   "r": "Amino acid conditioning.",
+   "o": "BIOTECH",
+   "cid": 5962,
+   "a": [
+    "L-Lysine"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "copper-tripeptide-1",
+   "n": "Copper Tripeptide-1",
+   "c": "GHK-Cu",
+   "t": "PEPTIDE",
+   "m": "PEPTIDE",
+   "f": "peptides",
+   "fn": [
+    "peptide-active"
+   ],
+   "p": 5,
+   "r": "Peptide active; in-vitro hair follicle literature.",
+   "o": "SYNTHETIC",
+   "a": [
+    "GHK-Cu",
+    "Copper Peptide"
+   ]
+  },
+  {
+   "k": "biotinoyl-tripeptide-1",
+   "n": "Biotinoyl Tripeptide-1",
+   "t": "PEPTIDE",
+   "m": "PEPTIDE",
+   "f": "peptides",
+   "fn": [
+    "peptide-active"
+   ],
+   "p": 5,
+   "r": "Peptide active in scalp serums.",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "acetyl-tetrapeptide-3",
+   "n": "Acetyl Tetrapeptide-3",
+   "t": "PEPTIDE",
+   "m": "PEPTIDE",
+   "f": "peptides",
+   "fn": [
+    "peptide-active"
+   ],
+   "p": 5,
+   "r": "Peptide active in scalp serums.",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "palmitoyl-tetrapeptide-20",
+   "n": "Palmitoyl Tetrapeptide-20",
+   "t": "PEPTIDE",
+   "m": "PEPTIDE",
+   "f": "peptides",
+   "fn": [
+    "peptide-active"
+   ],
+   "p": 5,
+   "r": "Peptide active (pigmentation research).",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "myristoyl-pentapeptide-17",
+   "n": "Myristoyl Pentapeptide-17",
+   "t": "PEPTIDE",
+   "m": "PEPTIDE",
+   "f": "peptides",
+   "fn": [
+    "peptide-active"
+   ],
+   "p": 5,
+   "r": "Peptide active (lash/brow products).",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "aloe-barbadensis-leaf-juice",
+   "n": "Aloe Barbadensis Leaf Juice",
+   "c": "Aloe Vera Juice",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "humectant",
+    "scalp-soothing"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Aloe Vera Juice",
+    "Aloe Barbadensis Extract",
+    "Aloe Vera"
+   ],
+   "b": [
+    "Aloe",
+    "barbadensis",
+    "leaf"
+   ]
+  },
+  {
+   "k": "burdock-root-extract",
+   "n": "Arctium Lappa Root Extract",
+   "c": "Burdock Root Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active",
+    "scalp-soothing"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Arctium Lappa (Burdock) Root Extract",
+    "Burdock Root Extract",
+    "Burdock Root"
+   ],
+   "b": [
+    "Arctium",
+    "lappa",
+    "root"
+   ]
+  },
+  {
+   "k": "comfrey-leaf-extract",
+   "n": "Symphytum Officinale Leaf Extract",
+   "c": "Comfrey Leaf Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active",
+    "scalp-soothing"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Symphytum Officinale (Comfrey) Leaves Extract",
+    "Comfrey Leaf Extract"
+   ],
+   "b": [
+    "Symphytum",
+    "officinale",
+    "leaf"
+   ]
+  },
+  {
+   "k": "comfrey-extract",
+   "n": "Comfrey Extract (plant part unspecified)",
+   "c": "Comfrey",
+   "t": "UNKNOWN_COMPOSITION",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Comfrey Extract",
+    "Comfrey"
+   ],
+   "b": [
+    "Symphytum",
+    "officinale",
+    "unspecified"
+   ],
+   "identityNote": "Labels declare 'Comfrey Extract' without plant part. Root vs leaf differ materially in pyrrolizidine-alkaloid content. Do not merge with the leaf extract without supplier confirmation."
+  },
+  {
+   "k": "kelp-extract",
+   "n": "Kelp Extract (species unspecified)",
+   "c": "Kelp",
+   "t": "UNKNOWN_COMPOSITION",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active",
+    "humectant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Kelp Extract",
+    "Kelp"
+   ],
+   "identityNote": "'Kelp' covers several brown-algae genera (e.g., Laminaria, Macrocystis, Ascophyllum). Species unresolved."
+  },
+  {
+   "k": "fenugreek-seed-extract",
+   "n": "Trigonella Foenum-Graecum Seed Extract",
+   "c": "Fenugreek Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Fenugreek Extract",
+    "Fenugreek",
+    "Trigonella Foenum-Graecum Seed Extract"
+   ],
+   "b": [
+    "Trigonella",
+    "foenum-graecum",
+    "seed"
+   ]
+  },
+  {
+   "k": "nettle-extract",
+   "n": "Urtica Dioica Extract",
+   "c": "Nettle Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Urtica Dioica (Nettle) Extract",
+    "Urtica Dioica (Nettle) Leaf Extract",
+    "Nettle Extract",
+    "Nettles",
+    "Stinging Nettle"
+   ],
+   "b": [
+    "Urtica",
+    "dioica",
+    "leaf"
+   ]
+  },
+  {
+   "k": "horsetail-extract",
+   "n": "Equisetum Arvense Extract",
+   "c": "Horsetail Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Equisetum Arvense (Horsetail) Extract",
+    "Equisetum Arvense (Horsetail Grass) Extract",
+    "Horsetail Extract",
+    "Horsetail"
+   ],
+   "b": [
+    "Equisetum",
+    "arvense",
+    "aerial parts"
+   ]
+  },
+  {
+   "k": "alfalfa-extract",
+   "n": "Medicago Sativa Extract",
+   "c": "Alfalfa Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Alfalfa Extract",
+    "Alfalfa"
+   ],
+   "b": [
+    "Medicago",
+    "sativa",
+    "unspecified"
+   ]
+  },
+  {
+   "k": "ginger-root-extract",
+   "n": "Zingiber Officinale Root Extract",
+   "c": "Ginger Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Ginger Extract",
+    "Ginger"
+   ],
+   "b": [
+    "Zingiber",
+    "officinale",
+    "root"
+   ]
+  },
+  {
+   "k": "ginger-root-oil",
+   "n": "Zingiber Officinale Root Oil",
+   "c": "Ginger Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "fragrance",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Zingiber Officinale (Ginger) Root Oil"
+   ],
+   "b": [
+    "Zingiber",
+    "officinale",
+    "root"
+   ]
+  },
+  {
+   "k": "oatstraw-extract",
+   "n": "Avena Sativa Straw Extract",
+   "c": "Oatstraw Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "scalp-soothing",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Oatstraw Extract",
+    "Oatstraw"
+   ],
+   "b": [
+    "Avena",
+    "sativa",
+    "straw"
+   ]
+  },
+  {
+   "k": "flax-extract",
+   "n": "Linum Usitatissimum Extract",
+   "c": "Flax Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "film-former",
+    "humectant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Linium Usitatissium (Flax) Extract",
+    "Flax Extract",
+    "Flaxseed Extract"
+   ],
+   "b": [
+    "Linum",
+    "usitatissimum",
+    "seed"
+   ]
+  },
+  {
+   "k": "passion-fruit-extract",
+   "n": "Passiflora Edulis Fruit Extract",
+   "c": "Passion Fruit Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Passiflora Edulis (Passion) Fruit Extract"
+   ],
+   "b": [
+    "Passiflora",
+    "edulis",
+    "fruit"
+   ]
+  },
+  {
+   "k": "calendula-extract",
+   "n": "Calendula Officinalis Extract",
+   "c": "Calendula Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "scalp-soothing",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Calendula Officinalis (Calendula) Extract"
+   ],
+   "b": [
+    "Calendula",
+    "officinalis",
+    "flower"
+   ]
+  },
+  {
+   "k": "matricaria-flower-extract",
+   "n": "Chamomilla Recutita Flower Extract",
+   "c": "German Chamomile Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "scalp-soothing",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Matricaria Chamomilla Flower Extract",
+    "German Chamomile"
+   ],
+   "b": [
+    "Matricaria",
+    "chamomilla",
+    "flower"
+   ]
+  },
+  {
+   "k": "anthemis-nobilis-flower-extract",
+   "n": "Anthemis Nobilis Flower Extract",
+   "c": "Roman Chamomile Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "scalp-soothing",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Anthemis Nobilis (Chamomile) Flower Extract",
+    "Roman Chamomile",
+    "Chamaemelum Nobile Flower Extract"
+   ],
+   "b": [
+    "Chamaemelum",
+    "nobile",
+    "flower"
+   ]
+  },
+  {
+   "k": "hops-extract",
+   "n": "Humulus Lupulus Extract",
+   "c": "Hops Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Humulus Lupulus (Hops) Extract"
+   ],
+   "b": [
+    "Humulus",
+    "lupulus",
+    "cone"
+   ]
+  },
+  {
+   "k": "henna-extract",
+   "n": "Lawsonia Inermis Extract",
+   "c": "Henna Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "colorant",
+    "conditioner"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Lawsonia Inermis (Henna) Extract"
+   ],
+   "b": [
+    "Lawsonia",
+    "inermis",
+    "leaf"
+   ]
+  },
+  {
+   "k": "rosemary-leaf-extract",
+   "n": "Rosmarinus Officinalis Leaf Extract",
+   "c": "Rosemary Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "antioxidant",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Rosmarinus Officinalis (Rosemary) Leaves Extract",
+    "Rosemary Leaf Extract"
+   ],
+   "b": [
+    "Rosmarinus",
+    "officinalis",
+    "leaf"
+   ]
+  },
+  {
+   "k": "celery-seed-extract",
+   "n": "Apium Graveolens Seed Extract",
+   "c": "Celery Seed Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Apium Graveolens (Celery) Seed Extract"
+   ],
+   "b": [
+    "Apium",
+    "graveolens",
+    "seed"
+   ]
+  },
+  {
+   "k": "hibiscus-flower-extract",
+   "n": "Hibiscus Rosa-Sinensis Flower Extract",
+   "c": "Hibiscus Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "b": [
+    "Hibiscus",
+    "rosa-sinensis",
+    "flower"
+   ]
+  },
+  {
+   "k": "coconut-fruit-juice",
+   "n": "Cocos Nucifera Fruit Juice",
+   "c": "Coconut Water",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "humectant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Cocos Nucifera (Coconut) Fruit Juice",
+    "Coconut Water"
+   ],
+   "b": [
+    "Cocos",
+    "nucifera",
+    "fruit"
+   ]
+  },
+  {
+   "k": "coconut-fruit-extract",
+   "n": "Cocos Nucifera Fruit Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "humectant",
+    "emollient"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Cocos Nucifera (Coconut) Fruit Extract"
+   ],
+   "b": [
+    "Cocos",
+    "nucifera",
+    "fruit"
+   ]
+  },
+  {
+   "k": "tangerine-fruit-extract",
+   "n": "Citrus Reticulata Fruit Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Citrus Reticulata (Tangerine) Fruit Extract"
+   ],
+   "b": [
+    "Citrus",
+    "reticulata",
+    "fruit"
+   ]
+  },
+  {
+   "k": "green-tea-leaf-extract",
+   "n": "Camellia Sinensis Leaf Extract",
+   "c": "Green Tea Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "antioxidant",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Green Tea Extract"
+   ],
+   "b": [
+    "Camellia",
+    "sinensis",
+    "leaf"
+   ]
+  },
+  {
+   "k": "saw-palmetto-fruit-extract",
+   "n": "Serenoa Serrulata Fruit Extract",
+   "c": "Saw Palmetto Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active",
+    "sebum-modulating"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Saw Palmetto",
+    "Serenoa Repens Fruit Extract"
+   ],
+   "b": [
+    "Serenoa",
+    "repens",
+    "fruit"
+   ]
+  },
+  {
+   "k": "amla-fruit-extract",
+   "n": "Phyllanthus Emblica Fruit Extract",
+   "c": "Amla Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "antioxidant",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Amla",
+    "Indian Gooseberry Extract"
+   ],
+   "b": [
+    "Phyllanthus",
+    "emblica",
+    "fruit"
+   ]
+  },
+  {
+   "k": "beet-root-extract",
+   "n": "Beta Vulgaris Root Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "humectant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Beta Vulgaris (Beet) Root Extract"
+   ],
+   "b": [
+    "Beta",
+    "vulgaris",
+    "root"
+   ]
+  },
+  {
+   "k": "apple-fruit-extract",
+   "n": "Pyrus Malus Fruit Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "exfoliant",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Pyrus Malus (Apple) Fruit Extract"
+   ],
+   "b": [
+    "Malus",
+    "domestica",
+    "fruit"
+   ]
+  },
+  {
+   "k": "lemon-peel-extract",
+   "n": "Citrus Limon Peel Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Citrus Limon (Lemon) Peel Extract"
+   ],
+   "b": [
+    "Citrus",
+    "limon",
+    "peel"
+   ]
+  },
+  {
+   "k": "sugarcane-extract",
+   "n": "Saccharum Officinarum Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "exfoliant",
+    "humectant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Saccharum Ofcinarum (Sugarcane) Extract",
+    "Sugarcane Extract"
+   ],
+   "b": [
+    "Saccharum",
+    "officinarum",
+    "stem"
+   ]
+  },
+  {
+   "k": "marshmallow-extract",
+   "n": "Althaea Officinalis Leaf/Root Extract",
+   "c": "Marshmallow Root Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "detangler",
+    "humectant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Althaea Officinalis (Marshmallow) Leaf/Root Extract",
+    "Marshmallow Root"
+   ],
+   "b": [
+    "Althaea",
+    "officinalis",
+    "leaf and root"
+   ]
+  },
+  {
+   "k": "agave-leaf-extract",
+   "n": "Agave Americana Leaf Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "humectant"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Agave Americana (Agave) Leaf Extract"
+   ],
+   "b": [
+    "Agave",
+    "americana",
+    "leaf"
+   ]
+  },
+  {
+   "k": "chondrus-crispus-powder",
+   "n": "Chondrus Crispus Powder",
+   "c": "Irish Moss / Sea Moss",
+   "t": "BOTANICAL_FRACTION",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "film-former",
+    "thickener"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Chondrus (Seaweed) Crispus Powder",
+    "Sea Moss",
+    "Irish Moss"
+   ],
+   "b": [
+    "Chondrus",
+    "crispus",
+    "thallus"
+   ]
+  },
+  {
+   "k": "tea-tree-leaf-oil",
+   "n": "Melaleuca Alternifolia Leaf Oil",
+   "c": "Tea Tree Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "botanical-active",
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Melalueca Alternifolia (Tea Tree) Leaf Oil",
+    "Tea Tree Oil",
+    "Melaleuca Alternifolia (Tea Tree) Leaf Oil"
+   ],
+   "b": [
+    "Melaleuca",
+    "alternifolia",
+    "leaf"
+   ]
+  },
+  {
+   "k": "rosemary-leaf-oil",
+   "n": "Rosmarinus Officinalis Leaf Oil",
+   "c": "Rosemary Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "fragrance",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Rosmarinus Officinalis (Rosemary) Leaf Oil",
+    "Rosemary Oil",
+    "Rosemary Essential Oil"
+   ],
+   "b": [
+    "Rosmarinus",
+    "officinalis",
+    "leaf"
+   ]
+  },
+  {
+   "k": "peppermint-oil",
+   "n": "Mentha Piperita Oil",
+   "c": "Peppermint Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "fragrance",
+    "botanical-active"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Mentha Piperita (Peppermint) Oil",
+    "Peppermint Essential Oil",
+    "Peppermint Oil"
+   ],
+   "b": [
+    "Mentha",
+    "piperita",
+    "aerial parts"
+   ]
+  },
+  {
+   "k": "eucalyptus-leaf-oil",
+   "n": "Eucalyptus Globulus Leaf Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Eucalyptus Globolus (Eucalyptus) Leaf Oil",
+    "Eucalyptus Oil"
+   ],
+   "b": [
+    "Eucalyptus",
+    "globulus",
+    "leaf"
+   ]
+  },
+  {
+   "k": "lavender-oil",
+   "n": "Lavandula Angustifolia Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Lavandula Angustifolia (Lavender) Oil",
+    "Lavender Oil"
+   ],
+   "b": [
+    "Lavandula",
+    "angustifolia",
+    "flower"
+   ]
+  },
+  {
+   "k": "basil-oil",
+   "n": "Ocimum Basilicum Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Ocimum, Basilicum (Basil) Oil",
+    "Basil Oil"
+   ],
+   "b": [
+    "Ocimum",
+    "basilicum",
+    "aerial parts"
+   ]
+  },
+  {
+   "k": "patchouli-oil",
+   "n": "Pogostemon Cablin Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Pogostemon Cablin (Patchouli) Oil"
+   ],
+   "b": [
+    "Pogostemon",
+    "cablin",
+    "leaf"
+   ]
+  },
+  {
+   "k": "sage-oil",
+   "n": "Salvia Officinalis Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Salvia Officinalis (Sage) Oil"
+   ],
+   "b": [
+    "Salvia",
+    "officinalis",
+    "leaf"
+   ]
+  },
+  {
+   "k": "bitter-orange-peel-oil",
+   "n": "Citrus Aurantium Amara Peel Oil",
+   "t": "ESSENTIAL_OIL",
+   "m": "OIL",
+   "f": "essential-oils",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "a": [
+    "Citrus Aurantium Amara (Orange) Peel Oil"
+   ],
+   "b": [
+    "Citrus",
+    "aurantium amara",
+    "peel"
+   ]
+  },
+  {
+   "k": "capsicum-extract",
+   "n": "Capsicum Frutescens Fruit Extract",
+   "t": "BOTANICAL_EXTRACT",
+   "m": "BOTANICAL_EXTRACT",
+   "f": "botanical-extracts",
+   "fn": [
+    "botanical-active"
+   ],
+   "p": 4,
+   "r": "Scalp-stimulation products; irritation risk.",
+   "o": "NATURAL",
+   "b": [
+    "Capsicum",
+    "frutescens",
+    "fruit"
+   ]
+  },
+  {
+   "k": "phenoxyethanol",
+   "n": "Phenoxyethanol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 31236,
+   "a": [
+    "2-Phenoxyethanol",
+    "Phenoxyethanol (Optiphen ND)"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "ethylhexylglycerin",
+   "n": "Ethylhexylglycerin",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "preservatives",
+   "fn": [
+    "preservative-booster",
+    "humectant"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 9859093,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "potassium-sorbate",
+   "n": "Potassium Sorbate",
+   "t": "SALT",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 23676745,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sorbic-acid",
+   "n": "Sorbic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "p": 4,
+   "r": "Parent acid of potassium sorbate (related, not identical).",
+   "o": "SYNTHETIC",
+   "cid": 643460,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "benzoic-acid",
+   "n": "Benzoic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative",
+    "ph-adjuster"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 243,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sodium-benzoate",
+   "n": "Sodium Benzoate",
+   "t": "SALT",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "p": 4,
+   "r": "Common natural-positioned preservative.",
+   "o": "SYNTHETIC",
+   "cid": 517055,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "benzyl-alcohol",
+   "n": "Benzyl Alcohol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative",
+    "fragrance"
+   ],
+   "p": 4,
+   "r": "Preservative and EU-listed fragrance allergen.",
+   "o": "SYNTHETIC",
+   "cid": 244,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "dehydroacetic-acid",
+   "n": "Dehydroacetic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "p": 4,
+   "r": "Common in 'clean' preservative systems.",
+   "o": "SYNTHETIC",
+   "cid": 122903,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "methylparaben",
+   "n": "Methylparaben",
+   "t": "ESTER",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "p": 6,
+   "r": "Restricted preservative (EU Annex V).",
+   "o": "SYNTHETIC",
+   "cid": 7456,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "propylparaben",
+   "n": "Propylparaben",
+   "t": "ESTER",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "p": 6,
+   "r": "Restricted preservative (EU Annex V).",
+   "o": "SYNTHETIC",
+   "cid": 7175,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "methylisothiazolinone",
+   "n": "Methylisothiazolinone",
+   "c": "MIT",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "p": 6,
+   "r": "Known sensitizer; restricted (EU rinse-off only).",
+   "o": "SYNTHETIC",
+   "cid": 39800,
+   "a": [
+    "MI",
+    "MIT"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "methylchloroisothiazolinone",
+   "n": "Methylchloroisothiazolinone",
+   "c": "CMIT",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "p": 6,
+   "r": "Known sensitizer; restricted.",
+   "o": "SYNTHETIC",
+   "cid": 33344,
+   "a": [
+    "MCI",
+    "CMIT"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "dmdm-hydantoin",
+   "n": "DMDM Hydantoin",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "p": 6,
+   "r": "Formaldehyde releaser; consumer litigation in hair care.",
+   "o": "SYNTHETIC",
+   "cid": 22947,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "imidazolidinyl-urea",
+   "n": "Imidazolidinyl Urea",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "PRESERVATIVE",
+   "f": "preservatives",
+   "fn": [
+    "preservative"
+   ],
+   "p": 6,
+   "r": "Formaldehyde releaser.",
+   "o": "SYNTHETIC",
+   "cid": 38258,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "formaldehyde",
+   "n": "Formaldehyde",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "chemical-treatment-agents",
+   "fn": [
+    "preservative",
+    "other"
+   ],
+   "p": 6,
+   "r": "Restricted/prohibited depending on jurisdiction and use; hair-straightening concern.",
+   "o": "SYNTHETIC",
+   "cid": 712,
+   "a": [
+    "Methanal",
+    "Formalin"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "leuconostoc-radish-root-ferment-filtrate",
+   "n": "Leuconostoc/Radish Root Ferment Filtrate",
+   "t": "FILTRATE",
+   "m": "FERMENTATION_DERIVED",
+   "f": "fermentation-derived",
+   "fn": [
+    "preservative",
+    "preservative-booster"
+   ],
+   "p": 5,
+   "r": "Fermentation-derived preservative alternative.",
+   "o": "BIOTECH"
+  },
+  {
+   "k": "disodium-edta",
+   "n": "Disodium EDTA",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "chelators",
+   "fn": [
+    "chelator"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 8759,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "edta",
+   "n": "EDTA",
+   "c": "Edetic acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "chelators",
+   "fn": [
+    "chelator"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 6049,
+   "a": [
+    "Ethylenediaminetetraacetic Acid",
+    "Edetic Acid"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "tetrasodium-edta",
+   "n": "Tetrasodium EDTA",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "chelators",
+   "fn": [
+    "chelator"
+   ],
+   "p": 4,
+   "r": "Chelator; hard-water buildup.",
+   "o": "SYNTHETIC",
+   "cid": 6144,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "trisodium-edta",
+   "n": "Trisodium EDTA",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "chelators",
+   "fn": [
+    "chelator"
+   ],
+   "p": 4,
+   "r": "Chelator; hard-water buildup literature.",
+   "o": "SYNTHETIC",
+   "cid": 9008,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "tetrasodium-glutamate-diacetate",
+   "n": "Tetrasodium Glutamate Diacetate",
+   "c": "GLDA",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "chelators",
+   "fn": [
+    "chelator"
+   ],
+   "p": 4,
+   "r": "Biodegradable chelator alternative to EDTA.",
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "GLDA"
+   ],
+   "cid": 44630158,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "sodium-phytate",
+   "n": "Sodium Phytate",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "chelators",
+   "fn": [
+    "chelator"
+   ],
+   "p": 4,
+   "r": "Natural-positioned chelator.",
+   "o": "NATURALLY_DERIVED"
+  },
+  {
+   "k": "etidronic-acid",
+   "n": "Etidronic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "chelators",
+   "fn": [
+    "chelator"
+   ],
+   "p": 4,
+   "r": "Chelator in clarifying shampoos.",
+   "o": "SYNTHETIC",
+   "cid": 3305,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "tocopherol",
+   "n": "Tocopherol",
+   "c": "Vitamin E",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "antioxidants-vitamins",
+   "fn": [
+    "antioxidant"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "cid": 14985,
+   "a": [
+    "Vitamin E",
+    "alpha-Tocopherol",
+    "Vitamin E oil"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "tocopheryl-acetate",
+   "n": "Tocopheryl Acetate",
+   "t": "ESTER",
+   "m": "SMALL_MOLECULE",
+   "f": "antioxidants-vitamins",
+   "fn": [
+    "antioxidant",
+    "conditioner"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 86472,
+   "a": [
+    "Vitamin E Acetate",
+    "Tocopheryl Acetate (Vitamin E)"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "ascorbic-acid",
+   "n": "Ascorbic Acid",
+   "c": "Vitamin C",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "antioxidants-vitamins",
+   "fn": [
+    "antioxidant"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 54670067,
+   "a": [
+    "Vitamin C",
+    "L-Ascorbic Acid"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "ascorbyl-palmitate",
+   "n": "Ascorbyl Palmitate",
+   "t": "ESTER",
+   "m": "SMALL_MOLECULE",
+   "f": "antioxidants-vitamins",
+   "fn": [
+    "antioxidant"
+   ],
+   "p": 4,
+   "r": "Oil-soluble antioxidant for oil formulas.",
+   "o": "SYNTHETIC",
+   "cid": 54680660,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "bht",
+   "n": "BHT",
+   "c": "Butylated hydroxytoluene",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "antioxidants-vitamins",
+   "fn": [
+    "antioxidant"
+   ],
+   "p": 4,
+   "r": "Antioxidant for oil-based products.",
+   "o": "SYNTHETIC",
+   "cid": 31404,
+   "a": [
+    "Butylated Hydroxytoluene"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "ferulic-acid",
+   "n": "Ferulic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "antioxidants-vitamins",
+   "fn": [
+    "antioxidant"
+   ],
+   "p": 4,
+   "r": "Antioxidant; UV-damage research.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 445858,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "biotin",
+   "n": "Biotin",
+   "c": "Vitamin B7",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "antioxidants-vitamins",
+   "fn": [
+    "conditioner",
+    "other"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 171548,
+   "a": [
+    "Vitamin B7",
+    "Vitamin H"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "niacinamide",
+   "n": "Niacinamide",
+   "c": "Vitamin B3",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "scalp-actives",
+   "fn": [
+    "scalp-soothing",
+    "other"
+   ],
+   "p": 4,
+   "r": "Scalp care; appearance-of-density literature.",
+   "o": "SYNTHETIC",
+   "cid": 936,
+   "a": [
+    "Nicotinamide",
+    "Vitamin B3"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "cholecalciferol",
+   "n": "Cholecalciferol",
+   "c": "Vitamin D3",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "antioxidants-vitamins",
+   "fn": [
+    "other"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 5280795,
+   "a": [
+    "Vitamin D3",
+    "Cholecalciferol (Vitamin D)"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "cyanocobalamin",
+   "n": "Cyanocobalamin",
+   "c": "Vitamin B12",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "antioxidants-vitamins",
+   "fn": [
+    "colorant",
+    "other"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 5311498,
+   "a": [
+    "Vitamin B12",
+    "Cyanocobalamin (Vitamin B-12)"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "benzyl-nicotinate",
+   "n": "Benzyl Nicotinate",
+   "t": "ESTER",
+   "m": "SMALL_MOLECULE",
+   "f": "scalp-actives",
+   "fn": [
+    "other"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 7191,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "caffeine",
+   "n": "Caffeine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "scalp-actives",
+   "fn": [
+    "botanical-active",
+    "other"
+   ],
+   "p": 4,
+   "r": "Scalp active with follicular-penetration evidence.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 2519,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "menthol",
+   "n": "Menthol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "scalp-actives",
+   "fn": [
+    "scalp-soothing",
+    "fragrance"
+   ],
+   "o": "NATURALLY_DERIVED",
+   "cid": 1254,
+   "a": [
+    "Mint camphor"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "salicylic-acid",
+   "n": "Salicylic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "anti-dandruff-actives",
+   "fn": [
+    "exfoliant"
+   ],
+   "p": 4,
+   "r": "Flaking/buildup; restricted concentration in EU; OTC drug active in US dandruff products.",
+   "o": "SYNTHETIC",
+   "cid": 338,
+   "a": [
+    "BHA",
+    "2-Hydroxybenzoic Acid"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "zinc-pyrithione",
+   "n": "Zinc Pyrithione",
+   "c": "ZPT",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "anti-dandruff-actives",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Visible flaking evidence; prohibited in EU cosmetics since 2022 (CMR) — verify.",
+   "o": "SYNTHETIC",
+   "cid": 26041,
+   "a": [
+    "ZPT",
+    "ZnPTO",
+    "Pyrithione Zinc"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "piroctone-olamine",
+   "n": "Piroctone Olamine",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "anti-dandruff-actives",
+   "fn": [
+    "other",
+    "preservative"
+   ],
+   "p": 4,
+   "r": "Anti-dandruff active with controlled human evidence.",
+   "o": "SYNTHETIC",
+   "cid": 50258,
+   "a": [
+    "Octopirox"
+   ],
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "climbazole",
+   "n": "Climbazole",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "anti-dandruff-actives",
+   "fn": [
+    "preservative",
+    "other"
+   ],
+   "p": 4,
+   "r": "Anti-dandruff active; EU-restricted.",
+   "o": "SYNTHETIC",
+   "cid": 37907,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "ketoconazole",
+   "n": "Ketoconazole",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "drug-actives",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Drug active (OTC/Rx) — not a cosmetic ingredient; must never be proposed in cosmetic candidates.",
+   "o": "SYNTHETIC",
+   "cid": 456201,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "selenium-disulfide",
+   "n": "Selenium Disulfide",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "MINERAL",
+   "f": "drug-actives",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Drug active in US OTC dandruff products; restricted (not prohibited) in EU cosmetics — verify Annex III entry.",
+   "o": "SYNTHETIC",
+   "cid": 24087,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "minoxidil",
+   "n": "Minoxidil",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "drug-actives",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Drug — comparator only in evidence; cannot be a cosmetic ingredient.",
+   "o": "SYNTHETIC",
+   "cid": 4201,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "allantoin",
+   "n": "Allantoin",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "scalp-actives",
+   "fn": [
+    "scalp-soothing"
+   ],
+   "p": 4,
+   "r": "Scalp comfort.",
+   "o": "SYNTHETIC",
+   "cid": 204,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "bisabolol",
+   "n": "Bisabolol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "scalp-actives",
+   "fn": [
+    "scalp-soothing"
+   ],
+   "p": 4,
+   "r": "Scalp comfort; chamomile-derived marker.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 10586,
+   "a": [
+    "alpha-Bisabolol"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "glycyrrhetinic-acid",
+   "n": "Glycyrrhetinic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "scalp-actives",
+   "fn": [
+    "scalp-soothing"
+   ],
+   "p": 4,
+   "r": "Scalp comfort.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 10114,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "adenosine",
+   "n": "Adenosine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "scalp-actives",
+   "fn": [
+    "other"
+   ],
+   "p": 5,
+   "r": "Scalp active; appearance-of-density research.",
+   "o": "BIOTECH",
+   "cid": 60961,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "capsaicin",
+   "n": "Capsaicin",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "scalp-actives",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Irritant marker compound of capsicum extract.",
+   "o": "NATURALLY_DERIVED",
+   "cid": 1548943,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sulfur",
+   "n": "Sulfur",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "MINERAL",
+   "f": "drug-actives",
+   "fn": [
+    "other"
+   ],
+   "p": 4,
+   "r": "Traditional scalp product ingredient; OTC drug context in US.",
+   "o": "NATURAL",
+   "cid": 5362487,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "sodium-hydroxide",
+   "n": "Sodium Hydroxide",
+   "c": "Lye",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "chemical-treatment-agents",
+   "fn": [
+    "ph-adjuster",
+    "other"
+   ],
+   "p": 4,
+   "r": "Relaxer active (chemical damage); pH adjuster in trace amounts.",
+   "o": "SYNTHETIC",
+   "cid": 14798,
+   "a": [
+    "Lye",
+    "Caustic Soda"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "guanidine-carbonate",
+   "n": "Guanidine Carbonate",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "chemical-treatment-agents",
+   "fn": [
+    "other"
+   ],
+   "p": 4,
+   "r": "No-lye relaxer component.",
+   "o": "SYNTHETIC",
+   "cid": 11650,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "calcium-hydroxide",
+   "n": "Calcium Hydroxide",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "MINERAL",
+   "f": "chemical-treatment-agents",
+   "fn": [
+    "ph-adjuster",
+    "other"
+   ],
+   "p": 4,
+   "r": "No-lye relaxer component; EU-restricted.",
+   "o": "SYNTHETIC",
+   "cid": 6093208,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "thioglycolic-acid",
+   "n": "Thioglycolic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "chemical-treatment-agents",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Permanent-wave/depilatory active; EU-restricted.",
+   "o": "SYNTHETIC",
+   "cid": 1133,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "ammonium-thioglycolate",
+   "n": "Ammonium Thioglycolate",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "chemical-treatment-agents",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Salt of thioglycolic acid — related, not interchangeable.",
+   "o": "SYNTHETIC",
+   "cid": 21534,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "glyoxylic-acid",
+   "n": "Glyoxylic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "chemical-treatment-agents",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Straightening active under safety scrutiny.",
+   "o": "SYNTHETIC",
+   "cid": 760,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "hydrogen-peroxide",
+   "n": "Hydrogen Peroxide",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "hair-dye-agents",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Oxidizer in color/bleach; EU-restricted.",
+   "o": "SYNTHETIC",
+   "cid": 784,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "ammonium-persulfate",
+   "n": "Ammonium Persulfate",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "hair-dye-agents",
+   "fn": [
+    "other"
+   ],
+   "p": 6,
+   "r": "Bleach booster; respiratory and skin sensitizer.",
+   "o": "SYNTHETIC",
+   "cid": 62648,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "p-phenylenediamine",
+   "n": "p-Phenylenediamine",
+   "c": "PPD",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "COLORANT",
+   "f": "hair-dye-agents",
+   "fn": [
+    "colorant"
+   ],
+   "p": 6,
+   "r": "Strong sensitizer; EU-restricted oxidative dye.",
+   "o": "SYNTHETIC",
+   "cid": 7814,
+   "a": [
+    "PPD",
+    "para-Phenylenediamine"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "resorcinol",
+   "n": "Resorcinol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "COLORANT",
+   "f": "hair-dye-agents",
+   "fn": [
+    "colorant"
+   ],
+   "p": 6,
+   "r": "Oxidative dye coupler; restricted.",
+   "o": "SYNTHETIC",
+   "cid": 5054,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "lead-acetate",
+   "n": "Lead Acetate",
+   "t": "SALT",
+   "m": "COLORANT",
+   "f": "hair-dye-agents",
+   "fn": [
+    "colorant"
+   ],
+   "p": 6,
+   "r": "Progressive hair dye; color-additive listing repealed in US — prohibited-substance reference.",
+   "o": "SYNTHETIC",
+   "cid": 9317,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "maleic-acid",
+   "n": "Maleic Acid",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "bond-repair",
+   "fn": [
+    "strengthening-agent",
+    "ph-adjuster"
+   ],
+   "p": 5,
+   "r": "Bond-repair research and patent activity.",
+   "o": "SYNTHETIC",
+   "cid": 444266,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "bis-aminopropyl-diglycol-dimaleate",
+   "n": "Bis-Aminopropyl Diglycol Dimaleate",
+   "t": "SALT",
+   "m": "SMALL_MOLECULE",
+   "f": "bond-repair",
+   "fn": [
+    "strengthening-agent"
+   ],
+   "p": 5,
+   "r": "Bond-building active (chemical damage).",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "carbomer",
+   "n": "Carbomer",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "polymers-thickeners",
+   "fn": [
+    "thickener",
+    "rheology-modifier"
+   ],
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "xanthan-gum",
+   "n": "Xanthan Gum",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "polymers-thickeners",
+   "fn": [
+    "thickener",
+    "rheology-modifier"
+   ],
+   "o": "BIOTECH"
+  },
+  {
+   "k": "pectin",
+   "n": "Pectin",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "polymers-thickeners",
+   "fn": [
+    "thickener",
+    "film-former"
+   ],
+   "o": "NATURAL"
+  },
+  {
+   "k": "guar-gum",
+   "n": "Cyamopsis Tetragonoloba Gum",
+   "c": "Guar Gum",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "polymers-thickeners",
+   "fn": [
+    "thickener"
+   ],
+   "p": 4,
+   "r": "Parent of cationic guar — related, not interchangeable.",
+   "o": "NATURAL",
+   "a": [
+    "Guar Gum"
+   ]
+  },
+  {
+   "k": "hydroxyethylcellulose",
+   "n": "Hydroxyethylcellulose",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "polymers-thickeners",
+   "fn": [
+    "thickener",
+    "film-former"
+   ],
+   "p": 4,
+   "r": "Gel thickener.",
+   "o": "NATURALLY_DERIVED",
+   "a": [
+    "HEC"
+   ]
+  },
+  {
+   "k": "pvp",
+   "n": "PVP",
+   "c": "Polyvinylpyrrolidone",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "film-formers",
+   "fn": [
+    "film-former"
+   ],
+   "o": "SYNTHETIC",
+   "a": [
+    "Polyvinylpyrrolidone",
+    "Povidone"
+   ]
+  },
+  {
+   "k": "vp-va-copolymer",
+   "n": "VP/VA Copolymer",
+   "t": "COPOLYMER",
+   "m": "POLYMER",
+   "f": "film-formers",
+   "fn": [
+    "film-former"
+   ],
+   "p": 4,
+   "r": "Styling film-former.",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "acrylates-copolymer",
+   "n": "Acrylates Copolymer",
+   "t": "COPOLYMER",
+   "m": "POLYMER",
+   "f": "film-formers",
+   "fn": [
+    "film-former"
+   ],
+   "p": 4,
+   "r": "Styling film-former.",
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "polyacrylamide",
+   "n": "Polyacrylamide",
+   "t": "POLYMER",
+   "m": "POLYMER",
+   "f": "polymers-thickeners",
+   "fn": [
+    "thickener",
+    "film-former"
+   ],
+   "o": "SYNTHETIC"
+  },
+  {
+   "k": "aminomethyl-propanol",
+   "n": "Aminomethyl Propanol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "ph-adjusters",
+   "fn": [
+    "ph-adjuster"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 11807,
+   "a": [
+    "AMP"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "triethanolamine",
+   "n": "Triethanolamine",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "SMALL_MOLECULE",
+   "f": "ph-adjusters",
+   "fn": [
+    "ph-adjuster"
+   ],
+   "p": 4,
+   "r": "pH adjuster; nitrosamine-formation restrictions.",
+   "o": "SYNTHETIC",
+   "cid": 7618,
+   "a": [
+    "TEA"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "triethyl-citrate",
+   "n": "Triethyl Citrate",
+   "t": "ESTER",
+   "m": "SMALL_MOLECULE",
+   "f": "other-functional",
+   "fn": [
+    "solubilizer",
+    "other"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 6506,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "silica",
+   "n": "Silica",
+   "t": "MINERAL",
+   "m": "MINERAL",
+   "f": "minerals",
+   "fn": [
+    "other"
+   ],
+   "o": "NATURAL",
+   "cid": 24261,
+   "a": [
+    "Silicon Dioxide"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "fragrance",
+   "n": "Parfum",
+   "c": "Fragrance",
+   "t": "FRAGRANCE_MIXTURE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "UNKNOWN",
+   "a": [
+    "Fragrance",
+    "Parfum (Fragrance)",
+    "Fragrance (Parfum)",
+    "Fragrance/Parfum",
+    "Fragrance (Essential Oil Blend)"
+   ],
+   "identityNote": "Undisclosed mixture. Exposure to individual fragrance allergens is unknown unless separately declared."
+  },
+  {
+   "k": "limonene",
+   "n": "Limonene",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "cid": 22311,
+   "a": [
+    "d-Limonene"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "linalool",
+   "n": "Linalool",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "NATURAL",
+   "cid": 6549,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "hexyl-cinnamal",
+   "n": "Hexyl Cinnamal",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 1550884,
+   "a": [
+    "Hexyl Cinnamaldehyde"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "amyl-cinnamal",
+   "n": "Amyl Cinnamal",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "SYNTHETIC",
+   "a": [
+    "Amyl Cinnamaldehyde"
+   ],
+   "cid": 1712058,
+   "cidOrigin": "PUBCHEM_NAME_LOOKUP"
+  },
+  {
+   "k": "hexamethylindanopyran",
+   "n": "Hexamethylindanopyran",
+   "c": "Galaxolide",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 91497,
+   "a": [
+    "Galaxolide",
+    "HHCB"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "anise-alcohol",
+   "n": "Anise Alcohol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 7738,
+   "a": [
+    "Anisyl Alcohol",
+    "4-Methoxybenzyl Alcohol"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "coumarin",
+   "n": "Coumarin",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "o": "SYNTHETIC",
+   "cid": 323,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "citronellol",
+   "n": "Citronellol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "EU-labelled fragrance allergen.",
+   "o": "NATURAL",
+   "cid": 8842,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "geraniol",
+   "n": "Geraniol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "EU-labelled fragrance allergen.",
+   "o": "NATURAL",
+   "cid": 637566,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "eugenol",
+   "n": "Eugenol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "EU-labelled fragrance allergen.",
+   "o": "NATURAL",
+   "cid": 3314,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "isoeugenol",
+   "n": "Isoeugenol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "Restricted fragrance allergen.",
+   "o": "NATURAL",
+   "cid": 853433,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "cinnamal",
+   "n": "Cinnamal",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "EU-labelled fragrance allergen.",
+   "o": "NATURAL",
+   "cid": 637511,
+   "a": [
+    "Cinnamaldehyde"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "citral",
+   "n": "Citral",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "EU-labelled fragrance allergen.",
+   "o": "NATURAL",
+   "cid": 638011,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "benzyl-salicylate",
+   "n": "Benzyl Salicylate",
+   "t": "ESTER",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "EU-labelled fragrance allergen.",
+   "o": "SYNTHETIC",
+   "cid": 8363,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "benzyl-benzoate",
+   "n": "Benzyl Benzoate",
+   "t": "ESTER",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "EU-labelled fragrance allergen.",
+   "o": "SYNTHETIC",
+   "cid": 2345,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "farnesol",
+   "n": "Farnesol",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "EU-labelled fragrance allergen.",
+   "o": "NATURAL",
+   "cid": 445070,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "hydroxycitronellal",
+   "n": "Hydroxycitronellal",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "Restricted fragrance allergen.",
+   "o": "SYNTHETIC",
+   "cid": 7888,
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "butylphenyl-methylpropional",
+   "n": "Butylphenyl Methylpropional",
+   "c": "Lilial",
+   "t": "DEFINED_SUBSTANCE",
+   "m": "FRAGRANCE_MATERIAL",
+   "f": "fragrance-allergens",
+   "fn": [
+    "fragrance"
+   ],
+   "p": 6,
+   "r": "Prohibited in EU cosmetics (CMR) — prohibited-substance reference.",
+   "o": "SYNTHETIC",
+   "cid": 228987,
+   "a": [
+    "Lilial"
+   ],
+   "cidOrigin": "CURATOR_CANDIDATE"
+  },
+  {
+   "k": "lactobacillus-ferment",
+   "n": "Lactobacillus Ferment",
+   "t": "FERMENT",
+   "m": "FERMENTATION_DERIVED",
+   "f": "fermentation-derived",
+   "fn": [
+    "microbiome-related",
+    "preservative-booster"
+   ],
+   "p": 5,
+   "r": "Fermentation-derived; scalp microbiome research.",
+   "o": "BIOTECH"
+  },
+  {
+   "k": "galactomyces-ferment-filtrate",
+   "n": "Galactomyces Ferment Filtrate",
+   "t": "FILTRATE",
+   "m": "FERMENTATION_DERIVED",
+   "f": "fermentation-derived",
+   "fn": [
+    "microbiome-related",
+    "humectant"
+   ],
+   "p": 5,
+   "r": "Fermentation-derived active.",
+   "o": "BIOTECH"
+  },
+  {
+   "k": "bifida-ferment-lysate",
+   "n": "Bifida Ferment Lysate",
+   "t": "LYSATE",
+   "m": "MICROBIOME_RELATED",
+   "f": "fermentation-derived",
+   "fn": [
+    "microbiome-related"
+   ],
+   "p": 5,
+   "r": "Microbiome-related lysate.",
+   "o": "BIOTECH"
+  },
+  {
+   "k": "saccharomyces-ferment-filtrate",
+   "n": "Saccharomyces Ferment Filtrate",
+   "t": "FILTRATE",
+   "m": "FERMENTATION_DERIVED",
+   "f": "fermentation-derived",
+   "fn": [
+    "microbiome-related"
+   ],
+   "p": 5,
+   "r": "Fermentation-derived active.",
+   "o": "BIOTECH"
+  },
+  {
+   "k": "inulin",
+   "n": "Inulin",
+   "t": "POLYMER",
+   "m": "MICROBIOME_RELATED",
+   "f": "fermentation-derived",
+   "fn": [
+    "microbiome-related",
+    "humectant"
+   ],
+   "p": 5,
+   "r": "Prebiotic positioned for scalp microbiome.",
+   "o": "NATURAL"
+  },
+  {
+   "k": "alpha-glucan-oligosaccharide",
+   "n": "Alpha-Glucan Oligosaccharide",
+   "t": "POLYMER",
+   "m": "MICROBIOME_RELATED",
+   "f": "fermentation-derived",
+   "fn": [
+    "microbiome-related"
+   ],
+   "p": 5,
+   "r": "Prebiotic; microbiome-related.",
+   "o": "BIOTECH"
+  },
+  {
+   "k": "lecithin",
+   "n": "Lecithin",
+   "t": "UVCB",
+   "m": "DELIVERY_TECHNOLOGY",
+   "f": "delivery-systems",
+   "fn": [
+    "emulsifier",
+    "delivery-carrier"
+   ],
+   "p": 5,
+   "r": "Liposome/delivery-system building block.",
+   "o": "NATURAL"
+  },
+  {
+   "k": "hydroxypropyl-cyclodextrin",
+   "n": "Hydroxypropyl Cyclodextrin",
+   "t": "DERIVATIVE",
+   "m": "DELIVERY_TECHNOLOGY",
+   "f": "delivery-systems",
+   "fn": [
+    "delivery-carrier",
+    "solubilizer"
+   ],
+   "p": 5,
+   "r": "Encapsulation/delivery technology.",
+   "o": "BIOTECH"
+  }
+ ]
+}
