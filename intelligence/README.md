@@ -46,7 +46,7 @@ Everything is loaded through the same import engine that users use, so a second 
 |---|---|---|
 | Canonical ingredients | 289 | Curator seed (AI-assisted), all `SUBMITTED` for identity review |
 | PubChem identifiers/properties | 126 compounds, 853 facts | PubChem snapshot 2026-10-29 (`seed/data/pubchem-snapshot-2026-10-29.json`). 9 recalled CIDs were wrong; they were rejected and recorded in `pubchem-rejected-candidates.json`. |
-| Products | 38 (5 Supernatural, 33 textured-hair competitors) | Verbatim manufacturer ingredient declarations with source URLs |
+| Products | 273 (5 Supernatural, 268 from 49 textured-hair brands) | Verbatim manufacturer ingredient declarations with source URLs |
 | Evidence | 79 | Real PubMed IDs, titles only. Study type and level are AI-proposed; **0 reviewed**. |
 | Patents | 43 | Publication numbers linking to Espacenet. Research aid, not a legal opinion. |
 | Regulatory records | 54 (48 ingredients; EU and US) | Drafts with `lastCheckedAt` empty, so all are shown as stale until verified against official text |
