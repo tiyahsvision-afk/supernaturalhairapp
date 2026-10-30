@@ -1,0 +1,39 @@
+# Render Blueprint for a private preview of Ingredient Intelligence (free plan).
+# Database: Neon (free). Paste its connection string into DATABASE_URL when Render asks; it is never committed.
+services:
+  - type: web
+    name: ingredient-intelligence
+    runtime: node
+    plan: free
+    region: ohio
+    branch: claude/ingredient-intelligence-phase1
+    rootDir: intelligence
+    buildCommand: >-
+      npm ci --include=dev &&
+      npx prisma generate &&
+      npx prisma migrate deploy &&
+      if [ "$SEED_ON_DEPLOY" = "true" ]; then npm run db:seed; fi &&
+      npm run build
+    startCommand: npm start
+    healthCheckPath: /login
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        sync: false
+      - key: SEED_ADMIN_EMAIL
+        sync: false
+      - key: SEED_ADMIN_PASSWORD
+        sync: false
+      - key: APP_SECRET
+        generateValue: true
+      - key: APP_ENV
+        value: production
+      - key: MFA_ENFORCEMENT
+        value: required
+      - key: SEED_DEMO_USERS
+        value: "false"
+      # The seed is idempotent; it only adds what is missing. Set to "false" to skip it on later deploys.
+      - key: SEED_ON_DEPLOY
+        value: "true"

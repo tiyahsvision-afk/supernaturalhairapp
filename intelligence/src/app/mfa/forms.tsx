@@ -8,7 +8,7 @@ function CodeForm({ action, label }: { action: (p: { error?: string } | undefine
     <form action={act} className="space-y-3">
       <label className="block text-sm"><span className="mb-1 block font-medium">6-digit code</span><input name="code" inputMode="numeric" pattern="\d{6}" autoComplete="one-time-code" required /></label>
       {state?.error && <p role="alert" className="text-sm text-bad">{state.error}</p>}
-      <button disabled={pending} className="w-full rounded-full border border-brand bg-brand px-4 py-2 text-sm font-semibold text-[#0d2440]">{label}</button>
+      <button type="submit" disabled={pending} className="w-full rounded-full border border-brand bg-brand px-4 py-2 text-sm font-semibold text-[#0d2440]">{label}</button>
     </form>
   )
 }
