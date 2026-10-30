@@ -23,6 +23,7 @@ Generated from `seed/data/sources.json` (the live registry is at `/sources`). "E
 | UK Cosmetics Regulation (retained Regulation 1223/2009, as amended) | REGULATORY | MANUAL_REVIEW_REQUIRED | yes | no | no | no | — |
 | European Commission CosIng database | COSMETIC_INVENTORY | MANUAL_REVIEW_REQUIRED | yes | no | no | no | — |
 | EU CosIng inventory via Open Beauty Facts taxonomy | COSMETIC_INVENTORY | APPROVED_WITH_ATTRIBUTION (preliminary) | yes | no | no | no | INCI names, CosIng reference, CAS/EC (unverified), official functions, annex references |
+| EU CosIng Ingredients/Fragrance Inventory export (2016) | COSMETIC_INVENTORY | APPROVED_WITH_ATTRIBUTION (preliminary) | yes | no | no | no | supplement for records missing from the snapshot; may be outdated |
 | Cosmetic Ingredient Review (CIR) reports | SAFETY_REVIEW | LINK_ONLY | yes | no | no | no | links; conclusion summaries after review |
 | Scientific Committee on Consumer Safety (SCCS) opinions | SAFETY_REVIEW | APPROVED_WITH_ATTRIBUTION | yes | no | no | no | safety review records |
 | EPA CompTox Chemicals Dashboard / CTX APIs | CHEMICAL_DATABASE | MANUAL_REVIEW_REQUIRED | yes | no | no | no | — |
@@ -170,3 +171,18 @@ Every value in comparisons, profiles and reports carries one status. Unverified 
 | N/A | Does not apply to this material |
 
 Certainty levels for findings: Established, Supported, Uncertain, Unsupported, Needs testing, Review required, Information. A substitution, formulation or claim finding is never more than "Supported" without reviewed human studies, and medical-context studies never support a cosmetic claim.
+
+## 10. Label matching rules
+
+Product label lines are matched to ingredients only by exact rules. Each rule accepts a match only when exactly one ingredient fits; anything else goes to identity review.
+
+| Method | Example | Confidence |
+|---|---|---|
+| Exact INCI, canonical name or approved alias | `Glycerin` | 0.95–1.0 |
+| INCI label form (common name in parentheses removed) | `Rosmarinus Officinalis (Rosemary) Leaf Extract` | 0.9 |
+| Multilingual name joined by `/`, all parts the same ingredient | `Water/Aqua/Eau` | 0.9 |
+| Spacing or hyphen variant | `Hydroxyethyl Cellulose`, `Polysorbate-20` | 0.9 |
+| Colour Index number in parentheses | `Blue 1 (CI 42090)` | 0.9 |
+| Fuzzy similarity | — | never auto-matched; review |
+
+Misspellings, common names (`Burdock`), trade blends (`BTMS`) and lines missing commas are never corrected automatically. When the database grows, `rematchUnresolvedLines` re-checks unresolved lines with the same rules and records each upgrade in the audit log; manual decisions are never changed.

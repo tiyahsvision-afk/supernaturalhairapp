@@ -475,6 +475,152 @@
         "Published list repeats \"Cetyl Alcohol\" and \"Citrus Medica Limonum\". Recorded verbatim.",
         "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
       ]
+    },
+    {
+      "key": "sheamoisture-jbco-leave-in",
+      "brand": "SheaMoisture",
+      "name": "Jamaican Black Castor Oil Strengthen & Restore Leave-In Conditioner 16oz",
+      "category": "leave-in conditioner",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://www.sheamoisture.com/us/en/p/jamaican-black-castor-oil-strengthen-&-restore-leave-in-conditioner-16oz.html/00764302215516",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water, Ricinus Communis (Castor) Seed Oil, Stearyl Alcohol, Cetyl Alcohol, Behentrimonium Chloride, Fragrance (Essential Oil Blend), Butyrospermum Parkii (Shea) Butter*\", Cocos Nucifera (Coconut) Oil, Panthenol, Dicaprylyl Ether, Hydroxyethylcellulose, Glycerin (Vegetable), Simmondsia Chinensis (Jojoba) Seed Oil, Adansonia Digitata Seed Oil, Hydrolyzed Keratin, Mauritia Flexuosa Fruit Oil, Tocopheryl Acetate, Aloe Barbadensis Leaf Juice, Yeast Extract, Macadamia Ternifolia Seed Oil, Hydrolyzed Vegetable Protein PG-Propyl Silanetriol, Mentha Piperita (Peppermint) Leaf Extract, Hydrolyzed Rice Protein, Niacin, Trifolium Pratense (Clover) Flower Extract, Vinegar, Caprylhydroxamic Acid, Caprylyl Glycol.",
+      "dataQualityNotes": [
+        "* Certified Organic Ingredient; \" Fair Trade Ingredient (footnotes on the published list).",
+        "The Canadian page lists a different formula (adds Acetic Acid, Hydrolyzed Wheat Protein, Benzoic Acid and others).",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "mielle-rice-water-split-end",
+      "brand": "Mielle",
+      "name": "Rice Water Hair Split End Therapy 2 fl oz",
+      "category": "hair serum",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://mielleorganics.com/products/rice-water-hair-split-end-therapy",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua, Eau), Hydrolyzed Collagen, Hydrogenated Castor Oil/Sebacic Acid Copolymer, Polyquaternium-6, Oryza Sativa (Rice) Bran Water, Brassica Campestris (Rapeseed) Seed Oil, Citrus Junos Peel Extract, Polyglyceryl-3 Diisostearate, Hydroxyethylcellulose, Oleth-20, Adansonia Digitata (Baobab) Seed Oil, Rosmarinus Officinalis (Rosemary) Leaf Oil, Cocos Nucifera (Coconut) Oil, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Vitis Vinifera (Grape) Seed Oil, Disodium EDTA, Phenoxyethanol, Benzoic Acid, Ethylhexylglycerin, Glycereth-2 Cocoate, Fragrance (Parfum)",
+      "dataQualityNotes": [
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "pattern-hydration-shampoo",
+      "brand": "Pattern Beauty",
+      "name": "Hydration Shampoo",
+      "category": "shampoo",
+      "applicationType": "RINSE_OFF",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://patternbeauty.com/products/hydration-shampoo",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Aqua (Water, Eau), Sodium C14-16 Olefin Sulfonate, Cocamidopropyl Betaine, Propanediol, Glycol Distearate, Argania Spinosa Kernel Oil, Cocos Nucifera (Coconut) Oil, Mel (Honey, Miel), Melaleuca Alternifolia (Tea Tree) Leaf Oil, Olea Europaea (Olive) Fruit Oil, Biotin, Persea Gratissima (Avocado) Oil, Ricinus Communis (Castor) Seed Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Butyrospermum Parkii (Shea) Butter, Aloe Barbadensis Leaf Juice, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Glycine Soja (Soybean) Oil, Glycine Soja (Soybean) Sterols, Glycolipids, Glycerin, Phospholipids, Amodimethicone, Guar Hydroxypropyltrimonium Chloride, Hydroxyethylcellulose, Lauryl Lactyl Lactate, Hydroxyacetophenone, PEG-150 Distearate, Parfum (Fragrance), Hydrolyzed Vegetable Protein PG-Propyl Silanetriol, Celluose, Phenoxyethanol, Citric Acid, PEG-150 Stearate, Disodium EDTA, PEG-1M, Stearic Acid, Sodium Hydroxide, Sodium Acetate, Potassium Sorbate, Sodium Benzoate, Linalool",
+      "dataQualityNotes": [
+        "Published list spells \"Celluose\" (INCI: Cellulose). Recorded verbatim.",
+        "Sulfate-free by name, but contains Sodium C14-16 Olefin Sulfonate (an anionic sulfonate surfactant).",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "curlsmith-co-wash",
+      "brand": "Curlsmith",
+      "name": "Curl Quenching Conditioning Co-Wash 12 oz",
+      "category": "co-wash",
+      "applicationType": "RINSE_OFF",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://curlsmith.com/products/co-wash",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua / Eau), Cetearyl Alcohol, Hydroxypropyl Starch Phosphate, Cetyl Palmitate, Behentrimonium Chloride, Cocamidopropyl Betaine, Cocos Nucifera (Coconut) Oil*, Butyrospermum Parkii (Shea) Butter, Persea Gratissima (Avocado) Oil*, Helianthus Annuus (Sunflower) Seed Oil, Carapa Guaianensis (Andiroba) Seed Oil, Aloe Barbadensis Leaf Juice, Ocimum Basilicum (Basil) Leaf Extract, Rosmarinus Officinalis (Rosemary) Leaf Extract, Panthenol, Salvia Officinalis (Sage) Leaf Extract, Piper Nigrum (Black Pepper) Seed Extract, Glycerin, Citric Acid, Sodium Hydroxide, Sodium Chloride, Glyceryl Caprylate, Glyceryl Undecylenate, Selaginella Lepidophylla Extract, Isopropyl Alcohol, Guar Hydroxypropyltrimonium Chloride, Sodium Benzoate, Potassium Sorbate, Fragrance (Parfum), Limonene, Linalool, Citrus Aurantium Peel Oil, Citrus Limon (Lemon) Peel Oil, Tetramethyl Acetyloctahydronaphthalenes.",
+      "dataQualityNotes": [
+        "The brand notes that ingredient lists may vary during reformulation; the printed package list is authoritative.",
+        "* Organic Ingredient.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "tgin-honey-miracle-mask",
+      "brand": "tgin",
+      "name": "Honey Miracle Hair Mask 12 oz",
+      "category": "deep conditioner",
+      "applicationType": "RINSE_OFF",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://tginatural.com/products/tgin-honey-miracle-hair-mask",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua), Olea Europaea (Olive) Fruit Oil, Aloe Barbadensis Leaf Juice*, Simmondsia Chinensis (Jojoba) Seed Oil*, Cetyl Alcohol, Glycerin, Stearamidopropyl Dimethylamine, Stearyl Alcohol, Honey (Mel)*, Lactic Acid, Dimethicone, Panthenol, Tocopheryl Acetate, Hydrogenated Ethylhexyl Olivate, Hydrogenated Olive Oil Unsaponifiables, Tetrasodium Glutamate Diacetate, Phenoxyethanol, Sodium Benzoate, Sodium Hydroxide, Fragrance (Parfum), Hexamethylindanopyran, Limonene, Benzyl Benzoate, Geraniol, Pinene, Linalool, Hexyl Cinnamal, Linalyl Acetate, Geranyl Acetate.",
+      "dataQualityNotes": [
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "mielle-rosemary-mint-leave-in",
+      "brand": "Mielle",
+      "name": "Rosemary Mint Strengthening Leave-In Conditioner 12 oz",
+      "category": "leave-in conditioner",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://mielleorganics.com/products/rosemary-mint-strengthening-leave-in-conditioner",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water, Glycerin, Behentrimonium Methosulfate, Cetearyl Alcohol, Stearyl Alcohol, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Cetyl Alcohol, Triethyl Citrate, Olea Europaea (Olive) Fruit Oil, Fragrance, Biotin, Persea Gratissima (Avocado) Oil, Sesamum Indicum (Sesame) Seed Oil, Ceteareth-20, Rosmarinus Officinalis (Rosemary) Leaf Oil, Zingiber Officinale (Ginger) Root Oil, Mentha Piperita (Peppermint) Oil, Propylene Glycol, Chamomilla Recutita (Matricaria) Flower Extract, Vaccinium Myrtillus Fruit/Leaf Extract, Saccharum Officinarum (Sugar Cane) Extract, Citrus Aurantium Dulcis (Orange) Fruit Extract, Citrus Limon (Lemon) Fruit Extract, Acer Saccharum (Sugar Maple) Extract, Phenoxyethanol, Caprylyl Glycol, Polysorbate 20",
+      "dataQualityNotes": [
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "mielle-rosemary-mint-conditioner",
+      "brand": "Mielle",
+      "name": "Rosemary Mint Strengthening Conditioner",
+      "category": "conditioner",
+      "applicationType": "RINSE_OFF",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://mielleorganics.com/products/rosemary-mint-strengthening-conditioner",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water, Cetearyl Alcohol, Polyquaternium-7, Caprylic/Capric Triglyceride, Behentrimonium Chloride, C12-15 Alkyl Benzoate, Fragrance (Parfum), Persea Gratissima (Avocado) Oil, PPG-3 Myristyl Ether, Biotin, Butyrospermum Parkii (Shea) Butter, Cocos Nucifera (Coconut) Oil, Rosmarinus Officinalis (Rosemary) Leaf Oil, Mentha Piperita (Peppermint) Oil, Olea Europaea (Olive) Fruit Oil, Panthenol, Behentrimonium Methosulfate, Diheptyl Succinate Capryloyl Glycerin/Sebacic Acid Copolymer, Cetyl Alcohol, C10-40 Isoalkylamidopropylethyldimonium Ethosulfate, Phenoxyethanol, Benzoic Acid, Ethylhexylglycerin, Glycereth-2 Cocoate, Disodium EDTA, Tocopherol",
+      "dataQualityNotes": [
+        "\"Diheptyl Succinate Capryloyl Glycerin/Sebacic Acid Copolymer\" appears to be two INCI names (Diheptyl Succinate; Capryloyl Glycerin/Sebacic Acid Copolymer) without a separating comma. Recorded verbatim.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "bouncecurl-pure-silk-shampoo",
+      "brand": "Bounce Curl",
+      "name": "Pure Silk Moisturizing Shampoo",
+      "category": "shampoo",
+      "applicationType": "RINSE_OFF",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://www.bouncecurl.com/products/bounce-curl-moisturizing-shampoo",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water, **Helianthus Annuus (Sunflower) Seed Oil, Cocamidopropyl Betaine, Disodium Laureth Sulfosuccinate, Diethylhexyl Sodium Sulfosuccinate, **Glycerin Panthenol Polyquaternium-10, **Biotin, **Hydrolyzed Quinoa, **Hydrolyzed Adansonia Digitata (Baobab) Seed Protein , Gluconolactone Sodium Benzoate, **Sodium Laurylglucosides Hydroxypropylsulfonate, **Lycium Barbarum Fruit Extract, **Coffea Arabica (Coffee) Seed Extract, **Euterpe Oleracea Fruit Extract, **Morinda Citrifolia Extract , **Punica Granatum Fruit Extract, **Camellia Sinensis Leaf Extract, **Garcinia Mangostana Fruit Extract, **Calendula Officinalis Flower Extract, **Rosmarinus Officinalis (Rosemary) Leaf Extract, **Citrus Aurantium Bergamia (Bergamot) Fruit Oil, **Vanillin, **Hybrid Safflower Oil, **Boswellia Carterii Oil, **Pelargonium Graveolens (Geranium) Oil, **Citrus Grandis (Grapefruit) Peel Oil, **Lavandula Angustifolia (Lavender) Oil , **Pogostemon Cablin (Patchouli) Oil, **Citrus Aurantium Dulcis (Orange) Peel Oil, **Cocos Nucifera (Coconut) Oil, **Citrus Nobilis (Mandarin Orange) Peel Oil , **Citric Acid.",
+      "dataQualityNotes": [
+        "Published list is missing commas in places (\"Glycerin Panthenol Polyquaternium-10\", \"Gluconolactone Sodium Benzoate\"); those lines combine several ingredients and need identity review. Recorded verbatim.",
+        "Marketed as sulfate-free; contains Disodium Laureth Sulfosuccinate (a sulfosuccinate, not a sulfate).",
+        "** markers are not explained on the page.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "camillerose-almond-jai",
+      "brand": "Camille Rose",
+      "name": "Almond Jai Twisting Butter",
+      "category": "styling butter",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://www.camillerose.com/products/almond-jai-twisting-butter",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Deionized Water, Behentrimonium Methosulfate, (BTMS), Cetearyl Alcohol, Prunus Amygdalus Dulcis Fruit Extract, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Cucurbita Pepo (Pumpkin) Seed Oil, Sesamum Indicum (Sesame) Seed Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Oryza Sativa (Rice) Bran Oil, Macadamia Ternifolia Seed Oil, Olea Europaea (Olive) Fruit Oil, Cannabis Sativa Seed Oil, Ulmus Fulva Bark (Slippery Elm) Extract, Ricinus Communis (Castor) Seed Oil, Aloe Barbadensis Leaf Juice, Cera Alba, Camellia Sinensis Leaf Extract, Phenoxyethanol (Optiphen ND), Caprylyl Glycol, Fragrance",
+      "dataQualityNotes": [
+        "\"(BTMS)\" is a trade-name abbreviation listed as its own entry. \"Optiphen ND\" is a trade name.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
     }
   ]
 }

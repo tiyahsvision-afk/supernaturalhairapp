@@ -76,11 +76,15 @@ export async function merge(actor: Principal, primaryId: string, secondaryId: st
       const rows: { id: string }[] = await tx[t].findMany({ where: { ingredientId: secondaryId }, select: { id: true } })
       snapshot[t] = rows.map((r) => r.id)
       for (const id of snapshot[t]) {
+        // A failed statement aborts a Postgres transaction, so each move runs under a savepoint that can be rolled back.
+        await tx.$executeRawUnsafe('SAVEPOINT merge_move')
         try {
           // @ts-expect-error dynamic delegate
           await tx[t].update({ where: { id }, data: { ingredientId: primaryId } })
+          await tx.$executeRawUnsafe('RELEASE SAVEPOINT merge_move')
         } catch {
-          // Unique collision (e.g. identical alias already on primary): leave the row on the secondary; still recorded.
+          // Unique collision (e.g. identical alias already on primary): leave the row on the secondary; not recorded as moved.
+          await tx.$executeRawUnsafe('ROLLBACK TO SAVEPOINT merge_move')
           snapshot[t] = snapshot[t].filter((x) => x !== id)
         }
       }

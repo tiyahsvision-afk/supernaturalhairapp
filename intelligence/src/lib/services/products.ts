@@ -4,7 +4,7 @@ import { prisma } from '../db'
 import { audit } from '../audit'
 import type { Principal } from '../permissions'
 import { parseIngredientList } from '../inci-parser'
-import { buildNameIndex, matchItems, type NameIndex } from './matching'
+import { buildNameIndex, matchItems, matchName, type NameIndex } from './matching'
 import { screenClaimText } from '../claims-guard'
 import { upsertEdge } from './graph'
 import { requestReview } from './review'
@@ -109,4 +109,29 @@ export async function recordProductVersion(actor: Principal | null, productId: s
 /** The ingredient-list version that applied on a given date (used for exposure; never rewrites history). */
 export async function versionAt(productId: string, at: Date) {
   return prisma.productVersion.findFirst({ where: { productId, validFrom: { lte: at }, OR: [{ validTo: null }, { validTo: { gt: at } }] }, orderBy: { versionNumber: 'desc' } })
+}
+
+/**
+ * Re-runs exact matching for unresolved lines of current product versions after the ingredient database grows
+ * (new inventory records, merges). Only upgrades lines to MATCHED; never changes matched or manually decided lines.
+ */
+export async function rematchUnresolvedLines(actor: Principal | null, nameIndex?: NameIndex) {
+  const idx = nameIndex ?? (await buildNameIndex())
+  const lines = await prisma.productIngredient.findMany({
+    where: { parsingStatus: { not: 'MATCHED' }, OR: [{ matchMethod: null }, { matchMethod: { not: 'MANUAL' } }], productVersion: { validTo: null } },
+    select: { id: true, productVersionId: true, position: true, displayedName: true, ingredientId: true, parsingStatus: true, productVersion: { select: { productId: true, versionNumber: true, sourceId: true } } },
+  })
+  let upgraded = 0
+  for (const l of lines) {
+    const m = matchName(idx, l.displayedName)
+    if (m.status !== 'MATCHED' || !m.ingredientId) continue
+    await prisma.$transaction(async (tx) => {
+      await tx.productIngredient.update({ where: { id: l.id }, data: { ingredientId: m.ingredientId, identityConfidence: m.confidence, matchMethod: m.method, parsingStatus: 'MATCHED' } })
+      await tx.quarantineItem.updateMany({ where: { dedupeKey: `identity:${l.productVersionId}:${l.position}`, status: 'OPEN' }, data: { status: 'RESOLVED', resolution: `Matched by ${m.method} after the ingredient database was extended.`, resolvedAt: new Date() } })
+      await upsertEdge(actor, { fromType: 'Product', fromId: l.productVersion.productId, toType: 'Ingredient', toId: m.ingredientId!, edgeType: 'CONTAINS', sourceId: l.productVersion.sourceId ?? null, confidence: m.confidence, evidenceType: 'MANUFACTURER_LABEL', properties: { position: l.position, displayedName: l.displayedName, productVersion: l.productVersion.versionNumber } }, tx)
+      await audit(actor, { action: 'product.line.rematch', entityType: 'ProductIngredient', entityId: l.id, before: { ingredientId: l.ingredientId, parsingStatus: l.parsingStatus }, after: { ingredientId: m.ingredientId, parsingStatus: 'MATCHED', method: m.method } }, tx)
+    })
+    upgraded++
+  }
+  return { checked: lines.length, upgraded }
 }

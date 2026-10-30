@@ -12,8 +12,13 @@ export interface MatchResult {
 
 export interface NameIndex {
   exact: Map<string, { ids: Set<string>; method: string; confidence: number }>
-  stripped: Map<string, Set<string>>
+  /** Name with parentheticals removed → candidate ingredients, each with the confidence of the name it came from. */
+  stripped: Map<string, Map<string, number>>
+  /** Name with spaces and hyphens removed ("hydroxyethyl cellulose" → "hydroxyethylcellulose") → candidates. */
+  compact: Map<string, Map<string, number>>
 }
+
+const compactKey = (s: string) => s.replace(/[\s-]+/g, '')
 
 const ALIAS_CONFIDENCE: Record<string, number> = { SYNONYM: 0.95, ABBREVIATION: 0.9, TRADE_NAME: 0.85, LEGACY_NAME: 0.9, MISSPELLING: 0.85, LABEL_DISPLAY_NAME: 0.7 }
 
@@ -29,15 +34,19 @@ export async function buildNameIndex(): Promise<NameIndex> {
   const ings = await prisma.ingredient.findMany({ where: { status: 'ACTIVE' }, select: { id: true, canonicalName: true, inciName: true, displayName: true, names: { select: { normalized: true, nameType: true } }, aliases: { select: { normalized: true, aliasType: true } } } })
   const exact: NameIndex['exact'] = new Map()
   const stripped: NameIndex['stripped'] = new Map()
+  const compact: NameIndex['compact'] = new Map()
   const add = (key: string, id: string, method: string, confidence: number) => {
     if (!key) return
     const cur = exact.get(key)
     if (!cur || confidence > cur.confidence) exact.set(key, { ids: new Set([id]), method, confidence })
     else if (confidence === cur.confidence) cur.ids.add(id)
     const s = stripParentheticals(key)
-    const set = stripped.get(s) ?? new Set<string>()
-    set.add(id)
-    stripped.set(s, set)
+    const m = stripped.get(s) ?? new Map<string, number>()
+    m.set(id, Math.max(m.get(id) ?? 0, confidence))
+    stripped.set(s, m)
+    const c = compact.get(compactKey(key)) ?? new Map<string, number>()
+    c.set(id, Math.max(c.get(id) ?? 0, confidence))
+    compact.set(compactKey(key), c)
   }
   for (const i of ings) {
     add(normalizeName(i.canonicalName), i.id, 'EXACT_CANONICAL', 1)
@@ -46,12 +55,19 @@ export async function buildNameIndex(): Promise<NameIndex> {
     for (const n of i.names) add(n.normalized, i.id, n.nameType === 'INCI' ? 'EXACT_INCI' : 'EXACT_NAME', n.nameType === 'INCI' ? 1 : 0.95)
     for (const a of i.aliases) add(a.normalized, i.id, a.aliasType === 'LABEL_DISPLAY_NAME' ? 'LABEL_DISPLAY_ALIAS' : 'EXACT_ALIAS', ALIAS_CONFIDENCE[a.aliasType] ?? 0.9)
   }
-  return { exact, stripped }
+  return { exact, stripped, compact }
 }
 
 /**
  * Matches a displayed label name to a canonical ingredient. Ambiguity is surfaced, never resolved by guessing:
  * multiple candidates or confidence < 0.9 ⇒ AMBIGUOUS and the line goes to identity review.
+ * Label convention: US labels add common names in parentheses ("Rosmarinus Officinalis (Rosemary) Leaf Extract").
+ * When removing them leaves exactly one ingredient whose INCI or established name matches exactly, that is a match
+ * (method INCI_LABEL_FORM, confidence 0.9); otherwise the line stays AMBIGUOUS.
+ * Other deterministic label variants, each accepted only when exactly one ingredient fits:
+ * - multilingual names joined by "/" ("Water/Aqua/Eau") whose parts all resolve to the same ingredient;
+ * - spacing/hyphen variants ("Hydroxyethyl Cellulose", "Polysorbate-20");
+ * - colorants declared with their Colour Index number ("Blue 1 (CI 42090)").
  */
 export function matchName(index: NameIndex, displayed: string): MatchResult {
   const key = normalizeName(displayed)
@@ -61,9 +77,26 @@ export function matchName(index: NameIndex, displayed: string): MatchResult {
     if (ids.length > 1) return { ingredientId: null, confidence: 0.5, method: hit.method, status: 'AMBIGUOUS', candidates: ids }
     return { ingredientId: ids[0], confidence: hit.confidence, method: hit.method, status: hit.confidence >= 0.9 ? 'MATCHED' : 'AMBIGUOUS', candidates: ids }
   }
+  const single = (m?: Map<string, number>) => (m && m.size === 1 && [...m.values()][0] >= 0.95 ? [...m.keys()][0] : null)
+  const variant = (id: string, method: string): MatchResult => ({ ingredientId: id, confidence: 0.9, method, status: 'MATCHED', candidates: [id] })
+  if (key.includes('/') && !key.includes('(')) {
+    const ids = new Set(key.split('/').map((p) => p.trim()).filter(Boolean).map((p) => { const h = index.exact.get(p); return h && h.ids.size === 1 && h.confidence >= 0.95 ? [...h.ids][0] : null }))
+    if (ids.size === 1 && !ids.has(null)) return variant([...ids][0]!, 'MULTILINGUAL_NAME')
+  }
+  const ci = /\((ci \d{5})\)/.exec(key)
+  if (ci) {
+    const h = index.exact.get(ci[1])
+    if (h && h.ids.size === 1) return variant([...h.ids][0], 'COLOUR_INDEX')
+  }
   const s = index.stripped.get(stripParentheticals(displayed))
-  if (s && s.size === 1) return { ingredientId: [...s][0], confidence: 0.85, method: 'PARENTHETICAL_STRIPPED', status: 'AMBIGUOUS', candidates: [...s] }
-  if (s && s.size > 1) return { ingredientId: null, confidence: 0.4, method: 'PARENTHETICAL_STRIPPED', status: 'AMBIGUOUS', candidates: [...s] }
+  if (s && s.size === 1) {
+    const [[id, conf]] = [...s]
+    if (conf >= 0.95) return { ingredientId: id, confidence: 0.9, method: 'INCI_LABEL_FORM', status: 'MATCHED', candidates: [id] }
+    return { ingredientId: id, confidence: 0.85, method: 'PARENTHETICAL_STRIPPED', status: 'AMBIGUOUS', candidates: [id] }
+  }
+  if (s && s.size > 1) return { ingredientId: null, confidence: 0.4, method: 'PARENTHETICAL_STRIPPED', status: 'AMBIGUOUS', candidates: [...s.keys()] }
+  const c = single(index.compact.get(compactKey(key)))
+  if (c) return variant(c, 'SPACING_VARIANT')
   return { ingredientId: null, confidence: 0, method: null, status: 'UNMATCHED', candidates: [] }
 }
 

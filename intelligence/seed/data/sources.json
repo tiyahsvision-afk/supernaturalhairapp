@@ -473,6 +473,41 @@
         "model training without consent"
       ],
       "reviewNotes": "Only mock data has been received. Connection not validated."
+    },
+    {
+      "key": "eu-cosing-export-2016",
+      "name": "EU CosIng Ingredients/Fragrance Inventory export (2016)",
+      "owner": "European Commission (data); Open Beauty Facts repository (copy)",
+      "type": "COSMETIC_INVENTORY",
+      "authority": "European Commission",
+      "url": "https://github.com/openfoodfacts/openbeautyfacts/blob/master/cosing/COSING_Ingredients-Fragrance.Inventory_v2.csv",
+      "accessMethod": "BULK_DOWNLOAD",
+      "apiStatus": "NOT_APPLICABLE",
+      "license": "CosIng content © European Union; reuse authorised with acknowledgement (Commission Decision 2011/833/EU). Compiled in the Open Beauty Facts repository (code AGPL-3.0; database ODbL).",
+      "termsUrl": "https://commission.europa.eu/legal-notice_en",
+      "rightsStatus": "APPROVED_WITH_ATTRIBUTION",
+      "commercialUse": "allowed with acknowledgement (preliminary)",
+      "internalUse": "allowed",
+      "redistribution": "allowed with acknowledgement (preliminary)",
+      "derivativeWork": "allowed (preliminary)",
+      "attributionRequirements": "Source: European Commission, CosIng database (Ingredients/Fragrance Inventory export, last update 15/02/2016).",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": true,
+      "allowExport": false,
+      "allowExternalApi": false,
+      "allowModelTraining": false,
+      "approvedUses": [
+        "INCI names",
+        "CAS/EC numbers",
+        "CosIng functions",
+        "Annex references"
+      ],
+      "prohibitedUses": [
+        "presenting Annex references as current legal status without verification"
+      ],
+      "refreshFrequency": "replace with a current Commission export when available",
+      "reviewNotes": "Official CosIng CSV export dated 15/02/2016 (copy in the Open Beauty Facts repository, retrieved 2026-10-30). Used only to supplement 4,150 records missing from the OBF taxonomy snapshot (e.g. Cocos Nucifera Oil, Hydroxyethylcellulose, PEG-40 Hydrogenated Castor Oil). Records may be outdated: entries changed or added after February 2016 are not reflected. CAS/EC unverified. Rights status is a preliminary reading pending licensing review."
     }
   ]
 }

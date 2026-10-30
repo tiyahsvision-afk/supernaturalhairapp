@@ -46,7 +46,7 @@ Everything is loaded through the same import engine that users use, so a second 
 |---|---|---|
 | Canonical ingredients | 289 | Curator seed (AI-assisted), all `SUBMITTED` for identity review |
 | PubChem identifiers/properties | 126 compounds, 853 facts | PubChem snapshot 2026-10-29 (`seed/data/pubchem-snapshot-2026-10-29.json`). 9 recalled CIDs were wrong; they were rejected and recorded in `pubchem-rejected-candidates.json`. |
-| Products | 29 (5 Supernatural, 24 textured-hair competitors) | Verbatim manufacturer ingredient declarations with source URLs |
+| Products | 38 (5 Supernatural, 33 textured-hair competitors) | Verbatim manufacturer ingredient declarations with source URLs |
 | Evidence | 79 | Real PubMed IDs, titles only. Study type and level are AI-proposed; **0 reviewed**. |
 | Patents | 43 | Publication numbers linking to Espacenet. Research aid, not a legal opinion. |
 | Regulatory records | 54 (48 ingredients; EU and US) | Drafts with `lastCheckedAt` empty, so all are shown as stale until verified against official text |
@@ -54,8 +54,9 @@ Everything is loaded through the same import engine that users use, so a second 
 | Hair Passport | 15 records | Mock batch exercising consent, mapping, quarantine and rejection paths |
 
 | EU CosIng inventory | 22,176 rows → ~22,000 ingredients, ~41,700 identifiers, ~1,185 EU annex records | Open Beauty Facts snapshot of the CosIng inventory (`seed/data/cosing/cosing-ingredients.json.gz`, built with `scripts/convert-cosing-obf.py`). Identifiers are `UNVERIFIED`; CAS numbers that fail the checksum (130) are not stored. Annex records have `lastCheckedAt` empty and carry no maximum concentrations. |
+| CosIng 2016 export supplement | 4,150 records (4,085 new, 65 linked) | Official Commission CSV export (last update 15/02/2016), used only for records missing from the snapshot above, such as Cocos Nucifera Oil and Hydroxyethylcellulose (`scripts/convert-cosing-export.py`). May be outdated for changes after 2016. WATER (US INCI) is merged into AQUA as a reversible curator decision. |
 
-Not seeded: supplier documents, maximum concentrations from the Annexes, and reviewed evidence or graph edges. These depend on human review or on documents that have not been provided. The OBF snapshot omits some common INCI names (for example Coco-Glucoside and Hydroxyethylcellulose); 77 curated ingredients therefore have no CosIng record yet.
+Not seeded: supplier documents, maximum concentrations from the Annexes, and reviewed evidence or graph edges. These depend on human review or on documents that have not been provided. The OBF snapshot omits some common INCI names (for example Coco-Glucoside and Hydroxyethylcellulose); these are filled from the 2016 export. About 94% of product label lines match an ingredient automatically; the rest (misspellings, common names, trade blends) wait in identity review.
 
 ### Research workbench (expansion)
 

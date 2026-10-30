@@ -16,12 +16,13 @@ import { createFact } from '../src/lib/services/facts'
 import { upsertEdge } from '../src/lib/services/graph'
 import { createFormula } from '../src/lib/services/formulas'
 import { requestReview } from '../src/lib/services/review'
-import { proposeDuplicates } from '../src/lib/services/identity'
+import { merge, proposeDuplicates } from '../src/lib/services/identity'
 import { createImportJob, runImportJob } from '../src/lib/import/engine'
 import { processBatch } from '../src/lib/integration/hair-passport'
 import { createApiKey } from '../src/lib/auth/api-keys'
 import { normalizeName, slugify } from '../src/lib/normalize'
 import { importCosing, refreshDerivedClasses } from './cosing'
+import { rematchUnresolvedLines } from '../src/lib/services/products'
 import { reindexIngredient, reindexRawMaterial, reindexResearchCandidate, reindexSupplier } from '../src/lib/search-index'
 
 const DATA = path.join(__dirname, 'data')
@@ -268,7 +269,18 @@ async function main() {
   // ─── EU CosIng inventory (22k INCI; batched, idempotent) ───
   const cos = await importCosing(actor, S['eu-cosing-obf'])
   log(`cosing: ${cos.rows} rows, ${cos.skipped} already present (${cos.refreshed} refreshed), ${cos.linked} linked to curated records, ${cos.created} created, ${cos.identifiers} identifiers, ${cos.casRejected} CAS failed checksum, ${cos.regulatory} EU annex records (${cos.seconds.toFixed(1)}s)`)
+  // Official 2016 CosIng export: only the records missing from the snapshot above (see scripts/convert-cosing-export.py).
+  const sup = await importCosing(actor, S['eu-cosing-export-2016'], path.join(__dirname, 'data', 'cosing', 'cosing-export-2016-supplement.json.gz'))
+  log(`cosing 2016 export supplement: ${sup.rows} rows, ${sup.skipped} already present, ${sup.linked} linked to existing records, ${sup.created} created, ${sup.regulatory} EU annex records`)
   log(`derived classes refreshed: ${await refreshDerivedClasses()}`)
+
+  // CosIng lists the same substance (CAS 7732-18-5) under AQUA (EU INCI) and WATER (US INCI name). Curator decision:
+  // merge WATER into AQUA. Reversible via identity unmerge; recorded as an identity event and in the audit log.
+  const [aqua, water] = await Promise.all([prisma.ingredient.findFirst({ where: { cosingRef: '31959' } }), prisma.ingredient.findFirst({ where: { cosingRef: '92472' } })])
+  if (aqua && water && aqua.status === 'ACTIVE' && water.status === 'ACTIVE') {
+    await merge(actor, aqua.id, water.id, 'Same substance (CAS 7732-18-5): WATER is the US INCI name for AQUA. Curator decision; reversible.')
+    log('identity: merged WATER (CosIng 92472) into AQUA (CosIng 31959)')
+  }
 
   // ─── Functions & families in the graph ───
   for (const i of ingredients) {
@@ -294,6 +306,8 @@ async function main() {
   }))
   await run('shcbeauty', 'product', productRows(true), 'products.json#supernatural')
   await run('manufacturer-labels', 'product', productRows(false), 'products.json#textured-hair')
+  const rm = await rematchUnresolvedLines(actor)
+  log(`product lines re-matched: ${rm.upgraded} of ${rm.checked} unresolved lines now matched exactly`)
 
   const evidence = load<{ evidence: Record<string, unknown>[] }>('evidence.json').evidence
   await run('pubmed-metadata', 'evidence', evidence.map((e) => ({
