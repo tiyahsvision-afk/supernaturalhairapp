@@ -1,4 +1,4 @@
-import type { Prisma } from '@prisma/client'
+import type { AuditLog, Prisma } from '@prisma/client'
 import { prisma } from './db'
 import type { Principal } from './permissions'
 
@@ -29,6 +29,7 @@ export async function audit(actor: Principal | null, input: AuditInput, tx: Tx =
       actorId: actor?.kind === 'USER' ? actor.id : null,
       actorType: actor ? actor.kind : 'SYSTEM',
       actorLabel: actor?.label ?? 'system',
+      organizationId: actor?.organizationId ?? null,
       action: input.action,
       entityType: input.entityType,
       entityId: input.entityId,
@@ -45,4 +46,24 @@ export async function audit(actor: Principal | null, input: AuditInput, tx: Tx =
 export async function securityEvent(type: string, details: { userId?: string; email?: string; ip?: string; [k: string]: unknown }) {
   const { userId, email, ip, ...rest } = details
   await prisma.securityEvent.create({ data: { type, userId, email, ip, details: toJson(rest) ?? {} } })
+}
+
+const CONFIDENTIAL_ENTITIES = new Set(['ResearchProject', 'ResearchReport', 'ResearchRun', 'Collection', 'Formula', 'FormulaVersion', 'RawMaterial', 'Document', 'ResearchCandidate'])
+
+/**
+ * Audit visibility. Customer organizations see only entries made by their own members. The platform operator
+ * (INTERNAL organization) sees every entry for security purposes, but the content (before/after) of other
+ * organizations' confidential records is redacted.
+ */
+export async function auditScope(p: Principal) {
+  const org = await prisma.organization.findUniqueOrThrow({ where: { id: p.organizationId }, select: { type: true } })
+  const internal = org.type === 'INTERNAL'
+  const orgUsers = internal ? null : (await prisma.user.findMany({ where: { organizationId: p.organizationId }, select: { id: true } })).map((u) => u.id)
+  return {
+    internal,
+    auditWhere: (internal ? {} : { organizationId: p.organizationId }) as Prisma.AuditLogWhereInput,
+    securityWhere: (internal ? {} : { userId: { in: orgUsers! } }) as Prisma.SecurityEventWhereInput,
+    redact: (r: AuditLog): AuditLog =>
+      internal && r.organizationId && r.organizationId !== p.organizationId && CONFIDENTIAL_ENTITIES.has(r.entityType) ? { ...r, before: null, after: { redacted: 'Confidential record of another organization' } } : r,
+  }
 }

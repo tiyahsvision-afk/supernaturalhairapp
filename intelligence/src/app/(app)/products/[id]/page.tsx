@@ -16,7 +16,7 @@ export default async function ProductPage({ params, searchParams }: { params: Pr
   const sp = await searchParams
   if (!/^[0-9a-f-]{36}$/.test(id)) notFound()
   const p = await prisma.product.findUnique({ where: { id }, include: { versions: { orderBy: { versionNumber: 'desc' }, include: { lines: { orderBy: { position: 'asc' }, include: { ingredient: true } } } } } })
-  if (!p) notFound()
+  if (!p || (p.ownerOrgId && p.ownerOrgId !== s.principal.organizationId)) notFound()
   const v = p.versions.find((x) => String(x.versionNumber) === sp.v) ?? p.versions[0]
   const src = v?.sourceId ? await prisma.source.findUnique({ where: { id: v.sourceId } }) : null
   const canWrite = can(s.principal, 'product:write')

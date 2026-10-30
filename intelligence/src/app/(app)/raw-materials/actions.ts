@@ -59,3 +59,34 @@ export async function createSupplierAction(f: FormData) {
   await reindexSupplier(sup.id)
   revalidatePath('/suppliers')
 }
+
+async function visibleMaterial(principal: Parameters<typeof canViewRecord>[0], id: string) {
+  const rm = await prisma.rawMaterial.findUnique({ where: { id } })
+  if (!rm || !canViewRecord(principal, rm, 'rawmaterial:read')) throw new Error('Raw material not found.')
+  return rm
+}
+
+/** Records a specification value from a supplier document. It stays unverified until a person checks it. */
+export async function addSpecAction(f: FormData) {
+  const s = await requirePermission('rawmaterial:write', 'raw material specification')
+  const rm = await visibleMaterial(s.principal, String(f.get('rawMaterialId')))
+  const parameter = String(f.get('parameter') ?? '').trim(), value = String(f.get('value') ?? '').trim()
+  if (!parameter || !value) throw new Error('Parameter and value are required.')
+  const documentId = String(f.get('documentId') ?? '') || null
+  if (documentId && !(await prisma.document.findFirst({ where: { id: documentId, rawMaterialId: rm.id } }))) throw new Error('Document not found for this material.')
+  const spec = await prisma.rawMaterialSpec.create({ data: { rawMaterialId: rm.id, parameter: parameter.slice(0, 120), value: value.slice(0, 300), unit: String(f.get('unit') ?? '').trim() || null, method: String(f.get('method') ?? '').trim() || null, documentId, entryMode: 'MANUAL', createdById: s.user.id } })
+  await audit(s.principal, { action: 'rawmaterial.spec.add', entityType: 'RawMaterial', entityId: rm.id, after: { specId: spec.id, parameter, value } })
+  revalidatePath(`/raw-materials/${rm.id}`)
+}
+
+/** Human verification against the source document. The person who entered a value cannot verify it. */
+export async function verifySpecAction(f: FormData) {
+  const s = await requirePermission('rawmaterial:write', 'verify specification')
+  const spec = await prisma.rawMaterialSpec.findUniqueOrThrow({ where: { id: String(f.get('specId')) } })
+  await visibleMaterial(s.principal, spec.rawMaterialId)
+  if (spec.createdById === s.user.id) throw new Error('A second person must verify a value you entered.')
+  if (!spec.documentId) throw new Error('Link the value to its source document before verifying.')
+  await prisma.rawMaterialSpec.update({ where: { id: spec.id }, data: { verifiedById: s.user.id, verifiedAt: new Date() } })
+  await audit(s.principal, { action: 'rawmaterial.spec.verify', entityType: 'RawMaterial', entityId: spec.rawMaterialId, after: { specId: spec.id } })
+  revalidatePath(`/raw-materials/${spec.rawMaterialId}`)
+}

@@ -35,6 +35,8 @@ The main threats are:
 | Audit | Every write records actor, before/after, reason and source; the database trigger rejects UPDATE/DELETE on `AuditLog` | `audit.ts`, migration `…_phase1_search_audit_guards` |
 | Data rights | Imports gated on source rights; partner API responses withhold records from sources not cleared for external use | `import/engine.ts`, `api/http.ts` |
 | Participant data | Direct identifiers rejected and payload discarded; consent gating per record; health context stripped without health consent; withdrawal stops intake and schedules deletion; mock data excluded by default | `integration/hair-passport.ts` |
+| Organization workspaces | Research projects, reports, review tasks for org-owned entities, products (`ownerOrgId`) and audit history (`AuditLog.organizationId`) are scoped to the user's organization. Restricted projects are limited to the creator and members; members can only be added from the same organization, with one generic error. The platform audit view redacts other organizations' confidential entities. | `research/projects.ts`, `services/review.ts`, `audit.ts` |
+| Signup and plans | `/signup` is off unless `ALLOW_SELF_SIGNUP=true`; rate-limited; generic duplicate message; creates a trial organization with a Brand partner user (no privileged roles). Plan limits are enforced per organization per month. | `src/app/signup`, `entitlements.ts` |
 | Secrets | Only `.env.example` is committed; `.env`, `storage/` and `private-data/` are git-ignored; demo users refused in production | `.gitignore`, `seed/seed.ts` |
 
 **Repository visibility.** This code lives in a public repository. That is acceptable for the code itself. Private formulas, supplier documents and any participant data must only ever enter through the database or storage, never as committed files. The seed contains only public or clearly labelled sample data.
@@ -44,6 +46,7 @@ The main threats are:
 - **Rate limiter and import runner are in-process.** Use Redis or a database-backed limiter and a job queue for multi-instance deployments.
 - **TOTP lacks replay protection** within the ±1-step window (store the last used step per user). There are no recovery codes or WebAuthn yet.
 - **No password-reset flow.** Admins reset passwords. An email-based reset with rate limits is a Phase 2 item.
+- **Research assistant sends retrieved records to the Anthropic API** when `ANTHROPIC_API_KEY` is set. Only records the user may already see are sent; do not enable it for organizations whose agreements forbid third-party processing.
 - **Malware scanning is optional.** Without `CLAMD_HOST`, uploads stay "not scanned" and visible to admins only.
 - **Encryption at rest relies on the database provider.** Only TOTP secrets are field-encrypted. Consider field encryption for supplier documents' metadata.
 - **`npm audit` reports a high-severity issue in a Prisma CLI transitive dependency** (`deepmerge-ts`; development tooling only, not shipped in the runtime). It is resolved by upgrading to Prisma 7, which requires migration work.

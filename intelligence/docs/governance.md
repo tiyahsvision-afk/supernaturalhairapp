@@ -22,6 +22,7 @@ Generated from `seed/data/sources.json` (the live registry is at `/sources`). "E
 | Health Canada Cosmetic Ingredient Hotlist | REGULATORY | MANUAL_REVIEW_REQUIRED | yes | no | no | no | — |
 | UK Cosmetics Regulation (retained Regulation 1223/2009, as amended) | REGULATORY | MANUAL_REVIEW_REQUIRED | yes | no | no | no | — |
 | European Commission CosIng database | COSMETIC_INVENTORY | MANUAL_REVIEW_REQUIRED | yes | no | no | no | — |
+| EU CosIng inventory via Open Beauty Facts taxonomy | COSMETIC_INVENTORY | APPROVED_WITH_ATTRIBUTION (preliminary) | yes | no | no | no | INCI names, CosIng reference, CAS/EC (unverified), official functions, annex references |
 | Cosmetic Ingredient Review (CIR) reports | SAFETY_REVIEW | LINK_ONLY | yes | no | no | no | links; conclusion summaries after review |
 | Scientific Committee on Consumer Safety (SCCS) opinions | SAFETY_REVIEW | APPROVED_WITH_ATTRIBUTION | yes | no | no | no | safety review records |
 | EPA CompTox Chemicals Dashboard / CTX APIs | CHEMICAL_DATABASE | MANUAL_REVIEW_REQUIRED | yes | no | no | no | — |
@@ -153,3 +154,19 @@ Requirements are rows in `ReviewRequirement`, shown at Settings → Review requi
 | Biostatistician | Phase 3 analysis plans, cohort definitions, multiplicity control |
 | Privacy / data-protection counsel | Hair Passport consent text, de-identification protocol, retention schedule |
 | Licensing counsel | Source terms (especially manufacturer pages, Google Patents, CosIng, CIR) |
+
+## 9. Data status labels (research workbench)
+
+Every value in comparisons, profiles and reports carries one status. Unverified data is never converted to verified silently; verification needs a named reviewer (and, for supplier specifications, a second person and a source document).
+
+| Status | Meaning |
+|---|---|
+| Verified | Checked by a qualified reviewer against the cited source |
+| Source-reported | Stated by a cited source; not yet reviewed |
+| Supplier-reported | From a supplier document (TDS, SDS, COA, specification) |
+| Rule-derived | Computed by a published rule from INCI naming or official functions; a screening aid |
+| Hypothesis | A proposal that needs testing |
+| Missing | No source on file. Shown instead of an estimate. |
+| N/A | Does not apply to this material |
+
+Certainty levels for findings: Established, Supported, Uncertain, Unsupported, Needs testing, Review required, Information. A substitution, formulation or claim finding is never more than "Supported" without reviewed human studies, and medical-context studies never support a cosmetic claim.

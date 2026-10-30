@@ -7,7 +7,9 @@ import { ingredientDetail } from '@/lib/services/ingredients'
 import { postgresGraphStore } from '@/lib/services/graph'
 import { isStale, JURISDICTIONS, REGULATORY_DISCLAIMER } from '@/lib/regulatory'
 import { GraphSvg } from '@/components/GraphSvg'
-import { Badge, Card, DISCLAIMERS, EmptyState, EntryModeBadge, KeyValue, Notice, PageHeader, PermissionDenied, Provenance, ReviewBadge, TableWrap, Tabs, Button, Field } from '@/components/ui'
+import { DerivedChips, DimensionTable, StatusLegend } from '@/components/intel'
+import { dimensionsFor, loadIntel } from '@/lib/dimensions'
+import { Badge, Card, DISCLAIMERS, EmptyState, EntryModeBadge, KeyValue, LinkButton, Notice, PageHeader, PermissionDenied, Provenance, ReviewBadge, TableWrap, Tabs, Button, Field } from '@/components/ui'
 import { addAliasAction, addConcentrationAction, addFactAction, addFunctionAction, addIdentifierAction, addRegulatoryAction, updateIngredientAction } from '../actions'
 
 export const dynamic = 'force-dynamic'
@@ -43,17 +45,42 @@ export default async function IngredientPage({ params, searchParams }: { params:
     { key: 'formulas', label: 'Formulas', count: visibleFormulaLines.length }, { key: 'phenotypes', label: 'Phenotypes' }, { key: 'outcomes', label: 'Outcomes' },
     { key: 'graph', label: 'Graph', count: d.edgeCount }, { key: 'history', label: 'History' },
   ]
+  const intel = tab === 'overview' ? (await loadIntel(s.principal, [ing.id])).map(dimensionsFor)[0] : null
   const allSources = tab === 'properties' || tab === 'regulatory' || tab === 'concentrations' || tab === 'functions' || tab === 'identity' ? await prisma.source.findMany({ where: { active: true }, orderBy: { name: 'asc' } }) : []
   return (
     <>
       <PageHeader eyebrow={`${label(ing.identityType)} · ${ing.family?.name ?? 'no family'}`} title={ing.displayName}
         subtitle={<>{ing.inciName && <>INCI: <strong>{ing.inciName}</strong> · </>}Priority tier {ing.priorityTier ?? '—'}{ing.priorityReason && <> — {ing.priorityReason}</>}</>}
-        actions={<><ReviewBadge status={ing.reviewStatus} /><Badge tone="brand">Completeness {completeness.score}%</Badge></>} />
+        actions={<><ReviewBadge status={ing.reviewStatus} /><Badge tone="brand">Completeness {completeness.score}%</Badge><LinkButton href={`/compare?ids=${ing.id}`}>Compare</LinkButton><LinkButton href={`/workbench/new?workflow=SUBSTITUTES&ingredient=${ing.id}`} variant="primary">Find substitutes</LinkButton></>} />
       {ing.identityNote && <Notice kind="warn" title="Identity note">{ing.identityNote}</Notice>}
       <Tabs tabs={tabs} active={tab} base={`/ingredients/${ing.id}`} />
 
       {tab === 'overview' && (
         <div className="grid gap-4 lg:grid-cols-3">
+          {intel && (
+            <Card title="Technical profile" className="lg:col-span-2" actions={<span className="text-xs text-ink-3">No value is shown without a source</span>}>
+              <div className="mb-4"><StatusLegend /></div>
+              <DimensionTable dims={intel.dims} />
+            </Card>
+          )}
+          <div className="space-y-4">
+            <Card title="Rule-based classification">
+              <DerivedChips classes={intel?.derived ?? []} />
+              <p className="mt-3 text-xs text-ink-3">Computed from the INCI name and official CosIng functions by transparent rules. Hover a tag for the rule. Screening aids, not measurements; naming rules have exceptions.</p>
+            </Card>
+            {(ing.cosingRef || ing.cosingFunctions.length > 0) && (
+              <Card title="EU CosIng record">
+                <KeyValue items={[
+                  ['CosIng ref', ing.cosingRef ?? 'not listed'],
+                  ['Functions', ing.cosingFunctions.join(', ') || '—'],
+                  ['Description', ing.cosingDescription],
+                  ['Annex reference', ing.cosingRestriction ?? 'none listed'],
+                  ['CosIng update', ing.cosingUpdated],
+                ]} />
+                <p className="mt-3 text-xs text-ink-3">Source: European Commission CosIng database (via Open Beauty Facts). CosIng is an information database without legal value; an Annex reference must be checked against the consolidated regulation.</p>
+              </Card>
+            )}
+          </div>
           <Card title="Identity" className="lg:col-span-2">
             <KeyValue items={[
               ['Canonical name', ing.canonicalName], ['Display name', ing.displayName], ['Common name', ing.commonName], ['Chemical name', ing.chemicalName],

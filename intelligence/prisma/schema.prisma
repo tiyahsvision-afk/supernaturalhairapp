@@ -570,12 +570,13 @@ enum IntegrationRecordStatus {
 // ─────────────────────── Organizations, users, auth ───────────────────────
 
 model Organization {
-  id           String   @id @default(uuid()) @db.Uuid
-  name         String
-  slug         String   @unique
-  type         OrgType
-  entitlements Json     @default("{}") // future subscription / data-entitlement flags (no billing in Phase 1)
-  createdAt    DateTime @default(now())
+  researchProjects ResearchProject[]
+  id               String            @id @default(uuid()) @db.Uuid
+  name             String
+  slug             String            @unique
+  type             OrgType
+  entitlements     Json              @default("{}") // future subscription / data-entitlement flags (no billing in Phase 1)
+  createdAt        DateTime          @default(now())
 
   users      User[]
   apiKeys    ApiKey[]
@@ -592,6 +593,7 @@ model User {
   email            String       @unique
   name             String
   passwordHash     String
+  workspaceMode    String? // FOUNDER | CHEMIST | BRAND | MANUFACTURER — chooses the default home experience
   status           UserStatus   @default(ACTIVE)
   mfaSecret        String? // base32 TOTP secret (encrypt at rest in production; see docs/security.md)
   mfaEnabled       Boolean      @default(false)
@@ -665,23 +667,25 @@ model ReviewerProfile {
 
 /// Append-only. An INSERT-only trigger (see migration) rejects UPDATE and DELETE.
 model AuditLog {
-  id         BigInt   @id @default(autoincrement())
-  at         DateTime @default(now())
-  actorId    String?  @db.Uuid
-  actorType  String // USER | API_KEY | SYSTEM
-  actorLabel String?
-  action     String // e.g. ingredient.create, fact.supersede, identity.merge
-  entityType String
-  entityId   String
-  before     Json?
-  after      Json?
-  reason     String?
-  sourceId   String?  @db.Uuid
-  requestId  String?
-  ip         String?
+  id             BigInt   @id @default(autoincrement())
+  at             DateTime @default(now())
+  actorId        String?  @db.Uuid
+  actorType      String // USER | API_KEY | SYSTEM
+  actorLabel     String?
+  organizationId String?  @db.Uuid // actor's organization; customer organizations only see their own entries
+  action         String // e.g. ingredient.create, fact.supersede, identity.merge
+  entityType     String
+  entityId       String
+  before         Json?
+  after          Json?
+  reason         String?
+  sourceId       String?  @db.Uuid
+  requestId      String?
+  ip             String?
 
   @@index([entityType, entityId])
   @@index([actorId])
+  @@index([organizationId, at])
   @@index([at])
 }
 
@@ -793,6 +797,16 @@ model Ingredient {
   priorityReason    String?
   identityNote      String?
   structureImageUrl String?
+  // EU CosIng inventory (official INCI record). Functions use CosIng vocabulary, e.g. "hair-conditioning".
+  cosingRef         String?           @unique
+  cosingFunctions   String[]          @default([])
+  cosingDescription String?
+  cosingRestriction String? // EU Annex reference, e.g. "III/249" or "V/29"
+  cosingUpdated     String?
+  wikidataId        String?
+  // Rule-derived classes (see src/lib/classify.ts); a cache for filtering, recomputed when the rules version changes.
+  derivedClasses    String[]          @default([])
+  derivedVersion    String?
   version           Int               @default(1)
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
@@ -816,6 +830,8 @@ model Ingredient {
 
   @@index([status])
   @@index([familyId])
+  @@index([cosingFunctions], type: Gin)
+  @@index([derivedClasses], type: Gin)
 }
 
 model ComplexMaterialProfile {
@@ -1159,20 +1175,23 @@ model SafetyReview {
 // ─────────────────────── Suppliers, raw materials, documents ───────────────────────
 
 model Supplier {
-  id        String        @id @default(uuid()) @db.Uuid
-  name      String        @unique
-  website   String?
-  type      String? // MANUFACTURER | DISTRIBUTOR | BOTH
-  country   String?
-  notes     String?
-  createdAt DateTime      @default(now())
-  rawMats   RawMaterial[]
-  documents Document[]
+  id             String        @id @default(uuid()) @db.Uuid
+  name           String        @unique
+  website        String?
+  type           String? // MANUFACTURER | DISTRIBUTOR | BOTH
+  country        String?
+  notes          String?
+  regions        String[]      @default([]) // markets/regions the supplier states it serves
+  certifications String[]      @default([]) // as stated by the supplier; verify against certificates on file
+  createdAt      DateTime      @default(now())
+  rawMats        RawMaterial[]
+  documents      Document[]
 }
 
 model RawMaterial {
   id                     String       @id @default(uuid()) @db.Uuid
   tradeName              String
+  grade                  String?
   supplierId             String?      @db.Uuid
   supplier               Supplier?    @relation(fields: [supplierId], references: [id])
   manufacturer           String?
@@ -1202,6 +1221,7 @@ model RawMaterial {
   components   RawMaterialComponent[]
   documents    Document[]
   formulaLines FormulaIngredient[]
+  specs        RawMaterialSpec[]
 
   @@unique([ownerOrgId, tradeName, supplierId])
 }
@@ -1282,6 +1302,8 @@ model FormulaVersion {
   viscosity              String?
   batchSize              Decimal?            @db.Decimal(12, 4)
   batchUnit              String?
+  unitSizeG              Decimal?            @db.Decimal(10, 2) // fill size of one finished unit, for cost per unit
+  currency               String              @default("USD")
   manufacturingProcess   String?
   processingTemperature  String?
   phaseStructure         String?
@@ -1323,6 +1345,7 @@ model FormulaIngredient {
   supplierId          String?        @db.Uuid
   lot                 String?
   activeConcentration Decimal?       @db.Decimal(9, 5) // only set when the raw material's active % is confirmed
+  unitCostPerKg       Decimal?       @db.Decimal(12, 4) // user-entered raw-material price, in the version's currency
 }
 
 // ─────────────────────── Products ───────────────────────
@@ -1952,4 +1975,144 @@ model WithdrawalNotice {
   affectedAnalyses Json      @default("[]")
   notes            String?
   isMock           Boolean   @default(false)
+}
+
+// ─── Research workbench (organization-scoped) ────────────────────────────────
+
+enum ResearchWorkflow {
+  SUBSTITUTES
+  FORMULATION
+  CLAIM
+  SUPPLIERS
+  COMPARISON
+  PRODUCT_BRIEF
+  GENERAL
+}
+
+enum ProjectStatus {
+  OPEN
+  IN_REVIEW
+  COMPLETE
+  ARCHIVED
+}
+
+/// A saved research project. Visibility follows the same rules as formulas: no cross-organization access.
+model ResearchProject {
+  id             String                  @id @default(uuid()) @db.Uuid
+  organizationId String                  @db.Uuid
+  organization   Organization            @relation(fields: [organizationId], references: [id])
+  createdById    String?                 @db.Uuid
+  title          String
+  objective      String
+  workflow       ResearchWorkflow
+  status         ProjectStatus           @default(OPEN)
+  visibility     Visibility              @default(ORGANIZATION)
+  inputs         Json                    @default("{}")
+  reviewStatus   ReviewStatus            @default(DRAFT)
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+  runs           ResearchRun[]
+  reports        ResearchReport[]
+  members        ResearchProjectMember[]
+
+  @@index([organizationId, updatedAt])
+}
+
+model ResearchProjectMember {
+  projectId String          @db.Uuid
+  project   ResearchProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId    String          @db.Uuid
+  role      String          @default("EDITOR") // EDITOR | VIEWER
+
+  @@id([projectId, userId])
+}
+
+/// One execution of a workflow. Results are stored as computed (never edited); citations point at database records.
+model ResearchRun {
+  id            String           @id @default(uuid()) @db.Uuid
+  projectId     String           @db.Uuid
+  project       ResearchProject  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  workflow      ResearchWorkflow
+  input         Json
+  result        Json
+  citations     Json             @default("[]")
+  engineVersion String
+  aiUsed        Boolean          @default(false)
+  aiModel       String?
+  createdById   String?          @db.Uuid
+  createdAt     DateTime         @default(now())
+
+  @@index([projectId, createdAt])
+}
+
+/// A generated report: an immutable snapshot of findings at generation time, with its verification summary.
+model ResearchReport {
+  id             String           @id @default(uuid()) @db.Uuid
+  organizationId String           @db.Uuid
+  projectId      String?          @db.Uuid
+  project        ResearchProject? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  type           String
+  title          String
+  snapshot       Json
+  createdById    String?          @db.Uuid
+  createdAt      DateTime         @default(now())
+
+  @@index([organizationId, createdAt])
+}
+
+model Collection {
+  id             String           @id @default(uuid()) @db.Uuid
+  organizationId String           @db.Uuid
+  createdById    String?          @db.Uuid
+  name           String
+  description    String?
+  visibility     Visibility       @default(ORGANIZATION)
+  createdAt      DateTime         @default(now())
+  items          CollectionItem[]
+
+  @@index([organizationId])
+}
+
+model CollectionItem {
+  id           String     @id @default(uuid()) @db.Uuid
+  collectionId String     @db.Uuid
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  entityType   String
+  entityId     String
+  note         String?
+  addedAt      DateTime   @default(now())
+
+  @@unique([collectionId, entityType, entityId])
+}
+
+/// Usage metering for subscription-ready entitlements. Records activity only; no billing is performed.
+model UsageEvent {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  userId         String?  @db.Uuid
+  kind           String // research.run | report.generate | ai.call | compare | wizard
+  at             DateTime @default(now())
+  meta           Json     @default("{}")
+
+  @@index([organizationId, kind, at])
+}
+
+/// A specification value for a raw material, taken from a supplier document (TDS/SDS/COA/spec sheet). Values entered
+/// or extracted are unverified until a person checks them against the document.
+model RawMaterialSpec {
+  id            String      @id @default(uuid()) @db.Uuid
+  rawMaterialId String      @db.Uuid
+  rawMaterial   RawMaterial @relation(fields: [rawMaterialId], references: [id], onDelete: Cascade)
+  parameter     String // e.g. Active content, pH (10% aq.), Appearance, Viscosity, Recommended use level
+  value         String
+  unit          String?
+  method        String?
+  documentId    String?     @db.Uuid
+  entryMode     EntryMode   @default(MANUAL)
+  verifiedById  String?     @db.Uuid
+  verifiedAt    DateTime?
+  createdById   String?     @db.Uuid
+  createdAt     DateTime    @default(now())
+
+  @@index([rawMaterialId])
 }

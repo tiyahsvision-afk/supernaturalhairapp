@@ -5,7 +5,7 @@ import { allowed, requireUser } from '@/lib/auth/next'
 import { can, canViewRecord } from '@/lib/permissions'
 import { signDownload } from '@/lib/storage'
 import { Badge, Card, DISCLAIMERS, KeyValue, Notice, PageHeader, PermissionDenied, TableWrap, Button } from '@/components/ui'
-import { addComponentAction } from '../actions'
+import { addComponentAction, addSpecAction, verifySpecAction } from '../actions'
 import { UploadForm } from './UploadForm'
 
 export const dynamic = 'force-dynamic'
@@ -15,7 +15,7 @@ export default async function RawMaterialPage({ params }: { params: Promise<{ id
   if (!(await allowed(s, 'rawmaterial:read', '/raw-materials/[id]'))) return <PermissionDenied permission="rawmaterial:read" />
   const { id } = await params
   if (!/^[0-9a-f-]{36}$/.test(id)) notFound()
-  const rm = await prisma.rawMaterial.findUnique({ where: { id }, include: { supplier: true, components: { include: { ingredient: true } }, documents: { orderBy: { createdAt: 'desc' } } } })
+  const rm = await prisma.rawMaterial.findUnique({ where: { id }, include: { supplier: true, components: { include: { ingredient: true } }, documents: { orderBy: { createdAt: 'desc' } }, specs: { orderBy: { parameter: 'asc' } } } })
   if (!rm || !canViewRecord(s.principal, rm, 'rawmaterial:read')) notFound()
   const now = Date.now()
   const canWrite = can(s.principal, 'rawmaterial:write')
@@ -53,6 +53,26 @@ export default async function RawMaterialPage({ params }: { params: Promise<{ id
             </tbody></table></TableWrap>
           )}
           {can(s.principal, 'document:upload') && <UploadForm rawMaterialId={rm.id} />}
+        </Card>
+        <Card title="Specifications (from supplier documents)" className="lg:col-span-2">
+          <p className="mb-3 text-xs text-ink-3">Enter values exactly as stated in the TDS, SDS, COA or specification sheet and link the document. A second person verifies each value against the document before it counts as verified.</p>
+          {rm.specs.length > 0 && (
+            <TableWrap><table><thead><tr><th>Parameter</th><th>Value</th><th>Method</th><th>Source document</th><th>Status</th></tr></thead><tbody>
+              {rm.specs.map((sp) => <tr key={sp.id}><td>{sp.parameter}</td><td>{sp.value}{sp.unit ? ` ${sp.unit}` : ''}</td><td className="text-xs">{sp.method ?? '—'}</td><td className="text-xs">{rm.documents.find((d) => d.id === sp.documentId)?.title ?? <span className="text-ink-3">not linked</span>}</td>
+                <td>{sp.verifiedAt ? <Badge tone="good">verified {sp.verifiedAt.toISOString().slice(0, 10)}</Badge> : can(s.principal, 'rawmaterial:write') && sp.createdById !== s.user.id && sp.documentId ? <form action={verifySpecAction}><input type="hidden" name="specId" value={sp.id} /><button className="rounded-full border border-line px-2 py-0.5 text-xs">Verify against document</button></form> : <Badge tone="warn">unverified</Badge>}</td></tr>)}
+            </tbody></table></TableWrap>
+          )}
+          {can(s.principal, 'rawmaterial:write') && (
+            <form action={addSpecAction} className="mt-3 grid gap-2 sm:grid-cols-6">
+              <input type="hidden" name="rawMaterialId" value={rm.id} />
+              <input name="parameter" placeholder="Parameter (e.g. Active content)" required className="sm:col-span-2" aria-label="Parameter" />
+              <input name="value" placeholder="Value" required aria-label="Value" />
+              <input name="unit" placeholder="Unit" aria-label="Unit" />
+              <input name="method" placeholder="Method" aria-label="Method" />
+              <select name="documentId" defaultValue="" aria-label="Source document"><option value="">Source document…</option>{rm.documents.map((d) => <option key={d.id} value={d.id}>{d.docType}: {d.title}</option>)}</select>
+              <button className="rounded-full border border-line px-3 py-1.5 text-sm sm:col-span-6 sm:justify-self-start">Add value</button>
+            </form>
+          )}
         </Card>
       </div>
     </>

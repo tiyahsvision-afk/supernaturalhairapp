@@ -127,23 +127,40 @@ Every searchable entity is written into `SearchEntry` (normalized term, kind, ow
 
 Each hit returns a human-readable explanation (`why`), and results are filtered by permission and record visibility before ranking. `scripts/search-eval.ts` measures top-1 accuracy, recall@5 and MRR@5 on a labelled set; the current result is 45/45 top-1 at p95 10 ms. That set was written by the developer and is a regression baseline, not a real-user benchmark; it should be extended with logged queries (`SearchLog`).
 
-## 7. AI architecture (planned for Phase 4; not built)
+## 7. AI architecture
 
-Phase 1 contains **no generative AI at runtime**. AI was used only offline, to propose seed classifications. Those carry `entryMode = AI_EXTRACTED` and remain `SUBMITTED` until reviewed.
+AI was used offline to propose seed classifications. Those carry `entryMode = AI_EXTRACTED` and remain `SUBMITTED` until reviewed. At runtime there is one generative component, the **research assistant** (`src/lib/research/assistant.ts`):
+- **Retrieval first.** The question is matched against ingredients, evidence, regulatory records and products the user may see. Each record becomes a numbered reference (R1…Rn).
+- **Answers cite records.** The model returns structured output (JSON schema). Any point that cites no reference, or cites one that was not retrieved, is dropped, and the methodology says so.
+- **Off without a key.** Without `ANTHROPIC_API_KEY`, the assistant returns the retrieved records only (`aiUsed: false`). Each AI call is metered against the plan.
+- **Answers are labelled** as drafts for qualified review, and saved projects can be sent for review.
+- **Technical values are never generated.** Ingredient dimensions (HLB, pH range, solubility, …) appear only with a source; otherwise they read *Missing*.
 
-The Phase 4 design:
-- **Retrieval only over permitted sources.** Licensing fields such as `allowModelTraining` and `fullTextStoragePermission` gate what may be embedded (pgvector).
-- **Answers cite records.** An answer without citations is not shown.
-- **Answers are labelled.** They are "Evidence-supported candidate" or "Candidate for cosmetic-chemist review", never as conclusions.
-- **Answers are reviewable.** Each is stored as an `AIAnswer` review record (a review requirement already exists).
-- **HairFM outputs are hypotheses.** Outputs received via Hair Passport are stored as `AI_ESTIMATE` observations with a mandatory model version, and treated as research hypotheses.
+Still planned: embeddings (pgvector) gated by `allowModelTraining`/`fullTextStoragePermission`, AI-assisted extraction from supplier documents with human verification, and HairFM hypothesis intake as `AI_ESTIMATE` observations.
+
+## 7a. Research workbench
+
+All workflows (`src/lib/research/*`) return one `WorkflowResult`: summary, findings (each with a certainty level and citations), tables whose cells carry a data status, limitations, open questions and next steps. `ResearchProject` stores the objective, inputs, members, visibility and review status; each run is a `ResearchRun` and each report a frozen `ResearchReport` snapshot. Re-running an approved project sets it to `RE_REVIEW_REQUIRED`.
+
+| Workflow | Engine | Notes |
+|---|---|---|
+| Substitutes | `substitutes.ts` | Ranks by overlap of official CosIng functions (IDF-weighted), adjusts for charge class, excludes avoided classes and EU-prohibited records. Never claims equivalence. |
+| Formulation | `formulation.ts` | Parses pasted or uploaded formulas; checks totals, cationic–anionic pairing, preservation, pH-dependent preservatives, known incompatibilities, regulatory status per market, allergens and functional coverage. |
+| Claim | `claim.ts` | Maps claim words to outcome terms; flags drug or proof wording; grades each element from reviewed human studies only. |
+| Suppliers | `suppliers.ts` | Lists visible raw materials, documents and specifications; reports gaps. No invented suppliers or prices. |
+| Comparison | `compare.ts` | 2–6 ingredients side by side; every cell labelled with its status. |
+| Product brief | `brief.ts` | Founder wizard; building blocks per category, market guidance with official links, manufacturer checklist. No percentages or prices. |
+
+**Data foundation.** `seed/cosing.ts` imports the EU CosIng inventory (OBF snapshot) idempotently, links existing curated records by exact INCI, and writes identifiers as `UNVERIFIED`. `src/lib/classify.ts` (`classify-rules/1.0.1`) derives screening classes from INCI naming and official functions; results are cached in `Ingredient.derivedClasses` with the rule version.
+
+**Organizations and plans.** `src/lib/entitlements.ts` defines plans and monthly limits; usage is written to `UsageEvent`. No payment provider is integrated.
 
 ## 8. Page map
 
 | Area | Pages |
 |---|---|
-| Research | Dashboard `/`, Ingredients (list with 13 filters, detail with 17 tabs, new), Search, Knowledge graph, Formulas (list, detail with versions/validation/compare/status, new), Products (list, detail with versions and line identity, new), Raw materials and Suppliers, Evidence (list, detail with rubric grading, new), Patents, Research candidates |
-| Data | Hair Passport (mock) integration (batches, records, mappings), Imports (upload, jobs, ingestion queue, templates), Review queue (tasks, quarantine, identity, licensing, stale), Sources & rights, Phase 1 completion |
+| Research | Home `/` (research-first, by workspace mode), Workbench `/workbench` (projects, new research), Founder wizard `/founder`, Reports `/reports`, Product benchmark `/products/compare`, Ingredients (list with 13 filters, detail with 17 tabs, new), Search, Knowledge graph, Formulas (list, detail with versions/validation/compare/status, new), Products (list, detail with versions and line identity, new), Raw materials and Suppliers, Evidence (list, detail with rubric grading, new), Patents, Research candidates |
+| Data | Data operations `/admin`, Hair Passport (mock) integration (batches, records, mappings), Imports (upload, jobs, ingestion queue, templates), Review queue (tasks, quarantine, identity, licensing, stale), Sources & rights, Phase 1 completion |
 | Admin | Audit history, Organizations, Settings (account, MFA, users and roles, API keys, permission matrix, review requirements), API docs |
 
 Every navigation entry leads to a working page; there are no placeholder pages.
@@ -156,7 +173,8 @@ Every navigation entry leads to a working page; there are no placeholder pages.
 | 1 | Canonical ingredient database, provenance, identity, search, products, formulas, evidence, patents, regulatory drafts, review workflows, imports, graph, API, Hair Passport mock contract | Built. Review-dependent targets are open; see `/completion`. |
 | 2 | Connectors: CosIng (INCI/CAS/EC/functions), PubChem/CompTox live refresh, PubMed E-utilities, PatentsView/EPO OPS, Health Canada and UK lists; supplier-document OCR and extraction; queue worker; S3 storage; reviewer onboarding to work down the review backlog | Planned |
 | 3 | Hair Passport live integration (after contract validation with that team), cohort builder, observational signal detection with pre-registered analysis plans and statistics governance | Planned |
-| 4 | Retrieval-augmented assistant with citations, embeddings (pgvector), HairFM hypothesis intake | Planned |
+| 4 | Retrieval-augmented assistant with citations (built; needs `ANTHROPIC_API_KEY`), embeddings (pgvector), HairFM hypothesis intake | Partly built |
+| Expansion | CosIng inventory (~22k ingredients), rule-derived classes, status-labelled technical profiles, research workbench, founder wizard, reports, organization workspaces and plans, self-service signup | Built |
 
 ## 10. Cost (indicative monthly, small team)
 

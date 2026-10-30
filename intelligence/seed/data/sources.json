@@ -1,26 +1,478 @@
 {
   "_meta": "Source registry with data-rights fields. termsReviewStatus starts as SUBMITTED for every source: rights below are the curator's PRELIMINARY reading and must be confirmed by a qualified reviewer. Export/external-API/model-training flags stay false until that review.",
   "sources": [
-    {"key": "pubchem", "name": "PubChem PUG REST", "owner": "U.S. National Library of Medicine (NCBI)", "type": "CHEMICAL_DATABASE", "authority": "NCBI/NLM", "url": "https://pubchem.ncbi.nlm.nih.gov/", "accessMethod": "API", "apiStatus": "BLOCKED_IN_ENVIRONMENT", "license": "NCBI data use policy; PubChem content largely public domain, some depositor records carry their own terms", "termsUrl": "https://www.ncbi.nlm.nih.gov/home/about/policies/", "rightsStatus": "APPROVED_WITH_ATTRIBUTION", "commercialUse": "allowed (preliminary)", "internalUse": "allowed", "redistribution": "allowed with attribution (preliminary)", "derivativeWork": "allowed (preliminary)", "attributionRequirements": "Cite PubChem and the NCBI.", "rateLimits": "≤5 requests/second, ≤400 requests/minute", "storagePermission": true, "cachingPermission": true, "fullTextStoragePermission": true, "approvedUses": ["identifier verification", "computed property facts"], "prohibitedUses": [], "refreshFrequency": "quarterly", "reviewNotes": "Direct egress to PubChem was blocked in the build environment; the 2026-10-29 snapshot was fetched through a web-fetch relay and stored verbatim in seed/data/pubchem-snapshot-2026-10-29.json."},
-    {"key": "pubmed-metadata", "name": "PubMed bibliographic metadata", "owner": "U.S. National Library of Medicine (NCBI)", "type": "LITERATURE", "authority": "NCBI/NLM", "url": "https://pubmed.ncbi.nlm.nih.gov/", "accessMethod": "WEB_FETCH", "apiStatus": "BLOCKED_IN_ENVIRONMENT", "license": "Citation metadata; abstracts may be copyrighted by publishers", "termsUrl": "https://www.ncbi.nlm.nih.gov/home/about/policies/", "rightsStatus": "METADATA_ONLY", "commercialUse": "metadata only", "internalUse": "allowed", "redistribution": "metadata and links only", "derivativeWork": "unknown", "attributionRequirements": "Cite the publication.", "storagePermission": true, "cachingPermission": true, "fullTextStoragePermission": false, "approvedUses": ["citation metadata", "links"], "prohibitedUses": ["storing abstracts or full text without permission"], "refreshFrequency": "on demand", "reviewNotes": "Retrieved via a PubMed-backed research index. Titles and identifiers only; abstracts deliberately not stored."},
-    {"key": "patent-search-discovery", "name": "Patent search (discovery via Google Patents pages)", "owner": "Google (index of official patent office data)", "type": "PATENT", "authority": "Discovery index (not an official office)", "url": "https://patents.google.com/", "accessMethod": "WEB_FETCH", "apiStatus": "NOT_APPLICABLE", "license": "Index terms apply; underlying bibliographic data from patent offices", "termsUrl": "https://policies.google.com/terms", "rightsStatus": "LINK_ONLY", "commercialUse": "unknown", "internalUse": "links and numbers only", "redistribution": "not permitted", "derivativeWork": "unknown", "storagePermission": true, "cachingPermission": false, "fullTextStoragePermission": false, "approvedUses": ["discovery of publication numbers and titles"], "prohibitedUses": ["copying claims or descriptions", "external redistribution"], "refreshFrequency": "on demand", "reviewNotes": "Publication numbers resolve to Espacenet (EPO) official records. Legal status, dates, assignees not retrieved."},
-    {"key": "espacenet", "name": "Espacenet (European Patent Office)", "owner": "European Patent Office", "type": "PATENT", "authority": "EPO", "url": "https://worldwide.espacenet.com/", "accessMethod": "MANUAL", "apiStatus": "KEY_REQUIRED", "license": "EPO terms; OPS API requires registration", "termsUrl": "https://www.epo.org/en/service-support/ordering/open-patent-services", "rightsStatus": "MANUAL_REVIEW_REQUIRED", "storagePermission": true, "cachingPermission": false, "approvedUses": ["official record links"], "prohibitedUses": [], "refreshFrequency": "Phase 2 connector"},
-    {"key": "manufacturer-labels", "name": "Manufacturer product pages (ingredient declarations)", "owner": "Respective brand owners", "type": "MANUFACTURER_LABEL", "authority": "Brand owner", "url": null, "accessMethod": "WEB_FETCH", "apiStatus": "NOT_APPLICABLE", "license": "Website terms of each brand", "rightsStatus": "MANUAL_REVIEW_REQUIRED", "commercialUse": "unknown", "internalUse": "factual ingredient declarations for internal research", "redistribution": "not permitted", "storagePermission": true, "cachingPermission": false, "fullTextStoragePermission": false, "approvedUses": ["internal research on declared ingredients"], "prohibitedUses": ["republishing marketing copy", "external API exposure"], "refreshFrequency": "quarterly", "reviewNotes": "Only the declared ingredient list (a factual label statement) is stored, plus page URL."},
-    {"key": "shcbeauty", "name": "Supernatural Hair Care (shcbeauty.com) product data", "owner": "Supernatural Hair Care", "type": "INTERNAL", "authority": "Supernatural", "url": "https://shcbeauty.com/", "accessMethod": "API", "apiStatus": "AVAILABLE", "license": "Owned by Supernatural", "rightsStatus": "APPROVED_INTERNAL", "commercialUse": "allowed", "internalUse": "allowed", "redistribution": "owner decision", "derivativeWork": "allowed", "storagePermission": true, "cachingPermission": true, "fullTextStoragePermission": true, "documentSharingPermission": false, "approvedUses": ["internal research", "product records"], "prohibitedUses": [], "refreshFrequency": "on change"},
-    {"key": "curator-seed", "name": "Curator seed (AI-assisted curation, pending review)", "owner": "Supernatural (internal)", "type": "CURATOR", "authority": "Internal curation", "accessMethod": "INTERNAL", "apiStatus": "NOT_APPLICABLE", "license": "Internal", "rightsStatus": "APPROVED_INTERNAL", "internalUse": "allowed", "storagePermission": true, "cachingPermission": true, "fullTextStoragePermission": true, "approvedUses": ["proposals for human review"], "prohibitedUses": ["presenting as verified fact before review", "model training"], "reviewNotes": "Identity types, families, functions, aliases and regulatory drafts proposed with AI assistance. Every record from this source is SUBMITTED for review; none is approved."},
-    {"key": "eu-cosmetics-regulation", "name": "Regulation (EC) No 1223/2009 (EU Cosmetics Regulation) and Annexes", "owner": "European Union", "type": "REGULATORY", "authority": "European Commission", "url": "https://eur-lex.europa.eu/eli/reg/2009/1223/oj", "accessMethod": "MANUAL", "apiStatus": "NOT_APPLICABLE", "license": "EU legal texts — reuse authorised (Commission Decision 2011/833/EU)", "termsUrl": "https://eur-lex.europa.eu/content/legal-notice/legal-notice.html", "rightsStatus": "APPROVED_WITH_ATTRIBUTION", "commercialUse": "allowed (preliminary)", "internalUse": "allowed", "redistribution": "allowed with attribution (preliminary)", "storagePermission": true, "cachingPermission": true, "fullTextStoragePermission": true, "approvedUses": ["regulatory records"], "prohibitedUses": [], "refreshFrequency": "monthly", "reviewNotes": "Seed records were drafted from the curator's knowledge of the Annexes and are NOT yet verified against the current consolidated text; all carry lastCheckedAt=null and display as stale."},
-    {"key": "eu-reach-annex-xvii", "name": "REACH Regulation (EC) No 1907/2006 Annex XVII restrictions", "owner": "European Union", "type": "REGULATORY", "authority": "European Commission / ECHA", "url": "https://echa.europa.eu/substances-restricted-under-reach", "accessMethod": "MANUAL", "license": "EU legal texts — reuse authorised", "rightsStatus": "APPROVED_WITH_ATTRIBUTION", "storagePermission": true, "cachingPermission": true, "approvedUses": ["regulatory records"], "refreshFrequency": "monthly"},
-    {"key": "us-ecfr", "name": "U.S. Code of Federal Regulations, Title 21 (eCFR)", "owner": "U.S. Government", "type": "REGULATORY", "authority": "FDA", "url": "https://www.ecfr.gov/current/title-21", "accessMethod": "MANUAL", "license": "U.S. Government work (public domain)", "rightsStatus": "APPROVED_COMMERCIAL", "commercialUse": "allowed", "internalUse": "allowed", "redistribution": "allowed", "storagePermission": true, "cachingPermission": true, "fullTextStoragePermission": true, "approvedUses": ["regulatory records"], "refreshFrequency": "monthly", "reviewNotes": "Seed records unverified against current eCFR text."},
-    {"key": "us-fda-cosmetics", "name": "FDA cosmetics guidance and resources", "owner": "U.S. Food and Drug Administration", "type": "REGULATORY", "authority": "FDA", "url": "https://www.fda.gov/cosmetics", "accessMethod": "MANUAL", "license": "U.S. Government work (public domain)", "rightsStatus": "APPROVED_COMMERCIAL", "storagePermission": true, "cachingPermission": true, "fullTextStoragePermission": true, "approvedUses": ["regulatory records"], "refreshFrequency": "monthly"},
-    {"key": "health-canada-hotlist", "name": "Health Canada Cosmetic Ingredient Hotlist", "owner": "Government of Canada", "type": "REGULATORY", "authority": "Health Canada", "url": "https://www.canada.ca/en/health-canada/services/consumer-product-safety/cosmetics/cosmetic-ingredient-hotlist-prohibited-restricted-ingredients.html", "accessMethod": "MANUAL", "license": "Open Government Licence – Canada (preliminary)", "rightsStatus": "MANUAL_REVIEW_REQUIRED", "storagePermission": true, "approvedUses": [], "refreshFrequency": "Phase 2 import", "reviewNotes": "No Canada records imported in Phase 1."},
-    {"key": "uk-cosmetics-regulation", "name": "UK Cosmetics Regulation (retained Regulation 1223/2009, as amended)", "owner": "UK Government", "type": "REGULATORY", "authority": "OPSS", "url": "https://www.legislation.gov.uk/eur/2009/1223/contents", "accessMethod": "MANUAL", "license": "Open Government Licence v3.0 (preliminary)", "rightsStatus": "MANUAL_REVIEW_REQUIRED", "storagePermission": true, "approvedUses": [], "refreshFrequency": "Phase 2 import", "reviewNotes": "No UK records imported in Phase 1; UK divergence from EU must be checked entry by entry."},
-    {"key": "eu-cosing", "name": "European Commission CosIng database", "owner": "European Commission", "type": "COSMETIC_INVENTORY", "authority": "European Commission", "url": "https://ec.europa.eu/growth/tools-databases/cosing/", "accessMethod": "BULK_DOWNLOAD", "apiStatus": "NOT_CONNECTED", "license": "Commission reuse policy (preliminary)", "rightsStatus": "MANUAL_REVIEW_REQUIRED", "storagePermission": true, "approvedUses": [], "refreshFrequency": "Phase 2 connector", "reviewNotes": "Planned authoritative source for INCI names, CAS/EC numbers and functions."},
-    {"key": "cir", "name": "Cosmetic Ingredient Review (CIR) reports", "owner": "Cosmetic Ingredient Review", "type": "SAFETY_REVIEW", "authority": "CIR Expert Panel", "url": "https://www.cir-safety.org/", "accessMethod": "MANUAL", "license": "Reports © CIR; link and cite", "rightsStatus": "LINK_ONLY", "storagePermission": true, "fullTextStoragePermission": false, "approvedUses": ["links", "conclusion summaries after review"], "refreshFrequency": "Phase 2"},
-    {"key": "sccs", "name": "Scientific Committee on Consumer Safety (SCCS) opinions", "owner": "European Commission", "type": "SAFETY_REVIEW", "authority": "SCCS", "url": "https://health.ec.europa.eu/scientific-committees/scientific-committee-consumer-safety-sccs_en", "accessMethod": "MANUAL", "license": "Commission reuse policy", "rightsStatus": "APPROVED_WITH_ATTRIBUTION", "storagePermission": true, "approvedUses": ["safety review records"], "refreshFrequency": "Phase 2"},
-    {"key": "epa-comptox", "name": "EPA CompTox Chemicals Dashboard / CTX APIs", "owner": "U.S. Environmental Protection Agency", "type": "CHEMICAL_DATABASE", "authority": "EPA", "url": "https://comptox.epa.gov/dashboard/", "accessMethod": "API", "apiStatus": "BLOCKED_IN_ENVIRONMENT", "license": "U.S. Government work; API key required", "rightsStatus": "MANUAL_REVIEW_REQUIRED", "storagePermission": true, "approvedUses": [], "refreshFrequency": "Phase 2 connector"},
-    {"key": "uspto-patentsview", "name": "USPTO PatentsView / Open Data", "owner": "U.S. Patent and Trademark Office", "type": "PATENT", "authority": "USPTO", "url": "https://patentsview.org/", "accessMethod": "API", "apiStatus": "KEY_REQUIRED", "license": "U.S. Government data", "rightsStatus": "MANUAL_REVIEW_REQUIRED", "storagePermission": true, "approvedUses": [], "refreshFrequency": "Phase 2 connector"},
-    {"key": "literature-derived", "name": "Values stated in literature titles/index snippets", "owner": "Respective publishers", "type": "LITERATURE", "authority": "Cited publication", "accessMethod": "INTERNAL", "license": "Facts extracted from citation metadata", "rightsStatus": "METADATA_ONLY", "storagePermission": true, "approvedUses": ["concentration tested in a cited study"], "prohibitedUses": ["copying text"], "reviewNotes": "Concentrations here appear verbatim in the cited title or index snippet; full methods not reviewed."},
-    {"key": "internal-sample-data", "name": "Internal sample formulas and raw materials (illustrative)", "owner": "Supernatural (internal)", "type": "INTERNAL", "authority": "Internal", "accessMethod": "INTERNAL", "license": "Internal", "rightsStatus": "APPROVED_INTERNAL", "storagePermission": true, "cachingPermission": true, "fullTextStoragePermission": true, "approvedUses": ["testing and demonstration"], "prohibitedUses": ["manufacture", "any claim"], "reviewNotes": "Clearly labelled SAMPLE records. Not Supernatural formulas. Not for manufacture."},
-    {"key": "hair-passport", "name": "Hair Passport integration (contract hp-ii/0.1.0-draft)", "owner": "Supernatural", "type": "HAIR_PASSPORT", "authority": "Hair Passport", "accessMethod": "API", "apiStatus": "NOT_CONNECTED", "license": "Participant consent governs use", "rightsStatus": "RESTRICTED", "internalUse": "consent-scoped research only", "redistribution": "prohibited", "storagePermission": true, "approvedUses": ["consent-eligible de-identified research"], "prohibitedUses": ["re-identification", "export without protocol", "model training without consent"], "reviewNotes": "Only mock data has been received. Connection not validated."}
+    {
+      "key": "pubchem",
+      "name": "PubChem PUG REST",
+      "owner": "U.S. National Library of Medicine (NCBI)",
+      "type": "CHEMICAL_DATABASE",
+      "authority": "NCBI/NLM",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/",
+      "accessMethod": "API",
+      "apiStatus": "BLOCKED_IN_ENVIRONMENT",
+      "license": "NCBI data use policy; PubChem content largely public domain, some depositor records carry their own terms",
+      "termsUrl": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+      "rightsStatus": "APPROVED_WITH_ATTRIBUTION",
+      "commercialUse": "allowed (preliminary)",
+      "internalUse": "allowed",
+      "redistribution": "allowed with attribution (preliminary)",
+      "derivativeWork": "allowed (preliminary)",
+      "attributionRequirements": "Cite PubChem and the NCBI.",
+      "rateLimits": "≤5 requests/second, ≤400 requests/minute",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": true,
+      "approvedUses": [
+        "identifier verification",
+        "computed property facts"
+      ],
+      "prohibitedUses": [],
+      "refreshFrequency": "quarterly",
+      "reviewNotes": "Direct egress to PubChem was blocked in the build environment; the 2026-10-29 snapshot was fetched through a web-fetch relay and stored verbatim in seed/data/pubchem-snapshot-2026-10-29.json."
+    },
+    {
+      "key": "pubmed-metadata",
+      "name": "PubMed bibliographic metadata",
+      "owner": "U.S. National Library of Medicine (NCBI)",
+      "type": "LITERATURE",
+      "authority": "NCBI/NLM",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "accessMethod": "WEB_FETCH",
+      "apiStatus": "BLOCKED_IN_ENVIRONMENT",
+      "license": "Citation metadata; abstracts may be copyrighted by publishers",
+      "termsUrl": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+      "rightsStatus": "METADATA_ONLY",
+      "commercialUse": "metadata only",
+      "internalUse": "allowed",
+      "redistribution": "metadata and links only",
+      "derivativeWork": "unknown",
+      "attributionRequirements": "Cite the publication.",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": false,
+      "approvedUses": [
+        "citation metadata",
+        "links"
+      ],
+      "prohibitedUses": [
+        "storing abstracts or full text without permission"
+      ],
+      "refreshFrequency": "on demand",
+      "reviewNotes": "Retrieved via a PubMed-backed research index. Titles and identifiers only; abstracts deliberately not stored."
+    },
+    {
+      "key": "patent-search-discovery",
+      "name": "Patent search (discovery via Google Patents pages)",
+      "owner": "Google (index of official patent office data)",
+      "type": "PATENT",
+      "authority": "Discovery index (not an official office)",
+      "url": "https://patents.google.com/",
+      "accessMethod": "WEB_FETCH",
+      "apiStatus": "NOT_APPLICABLE",
+      "license": "Index terms apply; underlying bibliographic data from patent offices",
+      "termsUrl": "https://policies.google.com/terms",
+      "rightsStatus": "LINK_ONLY",
+      "commercialUse": "unknown",
+      "internalUse": "links and numbers only",
+      "redistribution": "not permitted",
+      "derivativeWork": "unknown",
+      "storagePermission": true,
+      "cachingPermission": false,
+      "fullTextStoragePermission": false,
+      "approvedUses": [
+        "discovery of publication numbers and titles"
+      ],
+      "prohibitedUses": [
+        "copying claims or descriptions",
+        "external redistribution"
+      ],
+      "refreshFrequency": "on demand",
+      "reviewNotes": "Publication numbers resolve to Espacenet (EPO) official records. Legal status, dates, assignees not retrieved."
+    },
+    {
+      "key": "espacenet",
+      "name": "Espacenet (European Patent Office)",
+      "owner": "European Patent Office",
+      "type": "PATENT",
+      "authority": "EPO",
+      "url": "https://worldwide.espacenet.com/",
+      "accessMethod": "MANUAL",
+      "apiStatus": "KEY_REQUIRED",
+      "license": "EPO terms; OPS API requires registration",
+      "termsUrl": "https://www.epo.org/en/service-support/ordering/open-patent-services",
+      "rightsStatus": "MANUAL_REVIEW_REQUIRED",
+      "storagePermission": true,
+      "cachingPermission": false,
+      "approvedUses": [
+        "official record links"
+      ],
+      "prohibitedUses": [],
+      "refreshFrequency": "Phase 2 connector"
+    },
+    {
+      "key": "manufacturer-labels",
+      "name": "Manufacturer product pages (ingredient declarations)",
+      "owner": "Respective brand owners",
+      "type": "MANUFACTURER_LABEL",
+      "authority": "Brand owner",
+      "url": null,
+      "accessMethod": "WEB_FETCH",
+      "apiStatus": "NOT_APPLICABLE",
+      "license": "Website terms of each brand",
+      "rightsStatus": "MANUAL_REVIEW_REQUIRED",
+      "commercialUse": "unknown",
+      "internalUse": "factual ingredient declarations for internal research",
+      "redistribution": "not permitted",
+      "storagePermission": true,
+      "cachingPermission": false,
+      "fullTextStoragePermission": false,
+      "approvedUses": [
+        "internal research on declared ingredients"
+      ],
+      "prohibitedUses": [
+        "republishing marketing copy",
+        "external API exposure"
+      ],
+      "refreshFrequency": "quarterly",
+      "reviewNotes": "Only the declared ingredient list (a factual label statement) is stored, plus page URL."
+    },
+    {
+      "key": "shcbeauty",
+      "name": "Supernatural Hair Care (shcbeauty.com) product data",
+      "owner": "Supernatural Hair Care",
+      "type": "INTERNAL",
+      "authority": "Supernatural",
+      "url": "https://shcbeauty.com/",
+      "accessMethod": "API",
+      "apiStatus": "AVAILABLE",
+      "license": "Owned by Supernatural",
+      "rightsStatus": "APPROVED_INTERNAL",
+      "commercialUse": "allowed",
+      "internalUse": "allowed",
+      "redistribution": "owner decision",
+      "derivativeWork": "allowed",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": true,
+      "documentSharingPermission": false,
+      "approvedUses": [
+        "internal research",
+        "product records"
+      ],
+      "prohibitedUses": [],
+      "refreshFrequency": "on change"
+    },
+    {
+      "key": "curator-seed",
+      "name": "Curator seed (AI-assisted curation, pending review)",
+      "owner": "Supernatural (internal)",
+      "type": "CURATOR",
+      "authority": "Internal curation",
+      "accessMethod": "INTERNAL",
+      "apiStatus": "NOT_APPLICABLE",
+      "license": "Internal",
+      "rightsStatus": "APPROVED_INTERNAL",
+      "internalUse": "allowed",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": true,
+      "approvedUses": [
+        "proposals for human review"
+      ],
+      "prohibitedUses": [
+        "presenting as verified fact before review",
+        "model training"
+      ],
+      "reviewNotes": "Identity types, families, functions, aliases and regulatory drafts proposed with AI assistance. Every record from this source is SUBMITTED for review; none is approved."
+    },
+    {
+      "key": "eu-cosmetics-regulation",
+      "name": "Regulation (EC) No 1223/2009 (EU Cosmetics Regulation) and Annexes",
+      "owner": "European Union",
+      "type": "REGULATORY",
+      "authority": "European Commission",
+      "url": "https://eur-lex.europa.eu/eli/reg/2009/1223/oj",
+      "accessMethod": "MANUAL",
+      "apiStatus": "NOT_APPLICABLE",
+      "license": "EU legal texts — reuse authorised (Commission Decision 2011/833/EU)",
+      "termsUrl": "https://eur-lex.europa.eu/content/legal-notice/legal-notice.html",
+      "rightsStatus": "APPROVED_WITH_ATTRIBUTION",
+      "commercialUse": "allowed (preliminary)",
+      "internalUse": "allowed",
+      "redistribution": "allowed with attribution (preliminary)",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": true,
+      "approvedUses": [
+        "regulatory records"
+      ],
+      "prohibitedUses": [],
+      "refreshFrequency": "monthly",
+      "reviewNotes": "Seed records were drafted from the curator's knowledge of the Annexes and are NOT yet verified against the current consolidated text; all carry lastCheckedAt=null and display as stale."
+    },
+    {
+      "key": "eu-reach-annex-xvii",
+      "name": "REACH Regulation (EC) No 1907/2006 Annex XVII restrictions",
+      "owner": "European Union",
+      "type": "REGULATORY",
+      "authority": "European Commission / ECHA",
+      "url": "https://echa.europa.eu/substances-restricted-under-reach",
+      "accessMethod": "MANUAL",
+      "license": "EU legal texts — reuse authorised",
+      "rightsStatus": "APPROVED_WITH_ATTRIBUTION",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "approvedUses": [
+        "regulatory records"
+      ],
+      "refreshFrequency": "monthly"
+    },
+    {
+      "key": "us-ecfr",
+      "name": "U.S. Code of Federal Regulations, Title 21 (eCFR)",
+      "owner": "U.S. Government",
+      "type": "REGULATORY",
+      "authority": "FDA",
+      "url": "https://www.ecfr.gov/current/title-21",
+      "accessMethod": "MANUAL",
+      "license": "U.S. Government work (public domain)",
+      "rightsStatus": "APPROVED_COMMERCIAL",
+      "commercialUse": "allowed",
+      "internalUse": "allowed",
+      "redistribution": "allowed",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": true,
+      "approvedUses": [
+        "regulatory records"
+      ],
+      "refreshFrequency": "monthly",
+      "reviewNotes": "Seed records unverified against current eCFR text."
+    },
+    {
+      "key": "us-fda-cosmetics",
+      "name": "FDA cosmetics guidance and resources",
+      "owner": "U.S. Food and Drug Administration",
+      "type": "REGULATORY",
+      "authority": "FDA",
+      "url": "https://www.fda.gov/cosmetics",
+      "accessMethod": "MANUAL",
+      "license": "U.S. Government work (public domain)",
+      "rightsStatus": "APPROVED_COMMERCIAL",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": true,
+      "approvedUses": [
+        "regulatory records"
+      ],
+      "refreshFrequency": "monthly"
+    },
+    {
+      "key": "health-canada-hotlist",
+      "name": "Health Canada Cosmetic Ingredient Hotlist",
+      "owner": "Government of Canada",
+      "type": "REGULATORY",
+      "authority": "Health Canada",
+      "url": "https://www.canada.ca/en/health-canada/services/consumer-product-safety/cosmetics/cosmetic-ingredient-hotlist-prohibited-restricted-ingredients.html",
+      "accessMethod": "MANUAL",
+      "license": "Open Government Licence – Canada (preliminary)",
+      "rightsStatus": "MANUAL_REVIEW_REQUIRED",
+      "storagePermission": true,
+      "approvedUses": [],
+      "refreshFrequency": "Phase 2 import",
+      "reviewNotes": "No Canada records imported in Phase 1."
+    },
+    {
+      "key": "uk-cosmetics-regulation",
+      "name": "UK Cosmetics Regulation (retained Regulation 1223/2009, as amended)",
+      "owner": "UK Government",
+      "type": "REGULATORY",
+      "authority": "OPSS",
+      "url": "https://www.legislation.gov.uk/eur/2009/1223/contents",
+      "accessMethod": "MANUAL",
+      "license": "Open Government Licence v3.0 (preliminary)",
+      "rightsStatus": "MANUAL_REVIEW_REQUIRED",
+      "storagePermission": true,
+      "approvedUses": [],
+      "refreshFrequency": "Phase 2 import",
+      "reviewNotes": "No UK records imported in Phase 1; UK divergence from EU must be checked entry by entry."
+    },
+    {
+      "key": "eu-cosing",
+      "name": "European Commission CosIng database",
+      "owner": "European Commission",
+      "type": "COSMETIC_INVENTORY",
+      "authority": "European Commission",
+      "url": "https://ec.europa.eu/growth/tools-databases/cosing/",
+      "accessMethod": "BULK_DOWNLOAD",
+      "apiStatus": "NOT_CONNECTED",
+      "license": "Commission reuse policy (preliminary)",
+      "rightsStatus": "MANUAL_REVIEW_REQUIRED",
+      "storagePermission": true,
+      "approvedUses": [],
+      "refreshFrequency": "Phase 2 connector",
+      "reviewNotes": "Planned authoritative source for INCI names, CAS/EC numbers and functions."
+    },
+    {
+      "key": "eu-cosing-obf",
+      "name": "EU CosIng inventory (via Open Beauty Facts taxonomy)",
+      "owner": "European Commission (data); Open Beauty Facts (compilation)",
+      "type": "COSMETIC_INVENTORY",
+      "authority": "European Commission",
+      "url": "https://github.com/openfoodfacts/openfoodfacts-server/blob/main/taxonomies/beauty/ingredients-cosing-obf.txt",
+      "accessMethod": "BULK_DOWNLOAD",
+      "apiStatus": "NOT_APPLICABLE",
+      "license": "CosIng content © European Union; reuse authorised with acknowledgement (Commission Decision 2011/833/EU). Compiled in the Open Beauty Facts repository (code AGPL-3.0; database ODbL).",
+      "termsUrl": "https://commission.europa.eu/legal-notice_en",
+      "rightsStatus": "APPROVED_WITH_ATTRIBUTION",
+      "commercialUse": "allowed with acknowledgement (preliminary)",
+      "internalUse": "allowed",
+      "redistribution": "allowed with acknowledgement (preliminary)",
+      "derivativeWork": "allowed (preliminary)",
+      "attributionRequirements": "Source: European Commission, CosIng database; compiled by Open Beauty Facts.",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": true,
+      "allowExport": false,
+      "allowExternalApi": false,
+      "allowModelTraining": false,
+      "approvedUses": [
+        "INCI names",
+        "CAS/EC numbers",
+        "CosIng functions",
+        "Annex references"
+      ],
+      "prohibitedUses": [
+        "presenting Annex references as current legal status without verification"
+      ],
+      "refreshFrequency": "quarterly",
+      "reviewNotes": "22,174 INCI records (snapshot of the OBF taxonomy, retrieved 2026-10-30). CAS/EC as reported by CosIng (unverified). Annex references are not the full Annex text: maximum concentrations and conditions of use must be checked in the consolidated regulation. Rights status is a preliminary reading pending licensing review."
+    },
+    {
+      "key": "cir",
+      "name": "Cosmetic Ingredient Review (CIR) reports",
+      "owner": "Cosmetic Ingredient Review",
+      "type": "SAFETY_REVIEW",
+      "authority": "CIR Expert Panel",
+      "url": "https://www.cir-safety.org/",
+      "accessMethod": "MANUAL",
+      "license": "Reports © CIR; link and cite",
+      "rightsStatus": "LINK_ONLY",
+      "storagePermission": true,
+      "fullTextStoragePermission": false,
+      "approvedUses": [
+        "links",
+        "conclusion summaries after review"
+      ],
+      "refreshFrequency": "Phase 2"
+    },
+    {
+      "key": "sccs",
+      "name": "Scientific Committee on Consumer Safety (SCCS) opinions",
+      "owner": "European Commission",
+      "type": "SAFETY_REVIEW",
+      "authority": "SCCS",
+      "url": "https://health.ec.europa.eu/scientific-committees/scientific-committee-consumer-safety-sccs_en",
+      "accessMethod": "MANUAL",
+      "license": "Commission reuse policy",
+      "rightsStatus": "APPROVED_WITH_ATTRIBUTION",
+      "storagePermission": true,
+      "approvedUses": [
+        "safety review records"
+      ],
+      "refreshFrequency": "Phase 2"
+    },
+    {
+      "key": "epa-comptox",
+      "name": "EPA CompTox Chemicals Dashboard / CTX APIs",
+      "owner": "U.S. Environmental Protection Agency",
+      "type": "CHEMICAL_DATABASE",
+      "authority": "EPA",
+      "url": "https://comptox.epa.gov/dashboard/",
+      "accessMethod": "API",
+      "apiStatus": "BLOCKED_IN_ENVIRONMENT",
+      "license": "U.S. Government work; API key required",
+      "rightsStatus": "MANUAL_REVIEW_REQUIRED",
+      "storagePermission": true,
+      "approvedUses": [],
+      "refreshFrequency": "Phase 2 connector"
+    },
+    {
+      "key": "uspto-patentsview",
+      "name": "USPTO PatentsView / Open Data",
+      "owner": "U.S. Patent and Trademark Office",
+      "type": "PATENT",
+      "authority": "USPTO",
+      "url": "https://patentsview.org/",
+      "accessMethod": "API",
+      "apiStatus": "KEY_REQUIRED",
+      "license": "U.S. Government data",
+      "rightsStatus": "MANUAL_REVIEW_REQUIRED",
+      "storagePermission": true,
+      "approvedUses": [],
+      "refreshFrequency": "Phase 2 connector"
+    },
+    {
+      "key": "literature-derived",
+      "name": "Values stated in literature titles/index snippets",
+      "owner": "Respective publishers",
+      "type": "LITERATURE",
+      "authority": "Cited publication",
+      "accessMethod": "INTERNAL",
+      "license": "Facts extracted from citation metadata",
+      "rightsStatus": "METADATA_ONLY",
+      "storagePermission": true,
+      "approvedUses": [
+        "concentration tested in a cited study"
+      ],
+      "prohibitedUses": [
+        "copying text"
+      ],
+      "reviewNotes": "Concentrations here appear verbatim in the cited title or index snippet; full methods not reviewed."
+    },
+    {
+      "key": "internal-sample-data",
+      "name": "Internal sample formulas and raw materials (illustrative)",
+      "owner": "Supernatural (internal)",
+      "type": "INTERNAL",
+      "authority": "Internal",
+      "accessMethod": "INTERNAL",
+      "license": "Internal",
+      "rightsStatus": "APPROVED_INTERNAL",
+      "storagePermission": true,
+      "cachingPermission": true,
+      "fullTextStoragePermission": true,
+      "approvedUses": [
+        "testing and demonstration"
+      ],
+      "prohibitedUses": [
+        "manufacture",
+        "any claim"
+      ],
+      "reviewNotes": "Clearly labelled SAMPLE records. Not Supernatural formulas. Not for manufacture."
+    },
+    {
+      "key": "hair-passport",
+      "name": "Hair Passport integration (contract hp-ii/0.1.0-draft)",
+      "owner": "Supernatural",
+      "type": "HAIR_PASSPORT",
+      "authority": "Hair Passport",
+      "accessMethod": "API",
+      "apiStatus": "NOT_CONNECTED",
+      "license": "Participant consent governs use",
+      "rightsStatus": "RESTRICTED",
+      "internalUse": "consent-scoped research only",
+      "redistribution": "prohibited",
+      "storagePermission": true,
+      "approvedUses": [
+        "consent-eligible de-identified research"
+      ],
+      "prohibitedUses": [
+        "re-identification",
+        "export without protocol",
+        "model training without consent"
+      ],
+      "reviewNotes": "Only mock data has been received. Connection not validated."
+    }
   ]
 }

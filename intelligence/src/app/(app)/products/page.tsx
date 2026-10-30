@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic'
 export default async function ProductsPage() {
   const s = await requireUser()
   if (!(await allowed(s, 'product:read', '/products'))) return <PermissionDenied permission="product:read" />
-  const rows = await prisma.product.findMany({ orderBy: [{ isSupernatural: 'desc' }, { brand: 'asc' }], include: { versions: { where: { validTo: null }, include: { lines: { select: { parsingStatus: true } } } } } })
+  const rows = await prisma.product.findMany({ where: { OR: [{ ownerOrgId: null }, { ownerOrgId: s.principal.organizationId }] }, orderBy: [{ isSupernatural: 'desc' }, { brand: 'asc' }], include: { versions: { where: { validTo: null }, include: { lines: { select: { parsingStatus: true } } } } } })
   return (
     <>
       <PageHeader eyebrow="Declared ingredient lists" title="Products" subtitle="Ingredient lists are stored in displayed order and versioned over time. Order never implies concentration." actions={can(s.principal, 'product:write') ? <LinkButton href="/products/new" variant="primary">Add product</LinkButton> : undefined} />

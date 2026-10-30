@@ -18,6 +18,13 @@ export interface NameIndex {
 const ALIAS_CONFIDENCE: Record<string, number> = { SYNONYM: 0.95, ABBREVIATION: 0.9, TRADE_NAME: 0.85, LEGACY_NAME: 0.9, MISSPELLING: 0.85, LABEL_DISPLAY_NAME: 0.7 }
 
 /** Builds an in-memory index of every active ingredient name, alias and canonical name. */
+let cached: { at: number; index: Promise<NameIndex> } | null = null
+/** Name index shared across requests for a few minutes (it covers ~22k ingredients and their aliases). */
+export function cachedNameIndex(ttlMs = 5 * 60_000): Promise<NameIndex> {
+  if (!cached || Date.now() - cached.at > ttlMs) cached = { at: Date.now(), index: buildNameIndex() }
+  return cached.index
+}
+
 export async function buildNameIndex(): Promise<NameIndex> {
   const ings = await prisma.ingredient.findMany({ where: { status: 'ACTIVE' }, select: { id: true, canonicalName: true, inciName: true, displayName: true, names: { select: { normalized: true, nameType: true } }, aliases: { select: { normalized: true, aliasType: true } } } })
   const exact: NameIndex['exact'] = new Map()

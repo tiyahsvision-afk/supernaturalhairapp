@@ -11,7 +11,7 @@ const ADMIN = { email: process.env.E2E_ADMIN_EMAIL ?? process.env.SEED_ADMIN_EMA
 const PARTNER = { email: 'brand-partner@demo.sii.local', password: 'DemoUser!2026-local' }
 const SHOTS = process.env.E2E_SCREENSHOT_DIR
 
-const PAGES = ['/', '/ingredients', '/ingredients?fn=humectant', '/search?q=shea', '/search?q=glycerine', '/graph', '/formulas', '/products', '/raw-materials', '/suppliers', '/evidence', '/patents', '/research-candidates', '/imports', '/review', '/review?tab=quarantine', '/review?tab=identity', '/sources', '/integrations', '/settings', '/organizations', '/completion', '/audit', '/api-docs']
+const PAGES = ['/', '/workbench', '/founder', '/reports', '/admin', '/products/compare', ...['SUBSTITUTES', 'FORMULATION', 'CLAIM', 'SUPPLIERS', 'COMPARISON', 'GENERAL'].map((w) => `/workbench/new?workflow=${w}`), '/ingredients?cls=cationic&free=silicone', '/ingredients', '/ingredients?fn=humectant', '/search?q=shea', '/search?q=glycerine', '/graph', '/formulas', '/products', '/raw-materials', '/suppliers', '/evidence', '/patents', '/research-candidates', '/imports', '/review', '/review?tab=quarantine', '/review?tab=identity', '/sources', '/integrations', '/settings', '/organizations', '/completion', '/audit', '/api-docs']
 const ERROR_TEXT = /Application error|Something went wrong|Unhandled Runtime Error|Internal Server Error/i
 
 const failures: string[] = []
@@ -71,11 +71,57 @@ async function main() {
       if (first) await visit(page, first)
     }
     const dash = await visit(page, '/')
-    check(/Phase 1|completion/i.test(dash), 'dashboard references Phase 1 completion status')
+    check(/What do you need to find out/i.test(dash), 'home leads with research')
+    const admin = await visit(page, '/admin')
+    check(/Data operations/i.test(admin), 'admin dashboard holds data operations')
+
+    // Workflow A end-to-end: pick an ingredient with the type-ahead, run, generate a report.
+    await page.goto(`${BASE}/workbench/new?workflow=SUBSTITUTES`)
+    await page.waitForLoadState('networkidle')
+    await page.fill('input[aria-label="Ingredient to replace"]', 'behentrimonium chloride')
+    await page.locator('[role="option"] button').first().click()
+    await page.fill('textarea[name="reason"]', 'smoke test: milder alternative')
+    await Promise.all([page.waitForURL(/\/workbench\/[0-9a-f-]{36}/, { timeout: 60000 }), page.click('button[type=submit]:has-text("Find substitutes")')])
+    await page.getByText('Candidate overview').first().waitFor({ timeout: 60000 })
+    const proj = await page.textContent('main') ?? ''
+    check(/Candidate overview/.test(proj) && /Needs lab testing/.test(proj), 'substitution project shows candidates and testing needs')
+    await Promise.all([page.waitForURL(/\/reports\/[0-9a-f-]{36}/, { timeout: 60000 }), page.click('button:has-text("Generate report")')])
+    await page.getByText('Data verification status').first().waitFor({ timeout: 60000 })
+    const rep = await page.textContent('main') ?? ''
+    check(/Ingredient Substitution Research Report/.test(rep) && /Sources/.test(rep) && /Data verification status/.test(rep), 'report has type, sources and verification status')
+    if (SHOTS) { await page.setViewportSize({ width: 1280, height: 900 }); await page.screenshot({ path: `${SHOTS}/report.png`, fullPage: true }) }
+
+    // Workflow B with pasted lines
+    await page.goto(`${BASE}/workbench/new?workflow=FORMULATION`)
+    await page.waitForLoadState('networkidle')
+    await page.fill('textarea[name="lines"]', 'Aqua q.s.\nSodium Laureth Sulfate 10\nBehentrimonium Chloride 2\nSodium Benzoate 0.5')
+    await page.fill('input[name="ph"]', '6.5')
+    await Promise.all([page.waitForURL(/\/workbench\/[0-9a-f-]{36}/, { timeout: 60000 }), page.click('button[type=submit]:has-text("Research this formulation")')])
+    await page.getByText('Functional building blocks').first().waitFor({ timeout: 60000 })
+    check(/Cationic and anionic/.test(await page.textContent('main') ?? ''), 'formulation research flags complexation')
+    if (SHOTS) await page.screenshot({ path: `${SHOTS}/formulation.png`, fullPage: true })
+
+    // Founder wizard: step through all ten questions
+    await page.goto(`${BASE}/founder`)
+    await page.waitForLoadState('networkidle')
+    for (let i = 0; i < 9; i++) { await page.click('button:has-text("Next")'); await page.getByText(`Question ${i + 2} of 10`).waitFor() }
+    await Promise.all([page.waitForURL(/\/workbench\/[0-9a-f-]{36}/, { timeout: 60000 }), page.click('button:has-text("Generate research brief")')])
+    await page.getByText('Development roadmap').first().waitFor({ timeout: 60000 })
+    const brief = await page.textContent('main') ?? ''
+    check(/Functional building blocks/.test(brief) && /not a finished, safety-tested formulation/.test(brief), 'founder wizard produces a research brief with the disclaimer')
+
+    // Compare via picker (two ingredients)
+    await page.goto(`${BASE}/compare`)
+    await page.waitForLoadState('networkidle')
+    for (const q of ['glycerin', 'panthenol']) { await page.fill('input[aria-label^="Ingredients to compare"]', q); await page.locator('[role="option"] button').first().click() }
+    await Promise.all([page.waitForURL(/\/workbench\/[0-9a-f-]{36}/, { timeout: 60000 }), page.click('button[type=submit]:has-text("Compare")')])
+    await page.getByText('Side-by-side').first().waitFor({ timeout: 60000 })
+    check(/Side-by-side/.test(await page.textContent('main') ?? ''), 'comparison renders side-by-side table')
+    if (SHOTS) await page.screenshot({ path: `${SHOTS}/compare.png`, fullPage: true })
     check(!/Proven to work|Safe to manufacture|globally approved/i.test(dash), 'dashboard contains no prohibited claims wording')
     if (SHOTS) {
       await page.setViewportSize({ width: 1280, height: 900 })
-      await page.goto(`${BASE}/`); await page.screenshot({ path: `${SHOTS}/dashboard.png`, fullPage: true })
+      await page.goto(`${BASE}/`); await page.waitForLoadState('networkidle'); await page.screenshot({ path: `${SHOTS}/dashboard.png`, fullPage: true })
       if (href) { await page.goto(`${BASE}${href}`); await page.getByText('Completeness').first().waitFor(); await page.screenshot({ path: `${SHOTS}/ingredient.png`, fullPage: true }) }
       await page.goto(`${BASE}/completion`); await page.waitForLoadState('networkidle'); await page.screenshot({ path: `${SHOTS}/completion.png`, fullPage: true })
       await page.setViewportSize({ width: 390, height: 844 })

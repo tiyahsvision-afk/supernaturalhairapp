@@ -9,13 +9,20 @@ export class IdentityError extends Error {}
 
 /** Proposes possible duplicates for review. Similar names are NEVER merged automatically. */
 export async function proposeDuplicates(limit = 200) {
+  // Two distinct EU CosIng entries are by definition different INCI ingredients, so candidates always involve at least
+  // one record that is not from CosIng (curated or label-derived). Keeps the query linear in the non-CosIng records.
   const rows = await prisma.$queryRaw<{ a: string; b: string; sim: number; an: string; bn: string }[]>`
-    SELECT a."ingredientId" AS a, b."ingredientId" AS b, similarity(a.normalized, b.normalized) AS sim, a.normalized AS an, b.normalized AS bn
-    FROM "IngredientName" a JOIN "IngredientName" b ON a."ingredientId" < b."ingredientId" AND a.normalized % b.normalized
-    JOIN "Ingredient" ia ON ia.id = a."ingredientId" AND ia.status = 'ACTIVE'
+    SELECT DISTINCT ON (LEAST(a."ingredientId", b."ingredientId"), GREATEST(a."ingredientId", b."ingredientId"))
+      LEAST(a."ingredientId", b."ingredientId") AS a, GREATEST(a."ingredientId", b."ingredientId") AS b,
+      similarity(a.normalized, b.normalized) AS sim, a.normalized AS an, b.normalized AS bn
+    FROM "IngredientName" a
+    JOIN "Ingredient" ia ON ia.id = a."ingredientId" AND ia.status = 'ACTIVE' AND ia."cosingRef" IS NULL
+    JOIN "IngredientName" b ON b."ingredientId" <> a."ingredientId" AND a.normalized % b.normalized
     JOIN "Ingredient" ib ON ib.id = b."ingredientId" AND ib.status = 'ACTIVE'
     WHERE similarity(a.normalized, b.normalized) >= 0.55
-    ORDER BY sim DESC LIMIT ${limit}`
+    ORDER BY LEAST(a."ingredientId", b."ingredientId"), GREATEST(a."ingredientId", b."ingredientId"), sim DESC`
+  rows.sort((x, y) => Number(y.sim) - Number(x.sim))
+  rows.splice(limit)
   let created = 0
   for (const r of rows) {
     const reason = stripParentheticals(r.an) === stripParentheticals(r.bn) ? `Names identical after removing parentheticals ("${r.an}" / "${r.bn}")` : `Similar names ("${r.an}" / "${r.bn}", similarity ${Number(r.sim).toFixed(2)})`

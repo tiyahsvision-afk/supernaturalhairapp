@@ -132,6 +132,9 @@ export interface IngredientFilters {
   leaveOnCompatible?: boolean
   unresolvedSafety?: boolean
   inSupernaturalProduct?: boolean
+  cosingFunction?: string
+  derivedClass?: string
+  excludeClasses?: string[]
 }
 
 export function ingredientWhere(f: IngredientFilters): Prisma.IngredientWhereInput {
@@ -148,6 +151,9 @@ export function ingredientWhere(f: IngredientFilters): Prisma.IngredientWhereInp
   if (f.hasSupplierDocuments) and.push({ rawComponents: { some: { rawMaterial: { documents: { some: {} } } } } })
   if (f.leaveOnCompatible) and.push({ NOT: { concentrations: { some: { recordType: 'REGULATORY_MAXIMUM', applicationType: 'LEAVE_ON', maxValue: 0 } } } }, { NOT: { regulatory: { some: { supersededAt: null, productRestrictions: { contains: 'rinse-off only', mode: 'insensitive' } } } } })
   if (f.unresolvedSafety) and.push({ safetyReviews: { some: { reviewStatus: { not: 'APPROVED' } } } })
+  if (f.cosingFunction) and.push({ cosingFunctions: { has: f.cosingFunction } })
+  if (f.derivedClass) and.push({ derivedClasses: { has: f.derivedClass } })
+  for (const c of f.excludeClasses ?? []) and.push({ NOT: { derivedClasses: { has: c } } })
   if (f.inSupernaturalProduct) and.push({ productLines: { some: { productVersion: { validTo: null, product: { isSupernatural: true } } } } })
   return { AND: and }
 }

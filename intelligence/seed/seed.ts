@@ -21,6 +21,7 @@ import { createImportJob, runImportJob } from '../src/lib/import/engine'
 import { processBatch } from '../src/lib/integration/hair-passport'
 import { createApiKey } from '../src/lib/auth/api-keys'
 import { normalizeName, slugify } from '../src/lib/normalize'
+import { importCosing, refreshDerivedClasses } from './cosing'
 import { reindexIngredient, reindexRawMaterial, reindexResearchCandidate, reindexSupplier } from '../src/lib/search-index'
 
 const DATA = path.join(__dirname, 'data')
@@ -55,6 +56,7 @@ const REVIEW_REQUIREMENTS: { recordType: string; reviewType: string; roles: Role
   { recordType: 'Source', reviewType: 'SOURCE_RIGHTS', roles: ['REGULATORY_REVIEWER', 'DATA_ADMIN'], notes: 'Licensing / data-rights review.' },
   { recordType: 'ProductVersion', reviewType: 'PRODUCT_INGREDIENTS', roles: ['DATA_ADMIN', 'COSMETIC_CHEMIST', 'DATA_ANNOTATOR'] },
   { recordType: 'GraphEdge', reviewType: 'GRAPH_RELATIONSHIP', roles: ['RESEARCH_SCIENTIST', 'COSMETIC_CHEMIST'] },
+  { recordType: 'ResearchProject', reviewType: 'EVIDENCE', roles: ['RESEARCH_SCIENTIST', 'COSMETIC_CHEMIST', 'REGULATORY_REVIEWER'], notes: 'Workbench research findings: one qualified reviewer signs off before a report is treated as reviewed.' },
 ]
 
 const FAMILY_NAMES: Record<string, string> = {
@@ -262,6 +264,11 @@ async function main() {
     await prisma.quarantineItem.upsert({ where: { dedupeKey: `rejected-cid:${k}` }, update: {}, create: { queue: 'IDENTIFIER_MISMATCH', entityType: 'Ingredient', entityId: ING[k], dedupeKey: `rejected-cid:${k}`, payload: { rejectedCid: badCid }, reason: `Candidate CID ${badCid} did not match this ingredient in PubChem.`, status: 'RESOLVED', resolution: 'Rejected; replaced by PubChem name-lookup CID (verified by title).', resolvedAt: new Date() } })
   }
   log(`pubchem: ${verified} verified, ${needsReview} need review, ${facts} facts, ${Object.keys(rejected).length} rejected candidate CIDs recorded`)
+
+  // ─── EU CosIng inventory (22k INCI; batched, idempotent) ───
+  const cos = await importCosing(actor, S['eu-cosing-obf'])
+  log(`cosing: ${cos.rows} rows, ${cos.skipped} already present (${cos.refreshed} refreshed), ${cos.linked} linked to curated records, ${cos.created} created, ${cos.identifiers} identifiers, ${cos.casRejected} CAS failed checksum, ${cos.regulatory} EU annex records (${cos.seconds.toFixed(1)}s)`)
+  log(`derived classes refreshed: ${await refreshDerivedClasses()}`)
 
   // ─── Functions & families in the graph ───
   for (const i of ingredients) {

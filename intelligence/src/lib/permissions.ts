@@ -22,12 +22,15 @@ export const PERMISSIONS = [
   'ip:read', 'ip:write',
   'export:data',
   'user:manage', 'apikey:manage', 'org:manage', 'audit:read',
+  'research:read', 'research:write',
 ] as const
 
 export type Permission = (typeof PERMISSIONS)[number]
 
 const READ_REFERENCE: Permission[] = [
   'search:read', 'ingredient:read', 'evidence:read', 'patent:read', 'product:read', 'supplier:read', 'graph:read', 'review:read',
+  // Research workbench: projects are always scoped to the user's own organization.
+  'research:read', 'research:write',
 ]
 
 export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
@@ -53,9 +56,9 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   REGULATORY_REVIEWER: [...READ_REFERENCE, 'regulatory:write', 'regulatory:approve', 'safety:write', 'review:act', 'source:rights_review'],
   PATENT_REVIEWER: [...READ_REFERENCE, 'patent:write', 'patent:approve', 'ip:read', 'review:act'],
   DATA_ANNOTATOR: [...READ_REFERENCE, 'ingredient:write', 'fact:write', 'evidence:write', 'product:write', 'graph:write', 'patent:write'],
-  SUPPLIER_PARTNER: ['search:read', 'ingredient:read', 'supplier:read', 'rawmaterial:read', 'rawmaterial:write', 'document:upload', 'document:read'],
-  BRAND_PARTNER: ['search:read', 'ingredient:read', 'product:read', 'product:write', 'formula:read', 'formula:write', 'formula:private:read'],
-  READ_ONLY_RESEARCHER: [...READ_REFERENCE],
+  SUPPLIER_PARTNER: ['search:read', 'ingredient:read', 'research:read', 'research:write', 'supplier:read', 'rawmaterial:read', 'rawmaterial:write', 'document:upload', 'document:read'],
+  BRAND_PARTNER: ['search:read', 'ingredient:read', 'evidence:read', 'patent:read', 'graph:read', 'supplier:read', 'research:read', 'research:write', 'product:read', 'product:write', 'formula:read', 'formula:write', 'formula:private:read', 'rawmaterial:read', 'rawmaterial:write', 'document:upload', 'document:read'],
+  READ_ONLY_RESEARCHER: READ_REFERENCE.filter((p) => p !== 'research:write'),
 }
 
 /** Roles whose accounts must have MFA enabled when MFA_ENFORCEMENT=required. */

@@ -53,7 +53,18 @@ Everything is loaded through the same import engine that users use, so a second 
 | Formulas / raw materials | 10 / 10 | Clearly labelled `SAMPLE` archetypes. Not Supernatural formulas; not for manufacture. |
 | Hair Passport | 15 records | Mock batch exercising consent, mapping, quarantine and rejection paths |
 
-Not seeded: CAS/EC numbers (pending the CosIng connector), supplier documents, and reviewed evidence or graph edges. These depend on human review or on documents that have not been provided.
+| EU CosIng inventory | 22,176 rows → ~22,000 ingredients, ~41,700 identifiers, ~1,185 EU annex records | Open Beauty Facts snapshot of the CosIng inventory (`seed/data/cosing/cosing-ingredients.json.gz`, built with `scripts/convert-cosing-obf.py`). Identifiers are `UNVERIFIED`; CAS numbers that fail the checksum (130) are not stored. Annex records have `lastCheckedAt` empty and carry no maximum concentrations. |
+
+Not seeded: supplier documents, maximum concentrations from the Annexes, and reviewed evidence or graph edges. These depend on human review or on documents that have not been provided. The OBF snapshot omits some common INCI names (for example Coco-Glucoside and Hydroxyethylcellulose); 77 curated ingredients therefore have no CosIng record yet.
+
+### Research workbench (expansion)
+
+- **Home** is research-first: search, start research by workspace mode (Founder, Chemist, Brand, Manufacturer), saved projects, monitoring of your formulas' ingredients and recent intelligence updates. Data operations moved to `/admin`.
+- **Workflows** (`/workbench`): Substitutes, Formulation investigation (paste or upload CSV/TXT), Claim support, Supplier documentation, Ingredient comparison and the Founder product brief (`/founder`, 10 questions). Each project saves its runs, citations, objective, members and review status, and generates printable reports (`/reports`).
+- **Every value has a status**: Verified, Source-reported, Supplier-reported, Rule-derived, Hypothesis, Missing or N/A. Technical values (HLB, pH range, solubility, …) are shown only when a source supports them; otherwise they read *Missing*. Rule-derived classes (sulfate surfactant, cationic, silicone, EU allergen, …) are screening aids that show the rule used.
+- **Research assistant** (`/assistant`): answers only from retrieved records and drops any statement that does not cite one. Without `ANTHROPIC_API_KEY` it returns the retrieved records with no AI summary.
+- **Organizations**: projects, reports, formulas, products, review tasks and audit history are scoped to the user's organization. Plans (`internal`, `trial`, `professional`, `team`) set monthly limits that are tracked in `UsageEvent`. There is no billing integration.
+- **Self-service signup** (`/signup`) is off unless `ALLOW_SELF_SIGNUP=true`. It creates a trial organization with one Brand partner user.
 
 ## Commands
 
@@ -72,7 +83,7 @@ Not seeded: CAS/EC numbers (pending the CosIng connector), supplier documents, a
 
 ## Environment variables
 
-See `.env.example`. Required: `DATABASE_URL` and `APP_SECRET` (at least 32 characters). Recommended: `MFA_ENFORCEMENT=required` everywhere except local development. Optional: `CLAMD_HOST` (upload malware scanning), `STORAGE_DIR`, `MAX_UPLOAD_MB` and `SESSION_TTL_HOURS`. Connector keys (`NCBI_API_KEY`, `PATENTSVIEW_API_KEY`) and `ANTHROPIC_API_KEY` are **not used in Phase 1**.
+See `.env.example`. Required: `DATABASE_URL` and `APP_SECRET` (at least 32 characters). Recommended: `MFA_ENFORCEMENT=required` everywhere except local development. Optional: `CLAMD_HOST` (upload malware scanning), `STORAGE_DIR`, `MAX_UPLOAD_MB` and `SESSION_TTL_HOURS`. `ANTHROPIC_API_KEY` turns on AI summaries in the research assistant (cited answers only). `ALLOW_SELF_SIGNUP=true` turns on `/signup`. Connector keys (`NCBI_API_KEY`, `PATENTSVIEW_API_KEY`) are not used yet.
 
 ## API
 

@@ -31,6 +31,32 @@ export async function requestReview(actor: Principal | null, input: { entityType
   return task
 }
 
+/**
+ * Review tasks about organization-owned records (research projects, formula versions) are only listed for, and can
+ * only be decided by, members of the owning organization. Tasks about shared reference data are visible to all.
+ */
+export async function taskVisibilityWhere(p: Principal): Promise<Prisma.ReviewTaskWhereInput> {
+  const [projects, versions] = await Promise.all([
+    prisma.researchProject.findMany({ where: { organizationId: p.organizationId }, select: { id: true } }),
+    prisma.formulaVersion.findMany({ where: { formula: { ownerOrgId: p.organizationId } }, select: { id: true } }),
+  ])
+  return { AND: [
+    { OR: [{ entityType: { not: 'ResearchProject' } }, { entityId: { in: projects.map((x) => x.id) } }] },
+    { OR: [{ entityType: { not: 'FormulaVersion' } }, { entityId: { in: versions.map((x) => x.id) } }] },
+  ] }
+}
+
+async function assertTaskInOrg(tx: Prisma.TransactionClient, actor: Principal, task: { entityType: string; entityId: string }) {
+  if (task.entityType === 'ResearchProject') {
+    const pr = await tx.researchProject.findUnique({ where: { id: task.entityId }, select: { organizationId: true } })
+    if (!pr || pr.organizationId !== actor.organizationId) throw new ReviewError('Task not found.')
+  }
+  if (task.entityType === 'FormulaVersion') {
+    const fv = await tx.formulaVersion.findUnique({ where: { id: task.entityId }, select: { formula: { select: { ownerOrgId: true } } } })
+    if (!fv || fv.formula.ownerOrgId !== actor.organizationId) throw new ReviewError('Task not found.')
+  }
+}
+
 export function eligibleReviewer(roles: Role[], required: Role[]): boolean {
   return roles.includes('SUPER_ADMIN') || roles.some((r) => required.includes(r))
 }
@@ -43,6 +69,7 @@ export async function decide(actor: Principal, taskId: string, decision: Extract
   if (actor.kind !== 'USER') throw new ReviewError('Reviews require a signed-in reviewer.')
   return prisma.$transaction(async (tx) => {
     const task = await tx.reviewTask.findUniqueOrThrow({ where: { id: taskId }, include: { decisions: true } })
+    await assertTaskInOrg(tx, actor, task)
     if (['APPROVED', 'REJECTED', 'SUPERSEDED', 'EXPIRED'].includes(task.status)) throw new ReviewError('Task already closed.')
     if (!eligibleReviewer(actor.roles, task.requiredRoles)) throw new ReviewError(`Requires one of: ${task.requiredRoles.join(', ')}`)
     if (task.submittedById === actor.id) throw new ReviewError('Reviewers cannot approve their own submission.')
@@ -77,7 +104,7 @@ export function nextReviewStatus(prior: ReviewStatus[], decision: 'APPROVED' | '
 const ENTITY_DELEGATE: Record<string, string> = {
   Ingredient: 'ingredient', IngredientFact: 'ingredientFact', RegulatoryRecord: 'regulatoryRecord', SafetyReview: 'safetyReview',
   Evidence: 'evidence', Patent: 'patent', GraphEdge: 'graphEdge', ProductVersion: 'productVersion', IngredientFunction: 'ingredientFunction',
-  IngredientIdentifier: 'ingredientIdentifier', Source: 'source', EvidenceLink: 'evidenceLink',
+  IngredientIdentifier: 'ingredientIdentifier', Source: 'source', EvidenceLink: 'evidenceLink', ResearchProject: 'researchProject',
 }
 
 /** Propagates an approved/rejected review onto the reviewed record (never onto AI drafts without a human decision). */

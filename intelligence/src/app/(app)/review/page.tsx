@@ -3,7 +3,7 @@ import type { Prisma, ReviewType } from '@prisma/client'
 import { prisma } from '@/lib/db'
 import { allowed, requireUser } from '@/lib/auth/next'
 import { can } from '@/lib/permissions'
-import { eligibleReviewer } from '@/lib/services/review'
+import { eligibleReviewer, taskVisibilityWhere } from '@/lib/services/review'
 import { isStale } from '@/lib/regulatory'
 import { Badge, Notice, PageHeader, PermissionDenied, TableWrap, Tabs, EmptyState } from '@/components/ui'
 import { assignToMeAction, resolveQuarantineAction, unmergeAction } from './actions'
@@ -19,7 +19,7 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
   const sp = await searchParams
   const tab = sp.tab ?? 'tasks'
   const counts = await Promise.all([
-    prisma.reviewTask.count({ where: { status: OPEN } }),
+    prisma.reviewTask.count({ where: { ...(await taskVisibilityWhere(s.principal)), status: OPEN } }),
     prisma.quarantineItem.count({ where: { status: 'OPEN' } }),
     prisma.identityResolutionCandidate.count({ where: { status: 'OPEN' } }),
     prisma.source.count({ where: { termsReviewStatus: { not: 'APPROVED' } } }),
@@ -45,11 +45,12 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
   )
 
   async function Tasks() {
-    const where: Prisma.ReviewTaskWhereInput = { status: OPEN, ...(sp.type ? { reviewType: sp.type as ReviewType } : {}), ...(sp.mine === '1' ? { OR: [{ assignedToId: s.user.id }, { requiredRoles: { hasSome: s.principal.roles } }] } : {}) }
+    const scope = await taskVisibilityWhere(s.principal)
+    const where: Prisma.ReviewTaskWhereInput = { ...scope, status: OPEN, ...(sp.type ? { reviewType: sp.type as ReviewType } : {}), ...(sp.mine === '1' ? { OR: [{ assignedToId: s.user.id }, { requiredRoles: { hasSome: s.principal.roles } }] } : {}) }
     const page = Math.max(1, Number(sp.page ?? 1))
     const [tasks, byType] = await Promise.all([
       prisma.reviewTask.findMany({ where, orderBy: [{ priority: 'desc' }, { dueAt: 'asc' }], skip: (page - 1) * 50, take: 50, include: { decisions: true, assignedTo: true } }),
-      prisma.reviewTask.groupBy({ by: ['reviewType'], where: { status: OPEN }, _count: true }),
+      prisma.reviewTask.groupBy({ by: ['reviewType'], where: { ...scope, status: OPEN }, _count: true }),
     ])
     const now = Date.now()
     return (
