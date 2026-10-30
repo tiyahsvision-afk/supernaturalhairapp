@@ -20,7 +20,9 @@
       "purchaseUrl": "https://shcbeauty.com/products/detox-shampoo",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Aqua (Water), Sodium C14-16 Olefin Sulfonate, Cocamidopropyl Hydroxysultaine, Sodium Chloride, Panthenol, Glycerin, Hydrolyzed Jojoba Esters, Guar Hydroxypropyl Trimonium Chloride, Glycol Distearate, Phenoxyethanol, Ethylhexylglycerin, Citric Acid, Passiflora Edulis Seed (Passion Fruit) Oil, Oryza Sativa (Rice) Bran Oil, Euterpe Oleracea (Acai Palm) Fruit Oil, Calendula Officinalis Flower Oil, Linum Usitatissimum (Flax Seed) Seed Oil, Burdock Extract, Comfrey Extract, Kelp Extract, Fenugreek Extract",
-      "marketingExcerpts": ["This shampoo contains ingredients that detox, support healthy body chemistry"]
+      "marketingExcerpts": [
+        "This shampoo contains ingredients that detox, support healthy body chemistry"
+      ]
     },
     {
       "key": "shc-remedy-conditioner",
@@ -36,7 +38,9 @@
       "purchaseUrl": "https://shcbeauty.com/products/remedy-conditioner",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Aqua (Water), Olea Europaea (Olive) Fruit Oil, Glycerin, Vitis Vinifera (Grape) Seed Oil, Sorbitan Laurate, Cetyl Alcohol, Behentrimonium Chloride, Cocamidopropyl Hydroxysultaine, Hydrolyzed Jojoba Esters, Potassium Sorbate, Hydrolyzed Rice Protein, Phenoxyethanol, Ethylhexylglycerin, Passiflora Edulis (Passion) Fruit Extract, Calendula Officinalis (Calendula) Extract, Oryza Sativa (Rice) Bran Oil, Euterpe Oleracea (Acai Palm) Fruit Oil, Linium Usitatissium (Flax) Extract, Aloe Barbadensis Leaf Juice, Alfalfa Extract, Burdock Extract, Ginger Extract, Horsetail Extract, Kelp Extract",
-      "marketingExcerpts": ["your hair will receive the nutrients it needs to grow, strengthen and flourish"]
+      "marketingExcerpts": [
+        "your hair will receive the nutrients it needs to grow, strengthen and flourish"
+      ]
     },
     {
       "key": "shc-nourish-moisturizer",
@@ -52,8 +56,12 @@
       "purchaseUrl": "https://shcbeauty.com/products/nourish-nourishing-moisturizer",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Water (Aqua), Olea Europaea (Olive) Fruit Oil, Glycerin, Glyceryl Stearate SE, Cetyl Alcohol, Cetearyl Olivate, Sorbitan Olivate, Phenoxyethanol, Sodium Stearoyl Glutamate, Linium Usitatissium (Flax) Extract, Hydrolyzed Rice Protein, Aloe Barbadensis Leaf Juice, Ethylhexylglycerin, Oatstraw Extract, Kelp Extract, Comfrey Extract, Burdock Extract, Alfalfa Extract",
-      "marketingExcerpts": ["With such nourishing ingredients like aloe vera and shea butter"],
-      "dataQualityNotes": ["Marketing copy mentions shea butter, but shea butter does not appear in the published ingredient list. Needs verification against the physical label."]
+      "marketingExcerpts": [
+        "With such nourishing ingredients like aloe vera and shea butter"
+      ],
+      "dataQualityNotes": [
+        "Marketing copy mentions shea butter, but shea butter does not appear in the published ingredient list. Needs verification against the physical label."
+      ]
     },
     {
       "key": "shc-grow-oil",
@@ -69,8 +77,13 @@
       "purchaseUrl": "https://shcbeauty.com/products/hair-growth-oil",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Almond Oil, Castor oil, Vitamin E oil, argan oil, Horsetail, Nettles, Kelp, Fenugreek, Comfrey, Peppermint Essential Oil",
-      "marketingExcerpts": ["Nourish your body through your scalp", "the best herbs and oils for scalp stimulation and hair growth"],
-      "dataQualityNotes": ["Ingredient list uses common names, not INCI names. Identity of each botanical (part, extraction, carrier) is unresolved."]
+      "marketingExcerpts": [
+        "Nourish your body through your scalp",
+        "the best herbs and oils for scalp stimulation and hair growth"
+      ],
+      "dataQualityNotes": [
+        "Ingredient list uses common names, not INCI names. Identity of each botanical (part, extraction, carrier) is unresolved."
+      ]
     },
     {
       "key": "shc-rest-scalp-oil",
@@ -86,8 +99,13 @@
       "purchaseUrl": "https://shcbeauty.com/products/rest-scalp-massage-oil",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Almond, Jojoba, Alfalfa, Chamomile, Oatstraw, Ginger, Burdock, Peppermint Essential Oil",
-      "marketingExcerpts": ["The gentle yet potent extraction this oil contains gets absorbed through the scalp and supports body chemistry", "Alleviate tenderness, combat Itchiness, relax nerves"],
-      "dataQualityNotes": ["Ingredient list uses common names without material form (oil, extract, infusion). Identity unresolved."]
+      "marketingExcerpts": [
+        "The gentle yet potent extraction this oil contains gets absorbed through the scalp and supports body chemistry",
+        "Alleviate tenderness, combat Itchiness, relax nerves"
+      ],
+      "dataQualityNotes": [
+        "Ingredient list uses common names without material form (oil, extract, infusion). Identity unresolved."
+      ]
     },
     {
       "key": "sheamoisture-coconut-hibiscus-curl-enhancing-smoothie",
@@ -112,7 +130,9 @@
       "sourceUrl": "https://mielleorganics.com/products/rosemary-mint-oil",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Glycine Soja (Soybean) Oil, Ricinus Communis (Castor) Seed Oil, Rosmarinus Officinalis (Rosemary) Leaf Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Mentha Piperita (Peppermint) Oil, Eucalyptus Globolus (Eucalyptus) Leaf Oil, Menthol, Melalueca Alternifolia (Tea Tree) Leaf Oil, Cocos Nucifera (Coconut) Oil, Equisetum Arvense (Horsetail) Extract, Aloe Barbadensis Extract, Lavandula Angustifolia (Lavender) Oil, Triticum Vulgare (Wheat) Germ Oil, Carthamus Tinctorius (Safflower) Seed Oil, Oenothera Biennis (Evening Primrose) Oil, Vitis Vinifera (Grape) Seed Oil, Benzyl Nicotinate, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Oryza Sativa (Rice) Bran Oil, Tocopheryl Acetate, Biotin, Arctium Lappa (Burdock) Root Extract, Glycerin, Apium Graveolens (Celery) Seed Extract, Cholecalciferol (Vitamin D), Ascorbic Acid, Ocimum, Basilicum (Basil) Oil, Pogostemon Cablin (Patchouli) Oil, Salvia Officinalis (Sage) Oil, Silica, Urtica Dioica (Nettle) Extract",
-      "dataQualityNotes": ["Published list contains apparent typographical errors (\"Globolus\", \"Melalueca\", \"Ocimum, Basilicum\"). Parser must not silently correct; misspellings are recorded as aliases pending review."]
+      "dataQualityNotes": [
+        "Published list contains apparent typographical errors (\"Globolus\", \"Melalueca\", \"Ocimum, Basilicum\"). Parser must not silently correct; misspellings are recorded as aliases pending review."
+      ]
     },
     {
       "key": "mielle-rosemary-mint-shampoo",
@@ -137,7 +157,9 @@
       "sourceUrl": "https://www.auntjackiescurlsandcoils.com/products/dont-shrink-elongating-curling-gel",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Aqua (Water), Glycerin, Carbomer, Aminomethyl Propanol, Hydrolyzed Wheat Protein, Linum Usitatissimum (Linseed) Seed Oil, Tocopherol, PVP, Phenoxyethanol, Ethylhexylglycerin, EDTA, Potassium Sorbate, Polysorbate 20, Parfum (Fragrance), Limonene, Hexyl Cinnamal, Linalool, Amyl Cinnamal, Citrus Aurantium Amara (Orange) Peel Oil, Hexamethylindanopyran",
-      "dataQualityNotes": ["Product description mentions shea butter and olive oil, which do not appear in the published ingredient list."]
+      "dataQualityNotes": [
+        "Product description mentions shea butter and olive oil, which do not appear in the published ingredient list."
+      ]
     },
     {
       "key": "camillerose-curl-maker",
@@ -150,7 +172,9 @@
       "sourceUrl": "https://www.camillerose.com/products/curl-maker",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Deionized Water, Pectin, Cocos Nucifera (Coconut) Oil, Aloe Barbadensis Leaf Juice, Ricinus Communis (Castor) Seed Oil, Althaea Officinalis (Marshmallow) Leaf/Root Extract, Agave Americana (Agave) Leaf Extract, Equisetum Arvense (Horsetail) Extract, Urtica Dioica (Nettle) Leaf Extract, Hydrolyzed Corn Starch, Xanthan Gum, Chondrus (Seaweed) Crispus Powder, Polysorbate 20, Tocopheryl Acetate (Vitamin E), Cyanocobalamin (Vitamin B-12), Phenoxyethanol (Optiphen ND), Caprylyl Glycol, Fragrance",
-      "dataQualityNotes": ["\"Optiphen ND\" is a trade name of a raw material, displayed in parentheses after Phenoxyethanol."]
+      "dataQualityNotes": [
+        "\"Optiphen ND\" is a trade name of a raw material, displayed in parentheses after Phenoxyethanol."
+      ]
     },
     {
       "key": "asiam-coconut-cowash",
@@ -163,7 +187,9 @@
       "sourceUrl": "https://asiamnaturally.com/products/coconut-cowash",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Aqua/Water/Eau, Cetyl Alcohol, Cetrimonium Chloride, Cetearyl Alcohol, Cocos Nucifera (Coconut) Oil, Ricinus Communis (Castor) Seed Oil, Cocos Nucifera (Coconut) Fruit Extract, Citrus Reticulata (Tangerine) Fruit Extract, Phytosterols, Camellia Sinensis Leaf Extract, PEG-40 Castor Oil, Stearalkonium Chloride, Serenoa Serrulata Fruit Extract, Quaternium-18, Propylene Glycol, C12-15 Alkyl Lactate, Fragrance/Parfum, Potassium Sorbate, Caprylyl Glycol, Phenoxyethanol, Abies Balsamea (Balsam Canada) Resin, Caprylic/Capric Triglyceride, Glycerin, Potassium Chloride, Limonene",
-      "dataQualityNotes": ["On the source page the 'Propylene Glycol' entry links to a 'propylene-glycol-dicaprylate-dicaprate' page; the displayed name and the linked ingredient differ. Recorded as displayed; identity flagged for review."]
+      "dataQualityNotes": [
+        "On the source page the 'Propylene Glycol' entry links to a 'propylene-glycol-dicaprylate-dicaprate' page; the displayed name and the linked ingredient differ. Recorded as displayed; identity flagged for review."
+      ]
     },
     {
       "key": "asiam-leave-in-conditioner",
@@ -176,6 +202,279 @@
       "sourceUrl": "https://asiamnaturally.com/products/leave-in-conditioner",
       "ingredientListSource": "MANUFACTURER_WEBSITE",
       "ingredientList": "Aqua/Water/Eau, Cetearyl Alcohol, Cetyl Alcohol, Cocos Nucifera (Coconut) Fruit Extract, Phyllanthus Emblica Fruit Extract, Beta Vulgaris (Beet) Root Extract, Phytosterols, Serenoa Serrulata Fruit Extract, Camellia Sinensis Leaf Extract, Glycerin, Pyrus Malus (Apple) Fruit Extract, Citrus Limon (Lemon) Peel Extract, Saccharum Ofcinarum (Sugarcane) Extract, Betaine, Behentrimonium Methosulfate, Stearamidopropyl Dimethylamine, Citric Acid, Phenoxyethanol, Caprylyl Glycol, Potassium Sorbate, Polyacrylamide, Fragrance/Parfum, Anise Alcohol, Coumarin, Limonene"
+    },
+    {
+      "key": "mielle-ph-curl-smoothie",
+      "brand": "Mielle",
+      "name": "Pomegranate & Honey Curl Smoothie 12 fl. oz.",
+      "category": "curl cream",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://mielleorganics.com/products/pomegranate-honey-curl-smoothie",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua, Eau), Glycerin, Pectin, Hydrolyzed Corn Starch, Polysorbate-20, Xanthan Gum, Hydroxyethylcellulose, Carrageenan, Fragrance (Parfum), Orbignya Oleifera (Babassu) Oil, Mauritia Flexuosa (Buriti) Fruit Oil, Copaiferi Officinalis (Balsam Copaiba) Resin, Astrocaryum Murumuru Seed Butter, Cocos Nucifera (Coconut) Oil, Punica Granatum (Pomegranate) Extract, Honey (Mel, Miel), Persea Gratissima (Avocado) Oil, Phenoxyethanol, Benzoic Acid, Ethylhexylglycerin, Glycereth-2 Cocoate",
+      "dataQualityNotes": [
+        "Published list spells \"Copaiferi Officinalis\" (INCI: Copaifera Officinalis). Recorded verbatim; not corrected.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "curlsmith-curl-souffle",
+      "brand": "Curlsmith",
+      "name": "Curl Defining Styling Soufflé",
+      "category": "curl gel",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://curlsmith.com/products/curl-souffle",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua / Eau), Glycerin, Babassu Oil Polyglyceryl-4 Esters, Sorbitol, Chondrus Crispus (Carrageenan), PEG-40 Hydrogenated Castor Oil, Persea Gratissima (Avocado) Oil*, Butyrospermum Parkii (Shea) Butter, Helianthus Annuus (Sunflower) Seed Oil, Carapa Guaianensis Seed Oil, Linum Usitatissimum (Linseed) Seed Extract, Aloe Barbadensis Leaf Juice, Ocimum Basilicum (Basil) Leaf Extract, Rosmarinus Officinalis (Rosemary) Leaf Extract, Salvia Officinalis (Sage) Leaf Extract, Piper Nigrum (Black Pepper) Seed Extract, Selaginella Lepidophylla Extract, Glyceryl Caprylate, Glyceryl Undecylenate, Citric Acid, Sodium Benzoate, Potassium Sorbate, Fragrance (Parfum), Limonene, Linalool, Citrus Limon (Lemon) Peel Oil, Pinene, Tetramethyl Acetyloctahydronaphthalenes",
+      "dataQualityNotes": [
+        "Asterisk on the published list marks an organic ingredient.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "asiam-curling-jelly",
+      "brand": "As I Am",
+      "name": "Curling Jelly",
+      "category": "curl gel",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://asiamnaturally.com/products/curling-jelly",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Aqua/Water/Eau, Glycerin, Aloe Barbadensis Leaf Extract, Hydroxyethyl Cellulose, Betaine, Pectin, Beta Vulgaris (Beet) Root Extract, Xanthan Gum, Tocopheryl Acetate, Potassium Sorbate, Sucrose, Fragrance/Parfum, Phenoxyethanol, Caprylyl Glycol, Sodium Benzoate, Citric Acid, Erythorbic Acid, Coumarin, Limonene",
+      "dataQualityNotes": [
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "sheamoisture-ch-curl-style-milk",
+      "brand": "SheaMoisture",
+      "name": "Coconut & Hibiscus Curl & Style Milk 8 fl oz",
+      "category": "curl milk",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://www.sheamoisture.com/us/en/p/coconut-&-hibiscus-curl-&-style-milk.html/00764302290247",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water, Cocos Nucifera (Coconut) Oil, Cetyl Alcohol, Stearyl Alcohol, Glycerin (Vegetable), Butyrospermum Parkii (Shea) Butter, Glyceryl Stearate Citrate, Cetearyl Alcohol, Fragrance, Brassica Campestris (Rapeseed) Seed Oil, Panthenol, Melia Azadirachta (Neem) Seed Oil, Sodium Lauroyl Hydrolyzed Silk, Glycine Soja (Soybean) Oil, Tricholoma Matsutake Extract, Tocopherol, Aloe Barbadensis Leaf Juice, Hibiscus Rosa-Sinensis Flower Extract, Salvia Officinalis (Sage) Leaf Extract, Gellidiela Acerosa (Algae) Extract, Equisetum Arvense (Horsetail) Extract, Daucus Carota Sativa (Carrot) Root Extract, Beta-Carotene, Glyceryl Caprylate, Triethyl Citrate, Caprylyl Glycol, Benzoic Acid",
+      "dataQualityNotes": [
+        "Published list spells \"Gellidiela Acerosa\" (INCI: Gelidiella Acerosa). Recorded verbatim; not corrected.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "cantu-coconut-curling-cream-uk",
+      "brand": "Cantu",
+      "name": "Coconut Curling Cream (UK formula)",
+      "category": "curl cream",
+      "applicationType": "LEAVE_ON",
+      "market": "UK",
+      "isSupernatural": false,
+      "sourceUrl": "https://www.cantubeauty.co.uk/natural-curls-coils-waves/coconut-curling-cream/",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "AQUA (WATER), GLYCERIN, CANOLA OIL, CETEARYL ALCOHOL, PARFUM (FRAGRANCE), BUTYROSPERMUM PARKII (SHEA) BUTTER †, PETROLATUM, CETEARETH-20, GLYCOL STEARATE, COCOS NUCIFERA (COCONUT) OIL†, BIOTIN (VITAMIN B7), FOLIC ACID (VITAMIN B9), NIACIN (VITAMIN B3), CYANOCOBALAMIN (VITAMIN B12), PANTOTHENIC ACID (VITAMIN B5), PYRIDOXINE (VITAMIN B6), RIBOFLAVIN (VITAMIN B2), SIMMONDSIA CHINENSIS (JOJOBA) SEED OIL, OLEA EUROPAEA (OLIVE) FRUIT OIL, ARGANIA SPINOSA (ARGAN) KERNEL OIL, DAUCUS CAROTA SATIVA (CARROT) SEED OIL, MACADAMIA INTEGRIFOLIA SEED OIL, MANGIFERA INDICA (MANGO) SEED OIL, PERSEA GRATISSIMA (AVOCADO) OIL, PRUNUS AMYGDALUS DULCIS (SWEET ALMOND) OIL, VITIS VINIFERA (GRAPE) SEED EXTRACT, ALOE BARBADENSIS (ALOE) LEAF JUICE, LONICERA CAPRIFOLIUM (HONEYSUCKLE) EXTRACT, MACROCYSTIS PYRIFERA (KELP) EXTRACT, SALVIA OFFICINALIS (SAGE) LEAF EXTRACT), URTICA DIOICA (NETTLE) EXTRACT, HYDROLYZED SILK, CETETH-20, PHENOXYETHANOL, PEG-75, BENZYL BENZOATE, GUAR HYDROXYPROPYLTRIMONIUM CHLORIDE, BEHENTRIMONIUM METHOSULFATE, DISODIUM EDTA, ETHYLHEXYLGLYCERIN, POLYQUATERNIUM-7, COUMARIN, SILK AMINO ACIDS, HEXYL CINNAMAL, SODIUM BENZOATE, LEUCONOSTOC/RADISH ROOT FERMENT FILTRATE, HELIANTHUS ANNUUS (SUNFLOWER) SEED OIL, LECITHIN, ASCORBYL PALMITATE, POTASSIUM SORBATE, TOCOPHEROL, CITRIC ACID, TETRASODIUM GLUTAMATE DIACETATE.",
+      "dataQualityNotes": [
+        "UK manufacturer site; the US formula may differ.",
+        "† marks a certified organic ingredient.",
+        "Published list has a stray closing parenthesis after \"(SAGE) LEAF EXTRACT\". Recorded verbatim.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "bouncecurl-light-creme-gel",
+      "brand": "Bounce Curl",
+      "name": "Light Hold Creme Gel",
+      "category": "curl gel",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://www.bouncecurl.com/products/light-creme-gel-with-aloe",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water, VP/VA copolymer, Glycerin, Hydrolyzed Jojoba Esters, Jojoba Esters, Hydrolyzed quinoa protein, Hydrolyzed Oat protein, Aloe Barbadensis Leaf Extract, Panax Ginseng root Extract, Salvia Officinalis (Sage) Extract, *Nigella Sativa (Virgin Black Cumin) Oil, Boswellia Carter Oil, Aminomethyl Propanol, Carbomer, Sodium Phytate, Caprylyl Glycol, Hexylene Glycol, Phenoxyethanol, Citric Acid, **Fragrance (100% Natural Fragrance).",
+      "dataQualityNotes": [
+        "Published list spells \"Boswellia Carter Oil\" (INCI: Boswellia Carterii Oil). Recorded verbatim; not corrected.",
+        "Asterisk markers are not explained in the published list.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "pattern-curl-gel",
+      "brand": "Pattern Beauty",
+      "name": "Curl Gel",
+      "category": "curl gel",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://patternbeauty.com/products/curl-gel",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water/Aqua/Eau, Glycerin, Cetearyl Alcohol, Aloe Barbadensis Leaf Extract, Cocos Nucifera (Coconut) Oil, Behentrimonium Methosulfate, Wheat Amino Acids, Benzyl Alcohol, Hydrolyzed Silk, Caryodendron Orinocense Seed Oil, Cocos Nucifera (Coconut) Fruit Extract, Rosmarinus Officinalis (Rosemary) Leaf Extract, Helianthus Annuus (Sunflower) Seed Oil, PEG-40 Hydrogenated Castor Oil, PEG-60 Hydrogenated Castor Oil, Cetrimonium Chloride, Citric Acid, Hydroxyethylcellulose, Guar Hydroxypropyltrimonium Chloride, Ethylhexylglycerin, Disodium EDTA, Potassium Sorbate, Sodium Benzoate, Phenethyl Alcohol, Caprylyl Glycol, Polysorbate 60, Phenoxyethanol, Disodium Phosphate, Sodium Phosphate, Sodium Sulfite, Fragrance/Parfum, Benzyl Benzoate, Hexyl Cinnamal, Amyl Cinnamal, Hydroxycitronellal, Linalool, Citronellol, Limonene",
+      "dataQualityNotes": [
+        "Marketing says \"free of protein\"; the published list includes Wheat Amino Acids and Hydrolyzed Silk. Flagged for claim review, not resolved.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "pattern-styling-cream",
+      "brand": "Pattern Beauty",
+      "name": "Styling Cream",
+      "category": "curl cream",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://patternbeauty.com/products/styling-cream",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water/Aqua/Eau, Butyrospermum Parkii (Shea) Butter, Cetearyl Alcohol, Glycerin, Ceteareth-20, PEG-40 Hydrogenated Castor Oil, Cocos Nucifera (Coconut) Oil, PEG-120 Methyl Glucose Dioleate, Theobroma Cacao (Cocoa) Seed Butter, Potassium Carbonate, Rosmarinus Officinalis (Rosemary) Leaf Extract, Helianthus Annuus (Sunflower) Seed Oil, Caryodendron Orinocense Seed Oil, Cocos Nucifera (Coconut) Fruit Extract, Prunus Amygdalus Dulcis (Sweet Almond) Oil, PEG-60 Hydrogenated Castor Oil, Aloe Barbadensis Leaf Extract, Hydrolyzed Wheat Protein, Ethylhexylglycerin, Caprylyl Glycol, Polysorbate 60, Citric Acid, Phenoxyethanol, Hydroxyethylcellulose, Disodium EDTA, Disodium Phosphate, Sodium Phosphate, Sodium Benzoate, Benzyl Alcohol, Phenethyl Alcohol, Potassium Sorbate, Sodium Sulfite, Fragrance/Parfum, Benzyl Benzoate, Hexyl Cinnamal, Amyl Cinnamal, Hydroxycitronellal, Linalool, Citronellol, Limonene, Coumarin",
+      "dataQualityNotes": [
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "tgin-curl-food",
+      "brand": "tgin",
+      "name": "Miracle RepaiRx Curl Food 12 oz",
+      "category": "curl cream",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://tginatural.com/products/tgin-miracle-repairx-curl-food-12oz",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua), Cetearyl Alcohol, Glycerin, Cocos Nucifera (Coconut) Oil, Butyrospermum Parkii (Shea) Butter, Amodimethicone, Brassicamidopropyl Dimethylamine, Ricinus Communis (Castor) Seed Oil, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Biotin, Panthenol, Tocopherol, Tocopheryl Acetate, Honey (Mel)*, Carica Papaya (Papaya) Fruit Extract, Zingiber Officinale (Ginger) Root Extract, Euterpe Oleracea Fruit Extract, Gardenia Taitensis Flower Extract, Moringa Oleifera Seed Extract, Agave Americana Leaf Extract, Arctium Lappa Root Extract, Aloe Barbadensis Leaf Juice, Theobroma Cacao (Cocoa) Seed Butter, Triticum Vulgare (Wheat) Germ Oil, Hydrolyzed Soy Protein, Lactic Acid, Zea Mays (Corn) Starch, Ceteareth-20, Tetrasodium Glutamate Diacetate, Phenoxyethanol, Potassium Sorbate, Sodium Benzoate, Sodium Sulfite, Benzyl Alcohol, Citric Acid, Sodium Hydroxide, Fragrance (Parfum), Linalool, Hexyl Cinnamal, Citronellol, Rose Ketones, Geranyl Acetate.",
+      "dataQualityNotes": [
+        "\"Rose Ketones\" is a fragrance-group label, not a single INCI name.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "tgin-rose-water-curl-cream",
+      "brand": "tgin",
+      "name": "Rose Water Hydrating Curl Cream 12 oz",
+      "category": "curl cream",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://tginatural.com/products/tgin-rose-water-hydrating-curl-cream",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua), Aloe Barbadensis Leaf Juice*, C12-15 Alkyl Benzoate, Glycerin, Cetearyl Alcohol, Glyceryl Stearate, PEG-100 Stearate, Behentrimonium Chloride, Panthenol, Tocopherol, Tocopheryl Acetate, Euterpe Oleracea Fruit Oil*, Rosa Damascena Flower Water, Lactic Acid, Capryloyl Glycerin/Sebacic Acid Copolymer, Saccharomyces Ferment, Aspergillus Ferment, Caprylyl Glycol, Diheptyl Succinate, Polyquaternium-10, Polyquaternium-11, Polyester-37, Isopropyl Alcohol, Tetrasodium Glutamate Diacetate, Phenoxyethanol, Potassium Sorbate, Sodium Benzoate, Leuconostoc/Radish Root Ferment Filtrate, Citric Acid, Sodium Hydroxide, Fragrance (Parfum), Tetramethyl Acetyloctahydronaphthalenes.",
+      "dataQualityNotes": [
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "ouidad-acc-gel",
+      "brand": "Ouidad",
+      "name": "Advanced Climate Control Heat & Humidity Gel",
+      "category": "curl gel",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://www.ouidad.com/products/advanced-climate-control-heat-and-humidity-gel",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water/Aqua/Eau, Polyquaternium-28, Actinidia Chinensis (Kiwi) Fruit Extract, Chamomilla Recutita (Matricaria) Flower Extract, Cassia Auriculata Leaf Extract, Polyquaternium-7, Hydrolyzed Wheat Protein, Hydrolyzed Wheat Protein/PVP Crosspolymer, Panthenol, Sericin, VP/DMAPA Acrylates Copolymer, Hydroxyethylcellulose, Tocopheryl Acetate, Retinyl Palmitate, PEG-40 Hydrogenated Castor Oil, PEG-60 Almond Glycerides, PPG-26-Buteth-26, Polysorbate 20, Glycerin, Tetrasodium EDTA, Behentrimonium Chloride, Benzalkonium Chloride, Cetrimonium Chloride, Guar Hydroxypropyltrimonium Chloride, Butylene Glycol, Caprylyl Glycol, Hexylene Glycol, Leuconostoc/Radish Root Ferment Filtrate, Phenoxyethanol, Alpha-Isomethyl Ionone, Benzyl Benzoate, Benzyl Salicylate, Citronellol, Hexyl Cinnamal, Hydroxycitronellal, Limonene, Linalool, Galaxolide, Terpineol, Citrus Limon Peel Oil, Linalyl Acetate, Fragrance (Parfum)",
+      "dataQualityNotes": [
+        "\"Galaxolide\" is a trade name; the INCI is Hexamethylindanopyran (verify).",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "eden-coconut-shea-curl-creme",
+      "brand": "EDEN BodyWorks",
+      "name": "Coconut Shea Curl Defining Creme 16 oz",
+      "category": "curl cream",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://edenbodyworks.com/products/coconut-shea-curl-defining-creme",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua), Cocos Nucifera (Coconut) Oil, Vegetable Oil, Aloe Barbadensis (Aloe Vera) Leaf Juice, Cetyl Alcohol, Stearyl Alcohol, Persea Gratissima (Avocado) Oil, Butyrospermum Parkii (Shea) Butter, Cetyl Esters, Glyceryl Dilaurate, Steareth-20, Polyquaternium-7, Cocos Nucifera (Coconut) Milk, Simmondsia Chinensis (Jojoba) Seed Oil, Limnanthes Alba (Meadowfoam) Seed Oil, Lactobacillus/Tomato Fruit Ferment Extract, Oryza Sativa (Rice) Extract, Keratin Amino Acids, Acyl Coenzyme A Desaturase, Cetrimonium Chloride, Glycerin, Simmondsia Chinensis (Jojoba) Seed Oil, Tocopheryl Acetate (Vitamin E), Hydrolyzed Silk, Panthenyl Hydroxypropyl Steardimonium Chloride, Fragrance (Parfum), Dehydroacetic Acid, Benzyl Alcohol",
+      "dataQualityNotes": [
+        "Published list names Simmondsia Chinensis (Jojoba) Seed Oil twice. Recorded verbatim.",
+        "\"Vegetable Oil\" is not a specific INCI name.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "ufd-curly-magic",
+      "brand": "Uncle Funky's Daughter",
+      "name": "Curly Magic",
+      "category": "curl gel",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://unclefunkysdaughter.com/curly-magic.html",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water, Glycerin, Aloe Barbadensis (Aloe Vera) Leaf Juice*, Simmendsia Chinensis (Jojoba) Seed Oil, Hydrolyzed Wheat Protein, Althaea Officinalis (Marshmallow) Root Extract, Urtica Dioica (Nettle) Extract, Equisetum Arvense (Horsetail) Extract, Tocopherol (Vitamin E), Phenoxyethanol, Ethylhexylglycerin, Fragrance",
+      "dataQualityNotes": [
+        "Published list spells \"Simmendsia\" (INCI: Simmondsia). Recorded verbatim.",
+        "* Organically Sourced.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "auntjackies-curl-la-la-custard",
+      "brand": "Aunt Jackie's Curls & Coils",
+      "name": "Curl La La Defining Curl Custard 15 oz",
+      "category": "curl cream",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://www.auntjackiescurlsandcoils.com/products/curl-la-la-defining-curl-custard",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Aqua/Water, Propylene Glycol, Polyquaternium-37, Propylene Glycol Dicaprylate/Dicaprate, Butyrospermum Parkii (Shea) Butter, Glycine Soja (Soybean) Oil, Glycerin, Olea Europaea (Olive) Fruit Oil, Cetyl Alcohol, Parfum (Fragrance), Dimethicone, PPG-1 Trideceth-6, Stearalkonium Chloride, Lanolin Oil, Acrylamidopropyltrimonium Chloride/Acrylamide Copolymer, Dehydroacetic Acid, Cetearyl Alcohol, C11-15-Isoalkanes, Hydrolyzed Quinoa, Butylene Glycol, Citric Acid, Phenoxyethanol, Potassium Sorbate, TBHQ, Ethylhexylglycerin, Tocopherol, Benzyl Alcohol, Citrus Aurantium Amara (Orange) Peel Oil, Hexamethylindanopyran, Dimethyl Phenethyl Acetate, Geranyl Acetate, Limonene, Hexyl Cinnamal, Linalool, Amyl Cinnamal, Citronellol, Hydroxycitronellal, Cinnamyl Alcohol, Red 33 (CI 17200), Blue 1 (CI 42090)",
+      "dataQualityNotes": [
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "camillerose-curlaide-butter",
+      "brand": "Camille Rose",
+      "name": "Curlaide Moisture Butter",
+      "category": "curl cream",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://www.camillerose.com/products/curlaide-moisture-butter",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Deionized water, oryza sativa (rice) milk, behenetrimonium methosulfate and cetearyl alcohol (BTMS), cocos nucifera extract (coconut oil), butyrospermum parkii (shea butter) fruit oil, olea europaea (olive) oil, camellia sinensis (green tea) leaf extract, sesamum indicum (sesame) seed oil, glycine sojo (soybean) oil, aloe barbadensis leaf (aloe vera extract), ricinus communis (castor)seed oil, oryza sative (rice) bran oil, macadamia ternifolia (macadamia) seed oil, persea gratissiam (avocado) oil, aloe barbadensis (aloe) leaf juice, stearoxytrimethyl silane and stearyl alcohol (sily wax), ulmus eulva (slippery elm), sorbitol, simmondsia chinensis (jojoba) seed oil, ascorbic (vitamin C) acid, tocopherol (vitamin E), phenoxyethanol and caprylyl glycol and sorbic acid, and fragrance.",
+      "dataQualityNotes": [
+        "Published list is not in standard INCI form and contains several misspellings (\"behenetrimonium\", \"sojo\", \"sative\", \"gratissiam\", \"eulva\", \"sily\"). Recorded verbatim; many lines will need identity review.",
+        "Some entries name trade blends (BTMS, silky wax) that combine several INCI ingredients.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "nym-curl-talk-defining-cream",
+      "brand": "Not Your Mother's",
+      "name": "Curl Talk Defining Cream (with Protein)",
+      "category": "curl cream",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://notyourmothers.com/products/curl-talk-defining-cream",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua) (Eau), Polyacrylamide, C13-14 Isoalkane, Shea Butter Ethyl Esters, Polyquaternium-10, Keratin Amino Acids, Oryza Sativa (Rice) Extract, Acyl Coenzyme A Desaturase, Lactobacillus/Tomato Fruit Ferment Extract, Leuconostoc/Radish Root Ferment Filtrate, PG-Hydroxyethylcellulose Cocodimonium Chloride, Laureth-7, Disodium EDTA, Citric Acid, Ethylhexylglycerin, Phenoxyethanol, Fragrance (Parfum), Linalool, Limonene, Hydroxycitronellal, Citronellol.",
+      "dataQualityNotes": [
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
+    },
+    {
+      "key": "mielle-ph-leave-in",
+      "brand": "Mielle",
+      "name": "Pomegranate & Honey Leave-In Conditioner 12 fl oz",
+      "category": "leave-in conditioner",
+      "applicationType": "LEAVE_ON",
+      "market": "US",
+      "isSupernatural": false,
+      "sourceUrl": "https://mielleorganics.com/products/pomegranate-honey-leave-in-conditioner",
+      "ingredientListSource": "MANUFACTURER_WEBSITE",
+      "ingredientList": "Water (Aqua, Eau), Behentrimonium Methosulfate, Cetyl Alcohol, Butylene Glycol, Cetyl Alcohol, Glycerin, Orbignya Oleifera (Babassu) Oil, Mauritia Flexuosa (Buriti) Fruit Oil, Copaiferi Officinalis (Balsam Copaiba) Resin, Astrocaryum Murumuru Seed Butter, Vaccinium Myrtillus Fruit Extract, Saccharum Officinarum (Sugar Cane) Extract, Acer Saccharinum (Sugar Maple) Extract, Citrus Aurantium Dulcis (Orange) Fruit Extract, Citrus Medica Limonum Citrus Medica Limonum (Lemon) Fruit Extract, Punica Granatum (Pomegranate) Extract, Betaine, Hexylene Glycol, Honey (Mel, Miel), Pyrus Malus (Apple) Fruit Extract, Camellia Sinensis Leaf Extract, Hexapeptide-11, Citric Acid, Fragrance (Parfum), Phenoxyethanol, Benzoic Acid, Ethylhexylglycerin, Glycereth-2 Cocoate",
+      "dataQualityNotes": [
+        "Published list repeats \"Cetyl Alcohol\" and \"Citrus Medica Limonum\". Recorded verbatim.",
+        "Retrieved 2026-10-30 from the manufacturer page via a fetch relay; verify against the physical label before relying on it."
+      ]
     }
   ]
 }
